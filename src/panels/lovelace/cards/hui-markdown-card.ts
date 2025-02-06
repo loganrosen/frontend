@@ -112,7 +112,10 @@ export class HuiMarkdownCard extends LitElement implements LovelaceCard {
             >${this._error}</ha-alert
           >`
         : nothing}
-      <ha-card .header=${this._config.title}>
+      <ha-card
+        .header=${this._config.title}
+        class=${this._config.no_border ? "no-border" : ""}
+      >
         <ha-markdown
           cache
           breaks
@@ -223,6 +226,12 @@ export class HuiMarkdownCard extends LitElement implements LovelaceCard {
   static styles = css`
     ha-card {
       height: 100%;
+    }
+    ha-card.no-border {
+      border: none;
+      box-shadow: none;
+      background: none;
+      padding: 0;
     }
     ha-alert {
       margin-bottom: 8px;
