@@ -25,7 +25,7 @@ export default tseslint.config(
   eslintConfigPrettier,
   litConfigs["flat/all"],
   tseslint.configs.recommended,
-  tseslint.configs.strict,
+  tseslint.configs.strictTypeChecked,
   tseslint.configs.stylistic,
   wcConfigs["flat/recommended"],
   {
@@ -53,6 +53,8 @@ export default tseslint.config(
         ecmaFeatures: {
           modules: true,
         },
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
       },
     },
 
@@ -186,5 +188,9 @@ export default tseslint.config(
       ],
       "no-use-before-define": "off",
     },
+  },
+  {
+    files: ["**/*.js", "**/*.mjs"],
+    extends: [tseslint.configs.disableTypeChecked],
   }
 );
