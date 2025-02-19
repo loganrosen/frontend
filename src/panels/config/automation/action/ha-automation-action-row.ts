@@ -382,10 +382,10 @@ export default class HaAutomationActionRow extends LitElement {
                     "ui.errors.config.editor_not_supported"
                   )}
                 >
-                  ${this._warnings!.length > 0 &&
-                  this._warnings![0] !== undefined
+                  ${this._warnings.length > 0 &&
+                  this._warnings[0] !== undefined
                     ? html` <ul>
-                        ${this._warnings!.map(
+                        ${this._warnings.map(
                           (warning) => html`<li>${warning}</li>`
                         )}
                       </ul>`

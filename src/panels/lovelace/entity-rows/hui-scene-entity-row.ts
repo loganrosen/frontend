@@ -52,7 +52,7 @@ class HuiSceneEntityRow extends LitElement implements LovelaceRow {
           class="text-content"
         >
           ${this._config.action_name ||
-          this.hass!.localize("ui.card.scene.activate")}
+          this.hass.localize("ui.card.scene.activate")}
         </mwc-button>
       </hui-generic-entity-row>
     `;

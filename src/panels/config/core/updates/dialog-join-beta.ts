@@ -58,11 +58,11 @@ export class DialogJoinBeta
           <li>Home Assistant Operating System</li>
         </ul>
         <a
-          href=${documentationUrl(this.hass!, "/faq/release/")}
+          href=${documentationUrl(this.hass, "/faq/release/")}
           target="_blank"
           rel="noreferrer"
         >
-          ${this.hass!.localize(
+          ${this.hass.localize(
             "ui.dialogs.join_beta_channel.view_documentation"
           )}
           <ha-svg-icon .path=${mdiOpenInNew}></ha-svg-icon>

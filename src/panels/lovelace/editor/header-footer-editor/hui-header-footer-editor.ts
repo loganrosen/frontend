@@ -27,9 +27,9 @@ export class HuiHeaderFooterEditor extends LitElement {
             `ui.panel.lovelace.editor.header-footer.${this.configValue}`
           )}:
           ${!this.config?.type
-            ? this.hass!.localize("ui.panel.lovelace.editor.common.none")
-            : this.hass!.localize(
-                `ui.panel.lovelace.editor.header-footer.types.${this.config?.type}.name`
+            ? this.hass.localize("ui.panel.lovelace.editor.common.none")
+            : this.hass.localize(
+                `ui.panel.lovelace.editor.header-footer.types.${this.config.type}.name`
               )}
         </span>
       </div>
@@ -37,7 +37,7 @@ export class HuiHeaderFooterEditor extends LitElement {
         ${!this.config?.type
           ? html`
               <ha-icon-button
-                .label=${this.hass!.localize(
+                .label=${this.hass.localize(
                   "ui.panel.lovelace.editor.common.add"
                 )}
                 .path=${mdiPlus}
@@ -47,7 +47,7 @@ export class HuiHeaderFooterEditor extends LitElement {
             `
           : html`
               <ha-icon-button
-                .label=${this.hass!.localize(
+                .label=${this.hass.localize(
                   "ui.panel.lovelace.editor.common.clear"
                 )}
                 .path=${mdiClose}
@@ -55,7 +55,7 @@ export class HuiHeaderFooterEditor extends LitElement {
                 @click=${this._delete}
               ></ha-icon-button>
               <ha-icon-button
-                .label=${this.hass!.localize(
+                .label=${this.hass.localize(
                   "ui.panel.lovelace.editor.common.edit"
                 )}
                 .path=${mdiPencil}
@@ -78,7 +78,7 @@ export class HuiHeaderFooterEditor extends LitElement {
 
   private _add(): void {
     showCreateHeaderFooterDialog(this, {
-      pickHeaderFooter: (config) => this._elementPicked(config),
+      pickHeaderFooter: (config) => { this._elementPicked(config); },
       type: this.configValue,
     });
   }

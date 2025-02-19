@@ -342,10 +342,10 @@ class ActionRenderer {
       this.hass.localize(
         "ui.panel.config.automation.trace.messages.triggered_by",
         {
-          triggeredBy: triggerStep.changed_variables.trigger?.alias
+          triggeredBy: triggerStep.changed_variables.trigger.alias
             ? "alias"
             : "other",
-          alias: triggerStep.changed_variables.trigger?.alias,
+          alias: triggerStep.changed_variables.trigger.alias,
           triggeredPath: triggerStep.path === "trigger" ? "manual" : "trigger",
           trigger: this.trace.trigger,
           time: formatDateTimeWithSeconds(
@@ -407,13 +407,11 @@ class ActionRenderer {
         `${this.keys[index]}/choose/${chooseTrace.result.choice}`
       ) as Option | undefined;
       const choiceName = choiceConfig
-        ? `${
-            choiceConfig.alias ||
+        ? (choiceConfig.alias ||
             this.hass.localize(
               "ui.panel.config.automation.trace.messages.option_executed",
               { option: choiceNumeric }
-            )
-          }`
+            ))
         : this.hass.localize(
             "ui.panel.config.automation.trace.messages.error",
             { error: chooseTrace.error }
@@ -526,7 +524,7 @@ class ActionRenderer {
     if (ifTrace.result?.choice) {
       const choiceConfig = this._getDataFromPath(
         `${this.keys[index]}/${ifTrace.result.choice}/`
-      ) as any;
+      );
       const choiceName = choiceConfig
         ? choiceConfig.alias ||
           this.hass.localize(

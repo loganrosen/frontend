@@ -39,7 +39,7 @@ export const getZHADeviceActions = async (
     actions.push({
       label: hass.localize("ui.dialogs.zha_device_info.buttons.reconfigure"),
       icon: mdiCogRefresh,
-      action: () => showZHAReconfigureDeviceDialog(el, { device: zhaDevice }),
+      action: () => { showZHAReconfigureDeviceDialog(el, { device: zhaDevice }); },
     });
   }
 
@@ -53,7 +53,7 @@ export const getZHADeviceActions = async (
         {
           label: hass.localize("ui.dialogs.zha_device_info.buttons.add"),
           icon: mdiPlus,
-          action: () => navigate(`/config/zha/add/${zhaDevice!.ieee}`),
+          action: () => navigate(`/config/zha/add/${zhaDevice.ieee}`),
         },
       ]
     );
@@ -65,13 +65,13 @@ export const getZHADeviceActions = async (
         label: hass.localize("ui.dialogs.zha_device_info.buttons.manage"),
         icon: mdiGroup,
         action: () =>
-          showZHAManageZigbeeDeviceDialog(el, { device: zhaDevice }),
+          { showZHAManageZigbeeDeviceDialog(el, { device: zhaDevice }); },
       },
       {
         label: hass.localize("ui.dialogs.zha_device_info.buttons.view_network"),
         icon: mdiFamilyTree,
         action: () =>
-          navigate(`/config/zha/visualization/${zhaDevice!.device_reg_id}`),
+          navigate(`/config/zha/visualization/${zhaDevice.device_reg_id}`),
       },
     ]
   );

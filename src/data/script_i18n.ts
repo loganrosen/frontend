@@ -157,7 +157,7 @@ const tryDescribeAction = <T extends ActionType>(
             }
           } else if (key === "area_id") {
             const area = hass.areas[targetThing];
-            if (area?.name) {
+            if (area.name) {
               targets.push(area.name);
             } else {
               targets.push(
@@ -168,7 +168,7 @@ const tryDescribeAction = <T extends ActionType>(
             }
           } else if (key === "floor_id") {
             const floor = floorRegistry[targetThing] ?? undefined;
-            if (floor?.name) {
+            if (floor.name) {
               targets.push(floor.name);
             } else {
               targets.push(
@@ -215,7 +215,7 @@ const tryDescribeAction = <T extends ActionType>(
       const [domain, serviceName] = config.action.split(".", 2);
       const service =
         hass.localize(`component.${domain}.services.${serviceName}.name`) ||
-        hass.services[domain][serviceName]?.name;
+        hass.services[domain][serviceName].name;
 
       if (config.metadata) {
         return hass.localize(

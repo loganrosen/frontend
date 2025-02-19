@@ -42,7 +42,7 @@ export class HaTTSVoicePicker extends LitElement {
     return html`
       <ha-select
         .label=${this.label ||
-        this.hass!.localize("ui.components.tts-voice-picker.voice")}
+        this.hass.localize("ui.components.tts-voice-picker.voice")}
         .value=${value}
         .required=${this.required}
         .disabled=${this.disabled}
@@ -53,7 +53,7 @@ export class HaTTSVoicePicker extends LitElement {
       >
         ${!this.required
           ? html`<ha-list-item .value=${NONE}>
-              ${this.hass!.localize("ui.components.tts-voice-picker.none")}
+              ${this.hass.localize("ui.components.tts-voice-picker.none")}
             </ha-list-item>`
           : nothing}
         ${this._voices.map(

@@ -325,12 +325,12 @@ class HaPanelDevState extends LitElement {
 
   private async _copyEntity(ev) {
     ev.preventDefault();
-    const entity = (ev.currentTarget! as any).entity;
+    const entity = (ev.currentTarget!).entity;
     await copyToClipboard(entity.entity_id);
   }
 
   private _entitySelected(ev) {
-    const entityState: HassEntity = (ev.currentTarget! as any).entity;
+    const entityState: HassEntity = (ev.currentTarget!).entity;
     this._entityId = entityState.entity_id;
     this._entity = entityState;
     this._state = entityState.state;
@@ -403,7 +403,7 @@ class HaPanelDevState extends LitElement {
 
   private _entityMoreInfo(ev) {
     ev.preventDefault();
-    const entity = (ev.currentTarget! as any).entity;
+    const entity = (ev.currentTarget!).entity;
     fireEvent(this, "hass-more-info", { entityId: entity.entity_id });
   }
 

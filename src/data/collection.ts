@@ -43,7 +43,7 @@ export const getOptimisticCollection = <StateType>(
       // Unsub function to undo both
       return () => {
         if (subUpResult) {
-          subUpResult.then((unsub) => unsub());
+          subUpResult.then((unsub) => { unsub(); });
         }
         conn[updateKey] = undefined;
       };
@@ -65,7 +65,7 @@ export const getOptimisticCollection = <StateType>(
         return await saveCollection(conn, data);
       } catch (err: any) {
         if (store) {
-          store.setState(current as any, true);
+          store.setState(current, true);
         }
         throw err;
       }

@@ -10,7 +10,7 @@ export const getZwaveDeviceAlerts = async (
   const nodeAlerts = await fetchZwaveNodeAlerts(hass, device.id);
   const deviceAlerts: DeviceAlert[] = [];
 
-  if (nodeAlerts?.is_embedded === false) {
+  if (nodeAlerts.is_embedded === false) {
     deviceAlerts.push({
       level: "info",
       text: hass.localize(
@@ -19,7 +19,7 @@ export const getZwaveDeviceAlerts = async (
     });
   }
 
-  if (!nodeAlerts?.comments?.length) {
+  if (!nodeAlerts.comments.length) {
     return deviceAlerts;
   }
 

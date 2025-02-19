@@ -92,7 +92,7 @@ export class HuiButtonCard extends LitElement implements LovelaceCard {
   @consume<any>({ context: statesContext, subscribe: true })
   @transform({
     transformer: function (this: HuiButtonCard, value: HassEntities) {
-      return this._config?.entity ? value[this._config?.entity] : undefined;
+      return this._config?.entity ? value[this._config.entity] : undefined;
     },
     watch: ["_config"],
   })
@@ -117,7 +117,7 @@ export class HuiButtonCard extends LitElement implements LovelaceCard {
   @consume<any>({ context: entitiesContext, subscribe: true })
   @transform<HomeAssistant["entities"], EntityRegistryDisplayEntry>({
     transformer: function (this: HuiButtonCard, value) {
-      return this._config?.entity ? value[this._config?.entity] : undefined;
+      return this._config?.entity ? value[this._config.entity] : undefined;
     },
     watch: ["_config"],
   })
@@ -137,7 +137,7 @@ export class HuiButtonCard extends LitElement implements LovelaceCard {
   public getGridOptions(): LovelaceGridOptions {
     if (
       this._config?.show_icon &&
-      (this._config?.show_name || this._config?.show_state)
+      (this._config.show_name || this._config.show_state)
     ) {
       return {
         rows: 2,
@@ -195,8 +195,8 @@ export class HuiButtonCard extends LitElement implements LovelaceCard {
       <ha-card
         @action=${this._handleAction}
         .actionHandler=${actionHandler({
-          hasHold: hasAction(this._config!.hold_action),
-          hasDoubleClick: hasAction(this._config!.double_tap_action),
+          hasHold: hasAction(this._config.hold_action),
+          hasDoubleClick: hasAction(this._config.double_tap_action),
         })}
         role="button"
         aria-label=${this._config.name ||

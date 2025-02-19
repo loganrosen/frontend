@@ -214,7 +214,7 @@ export class HaScriptEditor extends SubscribeMixin(
             @click=${this._editCategory}
           >
             ${this.hass.localize(
-              `ui.panel.config.scene.picker.${this._registryEntry?.categories?.script ? "edit_category" : "assign_category"}`
+              `ui.panel.config.scene.picker.${this._registryEntry?.categories.script ? "edit_category" : "assign_category"}`
             )}
             <ha-svg-icon slot="graphic" .path=${mdiTag}></ha-svg-icon>
           </ha-list-item>
@@ -525,7 +525,7 @@ export class HaScriptEditor extends SubscribeMixin(
       return;
     }
     const stateObj = this.hass.states[this._entityId];
-    if (stateObj?.state !== UNAVAILABLE) {
+    if (stateObj.state !== UNAVAILABLE) {
       return;
     }
     const validation = await validateConfig(this.hass, {
@@ -732,8 +732,8 @@ export class HaScriptEditor extends SubscribeMixin(
 
           resolve(true);
         },
-        onClose: () => resolve(false),
-        onDiscard: () => resolve(true),
+        onClose: () => { resolve(false); },
+        onDiscard: () => { resolve(true); },
         entityRegistryUpdate: this._entityRegistryUpdate,
         entityRegistryEntry: this._registryEntry,
         title: this.hass.localize(
@@ -754,7 +754,7 @@ export class HaScriptEditor extends SubscribeMixin(
   private _backTapped = async () => {
     const result = await this._confirmUnsavedChanged();
     if (result) {
-      afterNextRender(() => history.back());
+      afterNextRender(() => { history.back(); });
     }
   };
 
@@ -835,9 +835,9 @@ export class HaScriptEditor extends SubscribeMixin(
         "ui.panel.config.script.editor.delete_confirm_text",
         { name: this._config?.alias }
       ),
-      confirmText: this.hass!.localize("ui.common.delete"),
+      confirmText: this.hass.localize("ui.common.delete"),
       destructive: true,
-      dismissText: this.hass!.localize("ui.common.cancel"),
+      dismissText: this.hass.localize("ui.common.cancel"),
       confirm: () => this._delete(),
     });
   }
@@ -853,9 +853,9 @@ export class HaScriptEditor extends SubscribeMixin(
         text: html`${this.hass.localize(
             "ui.panel.config.automation.editor.switch_ui_yaml_error"
           )}<br /><br />${this._yamlErrors}`,
-        confirmText: this.hass!.localize("ui.common.continue"),
+        confirmText: this.hass.localize("ui.common.continue"),
         destructive: true,
-        dismissText: this.hass!.localize("ui.common.cancel"),
+        dismissText: this.hass.localize("ui.common.cancel"),
       });
       if (!result) {
         return;
@@ -881,7 +881,7 @@ export class HaScriptEditor extends SubscribeMixin(
           this.requestUpdate();
           resolve(true);
         },
-        onClose: () => resolve(false),
+        onClose: () => { resolve(false); },
         entityRegistryUpdate: this._entityRegistryUpdate,
         entityRegistryEntry: this.entityRegistry.find(
           (entry) => entry.unique_id === this.scriptId
@@ -900,7 +900,7 @@ export class HaScriptEditor extends SubscribeMixin(
           this.requestUpdate();
           resolve();
         },
-        onClose: () => resolve(),
+        onClose: () => { resolve(); },
       });
     });
   }
@@ -940,7 +940,7 @@ export class HaScriptEditor extends SubscribeMixin(
     }
 
     try {
-      await this.hass!.callApi(
+      await this.hass.callApi(
         "POST",
         "config/script/config/" + id,
         this._config

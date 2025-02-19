@@ -63,7 +63,7 @@ class DialogHomeZoneDetail extends LitElement {
         escapeKeyAction
         .heading=${createCloseHeading(
           this.hass,
-          this.hass!.localize("ui.panel.config.zone.edit_home")
+          this.hass.localize("ui.panel.config.zone.edit_home")
         )}
       >
         <div>
@@ -81,7 +81,7 @@ class DialogHomeZoneDetail extends LitElement {
           @click=${this._updateEntry}
           .disabled=${!valid || this._submitting}
         >
-          ${this.hass!.localize("ui.panel.config.zone.detail.update")}
+          ${this.hass.localize("ui.panel.config.zone.detail.update")}
         </mwc-button>
       </ha-dialog>
     `;

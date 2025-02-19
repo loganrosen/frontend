@@ -117,7 +117,7 @@ class ZWaveJSProvisioned extends LitElement {
 
   private async _fetchData() {
     this._provisioningEntries = await fetchZwaveProvisioningEntries(
-      this.hass!,
+      this.hass,
       this.configEntryId
     );
   }

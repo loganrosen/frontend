@@ -99,7 +99,7 @@ export class BarMediaPlayer extends SubscribeMixin(LitElement) {
       stateObj.state === "playing"
     ) {
       this._progressInterval = window.setInterval(
-        () => this._updateProgressBar(),
+        () => { this._updateProgressBar(); },
         1000
       );
     }
@@ -140,7 +140,7 @@ export class BarMediaPlayer extends SubscribeMixin(LitElement) {
         item,
         resolved,
         this._browserPlayerVolume,
-        () => this.requestUpdate("_browserPlayer")
+        () => { this.requestUpdate("_browserPlayer"); }
       );
     } catch (err: any) {
       if (err.message === ERR_UNSUPPORTED_MEDIA) {
@@ -433,7 +433,7 @@ export class BarMediaPlayer extends SubscribeMixin(LitElement) {
       stateObj?.state === "playing"
     ) {
       this._progressInterval = window.setInterval(
-        () => this._updateProgressBar(),
+        () => { this._updateProgressBar(); },
         1000
       );
     } else if (
@@ -451,7 +451,7 @@ export class BarMediaPlayer extends SubscribeMixin(LitElement) {
         ? this._browserPlayer.toStateObj()
         : BrowserMediaPlayer.idleStateObj();
     }
-    return this.hass!.states[this.entityId] as MediaPlayerEntity | undefined;
+    return this.hass.states[this.entityId] as MediaPlayerEntity | undefined;
   }
 
   private _tearDownBrowserPlayer() {
@@ -484,11 +484,11 @@ export class BarMediaPlayer extends SubscribeMixin(LitElement) {
   }
 
   private get _mediaPlayerEntities() {
-    return Object.values(this.hass!.states).filter(
+    return Object.values(this.hass.states).filter(
       (entity) =>
         computeStateDomain(entity) === "media_player" &&
         supportsFeature(entity, MediaPlayerEntityFeature.BROWSE_MEDIA) &&
-        !this.hass.entities[entity.entity_id]?.hidden
+        !this.hass.entities[entity.entity_id].hidden
     );
   }
 
@@ -519,7 +519,7 @@ export class BarMediaPlayer extends SubscribeMixin(LitElement) {
 
     if (!this._browserPlayer) {
       handleMediaControlClick(
-        this.hass!,
+        this.hass,
         this._stateObj!,
         (e.currentTarget as HTMLElement).getAttribute("action")!
       );

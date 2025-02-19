@@ -47,7 +47,7 @@ class StateCardText extends LitElement {
     if (value === this.stateObj.state) {
       return;
     }
-    setValue(this.hass!, this.stateObj.entity_id, value);
+    setValue(this.hass, this.stateObj.entity_id, value);
   }
 
   static styles = css`

@@ -179,17 +179,17 @@ export class HaConfigLabels extends LitElement {
               {
                 label: this.hass.localize("ui.panel.config.entities.caption"),
                 path: mdiShape,
-                action: () => this._navigateEntities(label),
+                action: () => { this._navigateEntities(label); },
               },
               {
                 label: this.hass.localize("ui.panel.config.devices.caption"),
                 path: mdiDevices,
-                action: () => this._navigateDevices(label),
+                action: () => { this._navigateDevices(label); },
               },
               {
                 label: this.hass.localize("ui.panel.config.automation.caption"),
                 path: mdiRobot,
-                action: () => this._navigateAutomations(label),
+                action: () => { this._navigateAutomations(label); },
               },
               {
                 label: this.hass.localize("ui.common.delete"),
@@ -319,14 +319,14 @@ export class HaConfigLabels extends LitElement {
   private async _removeLabel(selectedLabel: LabelRegistryEntry) {
     if (
       !(await showConfirmationDialog(this, {
-        title: this.hass!.localize(
+        title: this.hass.localize(
           "ui.panel.config.labels.confirm_remove_title"
         ),
         text: this.hass.localize("ui.panel.config.labels.confirm_remove", {
           label: selectedLabel.name || selectedLabel.label_id,
         }),
-        dismissText: this.hass!.localize("ui.common.cancel"),
-        confirmText: this.hass!.localize("ui.common.remove"),
+        dismissText: this.hass.localize("ui.common.cancel"),
+        confirmText: this.hass.localize("ui.common.remove"),
         destructive: true,
       }))
     ) {

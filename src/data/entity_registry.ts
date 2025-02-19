@@ -253,7 +253,7 @@ const subscribeEntityRegistryUpdates = (
     debounce(
       () =>
         fetchEntityRegistry(conn).then((entities) =>
-          store.setState(entities, true)
+          { store.setState(entities, true); }
         ),
       500,
       true

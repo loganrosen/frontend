@@ -35,8 +35,8 @@ export class HaColorTempSelector extends LitElement {
 
     switch (this.selector.color_temp?.unit) {
       case "kelvin":
-        min = this.selector.color_temp?.min ?? DEFAULT_MIN_KELVIN;
-        max = this.selector.color_temp?.max ?? DEFAULT_MAX_KELVIN;
+        min = this.selector.color_temp.min ?? DEFAULT_MIN_KELVIN;
+        max = this.selector.color_temp.max ?? DEFAULT_MAX_KELVIN;
         break;
       case "mired":
       default:
@@ -96,7 +96,7 @@ export class HaColorTempSelector extends LitElement {
 
   private _valueChanged(ev: CustomEvent) {
     fireEvent(this, "value-changed", {
-      value: Number((ev.detail as any).value),
+      value: Number((ev.detail).value),
     });
   }
 }

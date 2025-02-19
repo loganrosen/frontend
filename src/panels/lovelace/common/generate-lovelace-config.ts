@@ -11,7 +11,6 @@ import type { AreaFilterValue } from "../../../components/ha-area-filter";
 import { areaCompare } from "../../../data/area_registry";
 import type {
   EnergyPreferences,
-  GridSourceTypeEnergyPreference,
 } from "../../../data/energy";
 import { domainToName } from "../../../data/integration";
 import type { LovelaceCardConfig } from "../../../data/lovelace/config/card";
@@ -71,7 +70,7 @@ const splitByAreaDevice = (
   for (const entity of Object.values(entityEntries)) {
     const areaId =
       entity.area_id ||
-      (entity.device_id && deviceEntries[entity.device_id]?.area_id);
+      (entity.device_id && deviceEntries[entity.device_id].area_id);
     if (areaId && areaId in areaEntries && entity.entity_id in allEntities) {
       if (!(areaId in areasWithEntities)) {
         areasWithEntities[areaId] = [];
@@ -167,11 +166,11 @@ export const computeCards = (
         type: "thermostat",
         entity: entityId,
         features:
-          (states[entityId]?.attributes?.hvac_modes?.length ?? 0) > 1
+          (states[entityId].attributes.hvac_modes?.length ?? 0) > 1
             ? [
                 {
                   type: "climate-hvac-modes",
-                  hvac_modes: states[entityId]?.attributes?.hvac_modes,
+                  hvac_modes: states[entityId].attributes.hvac_modes,
                 },
               ]
             : undefined,
@@ -622,7 +621,7 @@ export const generateDefaultViewConfig = (
     // Distribution card requires the grid to be configured
     const grid = energyPrefs.energy_sources.find(
       (source) => source.type === "grid"
-    ) as GridSourceTypeEnergyPreference | undefined;
+    );
 
     if (grid && grid.flow_from.length > 0) {
       energyCard = {

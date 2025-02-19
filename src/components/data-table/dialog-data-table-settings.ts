@@ -68,12 +68,12 @@ export class DialogDataTableSettings extends LitElement {
           }
           return orderA - orderB;
         })
-        .reduce(
+        .reduce<(DataTableColumnData & { key: string })[]>(
           (arr, key) => {
             arr.push({ key, ...columns[key] });
             return arr;
           },
-          [] as (DataTableColumnData & { key: string })[]
+          []
         )
   );
 
@@ -140,7 +140,7 @@ export class DialogDataTableSettings extends LitElement {
                     .hidden=${!isVisible}
                     .path=${isVisible ? mdiEye : mdiEyeOff}
                     slot="meta"
-                    .label=${this.hass!.localize(
+                    .label=${this.hass.localize(
                       `ui.components.data-table.settings.${isVisible ? "hide" : "show"}`,
                       { title: typeof col.title === "string" ? col.title : "" }
                     )}
@@ -182,7 +182,7 @@ export class DialogDataTableSettings extends LitElement {
 
     this._columnOrder = columnOrder;
 
-    this._params!.onUpdate(this._columnOrder, this._hiddenColumns);
+    this._params.onUpdate(this._columnOrder, this._hiddenColumns);
   }
 
   private _toggle(ev) {
@@ -263,7 +263,7 @@ export class DialogDataTableSettings extends LitElement {
 
     this._hiddenColumns = hidden;
 
-    this._params!.onUpdate(this._columnOrder, this._hiddenColumns);
+    this._params.onUpdate(this._columnOrder, this._hiddenColumns);
   }
 
   private _reset() {

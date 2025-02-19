@@ -28,7 +28,7 @@ class SearchInputOutlined extends LitElement {
   public placeholder?: string;
 
   public focus() {
-    this._input?.focus();
+    this._input.focus();
   }
 
   @query("ha-outlined-text-field", true) private _input!: HaOutlinedTextField;

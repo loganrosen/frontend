@@ -7,10 +7,8 @@ import { ifDefined } from "lit/directives/if-defined";
 import { debounce } from "../common/util/debounce";
 import { nextRender } from "../common/util/render-status";
 import "./ha-icon";
-import type { HaIcon } from "./ha-icon";
 import "./ha-ripple";
 import "./ha-svg-icon";
-import type { HaSvgIcon } from "./ha-svg-icon";
 
 @customElement("ha-control-select-menu")
 export class HaControlSelectMenu extends SelectBase {
@@ -91,14 +89,11 @@ export class HaControlSelectMenu extends SelectBase {
   }
 
   private _renderIcon() {
-    const index = this.mdcFoundation?.getSelectedIndex();
+    const index = this.mdcFoundation.getSelectedIndex();
     const items = this.menuElement?.items ?? [];
     const item = index != null ? items[index] : undefined;
     const defaultIcon = this.querySelector("[slot='icon']");
-    const icon = (item?.querySelector("[slot='graphic']") ?? null) as
-      | HaSvgIcon
-      | HaIcon
-      | null;
+    const icon = (item?.querySelector("[slot='graphic']") ?? null);
 
     if (!defaultIcon && !icon) {
       return null;

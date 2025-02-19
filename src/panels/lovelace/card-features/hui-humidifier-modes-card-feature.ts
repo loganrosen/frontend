@@ -88,7 +88,7 @@ class HuiHumidifierModesCardFeature
 
   private async _valueChanged(ev: CustomEvent) {
     const mode =
-      (ev.detail as any).value ?? ((ev.target as any).value as string);
+      (ev.detail).value ?? ((ev.target as any).value as string);
 
     const oldMode = this.stateObj!.attributes.mode;
 
@@ -124,7 +124,7 @@ class HuiHumidifierModesCardFeature
 
     const options = filterModes(
       stateObj.attributes.available_modes,
-      this._config!.modes
+      this._config.modes
     ).map<ControlSelectOption>((mode) => ({
       value: mode,
       label: this.hass!.formatEntityAttributeValue(
@@ -148,8 +148,8 @@ class HuiHumidifierModesCardFeature
           .value=${this._currentMode}
           @value-changed=${this._valueChanged}
           hide-label
-          .ariaLabel=${this.hass!.formatEntityAttributeName(stateObj, "mode")}
-          .disabled=${this.stateObj!.state === UNAVAILABLE}
+          .ariaLabel=${this.hass.formatEntityAttributeName(stateObj, "mode")}
+          .disabled=${this.stateObj.state === UNAVAILABLE}
         >
         </ha-control-select>
       `;
@@ -159,7 +159,7 @@ class HuiHumidifierModesCardFeature
       <ha-control-select-menu
         show-arrow
         hide-label
-        .label=${this.hass!.formatEntityAttributeName(stateObj, "mode")}
+        .label=${this.hass.formatEntityAttributeName(stateObj, "mode")}
         .value=${this._currentMode}
         .disabled=${this.stateObj.state === UNAVAILABLE}
         fixedMenuPosition

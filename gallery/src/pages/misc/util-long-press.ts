@@ -30,7 +30,7 @@ export class DemoUtilLongPress extends LitElement {
   }
 
   private _handleAction(ev: ActionHandlerEvent) {
-    this._addValue(ev, ev.detail.action!);
+    this._addValue(ev, ev.detail.action);
   }
 
   private _addValue(ev: Event, value: string) {

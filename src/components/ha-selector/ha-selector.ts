@@ -92,7 +92,7 @@ export class HaSelector extends LitElement {
 
   public async focus() {
     await this.updateComplete;
-    (this.renderRoot.querySelector("#selector") as HTMLElement)?.focus();
+    (this.renderRoot.querySelector("#selector") as HTMLElement).focus();
   }
 
   private get _type() {

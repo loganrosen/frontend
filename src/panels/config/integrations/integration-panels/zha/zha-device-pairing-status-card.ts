@@ -38,12 +38,12 @@ class ZHADevicePairingStatusCard extends LitElement {
         })}"
         ><div class="header">
           <h4>
-            ${this.hass!.localize(
+            ${this.hass.localize(
               `ui.panel.config.zha.device_pairing_card.${this.device.pairing_status}`
             )}
           </h4>
           <h1>
-            ${this.hass!.localize(
+            ${this.hass.localize(
               `ui.panel.config.zha.device_pairing_card.${this.device.pairing_status}_status_text`
             )}
           </h1>

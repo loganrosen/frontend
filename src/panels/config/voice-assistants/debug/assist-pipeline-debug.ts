@@ -182,7 +182,7 @@ export class AssistPipelineDebug extends LitElement {
       return;
     }
     if (
-      this._events?.length &&
+      this._events.length &&
       // If the last event is not a finish run event, the run is still ongoing.
       // Refresh events automatically.
       !["run-end", "error"].includes(this._events[this._events.length - 1].type)

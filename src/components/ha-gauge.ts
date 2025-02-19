@@ -155,10 +155,10 @@ export class HaGauge extends LitElement {
     // fit the text
     // That way it will auto-scale correctly
     const svgRoot = this.shadowRoot!.querySelector(".text")!;
-    const box = svgRoot.querySelector("text")!.getBBox()!;
+    const box = svgRoot.querySelector("text")!.getBBox();
     svgRoot.setAttribute(
       "viewBox",
-      `${box.x} ${box!.y} ${box.width} ${box.height}`
+      `${box.x} ${box.y} ${box.width} ${box.height}`
     );
   }
 

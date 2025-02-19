@@ -127,9 +127,9 @@ export class EnergyGridSettings extends LitElement {
             const entityState = this.hass.states[flow.stat_energy_from];
             return html`
               <div class="row" .source=${flow}>
-                ${entityState?.attributes.icon
+                ${entityState.attributes.icon
                   ? html`<ha-icon
-                      .icon=${entityState?.attributes.icon}
+                      .icon=${entityState.attributes.icon}
                     ></ha-icon>`
                   : html`<ha-svg-icon
                       .path=${mdiHomeImportOutline}
@@ -174,7 +174,7 @@ export class EnergyGridSettings extends LitElement {
             const entityState = this.hass.states[flow.stat_energy_to];
             return html`
               <div class="row" .source=${flow}>
-                ${entityState?.attributes.icon
+                ${entityState.attributes.icon
                   ? html`<ha-icon
                       .icon=${entityState.attributes.icon}
                     ></ha-icon>`
@@ -228,12 +228,12 @@ export class EnergyGridSettings extends LitElement {
                   src=${brandsUrl({
                     domain: "co2signal",
                     type: "icon",
-                    darkOptimized: this.hass.themes?.darkMode,
+                    darkOptimized: this.hass.themes.darkMode,
                   })}
                 />
                 <span class="content">${this._co2ConfigEntry.title}</span>
                 <a
-                  href=${`/config/integrations/integration/${this._co2ConfigEntry?.domain}`}
+                  href=${`/config/integrations/integration/${this._co2ConfigEntry.domain}`}
                 >
                   <ha-icon-button .path=${mdiPencil}></ha-icon-button>
                 </a>
@@ -254,7 +254,7 @@ export class EnergyGridSettings extends LitElement {
                     src=${brandsUrl({
                       domain: "co2signal",
                       type: "icon",
-                      darkOptimized: this.hass.themes?.darkMode,
+                      darkOptimized: this.hass.themes.darkMode,
                     })}
                   />
                   <mwc-button @click=${this._addCO2Sensor}>
@@ -300,7 +300,7 @@ export class EnergyGridSettings extends LitElement {
   private _addFromSource() {
     const gridSource = this.preferences.energy_sources.find(
       (src) => src.type === "grid"
-    ) as GridSourceTypeEnergyPreference | undefined;
+    );
     showEnergySettingsGridFlowFromDialog(this, {
       grid_source: gridSource,
       saveCallback: async (flow) => {
@@ -334,7 +334,7 @@ export class EnergyGridSettings extends LitElement {
   private _addToSource() {
     const gridSource = this.preferences.energy_sources.find(
       (src) => src.type === "grid"
-    ) as GridSourceTypeEnergyPreference | undefined;
+    );
     showEnergySettingsGridFlowToDialog(this, {
       grid_source: gridSource,
       saveCallback: async (flow) => {
@@ -370,7 +370,7 @@ export class EnergyGridSettings extends LitElement {
       ev.currentTarget.closest(".row").source;
     const gridSource = this.preferences.energy_sources.find(
       (src) => src.type === "grid"
-    ) as GridSourceTypeEnergyPreference | undefined;
+    );
     showEnergySettingsGridFlowFromDialog(this, {
       source: { ...origSource },
       grid_source: gridSource,
@@ -402,7 +402,7 @@ export class EnergyGridSettings extends LitElement {
       ev.currentTarget.closest(".row").source;
     const gridSource = this.preferences.energy_sources.find(
       (src) => src.type === "grid"
-    ) as GridSourceTypeEnergyPreference | undefined;
+    );
     showEnergySettingsGridFlowToDialog(this, {
       source: { ...origSource },
       grid_source: gridSource,

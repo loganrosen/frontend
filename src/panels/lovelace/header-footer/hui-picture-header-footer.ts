@@ -62,11 +62,11 @@ export class HuiPictureHeaderFooter
 
     return html`
       <img
-        alt=${ifDefined(this._config?.alt_text)}
+        alt=${ifDefined(this._config.alt_text)}
         @action=${this._handleAction}
         .actionHandler=${actionHandler({
-          hasHold: hasAction(this._config!.hold_action),
-          hasDoubleClick: hasAction(this._config!.double_tap_action),
+          hasHold: hasAction(this._config.hold_action),
+          hasDoubleClick: hasAction(this._config.double_tap_action),
         })}
         tabindex=${ifDefined(clickable ? 0 : undefined)}
         class=${classMap({
@@ -89,7 +89,7 @@ export class HuiPictureHeaderFooter
   `;
 
   private _handleAction(ev: ActionHandlerEvent) {
-    handleAction(this, this.hass!, this._config!, ev.detail.action!);
+    handleAction(this, this.hass!, this._config!, ev.detail.action);
   }
 }
 

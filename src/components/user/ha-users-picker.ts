@@ -79,7 +79,7 @@ class HaUsersPickerLight extends LitElement {
       )}
       <ha-user-picker
         .label=${this.pickUserLabel ||
-        this.hass!.localize("ui.components.user-picker.add_user")}
+        this.hass.localize("ui.components.user-picker.add_user")}
         .hass=${this.hass}
         .users=${notSelectedUsers}
         .disabled=${this.disabled || !notSelectedUsers?.length}
@@ -149,7 +149,7 @@ class HaUsersPickerLight extends LitElement {
   }
 
   private _removeUser(event) {
-    const userId = (event.currentTarget as any).userId;
+    const userId = (event.currentTarget).userId;
     this._updateUsers(this._currentUsers.filter((user) => user !== userId));
   }
 

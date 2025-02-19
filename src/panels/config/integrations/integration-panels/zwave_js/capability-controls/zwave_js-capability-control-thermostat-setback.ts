@@ -142,7 +142,7 @@ class ZWaveJSCapabilityThermostatSetback extends LitElement {
         "get",
         [],
         true
-      )) as { setbackType: number; setbackState: number | SpecialState };
+      ));
 
       this._setbackTypeInput.value = String(setbackType);
       if (typeof setbackState === "number") {

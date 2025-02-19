@@ -125,7 +125,7 @@ class HuiLawnMowerCommandCardFeature
 
   private _onCommandTap(ev): void {
     ev.stopPropagation();
-    const entry = (ev.target! as any).entry as LawnMowerButton;
+    const entry = (ev.target!).entry as LawnMowerButton;
     this.hass!.callService("lawn_mower", entry.serviceName, {
       entity_id: this.stateObj!.entity_id,
     });

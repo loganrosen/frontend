@@ -9,7 +9,7 @@ export const createDurationData = (
   }
   if (typeof duration !== "object") {
     if (typeof duration === "string" || isNaN(duration)) {
-      const parts = duration?.toString().split(":") || [];
+      const parts = duration.toString().split(":") || [];
       if (parts.length === 1) {
         return { seconds: Number(parts[0]) };
       }

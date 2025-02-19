@@ -72,7 +72,7 @@ export class CloudGooglePref extends LitElement {
             src=${brandsUrl({
               domain: "google_assistant",
               type: "icon",
-              darkOptimized: this.hass.themes?.darkMode,
+              darkOptimized: this.hass.themes.darkMode,
             })}
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
@@ -150,12 +150,12 @@ export class CloudGooglePref extends LitElement {
                   : ""}
                 <ha-settings-row>
                   <span slot="heading">
-                    ${this.hass!.localize(
+                    ${this.hass.localize(
                       "ui.panel.config.cloud.account.google.expose_new_entities"
                     )}
                   </span>
                   <span slot="description">
-                    ${this.hass!.localize(
+                    ${this.hass.localize(
                       "ui.panel.config.cloud.account.google.expose_new_entities_info"
                     )}
                   </span>
@@ -191,12 +191,12 @@ export class CloudGooglePref extends LitElement {
 
                       <ha-settings-row>
                         <span slot="heading">
-                          ${this.hass!.localize(
+                          ${this.hass.localize(
                             "ui.panel.config.cloud.account.google.enable_state_reporting"
                           )}
                         </span>
                         <span slot="description">
-                          ${this.hass!.localize(
+                          ${this.hass.localize(
                             "ui.panel.config.cloud.account.google.info_state_reporting"
                           )}
                         </span>
@@ -240,7 +240,7 @@ export class CloudGooglePref extends LitElement {
               >
                 <mwc-button>
                   ${manualConfig
-                    ? this.hass!.localize(
+                    ? this.hass.localize(
                         "ui.panel.config.cloud.account.google.show_entities"
                       )
                     : this.hass.localize(
@@ -278,7 +278,7 @@ export class CloudGooglePref extends LitElement {
   private async _enabledToggleChanged(ev) {
     const toggle = ev.target as HaSwitch;
     try {
-      await updateCloudPref(this.hass, { google_enabled: toggle.checked! });
+      await updateCloudPref(this.hass, { google_enabled: toggle.checked });
       fireEvent(this, "ha-refresh-cloud-status");
     } catch (_err: any) {
       toggle.checked = !toggle.checked;
@@ -289,7 +289,7 @@ export class CloudGooglePref extends LitElement {
     const toggle = ev.target as HaSwitch;
     try {
       await updateCloudPref(this.hass, {
-        google_report_state: toggle.checked!,
+        google_report_state: toggle.checked,
       });
       fireEvent(this, "ha-refresh-cloud-status");
     } catch (err: any) {

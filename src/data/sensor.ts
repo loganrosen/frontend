@@ -35,5 +35,5 @@ export const getSensorNumericDeviceClasses = async (
   sensorNumericDeviceClassesCache = hass.callWS({
     type: "sensor/numeric_device_classes",
   });
-  return sensorNumericDeviceClassesCache!;
+  return sensorNumericDeviceClassesCache;
 };

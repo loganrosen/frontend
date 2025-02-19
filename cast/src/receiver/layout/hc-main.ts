@@ -185,11 +185,11 @@ export class HcMain extends HassElement {
       this._sendError(
         ReceiverErrorCode.WRONG_INSTANCE,
         this._error,
-        msg.senderId!
+        msg.senderId
       );
     }
 
-    this._sendStatus(msg.senderId!);
+    this._sendStatus(msg.senderId);
   }
 
   private async _handleConnectMessage(msg: ConnectMessage) {
@@ -244,12 +244,12 @@ export class HcMain extends HassElement {
     // We should not get this command before we are connected.
     // Means a client got out of sync. Let's send status to them.
     if (!this.hass?.connected) {
-      this._sendStatus(msg.senderId!);
+      this._sendStatus(msg.senderId);
       this._error = "Cannot show Lovelace because we're not connected.";
       this._sendError(
         ReceiverErrorCode.NOT_CONNECTED,
         this._error,
-        msg.senderId!
+        msg.senderId
       );
       return;
     }
@@ -258,13 +258,13 @@ export class HcMain extends HassElement {
       (msg.hassUUID && msg.hassUUID !== this._hassUUID) ||
       (msg.hassUrl && msg.hassUrl !== this.hass.auth.data.hassUrl)
     ) {
-      this._sendStatus(msg.senderId!);
+      this._sendStatus(msg.senderId);
       this._error =
         "Cannot show Lovelace because we're not connected to the same Home Assistant instance.";
       this._sendError(
         ReceiverErrorCode.WRONG_INSTANCE,
         this._error,
-        msg.senderId!
+        msg.senderId
       );
       return;
     }
@@ -336,10 +336,10 @@ export class HcMain extends HassElement {
     if (!resourcesLoaded) {
       resourcesLoaded = true;
       const resources = atLeastVersion(this.hass.connection.haVersion, 0, 107)
-        ? await fetchResources(this.hass!.connection)
+        ? await fetchResources(this.hass.connection)
         : (this._lovelaceConfig as LegacyLovelaceConfig).resources;
       if (resources) {
-        loadLovelaceResources(resources, this.hass!);
+        loadLovelaceResources(resources, this.hass);
       }
     }
 

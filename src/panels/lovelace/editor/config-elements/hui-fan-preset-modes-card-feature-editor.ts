@@ -96,7 +96,7 @@ export class HuiFanPresetModesCardFeatureEditor
     }
 
     const stateObj = this.context?.entity_id
-      ? this.hass.states[this.context?.entity_id]
+      ? this.hass.states[this.context.entity_id]
       : undefined;
 
     const data: FanPresetModesCardFeatureData = {
@@ -128,7 +128,7 @@ export class HuiFanPresetModesCardFeatureEditor
       .value as FanPresetModesCardFeatureData;
 
     const stateObj = this.context?.entity_id
-      ? this.hass!.states[this.context?.entity_id]
+      ? this.hass!.states[this.context.entity_id]
       : undefined;
 
     if (customize_modes && !config.preset_modes) {

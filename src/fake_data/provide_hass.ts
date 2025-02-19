@@ -293,7 +293,7 @@ export const provideHass = (
     },
     hassUrl: (path?) => path,
     fetchWithAuth: () => Promise.reject("Not implemented"),
-    sendWS: (msg) => hassObj.connection.sendMessage(msg),
+    sendWS: (msg) => { hassObj.connection.sendMessage(msg); },
     callWS: (msg) => hassObj.connection.sendMessagePromise(msg),
 
     // Mock stuff
@@ -317,7 +317,7 @@ export const provideHass = (
     },
     mockAPI,
     mockEvent(event) {
-      (eventListeners[event] || []).forEach((fn) => fn(event));
+      (eventListeners[event] || []).forEach((fn) => { fn(event); });
     },
     mockTheme(theme) {
       invalidateThemeCache();

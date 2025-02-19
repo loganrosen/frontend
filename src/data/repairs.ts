@@ -86,7 +86,7 @@ const subscribeRepairsIssueUpdates = (
     debounce(
       () =>
         fetchRepairsIssues(conn).then((repairs) =>
-          store.setState(repairs, true)
+          { store.setState(repairs, true); }
         ),
       500,
       true

@@ -210,7 +210,7 @@ export const getPlatformIcons = async (
     return undefined;
   }
   const result = getHassIcons(hass, "entity", integration).then(
-    (res) => res?.resources[integration]
+    (res) => res.resources[integration]
   );
   resources.entity[integration] = result;
   return resources.entity[integration];
@@ -262,7 +262,7 @@ export const getServiceIcons = async (
     resources.services.all = getHassIcons(hass, "services", domain).then(
       (res) => {
         resources.services.domains = res.resources;
-        return res?.resources;
+        return res.resources;
       }
     );
     return resources.services.all;
@@ -281,7 +281,7 @@ export const getServiceIcons = async (
   }
   const result = getHassIcons(hass, "services", domain);
   resources.services.domains[domain] = result.then(
-    (res) => res?.resources[domain]
+    (res) => res.resources[domain]
   );
   return resources.services.domains[domain];
 };
@@ -291,7 +291,7 @@ export const entityIcon = async (
   stateObj: HassEntity,
   state?: string
 ) => {
-  const entry = hass.entities?.[stateObj.entity_id] as
+  const entry = hass.entities[stateObj.entity_id] as
     | EntityRegistryDisplayEntry
     | undefined;
   if (entry?.icon) {
@@ -330,7 +330,7 @@ const getEntityIcon = async (
   if (translation_key && platform) {
     const platformIcons = await getPlatformIcons(hass, platform);
     if (platformIcons) {
-      const translations = platformIcons[domain]?.[translation_key];
+      const translations = platformIcons[domain][translation_key];
       icon = (state && translations?.state?.[state]) || translations?.default;
     }
   }
@@ -345,7 +345,7 @@ const getEntityIcon = async (
       const translations =
         (device_class && entityComponentIcons[device_class]) ||
         entityComponentIcons._;
-      icon = (state && translations?.state?.[state]) || translations?.default;
+      icon = (state && translations.state?.[state]) || translations.default;
     }
   }
   return icon;
@@ -360,7 +360,7 @@ export const attributeIcon = async (
   let icon: string | undefined;
   const domain = computeStateDomain(state);
   const deviceClass = state.attributes.device_class;
-  const entity = hass.entities?.[state.entity_id] as
+  const entity = hass.entities[state.entity_id] as
     | EntityRegistryDisplayEntry
     | undefined;
   const platform = entity?.platform;
@@ -373,7 +373,7 @@ export const attributeIcon = async (
     const platformIcons = await getPlatformIcons(hass, platform);
     if (platformIcons) {
       const translations =
-        platformIcons[domain]?.[translation_key]?.state_attributes?.[attribute];
+        platformIcons[domain][translation_key]?.state_attributes?.[attribute];
       icon = (value && translations?.state?.[value]) || translations?.default;
     }
   }
@@ -382,9 +382,9 @@ export const attributeIcon = async (
     if (entityComponentIcons) {
       const translations =
         (deviceClass &&
-          entityComponentIcons[deviceClass]?.state_attributes?.[attribute]) ||
-        entityComponentIcons._?.state_attributes?.[attribute];
-      icon = (value && translations?.state?.[value]) || translations?.default;
+          entityComponentIcons[deviceClass].state_attributes?.[attribute]) ||
+        entityComponentIcons._.state_attributes?.[attribute];
+      icon = (value && translations?.state[value]) || translations?.default;
     }
   }
   return icon;
@@ -400,7 +400,7 @@ export const serviceIcon = async (
   const serviceIcons = await getServiceIcons(hass, domain);
   if (serviceIcons) {
     const srvceIcon = serviceIcons[serviceName] as ServiceIcons[string];
-    icon = srvceIcon?.service;
+    icon = srvceIcon.service;
   }
   if (!icon) {
     icon = await domainIcon(hass, domain);
@@ -418,7 +418,7 @@ export const serviceSectionIcon = async (
   const serviceIcons = await getServiceIcons(hass, domain);
   if (serviceIcons) {
     const srvceIcon = serviceIcons[serviceName] as ServiceIcons[string];
-    return srvceIcon?.sections?.[section];
+    return srvceIcon.sections?.[section];
   }
   return undefined;
 };
@@ -433,7 +433,7 @@ export const domainIcon = async (
     const translations =
       (deviceClass && entityComponentIcons[deviceClass]) ||
       entityComponentIcons._;
-    return translations?.default;
+    return translations.default;
   }
   return undefined;
 };

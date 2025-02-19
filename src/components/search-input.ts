@@ -25,7 +25,7 @@ class SearchInput extends LitElement {
   public label?: string;
 
   public focus() {
-    this._input?.focus();
+    this._input.focus();
   }
 
   @query("ha-textfield", true) private _input!: HaTextField;

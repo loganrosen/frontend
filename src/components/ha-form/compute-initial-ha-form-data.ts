@@ -8,7 +8,7 @@ export const computeInitialHaFormData = (
   schema.forEach((field) => {
     if (
       field.description?.suggested_value !== undefined &&
-      field.description?.suggested_value !== null
+      field.description.suggested_value !== null
     ) {
       data[field.name] = field.description.suggested_value;
     } else if ("default" in field) {
@@ -48,7 +48,7 @@ export const computeInitialHaFormData = (
       } else if ("area" in selector) {
         data[field.name] = selector.area?.multiple ? [] : "";
       } else if ("label" in selector) {
-        data[field.name] = selector.label?.multiple ? [] : "";
+        data[field.name] = selector.label.multiple ? [] : "";
       } else if ("boolean" in selector) {
         data[field.name] = false;
       } else if (
@@ -72,7 +72,7 @@ export const computeInitialHaFormData = (
           data[field.name] = selector.select.multiple ? [val] : val;
         }
       } else if ("country" in selector) {
-        if (selector.country?.countries?.length) {
+        if (selector.country?.countries.length) {
           data[field.name] = selector.country.countries[0];
         }
       } else if ("language" in selector) {

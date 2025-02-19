@@ -32,7 +32,7 @@ export class CloudStepSignin extends LitElement {
   render() {
     return html`<div class="content">
         <img
-          src=${`/static/images/logo_nabu_casa${this.hass.themes?.darkMode ? "_dark" : ""}.png`}
+          src=${`/static/images/logo_nabu_casa${this.hass.themes.darkMode ? "_dark" : ""}.png`}
           alt="Nabu Casa logo"
         />
         <h1>${this.hass.localize("ui.panel.config.cloud.login.sign_in")}</h1>

@@ -81,7 +81,7 @@ class DialogRestoreBackup extends LitElement implements HassDialog {
 
     const agentIds = Object.keys(this._params.backup.agents);
     const preferedAgent = getPreferredAgentForDownload(agentIds);
-    const isProtected = this._params.backup.agents[preferedAgent]?.protected;
+    const isProtected = this._params.backup.agents[preferedAgent].protected;
 
     if (isProtected) {
       this._backupEncryptionKey = await this._fetchEncryptionKey();
@@ -280,7 +280,7 @@ class DialogRestoreBackup extends LitElement implements HassDialog {
   }
 
   private _subscribeBackupEvents() {
-    this._unsub = subscribeBackupEvents(this.hass!, (event) => {
+    this._unsub = subscribeBackupEvents(this.hass, (event) => {
       if (event.manager_state === "idle" && this._state === "in_progress") {
         this.closeDialog();
       }
@@ -304,7 +304,7 @@ class DialogRestoreBackup extends LitElement implements HassDialog {
 
   private _unsubscribe() {
     if (this._unsub) {
-      const prom = this._unsub.then((unsub) => unsub());
+      const prom = this._unsub.then((unsub) => { unsub(); });
       this._unsub = undefined;
       return prom;
     }

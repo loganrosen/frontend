@@ -75,7 +75,7 @@ class MoreInfoLight extends LitElement {
 
   private get _stateOverride() {
     if (this.stateObj?.attributes.brightness) {
-      return this.hass.formatEntityAttributeValue(this.stateObj!, "brightness");
+      return this.hass.formatEntityAttributeValue(this.stateObj, "brightness");
     }
     return undefined;
   }
@@ -159,7 +159,7 @@ class MoreInfoLight extends LitElement {
                 ${supportsBrightness
                   ? html`
                       <ha-icon-button
-                        .disabled=${this.stateObj!.state === UNAVAILABLE}
+                        .disabled=${this.stateObj.state === UNAVAILABLE}
                         .label=${this.hass.localize(
                           "ui.dialogs.more_info_control.light.toggle"
                         )}
@@ -174,7 +174,7 @@ class MoreInfoLight extends LitElement {
                       <div class="separator"></div>
                       <ha-icon-button-toggle
                         .selected=${this._mainControl === "brightness"}
-                        .disabled=${this.stateObj!.state === UNAVAILABLE}
+                        .disabled=${this.stateObj.state === UNAVAILABLE}
                         .label=${this.hass.formatEntityAttributeName(
                           this.stateObj,
                           "brightness"
@@ -191,7 +191,7 @@ class MoreInfoLight extends LitElement {
                       <ha-icon-button-toggle
                         border-only
                         .selected=${this._mainControl === "color"}
-                        .disabled=${this.stateObj!.state === UNAVAILABLE}
+                        .disabled=${this.stateObj.state === UNAVAILABLE}
                         .label=${this.hass.localize(
                           "ui.dialogs.more_info_control.light.color"
                         )}
@@ -207,7 +207,7 @@ class MoreInfoLight extends LitElement {
                       <ha-icon-button-toggle
                         border-only
                         .selected=${this._mainControl === "color_temp"}
-                        .disabled=${this.stateObj!.state === UNAVAILABLE}
+                        .disabled=${this.stateObj.state === UNAVAILABLE}
                         .label=${this.hass.localize(
                           "ui.dialogs.more_info_control.light.color_temp"
                         )}
@@ -222,7 +222,7 @@ class MoreInfoLight extends LitElement {
                   ? html`
                       <div class="separator"></div>
                       <ha-icon-button
-                        .disabled=${this.stateObj!.state === UNAVAILABLE}
+                        .disabled=${this.stateObj.state === UNAVAILABLE}
                         .label=${this.hass.localize(
                           "ui.dialogs.more_info_control.light.set_white"
                         )}
@@ -278,7 +278,7 @@ class MoreInfoLight extends LitElement {
                         slot="icon"
                         .path=${mdiCreation}
                       ></ha-svg-icon>`}
-                  ${this.stateObj.attributes.effect_list?.map(
+                  ${this.stateObj.attributes.effect_list.map(
                     (effect) => html`
                       <ha-list-item .value=${effect} graphic="icon">
                         <ha-attribute-icon

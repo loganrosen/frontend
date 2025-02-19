@@ -92,7 +92,7 @@ export class EnergyBatterySettings extends LitElement {
             const toEntityState = this.hass.states[source.stat_energy_to];
             return html`
               <div class="row" .source=${source}>
-                ${toEntityState?.attributes.icon
+                ${toEntityState.attributes.icon
                   ? html`<ha-icon
                       .icon=${toEntityState.attributes.icon}
                     ></ha-icon>`
@@ -147,7 +147,7 @@ export class EnergyBatterySettings extends LitElement {
     showEnergySettingsBatteryDialog(this, {
       battery_sources: this.preferences.energy_sources.filter(
         (src) => src.type === "battery"
-      ) as BatterySourceTypeEnergyPreference[],
+      ),
       saveCallback: async (source) => {
         await this._savePreferences({
           ...this.preferences,
@@ -164,7 +164,7 @@ export class EnergyBatterySettings extends LitElement {
       source: { ...origSource },
       battery_sources: this.preferences.energy_sources.filter(
         (src) => src.type === "battery"
-      ) as BatterySourceTypeEnergyPreference[],
+      ),
       saveCallback: async (newSource) => {
         await this._savePreferences({
           ...this.preferences,

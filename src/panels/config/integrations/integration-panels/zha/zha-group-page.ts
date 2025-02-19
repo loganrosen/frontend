@@ -178,7 +178,7 @@ export class ZHAGroupPage extends LitElement {
                           )}
                         ></ha-circular-progress>`
                       : nothing}
-                    ${this.hass!.localize(
+                    ${this.hass.localize(
                       "ui.panel.config.zha.groups.remove_members"
                     )}</mwc-button
                   >
@@ -214,7 +214,7 @@ export class ZHAGroupPage extends LitElement {
                     aria-label="Saving"
                   ></ha-circular-progress>`
                 : ""}
-              ${this.hass!.localize(
+              ${this.hass.localize(
                 "ui.panel.config.zha.groups.add_members"
               )}</mwc-button
             >
@@ -226,9 +226,9 @@ export class ZHAGroupPage extends LitElement {
 
   private async _fetchData() {
     if (this.groupId !== null && this.groupId !== undefined) {
-      this.group = await fetchGroup(this.hass!, this.groupId);
+      this.group = await fetchGroup(this.hass, this.groupId);
     }
-    this.deviceEndpoints = await fetchGroupableDevices(this.hass!);
+    this.deviceEndpoints = await fetchGroupableDevices(this.hass);
     // filter the groupable devices so we only show devices that aren't already in the group
     this._filterDevices();
   }

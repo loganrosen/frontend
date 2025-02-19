@@ -69,7 +69,7 @@ export class ZHAAddGroupPage extends LitElement {
             type="string"
             .value=${this._groupName}
             @change=${this._handleNameChange}
-            .placeholder=${this.hass!.localize(
+            .placeholder=${this.hass.localize(
               "ui.panel.config.zha.groups.group_name_placeholder"
             )}
           ></ha-textfield>
@@ -78,7 +78,7 @@ export class ZHAAddGroupPage extends LitElement {
             type="number"
             .value=${this._groupId}
             @change=${this._handleGroupIdChange}
-            .placeholder=${this.hass!.localize(
+            .placeholder=${this.hass.localize(
               "ui.panel.config.zha.groups.group_id_placeholder"
             )}
           ></ha-textfield>
@@ -108,12 +108,12 @@ export class ZHAAddGroupPage extends LitElement {
                 ? html`<ha-circular-progress
                     indeterminate
                     size="small"
-                    .ariaLabel=${this.hass!.localize(
+                    .ariaLabel=${this.hass.localize(
                       "ui.panel.config.zha.groups.creating_group"
                     )}
                   ></ha-circular-progress>`
                 : ""}
-              ${this.hass!.localize(
+              ${this.hass.localize(
                 "ui.panel.config.zha.groups.create"
               )}</mwc-button
             >
@@ -124,7 +124,7 @@ export class ZHAAddGroupPage extends LitElement {
   }
 
   private async _fetchData() {
-    this.deviceEndpoints = await fetchGroupableDevices(this.hass!);
+    this.deviceEndpoints = await fetchGroupableDevices(this.hass);
   }
 
   private _handleAddSelectionChanged(
@@ -140,7 +140,7 @@ export class ZHAAddGroupPage extends LitElement {
       return { ieee: memberParts[0], endpoint_id: memberParts[1] };
     });
     const groupId = this._groupId
-      ? parseInt(this._groupId as string, 10)
+      ? parseInt(this._groupId, 10)
       : undefined;
     const group: ZHAGroup = await addGroup(
       this.hass,

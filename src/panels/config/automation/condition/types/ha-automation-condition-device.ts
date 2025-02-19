@@ -53,7 +53,7 @@ export class HaDeviceCondition extends LitElement {
       const extraFieldsData: Record<string, any> = {};
       capabilities.extra_fields.forEach((item) => {
         if (condition[item.name] !== undefined) {
-          extraFieldsData![item.name] = condition[item.name];
+          extraFieldsData[item.name] = condition[item.name];
         }
       });
       return extraFieldsData;

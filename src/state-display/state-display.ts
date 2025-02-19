@@ -96,7 +96,7 @@ class StateDisplay extends LitElement {
         `;
       }
 
-      return this.hass!.formatEntityState(stateObj);
+      return this.hass.formatEntityState(stateObj);
     }
     if (content === "name") {
       return html`${this.name || stateObj.attributes.friendly_name}`;
@@ -144,7 +144,7 @@ class StateDisplay extends LitElement {
     if (specialContent.includes(content)) {
       if (content === "install_status") {
         return html`
-          ${computeUpdateStateDisplay(stateObj as UpdateEntity, this.hass!)}
+          ${computeUpdateStateDisplay(stateObj as UpdateEntity, this.hass)}
         `;
       }
       if (content === "remaining_time") {
@@ -162,11 +162,11 @@ class StateDisplay extends LitElement {
 
     if (
       attribute == null ||
-      (HIDDEN_ZERO_ATTRIBUTES_DOMAINS[domain]?.includes(content) && !attribute)
+      (HIDDEN_ZERO_ATTRIBUTES_DOMAINS[domain].includes(content) && !attribute)
     ) {
       return undefined;
     }
-    return this.hass!.formatEntityAttributeValue(stateObj, content);
+    return this.hass.formatEntityAttributeValue(stateObj, content);
   }
 
   protected render() {
@@ -178,7 +178,7 @@ class StateDisplay extends LitElement {
       .filter(Boolean);
 
     if (!values.length) {
-      return html`${this.hass!.formatEntityState(stateObj)}`;
+      return html`${this.hass.formatEntityState(stateObj)}`;
     }
 
     return html`

@@ -42,7 +42,7 @@ export const generateColorTemperatureGradient = (min: number, max: number) => {
   }
 
   return gradient
-    .map(([stop, color]) => `${color} ${(stop as number) * 100}%`)
+    .map(([stop, color]) => `${color} ${(stop) * 100}%`)
     .join(", ");
 };
 
@@ -64,7 +64,7 @@ class LightColorTempPicker extends LitElement {
     const maxKelvin =
       this.stateObj.attributes.max_color_temp_kelvin ?? DEFAULT_MAX_KELVIN;
 
-    const gradient = this._generateTemperatureGradient(minKelvin!, maxKelvin);
+    const gradient = this._generateTemperatureGradient(minKelvin, maxKelvin);
     const color = stateColorCss(this.stateObj);
 
     return html`
@@ -163,7 +163,7 @@ class LightColorTempPicker extends LitElement {
   private _applyColor(color: LightColor, params?: Record<string, any>) {
     fireEvent(this, "color-changed", color);
     this.hass.callService("light", "turn_on", {
-      entity_id: this.stateObj!.entity_id,
+      entity_id: this.stateObj.entity_id,
       ...color,
       ...params,
     });

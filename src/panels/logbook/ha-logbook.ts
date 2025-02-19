@@ -189,7 +189,7 @@ export class HaLogbook extends LitElement {
     if (ev.detail.enable && !this._liveUpdatesEnabled) {
       // Process everything we queued up while we were scrolled down
       this._pendingStreamMessages.forEach((msg) =>
-        this._processStreamMessage(msg)
+        { this._processStreamMessage(msg); }
       );
       this._pendingStreamMessages = [];
     }
@@ -340,7 +340,7 @@ export class HaLogbook extends LitElement {
       ? []
       : purgeBeforePythonTime
         ? this._logbookEntries.filter(
-            (entry) => entry.when > purgeBeforePythonTime!
+            (entry) => entry.when > purgeBeforePythonTime
           )
         : this._logbookEntries;
 

@@ -60,8 +60,8 @@ export class HuiBadgeEditMode extends LitElement {
   protected _clipboard?: LovelaceCardConfig;
 
   private get _badges() {
-    const containerPath = getLovelaceContainerPath(this.path!);
-    return findLovelaceItems("badges", this.lovelace!.config, containerPath)!;
+    const containerPath = getLovelaceContainerPath(this.path);
+    return findLovelaceItems("badges", this.lovelace.config, containerPath)!;
   }
 
   private _touchStarted = false;
@@ -124,7 +124,7 @@ export class HuiBadgeEditMode extends LitElement {
           class="more"
           corner="BOTTOM_END"
           menu-corner="END"
-          .path=${[this.path!]}
+          .path=${[this.path]}
           @action=${this._handleAction}
           @opened=${this._handleOpened}
           @closed=${this._handleClosed}
@@ -208,33 +208,33 @@ export class HuiBadgeEditMode extends LitElement {
 
   private _cutBadge(): void {
     this._copyBadge();
-    fireEvent(this, "ll-delete-badge", { path: this.path!, silent: true });
+    fireEvent(this, "ll-delete-badge", { path: this.path, silent: true });
   }
 
   private _copyBadge(): void {
-    const { cardIndex } = parseLovelaceCardPath(this.path!);
+    const { cardIndex } = parseLovelaceCardPath(this.path);
     const cardConfig = this._badges[cardIndex];
     this._clipboard = deepClone(cardConfig);
   }
 
   private _duplicateBadge(): void {
-    const { cardIndex } = parseLovelaceCardPath(this.path!);
-    const containerPath = getLovelaceContainerPath(this.path!);
-    const badgeConfig = ensureBadgeConfig(this._badges![cardIndex]);
+    const { cardIndex } = parseLovelaceCardPath(this.path);
+    const containerPath = getLovelaceContainerPath(this.path);
+    const badgeConfig = ensureBadgeConfig(this._badges[cardIndex]);
     showEditBadgeDialog(this, {
-      lovelaceConfig: this.lovelace!.config,
-      saveConfig: this.lovelace!.saveConfig,
+      lovelaceConfig: this.lovelace.config,
+      saveConfig: this.lovelace.saveConfig,
       path: containerPath,
       badgeConfig,
     });
   }
 
   private _editBadge(): void {
-    fireEvent(this, "ll-edit-badge", { path: this.path! });
+    fireEvent(this, "ll-edit-badge", { path: this.path });
   }
 
   private _deleteBadge(): void {
-    fireEvent(this, "ll-delete-badge", { path: this.path!, silent: false });
+    fireEvent(this, "ll-delete-badge", { path: this.path, silent: false });
   }
 
   static get styles(): CSSResultGroup {

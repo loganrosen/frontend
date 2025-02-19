@@ -43,7 +43,7 @@ export class DemoAutomationTraceTimeline extends LitElement {
                 .trace=${trace.trace}
                 .logbookEntries=${trace.logbookEntries}
               ></hat-trace-timeline>
-              <button @click=${() => console.log(trace)}>Log trace</button>
+              <button @click=${() => { console.log(trace); }}>Log trace</button>
             </div>
           </ha-card>
         `

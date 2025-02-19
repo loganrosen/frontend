@@ -193,7 +193,7 @@ export class HuiEntityBadgeEditor
       return nothing;
     }
 
-    const schema = this._schema(this.hass!.localize);
+    const schema = this._schema(this.hass.localize);
 
     const data = {
       ...this._config,

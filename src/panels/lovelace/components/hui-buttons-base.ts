@@ -67,7 +67,7 @@ export class HuiButtonsBase extends LitElement {
 
   private _handleAction(ev: ActionHandlerEvent) {
     const config = (ev.currentTarget as any).config as EntitiesCardEntityConfig;
-    handleAction(this, this.hass, config, ev.detail.action!);
+    handleAction(this, this.hass, config, ev.detail.action);
   }
 
   static get styles(): CSSResultGroup {

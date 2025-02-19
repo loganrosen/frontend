@@ -61,23 +61,23 @@ export class HaStateControlWaterHeaterTemperature extends LitElement {
   }
 
   private _valueChanged(ev: CustomEvent) {
-    const value = (ev.detail as any).value;
+    const value = (ev.detail).value;
     if (isNaN(value)) return;
     this._targetTemperature = value;
     this._callService();
   }
 
   private _valueChanging(ev: CustomEvent) {
-    const value = (ev.detail as any).value;
+    const value = (ev.detail).value;
     if (isNaN(value)) return;
     this._targetTemperature = value;
   }
 
-  private _debouncedCallService = debounce(() => this._callService(), 1000);
+  private _debouncedCallService = debounce(() => { this._callService(); }, 1000);
 
   private _callService() {
     this.hass.callService("water_heater", "set_temperature", {
-      entity_id: this.stateObj!.entity_id,
+      entity_id: this.stateObj.entity_id,
       temperature: this._targetTemperature,
     });
   }
@@ -139,7 +139,7 @@ export class HaStateControlWaterHeaterTemperature extends LitElement {
   }
 
   private _renderTargetTemperature(temperature: number) {
-    const digits = this._step.toString().split(".")?.[1]?.length ?? 0;
+    const digits = this._step.toString().split(".")[1]?.length ?? 0;
     const formatOptions: Intl.NumberFormatOptions = {
       maximumFractionDigits: digits,
       minimumFractionDigits: digits,

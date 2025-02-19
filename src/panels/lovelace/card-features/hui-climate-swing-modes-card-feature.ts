@@ -90,7 +90,7 @@ class HuiClimateSwingModesCardFeature
 
   private async _valueChanged(ev: CustomEvent) {
     const swingMode =
-      (ev.detail as any).value ?? ((ev.target as any).value as string);
+      (ev.detail).value ?? ((ev.target as any).value as string);
 
     const oldSwingMode = this.stateObj!.attributes.swing_mode;
 
@@ -126,7 +126,7 @@ class HuiClimateSwingModesCardFeature
 
     const options = filterModes(
       stateObj.attributes.swing_modes,
-      this._config!.swing_modes
+      this._config.swing_modes
     ).map<ControlSelectOption>((mode) => ({
       value: mode,
       label: this.hass!.formatEntityAttributeValue(
@@ -150,11 +150,11 @@ class HuiClimateSwingModesCardFeature
           .value=${this._currentSwingMode}
           @value-changed=${this._valueChanged}
           hide-label
-          .ariaLabel=${this.hass!.formatEntityAttributeName(
+          .ariaLabel=${this.hass.formatEntityAttributeName(
             stateObj,
             "swing_mode"
           )}
-          .disabled=${this.stateObj!.state === UNAVAILABLE}
+          .disabled=${this.stateObj.state === UNAVAILABLE}
         >
         </ha-control-select>
       `;
@@ -164,7 +164,7 @@ class HuiClimateSwingModesCardFeature
       <ha-control-select-menu
         show-arrow
         hide-label
-        .label=${this.hass!.formatEntityAttributeName(stateObj, "swing_mode")}
+        .label=${this.hass.formatEntityAttributeName(stateObj, "swing_mode")}
         .value=${this._currentSwingMode}
         .disabled=${this.stateObj.state === UNAVAILABLE}
         fixedMenuPosition

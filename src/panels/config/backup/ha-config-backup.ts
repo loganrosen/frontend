@@ -153,7 +153,7 @@ class HaConfigBackup extends SubscribeMixin(HassRouterPage) {
 
   public hassSubscribe(): Promise<UnsubscribeFunc>[] {
     return [
-      subscribeBackupEvents(this.hass!, (event) => {
+      subscribeBackupEvents(this.hass, (event) => {
         const curState = this._manager.manager_state;
 
         this._manager = event;

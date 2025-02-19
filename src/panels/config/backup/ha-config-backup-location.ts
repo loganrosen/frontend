@@ -13,7 +13,6 @@ import "../../../components/ha-md-list";
 import "../../../components/ha-md-list-item";
 import type {
   BackupAgent,
-  BackupAgentConfig,
   BackupConfig,
 } from "../../../data/backup";
 import {
@@ -220,9 +219,7 @@ class HaConfigBackupDetails extends LitElement {
   }
 
   private _isEncryptionTurnedOn() {
-    const agentConfig = this.config?.agents[this.agentId] as
-      | BackupAgentConfig
-      | undefined;
+    const agentConfig = this.config?.agents[this.agentId];
 
     if (!agentConfig) {
       return true;

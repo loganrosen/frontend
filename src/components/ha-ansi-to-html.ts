@@ -355,8 +355,8 @@ export class HaAnsiToHtml extends LitElement {
 
               indices.forEach((index) => {
                 const range = new Range();
-                range.setStart(span.firstChild!, index);
-                range.setEnd(span.firstChild!, index + filter.length);
+                range.setStart(span.firstChild, index);
+                range.setEnd(span.firstChild, index + filter.length);
                 highlightRanges.push(range);
               });
             });

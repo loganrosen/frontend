@@ -30,7 +30,7 @@ export class HaStateControlAlarmControlPanelModes extends LitElement {
   private _modes = memoizeOne((stateObj: AlarmControlPanelEntity) => {
     const modes = Object.keys(ALARM_MODES) as AlarmMode[];
     return modes.filter((mode) => {
-      const feature = ALARM_MODES[mode as AlarmMode].feature;
+      const feature = ALARM_MODES[mode].feature;
       return !feature || supportsFeature(stateObj, feature);
     });
   });
@@ -47,15 +47,15 @@ export class HaStateControlAlarmControlPanelModes extends LitElement {
   }
 
   private async _setMode(mode: AlarmMode) {
-    setProtectedAlarmControlPanelMode(this, this.hass!, this.stateObj!, mode);
+    setProtectedAlarmControlPanelMode(this, this.hass, this.stateObj, mode);
   }
 
   private async _valueChanged(ev: CustomEvent) {
-    const mode = (ev.detail as any).value as AlarmMode;
+    const mode = (ev.detail).value as AlarmMode;
 
-    if (mode === this.stateObj!.state) return;
+    if (mode === this.stateObj.state) return;
 
-    const oldMode = this._getCurrentMode(this.stateObj!);
+    const oldMode = this._getCurrentMode(this.stateObj);
     this._currentMode = mode;
 
     try {
@@ -89,7 +89,7 @@ export class HaStateControlAlarmControlPanelModes extends LitElement {
           "--control-select-color": color,
           "--modes-count": modes.length.toString(),
         })}
-        .disabled=${this.stateObj!.state === UNAVAILABLE}
+        .disabled=${this.stateObj.state === UNAVAILABLE}
       >
       </ha-control-select>
     `;

@@ -47,7 +47,7 @@ export class HuiEnergyCompareCard
     return [
       getEnergyDataCollection(this.hass, {
         key: this._config!.collection_key,
-      }).subscribe((data) => this._update(data)),
+      }).subscribe((data) => { this._update(data); }),
     ];
   }
 

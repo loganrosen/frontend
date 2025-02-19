@@ -58,7 +58,7 @@ export class HuiHistoryGraphCard extends LitElement implements LovelaceCard {
   private _subscribed?: Promise<(() => Promise<void>) | undefined>;
 
   public getCardSize(): number {
-    return this._config?.title ? 2 : 0 + 2 * (this._entityIds?.length || 1);
+    return this._config?.title ? 2 : 0 + 2 * (this._entityIds.length || 1);
   }
 
   getGridOptions(): LovelaceGridOptions {
@@ -184,7 +184,7 @@ export class HuiHistoryGraphCard extends LitElement implements LovelaceCard {
   private _setRedrawTimer() {
     // redraw the graph every minute to update the time axis
     clearInterval(this._interval);
-    this._interval = window.setInterval(() => this._redrawGraph(), 1000 * 60);
+    this._interval = window.setInterval(() => { this._redrawGraph(); }, 1000 * 60);
   }
 
   private _unsubscribeHistory() {
@@ -225,7 +225,7 @@ export class HuiHistoryGraphCard extends LitElement implements LovelaceCard {
     if (
       changedProps.has("_config") &&
       (oldConfig?.entities !== this._config.entities ||
-        oldConfig?.hours_to_show !== this._config.hours_to_show)
+        oldConfig.hours_to_show !== this._config.hours_to_show)
     ) {
       this._unsubscribeHistory();
       this._subscribeHistory();

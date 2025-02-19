@@ -42,7 +42,7 @@ export class HaNumberSelector extends LitElement {
     const isBox =
       this.selector.number?.mode === "box" ||
       this.selector.number?.min === undefined ||
-      this.selector.number?.max === undefined;
+      this.selector.number.max === undefined;
 
     let sliderStep;
 

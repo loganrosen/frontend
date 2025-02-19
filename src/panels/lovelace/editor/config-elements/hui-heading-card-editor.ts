@@ -119,14 +119,14 @@ export class HuiHeadingCardEditor
     }
 
     const data = {
-      ...this._config!,
+      ...this._config,
     };
 
     if (!data.heading_style) {
       data.heading_style = "title";
     }
 
-    const schema = this._schema(this.hass!.localize);
+    const schema = this._schema(this.hass.localize);
 
     return html`
       <ha-form
@@ -139,14 +139,14 @@ export class HuiHeadingCardEditor
       <ha-expansion-panel outlined>
         <h3 slot="header">
           <ha-svg-icon .path=${mdiListBox}></ha-svg-icon>
-          ${this.hass!.localize(
+          ${this.hass.localize(
             "ui.panel.lovelace.editor.card.heading.entities"
           )}
         </h3>
         <div class="content">
           <hui-heading-badges-editor
             .hass=${this.hass}
-            .badges=${this._badges(this._config!.badges)}
+            .badges=${this._badges(this._config.badges)}
             @heading-badges-changed=${this._badgesChanged}
             @edit-heading-badge=${this._editBadge}
           >
@@ -188,7 +188,7 @@ export class HuiHeadingCardEditor
 
     fireEvent(this, "edit-sub-element", {
       config: config,
-      saveConfig: (newConfig) => this._updateBadge(index, newConfig),
+      saveConfig: (newConfig) => { this._updateBadge(index, newConfig); },
       type: "heading-badge",
     } as EditSubElementEvent<EntityHeadingBadgeConfig>);
   }

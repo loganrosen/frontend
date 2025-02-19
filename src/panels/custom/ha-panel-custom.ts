@@ -90,7 +90,7 @@ export class HaPanelCustom extends ReactiveElement {
   }
 
   private _createPanel(panel: CustomPanelInfo) {
-    const config = panel.config!._panel_custom;
+    const config = panel.config._panel_custom;
     const panelUrl = getUrl(config);
 
     const tempA = document.createElement("a");
@@ -125,7 +125,7 @@ export class HaPanelCustom extends ReactiveElement {
         () => {
           const element = createCustomPanelElement(config);
           this._setProperties = (props) =>
-            setCustomPanelProperties(element, props);
+            { setCustomPanelProperties(element, props); };
           setCustomPanelProperties(element, {
             panel,
             hass: this.hass,

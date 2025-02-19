@@ -727,7 +727,7 @@ class DialogZWaveJSAddNode extends LitElement {
       await zwaveValidateDskAndEnterPin(
         this.hass,
         this._entryId!,
-        this._pinInput!.value as string
+        this._pinInput!.value
       );
     } catch (err: any) {
       this._error = err.message;

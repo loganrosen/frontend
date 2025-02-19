@@ -421,7 +421,7 @@ export class SupervisorBackupContent extends LitElement {
 
   private _handleTextValueChanged(ev: InputEvent) {
     const input = ev.currentTarget as HaTextField;
-    this[input.name!] = input.value;
+    this[input.name] = input.value;
   }
 
   private _toggleHasPassword(): void {

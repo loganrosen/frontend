@@ -146,16 +146,16 @@ class HuiGaugeCard extends LitElement implements LovelaceCard {
             stateObj,
             this.hass.entities[stateObj.entity_id]
           )}
-          .locale=${this.hass!.locale}
-          .label=${this._config!.unit ||
-          this.hass?.states[this._config!.entity].attributes
+          .locale=${this.hass.locale}
+          .label=${this._config.unit ||
+          this.hass.states[this._config.entity].attributes
             .unit_of_measurement ||
           ""}
           style=${styleMap({
             "--gauge-color": this._computeSeverity(entityState),
           })}
-          .needle=${this._config!.needle}
-          .levels=${this._config!.needle ? this._severityLevels() : undefined}
+          .needle=${this._config.needle}
+          .levels=${this._config.needle ? this._severityLevels() : undefined}
         ></ha-gauge>
         <div class="name" .title=${name}>${name}</div>
       </ha-card>
@@ -247,9 +247,9 @@ class HuiGaugeCard extends LitElement implements LovelaceCard {
     const segments = this._config!.segments;
     if (segments) {
       return segments.map((segment) => ({
-        level: segment?.from,
-        stroke: segment?.color,
-        label: segment?.label,
+        level: segment.from,
+        stroke: segment.color,
+        label: segment.label,
       }));
     }
 
@@ -268,7 +268,7 @@ class HuiGaugeCard extends LitElement implements LovelaceCard {
   }
 
   private _handleAction(ev: ActionHandlerEvent) {
-    handleAction(this, this.hass!, this._config!, ev.detail.action!);
+    handleAction(this, this.hass!, this._config!, ev.detail.action);
   }
 
   static styles = css`

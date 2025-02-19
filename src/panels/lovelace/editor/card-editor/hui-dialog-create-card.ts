@@ -96,11 +96,11 @@ export class HuiCreateDialogCard
     }
 
     const title = this._containerConfig.title
-      ? this.hass!.localize(
+      ? this.hass.localize(
           "ui.panel.lovelace.editor.edit_card.pick_card_title",
           { name: `"${this._containerConfig.title}"` }
         )
-      : this.hass!.localize("ui.panel.lovelace.editor.edit_card.pick_card");
+      : this.hass.localize("ui.panel.lovelace.editor.edit_card.pick_card");
 
     return html`
       <ha-dialog
@@ -124,13 +124,13 @@ export class HuiCreateDialogCard
             @MDCTabBar:activated=${this._handleTabChanged}
           >
             <mwc-tab
-              .label=${this.hass!.localize(
+              .label=${this.hass.localize(
                 "ui.panel.lovelace.editor.cardpicker.by_card"
               )}
               dialogInitialFocus=${ifDefined(this._narrow ? "" : undefined)}
             ></mwc-tab>
             <mwc-tab
-              .label=${this.hass!.localize(
+              .label=${this.hass.localize(
                 "ui.panel.lovelace.editor.cardpicker.by_entity"
               )}
             ></mwc-tab>
@@ -160,12 +160,12 @@ export class HuiCreateDialogCard
 
         <div slot="primaryAction">
           <mwc-button @click=${this._cancel}>
-            ${this.hass!.localize("ui.common.cancel")}
+            ${this.hass.localize("ui.common.cancel")}
           </mwc-button>
           ${this._selectedEntities.length
             ? html`
                 <mwc-button @click=${this._suggestCards}>
-                  ${this.hass!.localize("ui.common.continue")}
+                  ${this.hass.localize("ui.common.continue")}
                 </mwc-button>
               `
             : ""}
@@ -289,7 +289,7 @@ export class HuiCreateDialogCard
     // If we are in a section, we want to keep the section options for the preview
     if (isSection) {
       const containerConfig = findLovelaceContainer(
-        this._params!.lovelaceConfig!,
+        this._params!.lovelaceConfig,
         [viewIndex, sectionIndex]
       );
       if (!isStrategySection(containerConfig)) {
@@ -324,7 +324,7 @@ export class HuiCreateDialogCard
         stateObj,
         name: computeStateName(stateObj),
         domain: computeDomain(entity),
-        last_changed: stateObj!.last_changed,
+        last_changed: stateObj.last_changed,
       } as DataTableRowData;
     })
   );

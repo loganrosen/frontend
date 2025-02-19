@@ -43,9 +43,9 @@ export class HuiServiceButtonElementEditor
 
   private _serviceData = memoizeOne(
     (config: ServiceButtonElementConfig): ServiceAction => ({
-      action: config?.action ?? config?.service,
-      data: config?.data ?? config?.service_data,
-      target: config?.target,
+      action: config.action ?? config.service,
+      data: config.data ?? config.service_data,
+      target: config.target,
     })
   );
 

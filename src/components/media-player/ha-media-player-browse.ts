@@ -249,7 +249,7 @@ export class HaMediaPlayerBrowse extends LitElement {
           });
         } else if (
           err.code === "entity_not_found" &&
-          isUnavailableState(this.hass.states[this.entityId]?.state)
+          isUnavailableState(this.hass.states[this.entityId].state)
         ) {
           this._setError({
             message: this.hass.localize(
@@ -366,7 +366,7 @@ export class HaMediaPlayerBrowse extends LitElement {
                                     ""
                                   )}"
                                 >
-                                  ${this.narrow && currentItem?.can_play
+                                  ${this.narrow && currentItem.can_play
                                     ? html`
                                         <ha-fab
                                           mini
@@ -690,7 +690,7 @@ export class HaMediaPlayerBrowse extends LitElement {
               const result = reader.result;
               resolve(typeof result === "string" ? result : "");
             };
-            reader.onerror = (e) => reject(e);
+            reader.onerror = (e) => { reject(e); };
             reader.readAsDataURL(blob);
           });
       });
@@ -703,7 +703,7 @@ export class HaMediaPlayerBrowse extends LitElement {
         domain: extractDomainFromBrandUrl(thumbnailUrl),
         type: "icon",
         useFallback: true,
-        darkOptimized: this.hass.themes?.darkMode,
+        darkOptimized: this.hass.themes.darkMode,
       });
     }
 
@@ -766,7 +766,7 @@ export class HaMediaPlayerBrowse extends LitElement {
   private async _attachResizeObserver(): Promise<void> {
     if (!this._resizeObserver) {
       this._resizeObserver = new ResizeObserver(
-        debounce(() => this._measureCard(), 250, false)
+        debounce(() => { this._measureCard(); }, 250, false)
       );
     }
 

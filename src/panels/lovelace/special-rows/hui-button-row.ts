@@ -64,8 +64,8 @@ export class HuiButtonRow extends LitElement implements LovelaceRow {
         <mwc-button
           @action=${this._handleAction}
           .actionHandler=${actionHandler({
-            hasHold: hasAction(this._config!.hold_action),
-            hasDoubleClick: hasAction(this._config!.double_tap_action),
+            hasHold: hasAction(this._config.hold_action),
+            hasDoubleClick: hasAction(this._config.double_tap_action),
           })}
           >${this._config.action_name
             ? this._config.action_name
@@ -107,7 +107,7 @@ export class HuiButtonRow extends LitElement implements LovelaceRow {
   `;
 
   private _handleAction(ev: ActionHandlerEvent) {
-    handleAction(this, this.hass!, this._config!, ev.detail.action!);
+    handleAction(this, this.hass!, this._config!, ev.detail.action);
   }
 }
 

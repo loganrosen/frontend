@@ -75,7 +75,7 @@ export class HuiSelectOptionsCardFeatureEditor
     }
 
     const stateObj = this.context?.entity_id
-      ? this.hass.states[this.context?.entity_id]
+      ? this.hass.states[this.context.entity_id]
       : undefined;
 
     const data: SelectOptionsCardFeatureData = {
@@ -105,7 +105,7 @@ export class HuiSelectOptionsCardFeatureEditor
       .value as SelectOptionsCardFeatureData;
 
     const stateObj = this.context?.entity_id
-      ? this.hass!.states[this.context?.entity_id]
+      ? this.hass!.states[this.context.entity_id]
       : undefined;
 
     if (customize_options && !config.options) {

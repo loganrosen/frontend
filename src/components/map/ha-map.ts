@@ -149,7 +149,7 @@ export class HaMap extends ReactiveElement {
       for (const entity of this.entities) {
         if (
           oldHass.states[getEntityId(entity)] !==
-          this.hass!.states[getEntityId(entity)]
+          this.hass.states[getEntityId(entity)]
         ) {
           this._drawEntities();
           autoFitRequired = true;
@@ -182,7 +182,7 @@ export class HaMap extends ReactiveElement {
     if (
       !changedProps.has("themeMode") &&
       (!changedProps.has("hass") ||
-        (oldHass && oldHass.themes?.darkMode === this.hass.themes?.darkMode))
+        (oldHass && oldHass.themes.darkMode === this.hass.themes.darkMode))
     ) {
       return;
     }
@@ -264,7 +264,7 @@ export class HaMap extends ReactiveElement {
         : []
     );
 
-    this._mapFocusZones?.forEach((zone) => {
+    this._mapFocusZones.forEach((zone) => {
       bounds.extend("getBounds" in zone ? zone.getBounds() : zone.getLatLng());
     });
 

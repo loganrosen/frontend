@@ -68,7 +68,7 @@ class DialogMatterOpenCommissioningWindow extends LitElement {
                     src=${brandsUrl({
                       domain: "matter",
                       type: "logo",
-                      darkOptimized: this.hass.themes?.darkMode,
+                      darkOptimized: this.hass.themes.darkMode,
                     })}
                   />
                   <ha-qr-code

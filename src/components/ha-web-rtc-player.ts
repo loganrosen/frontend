@@ -296,8 +296,8 @@ class HaWebRtcPlayer extends LitElement {
 
     this._logEvent(
       "local ice candidate",
-      event.candidate?.candidate,
-      event.candidate?.sdpMLineIndex
+      event.candidate.candidate,
+      event.candidate.sdpMLineIndex
     );
 
     if (this._sessionId) {
@@ -377,7 +377,7 @@ class HaWebRtcPlayer extends LitElement {
       this._logEvent("stopped");
       this._stopTimer();
     }
-    this._unsub?.then((unsub) => unsub());
+    this._unsub?.then((unsub) => { unsub(); });
     this._unsub = undefined;
     this._sessionId = undefined;
     this._candidatesList = [];
@@ -388,8 +388,8 @@ class HaWebRtcPlayer extends LitElement {
     const stream = video.srcObject as MediaStream;
 
     const data = {
-      hasAudio: Boolean(stream?.getAudioTracks().length),
-      hasVideo: Boolean(stream?.getVideoTracks().length),
+      hasAudio: Boolean(stream.getAudioTracks().length),
+      hasVideo: Boolean(stream.getVideoTracks().length),
     };
 
     fireEvent(this, "load");

@@ -212,7 +212,7 @@ class HaScriptPicker extends SubscribeMixin(LitElement) {
       return (
         filteredScripts
           ? scripts.filter((script) =>
-              filteredScripts!.includes(script.entity_id)
+              filteredScripts.includes(script.entity_id)
             )
           : scripts
       ).map((script) => {
@@ -225,7 +225,7 @@ class HaScriptPicker extends SubscribeMixin(LitElement) {
           ...script,
           name: computeStateName(script),
           area: entityRegEntry?.area_id
-            ? areas[entityRegEntry?.area_id]?.name
+            ? areas[entityRegEntry.area_id].name
             : undefined,
           last_triggered: script.attributes.last_triggered || undefined,
           category: category
@@ -331,21 +331,21 @@ class HaScriptPicker extends SubscribeMixin(LitElement) {
                   label: this.hass.localize(
                     "ui.panel.config.script.picker.show_info"
                   ),
-                  action: () => this._showInfo(script),
+                  action: () => { this._showInfo(script); },
                 },
                 {
                   path: mdiCog,
                   label: this.hass.localize(
                     "ui.panel.config.automation.picker.show_settings"
                   ),
-                  action: () => this._openSettings(script),
+                  action: () => { this._openSettings(script); },
                 },
                 {
                   path: mdiTag,
                   label: this.hass.localize(
                     `ui.panel.config.script.picker.${script.category ? "edit_category" : "assign_category"}`
                   ),
-                  action: () => this._editCategory(script),
+                  action: () => { this._editCategory(script); },
                 },
                 {
                   path: mdiPlay,
@@ -359,7 +359,7 @@ class HaScriptPicker extends SubscribeMixin(LitElement) {
                   label: this.hass.localize(
                     "ui.panel.config.script.picker.show_trace"
                   ),
-                  action: () => this._showTrace(script),
+                  action: () => { this._showTrace(script); },
                 },
                 {
                   divider: true,
@@ -406,7 +406,7 @@ class HaScriptPicker extends SubscribeMixin(LitElement) {
   }
 
   protected render(): TemplateResult {
-    const categoryItems = html`${this._categories?.map(
+    const categoryItems = html`${this._categories.map(
         (category) =>
           html`<ha-md-menu-item
             .value=${category.category_id}
@@ -431,15 +431,15 @@ class HaScriptPicker extends SubscribeMixin(LitElement) {
         </div>
       </ha-md-menu-item>`;
 
-    const labelItems = html`${this._labels?.map((label) => {
+    const labelItems = html`${this._labels.map((label) => {
         const color = label.color ? computeCssColor(label.color) : undefined;
         const selected = this._selected.every((entityId) =>
-          this.hass.entities[entityId]?.labels.includes(label.label_id)
+          this.hass.entities[entityId].labels.includes(label.label_id)
         );
         const partial =
           !selected &&
           this._selected.some((entityId) =>
-            this.hass.entities[entityId]?.labels.includes(label.label_id)
+            this.hass.entities[entityId].labels.includes(label.label_id)
           );
         return html`<ha-md-menu-item
           .value=${label.label_id}
@@ -572,7 +572,7 @@ class HaScriptPicker extends SubscribeMixin(LitElement) {
         <ha-filter-floor-areas
           .hass=${this.hass}
           .type=${"script"}
-          .value=${this._filters["ha-filter-floor-areas"]?.value}
+          .value=${this._filters["ha-filter-floor-areas"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-floor-areas"}
@@ -582,7 +582,7 @@ class HaScriptPicker extends SubscribeMixin(LitElement) {
         <ha-filter-devices
           .hass=${this.hass}
           .type=${"script"}
-          .value=${this._filters["ha-filter-devices"]?.value}
+          .value=${this._filters["ha-filter-devices"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-devices"}
@@ -592,7 +592,7 @@ class HaScriptPicker extends SubscribeMixin(LitElement) {
         <ha-filter-entities
           .hass=${this.hass}
           .type=${"script"}
-          .value=${this._filters["ha-filter-entities"]?.value}
+          .value=${this._filters["ha-filter-entities"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-entities"}
@@ -601,7 +601,7 @@ class HaScriptPicker extends SubscribeMixin(LitElement) {
         ></ha-filter-entities>
         <ha-filter-labels
           .hass=${this.hass}
-          .value=${this._filters["ha-filter-labels"]?.value}
+          .value=${this._filters["ha-filter-labels"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-labels"}
@@ -611,7 +611,7 @@ class HaScriptPicker extends SubscribeMixin(LitElement) {
         <ha-filter-categories
           .hass=${this.hass}
           scope="script"
-          .value=${this._filters["ha-filter-categories"]?.value}
+          .value=${this._filters["ha-filter-categories"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-categories"}
@@ -621,7 +621,7 @@ class HaScriptPicker extends SubscribeMixin(LitElement) {
         <ha-filter-blueprints
           .hass=${this.hass}
           .type=${"script"}
-          .value=${this._filters["ha-filter-blueprints"]?.value}
+          .value=${this._filters["ha-filter-blueprints"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-blueprints"}
@@ -874,7 +874,7 @@ class HaScriptPicker extends SubscribeMixin(LitElement) {
           "intersection" in items
             ? // @ts-ignore
               items.intersection(categoryItems)
-            : new Set([...items].filter((x) => categoryItems!.has(x)));
+            : new Set([...items].filter((x) => categoryItems.has(x)));
       }
       if (
         key === "ha-filter-labels" &&
@@ -897,7 +897,7 @@ class HaScriptPicker extends SubscribeMixin(LitElement) {
           "intersection" in items
             ? // @ts-ignore
               items.intersection(labelItems)
-            : new Set([...items].filter((x) => labelItems!.has(x)));
+            : new Set([...items].filter((x) => labelItems.has(x)));
       }
     }
     this._filteredScripts = items ? [...items] : undefined;
@@ -1124,7 +1124,7 @@ ${rejected
       const config = await fetchScriptFileConfig(this.hass, entry.unique_id);
       showScriptEditor({
         ...config,
-        alias: `${config?.alias} (${this.hass.localize(
+        alias: `${config.alias} (${this.hass.localize(
           "ui.panel.config.script.picker.duplicate"
         )})`,
       });
@@ -1155,8 +1155,8 @@ ${rejected
         "ui.panel.config.script.editor.delete_confirm_text",
         { name: script.name }
       ),
-      confirmText: this.hass!.localize("ui.common.delete"),
-      dismissText: this.hass!.localize("ui.common.cancel"),
+      confirmText: this.hass.localize("ui.common.delete"),
+      dismissText: this.hass.localize("ui.common.cancel"),
       confirm: () => this._delete(script),
       destructive: true,
     });

@@ -161,14 +161,14 @@ class DialogDashboardStrategyEditor extends LitElement {
           .disabled=${!this._guiModeAvailable}
           class="gui-mode-button"
         >
-          ${this.hass!.localize(
+          ${this.hass.localize(
             !this._strategyEditorEl || this._GUImode
               ? "ui.panel.lovelace.editor.strategy-editor.show_code_editor"
               : "ui.panel.lovelace.editor.strategy-editor.show_visual_editor"
           )}
         </ha-button>
         <ha-button @click=${this._save} slot="primaryAction">
-          ${this.hass!.localize("ui.common.save")}
+          ${this.hass.localize("ui.common.save")}
         </ha-button>
       </ha-dialog>
     `;

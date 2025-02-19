@@ -13,14 +13,8 @@ import type { Lovelace } from "../lovelace/types";
 import "../lovelace/views/hui-view";
 import "../lovelace/views/hui-view-container";
 import { navigate } from "../../common/navigate";
-import type {
-  GridSourceTypeEnergyPreference,
-  SolarSourceTypeEnergyPreference,
-  BatterySourceTypeEnergyPreference,
-  GasSourceTypeEnergyPreference,
-  WaterSourceTypeEnergyPreference,
-  DeviceConsumptionEnergyPreference,
-} from "../../data/energy";
+
+
 import {
   getEnergyDataCollection,
   getEnergyGasUnit,
@@ -56,7 +50,7 @@ class PanelEnergy extends LitElement {
       return;
     }
     const oldHass = changedProps.get("hass") as this["hass"];
-    if (oldHass?.locale !== this.hass.locale) {
+    if (oldHass.locale !== this.hass.locale) {
       this._setLovelace();
     }
     if (oldHass && oldHass.localize !== this.hass.localize) {
@@ -90,7 +84,7 @@ class PanelEnergy extends LitElement {
                   @request-selected=${this._navigateConfig}
                 >
                   <ha-svg-icon slot="graphic" .path=${mdiPencil}> </ha-svg-icon>
-                  ${this.hass!.localize("ui.panel.energy.configure")}
+                  ${this.hass.localize("ui.panel.energy.configure")}
                 </ha-list-item>`
               : nothing}
             <ha-list-item
@@ -99,7 +93,7 @@ class PanelEnergy extends LitElement {
               @request-selected=${this._dumpCSV}
             >
               <ha-svg-icon slot="graphic" .path=${mdiDownload}> </ha-svg-icon>
-              ${this.hass!.localize("ui.panel.energy.download_data")}
+              ${this.hass.localize("ui.panel.energy.download_data")}
             </ha-list-item>
           </hui-energy-period-selector>
         </div>
@@ -208,9 +202,9 @@ class PanelEnergy extends LitElement {
       costStatIds?: string[]
     ) {
       if (statIds.length) {
-        statIds.forEach((stat) => processStat(stat, type, unit));
+        statIds.forEach((stat) => { processStat(stat, type, unit); });
         if (costType && costStatIds) {
-          costStatIds.forEach((stat) => processStat(stat, costType, currency));
+          costStatIds.forEach((stat) => { processStat(stat, costType, currency); });
         }
       }
     };
@@ -222,7 +216,7 @@ class PanelEnergy extends LitElement {
     energy_sources
       .filter((s) => s.type === "grid")
       .forEach((source) => {
-        source = source as GridSourceTypeEnergyPreference;
+        source = source;
         source.flow_from.forEach((flowFrom) => {
           const statId = flowFrom.stat_energy_from;
           grid_consumptions.push(statId);
@@ -264,7 +258,7 @@ class PanelEnergy extends LitElement {
     energy_sources
       .filter((s) => s.type === "battery")
       .forEach((source) => {
-        source = source as BatterySourceTypeEnergyPreference;
+        source = source;
         battery_ins.push(source.stat_energy_to);
         battery_outs.push(source.stat_energy_from);
       });
@@ -276,7 +270,7 @@ class PanelEnergy extends LitElement {
     energy_sources
       .filter((s) => s.type === "solar")
       .forEach((source) => {
-        source = source as SolarSourceTypeEnergyPreference;
+        source = source;
         solar_productions.push(source.stat_energy_from);
       });
 
@@ -287,7 +281,7 @@ class PanelEnergy extends LitElement {
     energy_sources
       .filter((s) => s.type === "gas")
       .forEach((source) => {
-        source = source as GasSourceTypeEnergyPreference;
+        source = source;
         const statId = source.stat_energy_from;
         gas_consumptions.push(statId);
         const costId =
@@ -310,7 +304,7 @@ class PanelEnergy extends LitElement {
     energy_sources
       .filter((s) => s.type === "water")
       .forEach((source) => {
-        source = source as WaterSourceTypeEnergyPreference;
+        source = source;
         const statId = source.stat_energy_from;
         water_consumptions.push(statId);
         const costId =
@@ -330,7 +324,7 @@ class PanelEnergy extends LitElement {
 
     const devices: string[] = [];
     device_consumption.forEach((source) => {
-      source = source as DeviceConsumptionEnergyPreference;
+      source = source;
       devices.push(source.stat_consumption);
     });
 

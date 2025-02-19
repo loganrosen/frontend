@@ -134,7 +134,7 @@ class HaBlueprintOverview extends LitElement {
     ): BlueprintMetaDataPath[] => {
       const result: any[] = [];
       Object.entries(blueprints).forEach(([type, typeBlueprints]) =>
-        Object.entries(typeBlueprints).forEach(([path, blueprint]) => {
+        { Object.entries(typeBlueprints).forEach(([path, blueprint]) => {
           if ("error" in blueprint) {
             result.push({
               name: blueprint.error,
@@ -158,7 +158,7 @@ class HaBlueprintOverview extends LitElement {
               fullpath: `${type}/${path}`,
             });
           }
-        })
+        }); }
       );
       return result;
     }
@@ -217,14 +217,14 @@ class HaBlueprintOverview extends LitElement {
                       label: this.hass.localize(
                         `ui.panel.config.blueprint.overview.create_${blueprint.type}`
                       ),
-                      action: () => this._createNew(blueprint),
+                      action: () => { this._createNew(blueprint); },
                     },
                     {
                       path: mdiEye,
                       label: this.hass.localize(
                         `ui.panel.config.blueprint.overview.view_${blueprint.domain}`
                       ),
-                      action: () => this._showUsed(blueprint),
+                      action: () => { this._showUsed(blueprint); },
                     },
                     {
                       path: mdiShareVariant,
@@ -234,7 +234,7 @@ class HaBlueprintOverview extends LitElement {
                           ? "ui.panel.config.blueprint.overview.share_blueprint"
                           : "ui.panel.config.blueprint.overview.share_blueprint_no_url"
                       ),
-                      action: () => this._share(blueprint),
+                      action: () => { this._share(blueprint); },
                     },
                     {
                       path: mdiDownload,
@@ -368,7 +368,7 @@ class HaBlueprintOverview extends LitElement {
   private _addBlueprint(url?: string) {
     showAddBlueprintDialog(this, {
       url,
-      importedCallback: () => this._reload(),
+      importedCallback: () => { this._reload(); },
     });
   }
 
@@ -509,7 +509,7 @@ class HaBlueprintOverview extends LitElement {
             </ul>`,
           }
         ),
-        confirmText: this.hass!.localize(
+        confirmText: this.hass.localize(
           "ui.panel.config.blueprint.overview.blueprint_in_use_view",
           { type }
         ),
@@ -532,8 +532,8 @@ class HaBlueprintOverview extends LitElement {
           "ui.panel.config.blueprint.overview.confirm_delete_text",
           { name: blueprint.name }
         ),
-        confirmText: this.hass!.localize("ui.common.delete"),
-        dismissText: this.hass!.localize("ui.common.cancel"),
+        confirmText: this.hass.localize("ui.common.delete"),
+        dismissText: this.hass.localize("ui.common.cancel"),
         destructive: true,
       }))
     ) {

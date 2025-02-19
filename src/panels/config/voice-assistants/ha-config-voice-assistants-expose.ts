@@ -277,10 +277,10 @@ export class VoiceAssistantsExpose extends LitElement {
     (cloudStatus: CloudStatus | undefined) => {
       const googleEnabled =
         cloudStatus?.logged_in === true &&
-        cloudStatus.prefs.google_enabled === true;
+        cloudStatus.prefs.google_enabled;
       const alexaEnabled =
         cloudStatus?.logged_in === true &&
-        cloudStatus.prefs.alexa_enabled === true;
+        cloudStatus.prefs.alexa_enabled;
 
       const showAssistants = [...Object.keys(voiceAssistants)];
 
@@ -311,10 +311,10 @@ export class VoiceAssistantsExpose extends LitElement {
     ) => {
       const googleEnabled =
         cloudStatus?.logged_in === true &&
-        cloudStatus.prefs.google_enabled === true;
+        cloudStatus.prefs.google_enabled;
       const alexaEnabled =
         cloudStatus?.logged_in === true &&
-        cloudStatus.prefs.alexa_enabled === true;
+        cloudStatus.prefs.alexa_enabled;
 
       const showAssistants = [...this._availableAssistants(cloudStatus)];
 
@@ -346,7 +346,7 @@ export class VoiceAssistantsExpose extends LitElement {
 
       filteredEntities = filteredEntities.filter((entity) =>
         showAssistants.some(
-          (assis) => exposedEntities?.[entity.entity_id]?.[assis]
+          (assis) => exposedEntities[entity.entity_id][assis]
         )
       );
 
@@ -360,7 +360,7 @@ export class VoiceAssistantsExpose extends LitElement {
               (assis) =>
                 !(assis === "cloud.alexa" && alexaManual) &&
                 !(assis === "cloud.google_assistant" && googleManual) &&
-                exposedEntities?.[entity.entity_id]?.[assis]
+                exposedEntities[entity.entity_id][assis]
             )
           );
         }
@@ -370,8 +370,8 @@ export class VoiceAssistantsExpose extends LitElement {
         const entry: ExtEntityRegistryEntry | undefined =
           entities[entityState.entity_id];
         const areaId =
-          entry?.area_id ??
-          (entry?.device_id ? devices[entry.device_id!]?.area_id : undefined);
+          entry.area_id ??
+          (entry.device_id ? devices[entry.device_id].area_id : undefined);
         const area = areaId ? areas[areaId] : undefined;
 
         result[entityState.entity_id] = {
@@ -385,13 +385,13 @@ export class VoiceAssistantsExpose extends LitElement {
           domain: domainToName(localize, computeDomain(entityState.entity_id)),
           area: area ? area.name : "—",
           assistants: Object.keys(
-            exposedEntities?.[entityState.entity_id]
+            exposedEntities[entityState.entity_id]
           ).filter(
             (key) =>
               showAssistants.includes(key) &&
-              exposedEntities?.[entityState.entity_id]?.[key]
+              exposedEntities[entityState.entity_id][key]
           ),
-          aliases: entry?.aliases || [],
+          aliases: entry.aliases || [],
         };
       }
 
@@ -422,9 +422,9 @@ export class VoiceAssistantsExpose extends LitElement {
             const entry: ExtEntityRegistryEntry | undefined =
               entities[entityId];
             const areaId =
-              entry?.area_id ??
-              (entry?.device_id
-                ? devices[entry.device_id!]?.area_id
+              entry.area_id ??
+              (entry.device_id
+                ? devices[entry.device_id].area_id
                 : undefined);
             const area = areaId ? areas[areaId] : undefined;
             result[entityId] = {
@@ -435,17 +435,17 @@ export class VoiceAssistantsExpose extends LitElement {
               assistants: [
                 ...(exposedEntities
                   ? Object.keys(
-                      exposedEntities?.[entityState.entity_id]
+                      exposedEntities[entityState.entity_id]
                     ).filter(
                       (key) =>
                         showAssistants.includes(key) &&
-                        exposedEntities?.[entityState.entity_id]?.[key]
+                        exposedEntities[entityState.entity_id][key]
                     )
                   : []),
                 ...assistants,
               ],
               manAssistants: assistants,
-              aliases: entry?.aliases || [],
+              aliases: entry.aliases || [],
             };
           }
         });

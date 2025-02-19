@@ -239,28 +239,28 @@ export class HaConfigUsers extends LitElement {
     showUserDetailDialog(this, {
       entry,
       replaceEntry: (newEntry: User) => {
-        this._users = this._users!.map((ent) =>
+        this._users = this._users.map((ent) =>
           ent.id === newEntry.id ? newEntry : ent
         );
       },
       updateEntry: async (values) => {
-        const updated = await updateUser(this.hass!, entry!.id, values);
-        this._users = this._users!.map((ent) =>
+        const updated = await updateUser(this.hass, entry.id, values);
+        this._users = this._users.map((ent) =>
           ent === entry ? updated.user : ent
         );
       },
       removeEntry: async () => {
         if (
           !(await showConfirmationDialog(this, {
-            title: this.hass!.localize(
+            title: this.hass.localize(
               "ui.panel.config.users.editor.confirm_user_deletion_title",
               { name: entry.name }
             ),
-            text: this.hass!.localize(
+            text: this.hass.localize(
               "ui.panel.config.users.editor.confirm_user_deletion_text"
             ),
-            dismissText: this.hass!.localize("ui.common.cancel"),
-            confirmText: this.hass!.localize("ui.common.delete"),
+            dismissText: this.hass.localize("ui.common.cancel"),
+            confirmText: this.hass.localize("ui.common.delete"),
             destructive: true,
           }))
         ) {
@@ -268,8 +268,8 @@ export class HaConfigUsers extends LitElement {
         }
 
         try {
-          await deleteUser(this.hass!, entry!.id);
-          this._users = this._users!.filter((ent) => ent !== entry);
+          await deleteUser(this.hass, entry.id);
+          this._users = this._users.filter((ent) => ent !== entry);
           return true;
         } catch (_err: any) {
           return false;

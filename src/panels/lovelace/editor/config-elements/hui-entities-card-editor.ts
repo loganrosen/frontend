@@ -249,9 +249,9 @@ export class HuiEntitiesCardEditor
         <ha-theme-picker
           .hass=${this.hass}
           .value=${this._theme}
-          .label=${`${this.hass!.localize(
+          .label=${`${this.hass.localize(
             "ui.panel.lovelace.editor.card.generic.theme"
-          )} (${this.hass!.localize(
+          )} (${this.hass.localize(
             "ui.panel.lovelace.editor.card.config.optional"
           )})`}
           .configValue=${"theme"}
@@ -264,7 +264,7 @@ export class HuiEntitiesCardEditor
             )}
           >
             <ha-switch
-              .checked=${this._config!.show_header_toggle !== false}
+              .checked=${this._config.show_header_toggle !== false}
               .configValue=${"show_header_toggle"}
               @change=${this._valueChanged}
             ></ha-switch>
@@ -275,7 +275,7 @@ export class HuiEntitiesCardEditor
             )}
           >
             <ha-switch
-              .checked=${this._config!.state_color}
+              .checked=${this._config.state_color}
               .configValue=${"state_color"}
               @change=${this._valueChanged}
             ></ha-switch>
@@ -340,12 +340,12 @@ export class HuiEntitiesCardEditor
         this._subElementEditorConfig!.elementConfig = value;
       }
 
-      this._config = { ...this._config!, entities: newConfigEntities };
-      this._configEntities = processEditorEntities(this._config!.entities);
+      this._config = { ...this._config, entities: newConfigEntities };
+      this._configEntities = processEditorEntities(this._config.entities);
     } else if (configValue) {
       if (value === "") {
         this._config = { ...this._config };
-        delete this._config[configValue!];
+        delete this._config[configValue];
       } else {
         this._config = {
           ...this._config,
@@ -375,12 +375,12 @@ export class HuiEntitiesCardEditor
         newConfigEntities[this._subElementEditorConfig!.index!] = value;
       }
 
-      this._config = { ...this._config!, entities: newConfigEntities };
-      this._configEntities = processEditorEntities(this._config!.entities);
+      this._config = { ...this._config, entities: newConfigEntities };
+      this._configEntities = processEditorEntities(this._config.entities);
     } else if (configValue) {
       if (value === "") {
         this._config = { ...this._config };
-        delete this._config[configValue!];
+        delete this._config[configValue];
       } else {
         this._config = {
           ...this._config,

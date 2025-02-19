@@ -152,7 +152,7 @@ export class HaSceneEditor extends PreventUnsavedMixin(
         return undefined;
       }
       const entry = entries.find((ent) => ent.entity_id === entity_id);
-      return entry?.categories?.scene;
+      return entry?.categories.scene;
     }
   );
 
@@ -642,7 +642,7 @@ export class HaSceneEditor extends PreventUnsavedMixin(
         this._scene = Object.values(this.hass.states).find(
           (stateObj) =>
             stateObj.entity_id.startsWith("scene") &&
-            stateObj.attributes?.id === this.sceneId
+            stateObj.attributes.id === this.sceneId
         );
       }
     }
@@ -688,9 +688,9 @@ export class HaSceneEditor extends PreventUnsavedMixin(
         text: html`${this.hass.localize(
             "ui.panel.config.automation.editor.switch_ui_yaml_error"
           )}<br /><br />${this._yamlErrors}`,
-        confirmText: this.hass!.localize("ui.common.continue"),
+        confirmText: this.hass.localize("ui.common.continue"),
         destructive: true,
-        dismissText: this.hass!.localize("ui.common.cancel"),
+        dismissText: this.hass.localize("ui.common.cancel"),
       });
       if (!result) {
         return;
@@ -726,10 +726,10 @@ export class HaSceneEditor extends PreventUnsavedMixin(
         text: this.hass.localize(
           "ui.panel.config.scene.editor.enter_live_mode_unsaved"
         ),
-        confirmText: this.hass!.localize(
+        confirmText: this.hass.localize(
           "ui.panel.config.scene.editor.save_before_live"
         ),
-        dismissText: this.hass!.localize("ui.common.cancel"),
+        dismissText: this.hass.localize("ui.common.cancel"),
       });
       if (!result) {
         return;
@@ -737,7 +737,7 @@ export class HaSceneEditor extends PreventUnsavedMixin(
       await this._saveScene();
     }
 
-    this._entities.forEach((entity) => this._storeState(entity));
+    this._entities.forEach((entity) => { this._storeState(entity); });
     this._mode = "live";
     await this._setScene();
     this._subscribeEvents();
@@ -775,8 +775,8 @@ export class HaSceneEditor extends PreventUnsavedMixin(
 
   private async _subscribeEvents() {
     this._unsubscribeEvents =
-      await this.hass!.connection.subscribeEvents<HassEvent>(
-        (event) => this._stateChanged(event),
+      await this.hass.connection.subscribeEvents<HassEvent>(
+        (event) => { this._stateChanged(event); },
         "state_changed"
       );
   }
@@ -833,7 +833,7 @@ export class HaSceneEditor extends PreventUnsavedMixin(
       Object.keys(config.entities).forEach((entity) => {
         if (
           !this._single_entities.includes(entity) &&
-          config.metadata![entity]?.entity_only
+          config.metadata![entity].entity_only
         ) {
           this._single_entities.push(entity);
         }
@@ -984,20 +984,20 @@ export class HaSceneEditor extends PreventUnsavedMixin(
     if (this._mode === "live") {
       applyScene(this.hass, this._storedStates);
     }
-    afterNextRender(() => history.back());
+    afterNextRender(() => { history.back(); });
   }
 
   private _deleteTapped(): void {
     showConfirmationDialog(this, {
-      title: this.hass!.localize(
+      title: this.hass.localize(
         "ui.panel.config.scene.picker.delete_confirm_title"
       ),
-      text: this.hass!.localize(
+      text: this.hass.localize(
         "ui.panel.config.scene.picker.delete_confirm_text",
         { name: this._config?.name }
       ),
-      confirmText: this.hass!.localize("ui.common.delete"),
-      dismissText: this.hass!.localize("ui.common.cancel"),
+      confirmText: this.hass.localize("ui.common.delete"),
+      dismissText: this.hass.localize("ui.common.cancel"),
       confirm: () => this._delete(),
       destructive: true,
     });
@@ -1014,14 +1014,14 @@ export class HaSceneEditor extends PreventUnsavedMixin(
   private async _confirmUnsavedChanged(): Promise<boolean> {
     if (this._dirty) {
       return showConfirmationDialog(this, {
-        title: this.hass!.localize(
+        title: this.hass.localize(
           "ui.panel.config.scene.editor.unsaved_confirm_title"
         ),
-        text: this.hass!.localize(
+        text: this.hass.localize(
           "ui.panel.config.scene.editor.unsaved_confirm_text"
         ),
-        confirmText: this.hass!.localize("ui.common.leave"),
-        dismissText: this.hass!.localize("ui.common.stay"),
+        confirmText: this.hass.localize("ui.common.leave"),
+        dismissText: this.hass.localize("ui.common.stay"),
         destructive: true,
       });
     }
@@ -1108,7 +1108,7 @@ export class HaSceneEditor extends PreventUnsavedMixin(
       return;
     }
 
-    const id = !this.sceneId ? "" + Date.now() : this.sceneId!;
+    const id = !this.sceneId ? "" + Date.now() : this.sceneId;
     if (this._mode === "live") {
       this._generateConfigFromLive();
     }

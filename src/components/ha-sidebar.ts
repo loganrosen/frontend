@@ -22,7 +22,7 @@ import type { PaperIconItemElement } from "@polymer/paper-item/paper-icon-item";
 import "@polymer/paper-item/paper-item";
 import "@polymer/paper-listbox/paper-listbox";
 import type { UnsubscribeFunc } from "home-assistant-js-websocket";
-import type { CSSResult, CSSResultGroup, PropertyValues } from "lit";
+import type { CSSResultGroup, PropertyValues } from "lit";
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, eventOptions, property, state } from "lit/decorators";
 import { classMap } from "lit/directives/class-map";
@@ -224,7 +224,7 @@ class HaSidebar extends SubscribeMixin(LitElement) {
   public hassSubscribe(): UnsubscribeFunc[] {
     return this.hass.user?.is_admin
       ? [
-          subscribeRepairsIssueRegistry(this.hass.connection!, (repairs) => {
+          subscribeRepairsIssueRegistry(this.hass.connection, (repairs) => {
             this._issuesCount = repairs.issues.filter(
               (issue) => !issue.ignored
             ).length;
@@ -317,7 +317,7 @@ class HaSidebar extends SubscribeMixin(LitElement) {
     if (
       this.hass &&
       changedProps.get("hass")?.connected === false &&
-      this.hass.connected === true
+      this.hass.connected
     ) {
       this._subscribePersistentNotifications();
     }
@@ -343,7 +343,7 @@ class HaSidebar extends SubscribeMixin(LitElement) {
     for (const entityId of Object.keys(this.hass.states)) {
       if (
         entityId.startsWith("update.") &&
-        !this.hass.entities[entityId]?.hidden &&
+        !this.hass.entities[entityId].hidden &&
         updateCanInstall(this.hass.states[entityId] as UpdateEntity)
       ) {
         updateCount++;
@@ -391,7 +391,7 @@ class HaSidebar extends SubscribeMixin(LitElement) {
     );
 
     // Show the supervisor as being part of configuration
-    const selectedPanel = this.route.path?.startsWith("/hassio/")
+    const selectedPanel = this.route.path.startsWith("/hassio/")
       ? "config"
       : this.hass.panelUrl;
 
@@ -696,7 +696,7 @@ class HaSidebar extends SubscribeMixin(LitElement) {
   }
 
   private get _tooltip() {
-    return this.shadowRoot!.querySelector(".tooltip")! as HTMLDivElement;
+    return this.shadowRoot!.querySelector(".tooltip")!;
   }
 
   private _handleAction(ev: CustomEvent<ActionHandlerDetail>) {
@@ -717,7 +717,7 @@ class HaSidebar extends SubscribeMixin(LitElement) {
     const editStylesImport = await import("../resources/ha-sidebar-edit-style");
 
     const style = document.createElement("style");
-    style.innerHTML = (editStylesImport.sidebarEditStyle as CSSResult).cssText;
+    style.innerHTML = (editStylesImport.sidebarEditStyle).cssText;
     this.shadowRoot!.appendChild(style);
 
     await this.updateComplete;

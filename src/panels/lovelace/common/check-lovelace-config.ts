@@ -32,12 +32,12 @@ export const checkViewConfig = (
 
   // Remove empty badges
   if (updatedView.badges && !updatedView.badges.every(Boolean)) {
-    updatedView.badges = updatedView.badges!.filter(Boolean);
+    updatedView.badges = updatedView.badges.filter(Boolean);
   }
 
   // Migrate sections
   if (updatedView.sections) {
-    updatedView.sections = updatedView.sections!.map(checkSectionConfig);
+    updatedView.sections = updatedView.sections.map(checkSectionConfig);
   }
 
   return updatedView;

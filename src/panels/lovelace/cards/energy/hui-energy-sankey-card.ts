@@ -99,7 +99,7 @@ class HuiEnergySankeyCard
       const totalFromGrid =
         calculateStatisticsSumGrowth(
           this._data.stats,
-          types.grid![0].flow_from.map((flow) => flow.stat_energy_from)
+          types.grid[0].flow_from.map((flow) => flow.stat_energy_from)
         ) ?? 0;
 
       nodes.push({
@@ -278,8 +278,8 @@ class HuiEnergySankeyCard
       };
 
       const entityAreaId =
-        entity?.area_id ??
-        (entity.device_id && this.hass.devices[entity.device_id]?.area_id);
+        entity.area_id ??
+        (entity.device_id && this.hass.devices[entity.device_id].area_id);
       if (entityAreaId && entityAreaId in this.hass.areas) {
         const area = this.hass.areas[entityAreaId];
 
@@ -320,8 +320,8 @@ class HuiEnergySankeyCard
     Object.keys(floors)
       .sort(
         (a, b) =>
-          (this.hass.floors[b]?.level ?? -Infinity) -
-          (this.hass.floors[a]?.level ?? -Infinity)
+          (this.hass.floors[b].level ?? -Infinity) -
+          (this.hass.floors[a].level ?? -Infinity)
       )
       .forEach((floorId) => {
         let floorNodeId = `floor_${floorId}`;
@@ -349,7 +349,7 @@ class HuiEnergySankeyCard
           } else {
             nodes.push({
               id: areaNodeId,
-              label: this.hass.areas[areaId]!.name,
+              label: this.hass.areas[areaId].name,
               value: areas[areaId].value,
               tooltip: `${formatNumber(areas[areaId].value, this.hass.locale)} kWh`,
               index: 3,

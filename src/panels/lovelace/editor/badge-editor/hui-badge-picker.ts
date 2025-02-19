@@ -152,7 +152,7 @@ export class HuiBadgePicker extends LitElement {
                 ${suggestedBadges.length > 0
                   ? html`
                       <div class="badges-container-header">
-                        ${this.hass!.localize(
+                        ${this.hass.localize(
                           `ui.panel.lovelace.editor.badge.generic.suggested_badges`
                         )}
                       </div>
@@ -165,7 +165,7 @@ export class HuiBadgePicker extends LitElement {
                 ${suggestedBadges.length > 0
                   ? html`
                       <div class="badges-container-header">
-                        ${this.hass!.localize(
+                        ${this.hass.localize(
                           `ui.panel.lovelace.editor.badge.generic.other_badges`
                         )}
                       </div>
@@ -177,7 +177,7 @@ export class HuiBadgePicker extends LitElement {
                 ${customBadgesItems.length > 0
                   ? html`
                       <div class="badges-container-header">
-                        ${this.hass!.localize(
+                        ${this.hass.localize(
                           `ui.panel.lovelace.editor.badge.generic.custom_badges`
                         )}
                       </div>
@@ -195,12 +195,12 @@ export class HuiBadgePicker extends LitElement {
             .config=${{ type: "" }}
           >
             <div class="badge-header">
-              ${this.hass!.localize(
+              ${this.hass.localize(
                 `ui.panel.lovelace.editor.badge.generic.manual`
               )}
             </div>
             <div class="preview description">
-              ${this.hass!.localize(
+              ${this.hass.localize(
                 `ui.panel.lovelace.editor.badge.generic.manual_description`
               )}
             </div>
@@ -317,12 +317,12 @@ export class HuiBadgePicker extends LitElement {
           name: this.hass!.localize(
             "ui.panel.lovelace.editor.badge.generic.paste"
           ),
-          description: `${this.hass!.localize(
+          description: this.hass!.localize(
             "ui.panel.lovelace.editor.badge.generic.paste_description",
             {
               type: this._clipboard.type,
             }
-          )}`,
+          ),
         },
         this._clipboard
       ),
@@ -369,7 +369,7 @@ export class HuiBadgePicker extends LitElement {
   }
 
   private _tryCreateBadgeElement(badge: LovelaceBadgeConfig) {
-    const element = tryCreateBadgeElement(badge) as LovelaceBadge;
+    const element = tryCreateBadgeElement(badge);
     element.hass = this.hass;
     element.addEventListener(
       "ll-rebuild",
@@ -393,7 +393,7 @@ export class HuiBadgePicker extends LitElement {
       return;
     }
     if (badgeElToReplace.parentElement) {
-      badgeElToReplace.parentElement!.replaceChild(
+      badgeElToReplace.parentElement.replaceChild(
         newBadgeEl,
         badgeElToReplace
       );

@@ -114,12 +114,12 @@ export class HaFloorPicker extends LitElement {
 
   public async open() {
     await this.updateComplete;
-    await this.comboBox?.open();
+    await this.comboBox.open();
   }
 
   public async focus() {
     await this.updateComplete;
-    await this.comboBox?.focus();
+    await this.comboBox.focus();
   }
 
   private _getFloors = memoizeOne(
@@ -152,7 +152,7 @@ export class HaFloorPicker extends LitElement {
         inputEntities = entities.filter((entity) => entity.area_id);
 
         if (includeDomains) {
-          inputDevices = inputDevices!.filter((device) => {
+          inputDevices = inputDevices.filter((device) => {
             const devEntities = deviceEntityLookup[device.id];
             if (!devEntities || !devEntities.length) {
               return false;
@@ -161,13 +161,13 @@ export class HaFloorPicker extends LitElement {
               includeDomains.includes(computeDomain(entity.entity_id))
             );
           });
-          inputEntities = inputEntities!.filter((entity) =>
+          inputEntities = inputEntities.filter((entity) =>
             includeDomains.includes(computeDomain(entity.entity_id))
           );
         }
 
         if (excludeDomains) {
-          inputDevices = inputDevices!.filter((device) => {
+          inputDevices = inputDevices.filter((device) => {
             const devEntities = deviceEntityLookup[device.id];
             if (!devEntities || !devEntities.length) {
               return true;
@@ -177,14 +177,14 @@ export class HaFloorPicker extends LitElement {
                 !excludeDomains.includes(computeDomain(entity.entity_id))
             );
           });
-          inputEntities = inputEntities!.filter(
+          inputEntities = inputEntities.filter(
             (entity) =>
               !excludeDomains.includes(computeDomain(entity.entity_id))
           );
         }
 
         if (includeDeviceClasses) {
-          inputDevices = inputDevices!.filter((device) => {
+          inputDevices = inputDevices.filter((device) => {
             const devEntities = deviceEntityLookup[device.id];
             if (!devEntities || !devEntities.length) {
               return false;
@@ -200,7 +200,7 @@ export class HaFloorPicker extends LitElement {
               );
             });
           });
-          inputEntities = inputEntities!.filter((entity) => {
+          inputEntities = inputEntities.filter((entity) => {
             const stateObj = this.hass.states[entity.entity_id];
             return (
               stateObj.attributes.device_class &&
@@ -210,13 +210,13 @@ export class HaFloorPicker extends LitElement {
         }
 
         if (deviceFilter) {
-          inputDevices = inputDevices!.filter((device) =>
-            deviceFilter!(device)
+          inputDevices = inputDevices.filter((device) =>
+            deviceFilter(device)
           );
         }
 
         if (entityFilter) {
-          inputDevices = inputDevices!.filter((device) => {
+          inputDevices = inputDevices.filter((device) => {
             const devEntities = deviceEntityLookup[device.id];
             if (!devEntities || !devEntities.length) {
               return false;
@@ -229,12 +229,12 @@ export class HaFloorPicker extends LitElement {
               return entityFilter(stateObj);
             });
           });
-          inputEntities = inputEntities!.filter((entity) => {
+          inputEntities = inputEntities.filter((entity) => {
             const stateObj = this.hass.states[entity.entity_id];
             if (!stateObj) {
               return false;
             }
-            return entityFilter!(stateObj);
+            return entityFilter(stateObj);
           });
         }
       }
@@ -260,15 +260,15 @@ export class HaFloorPicker extends LitElement {
       if (areaIds) {
         const floorAreaLookup = getFloorAreaLookup(areas);
         outputFloors = outputFloors.filter((floor) =>
-          floorAreaLookup[floor.floor_id]?.some((area) =>
-            areaIds!.includes(area.area_id)
+          floorAreaLookup[floor.floor_id].some((area) =>
+            areaIds.includes(area.area_id)
           )
         );
       }
 
       if (excludeFloors) {
         outputFloors = outputFloors.filter(
-          (floor) => !excludeFloors!.includes(floor.floor_id)
+          (floor) => !excludeFloors.includes(floor.floor_id)
         );
       }
 
@@ -345,7 +345,7 @@ export class HaFloorPicker extends LitElement {
           ? this.hass.localize("ui.components.floor-picker.floor")
           : this.label}
         .placeholder=${this.placeholder
-          ? this.hass.floors[this.placeholder]?.name
+          ? this.hass.floors[this.placeholder].name
           : undefined}
         .renderer=${rowRenderer}
         @filter-changed=${this._filterChanged}
@@ -447,9 +447,9 @@ export class HaFloorPicker extends LitElement {
           const floors = [...Object.values(this.hass.floors), floor];
           this.comboBox.filteredItems = this._getFloors(
             floors,
-            Object.values(this.hass.areas)!,
-            Object.values(this.hass.devices)!,
-            Object.values(this.hass.entities)!,
+            Object.values(this.hass.areas),
+            Object.values(this.hass.devices),
+            Object.values(this.hass.entities),
             this.includeDomains,
             this.excludeDomains,
             this.includeDeviceClasses,

@@ -43,7 +43,7 @@ class MoreInfoWeather extends LitElement {
 
   private _unsubscribeForecastEvents() {
     if (this._subscribed) {
-      this._subscribed.then((unsub) => unsub());
+      this._subscribed.then((unsub) => { unsub(); });
       this._subscribed = undefined;
     }
     this._forecastEvent = undefined;
@@ -61,8 +61,8 @@ class MoreInfoWeather extends LitElement {
     }
 
     this._subscribed = subscribeForecast(
-      this.hass!,
-      this.stateObj!.entity_id,
+      this.hass,
+      this.stateObj.entity_id,
       this._forecastType,
       (event) => {
         this._forecastEvent = event;
@@ -107,7 +107,7 @@ class MoreInfoWeather extends LitElement {
         | WeatherEntity
         | undefined;
       if (
-        oldState?.entity_id !== this.stateObj?.entity_id ||
+        oldState?.entity_id !== this.stateObj.entity_id ||
         !this._subscribed
       ) {
         this._forecastType = getDefaultForecastType(this.stateObj);
@@ -264,7 +264,7 @@ class MoreInfoWeather extends LitElement {
                 ${getWind(
                   this.hass,
                   this.stateObj,
-                  this.stateObj.attributes.wind_speed!,
+                  this.stateObj.attributes.wind_speed,
                   this.stateObj.attributes.wind_bearing
                 )}
               </div>
@@ -302,7 +302,7 @@ class MoreInfoWeather extends LitElement {
                   ${supportedForecasts.map(
                     (forecastType) =>
                       html`<mwc-tab
-                        .label=${this.hass!.localize(
+                        .label=${this.hass.localize(
                           `ui.card.weather.${forecastType}`
                         )}
                       ></mwc-tab>`
@@ -320,13 +320,13 @@ class MoreInfoWeather extends LitElement {
                             ? html`
                                 ${formatDateWeekdayShort(
                                   new Date(item.datetime),
-                                  this.hass!.locale,
-                                  this.hass!.config
+                                  this.hass.locale,
+                                  this.hass.config
                                 )}
                                 <div class="daynight">
                                   ${item.is_daytime !== false
-                                    ? this.hass!.localize("ui.card.weather.day")
-                                    : this.hass!.localize(
+                                    ? this.hass.localize("ui.card.weather.day")
+                                    : this.hass.localize(
                                         "ui.card.weather.night"
                                       )}<br />
                                 </div>
@@ -335,15 +335,15 @@ class MoreInfoWeather extends LitElement {
                               ? html`
                                   ${formatTime(
                                     new Date(item.datetime),
-                                    this.hass!.locale,
-                                    this.hass!.config
+                                    this.hass.locale,
+                                    this.hass.config
                                   )}
                                 `
                               : html`
                                   ${formatDateWeekdayShort(
                                     new Date(item.datetime),
-                                    this.hass!.locale,
-                                    this.hass!.config
+                                    this.hass.locale,
+                                    this.hass.config
                                   )}
                                 `}
                         </div>
@@ -365,7 +365,7 @@ class MoreInfoWeather extends LitElement {
                           ${this._showValue(item.temperature)
                             ? html`${formatNumber(
                                 item.temperature,
-                                this.hass!.locale
+                                this.hass.locale
                               )}°`
                             : "—"}
                         </div>
@@ -373,7 +373,7 @@ class MoreInfoWeather extends LitElement {
                           ${this._showValue(item.templow)
                             ? html`${formatNumber(
                                 item.templow!,
-                                this.hass!.locale
+                                this.hass.locale
                               )}°`
                             : hourly
                               ? nothing

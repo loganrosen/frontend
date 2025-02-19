@@ -18,7 +18,6 @@ import {
 } from "../common/string/format-list";
 import type { HomeAssistant } from "../types";
 import type { Condition, ForDict, Trigger } from "./automation";
-import type { DeviceCondition, DeviceTrigger } from "./device_automation";
 import {
   localizeDeviceAutomationCondition,
   localizeDeviceAutomationTrigger,
@@ -716,7 +715,7 @@ const tryDescribeTrigger = (
 
   // Device Trigger
   if (trigger.trigger === "device" && trigger.device_id) {
-    const config = trigger as DeviceTrigger;
+    const config = trigger;
     const localized = localizeDeviceAutomationTrigger(
       hass,
       entityRegistry,
@@ -1178,7 +1177,7 @@ const tryDescribeCondition = (
   }
 
   if (condition.condition === "device" && condition.device_id) {
-    const config = condition as DeviceCondition;
+    const config = condition;
     const localized = localizeDeviceAutomationCondition(
       hass,
       entityRegistry,

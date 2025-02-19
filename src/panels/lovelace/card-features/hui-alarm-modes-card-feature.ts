@@ -80,7 +80,7 @@ class HuiAlarmModeCardFeature
 
   private async _valueChanged(ev: CustomEvent) {
     if (!this.stateObj) return;
-    const mode = (ev.detail as any).value as AlarmMode;
+    const mode = (ev.detail).value as AlarmMode;
 
     if (mode === this.stateObj.state) return;
 
@@ -156,7 +156,7 @@ class HuiAlarmModeCardFeature
           "--control-select-color": color,
           "--modes-count": options.length.toString(),
         })}
-        .disabled=${this.stateObj!.state === UNAVAILABLE}
+        .disabled=${this.stateObj.state === UNAVAILABLE}
       >
       </ha-control-select>
     `;

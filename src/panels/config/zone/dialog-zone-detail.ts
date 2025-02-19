@@ -33,7 +33,7 @@ class DialogZoneDetail extends LitElement {
     } else {
       const initConfig = getZoneEditorInitData();
       let movedHomeLocation;
-      if (!initConfig?.latitude || !initConfig?.longitude) {
+      if (!initConfig?.latitude || !initConfig.longitude) {
         movedHomeLocation = addDistanceToCoord(
           [this.hass.config.latitude, this.hass.config.longitude],
           Math.random() * 500 * (Math.random() < 0.5 ? -1 : 1),
@@ -86,7 +86,7 @@ class DialogZoneDetail extends LitElement {
           this.hass,
           this._params.entry
             ? this._params.entry.name
-            : this.hass!.localize("ui.panel.config.zone.detail.new_zone")
+            : this.hass.localize("ui.panel.config.zone.detail.new_zone")
         )}
       >
         <div>
@@ -108,7 +108,7 @@ class DialogZoneDetail extends LitElement {
                 @click=${this._deleteEntry}
                 .disabled=${this._submitting}
               >
-                ${this.hass!.localize("ui.panel.config.zone.detail.delete")}
+                ${this.hass.localize("ui.panel.config.zone.detail.delete")}
               </mwc-button>
             `
           : nothing}
@@ -118,8 +118,8 @@ class DialogZoneDetail extends LitElement {
           .disabled=${!valid || this._submitting}
         >
           ${this._params.entry
-            ? this.hass!.localize("ui.panel.config.zone.detail.update")
-            : this.hass!.localize("ui.panel.config.zone.detail.create")}
+            ? this.hass.localize("ui.panel.config.zone.detail.update")
+            : this.hass.localize("ui.panel.config.zone.detail.create")}
         </mwc-button>
       </ha-dialog>
     `;

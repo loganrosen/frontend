@@ -77,7 +77,7 @@ export class HuiIframeCard extends LitElement implements LovelaceCard {
     if (location.protocol === "https:" && target_protocol !== "https:") {
       return html`
         <ha-alert alert-type="error">
-          ${this.hass!.localize(
+          ${this.hass.localize(
             "ui.panel.lovelace.cards.iframe.error_secure_context",
             {
               target_protocol,

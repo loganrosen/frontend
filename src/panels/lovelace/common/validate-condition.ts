@@ -63,7 +63,7 @@ function getValueFromEntityId(
   value: string
 ): string | undefined {
   if (isValidEntityId(value) && hass.states[value]) {
-    return hass.states[value]?.state;
+    return hass.states[value].state;
   }
   return undefined;
 }

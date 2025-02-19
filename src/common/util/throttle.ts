@@ -15,12 +15,12 @@ export const throttle = <T extends any[]>(
   let previous = 0;
   const throttledFunc = (...args: T): void => {
     const later = () => {
-      previous = leading === false ? 0 : Date.now();
+      previous = !leading ? 0 : Date.now();
       timeout = undefined;
       func(...args);
     };
     const now = Date.now();
-    if (!previous && leading === false) {
+    if (!previous && !leading) {
       previous = now;
     }
     const remaining = wait - (now - previous);
@@ -31,7 +31,7 @@ export const throttle = <T extends any[]>(
       }
       previous = now;
       func(...args);
-    } else if (!timeout && trailing !== false) {
+    } else if (!timeout && trailing) {
       timeout = window.setTimeout(later, remaining);
     }
   };

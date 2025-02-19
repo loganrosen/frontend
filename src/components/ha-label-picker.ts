@@ -116,12 +116,12 @@ export class HaLabelPicker extends SubscribeMixin(LitElement) {
 
   public async open() {
     await this.updateComplete;
-    await this.comboBox?.open();
+    await this.comboBox.open();
   }
 
   public async focus() {
     await this.updateComplete;
-    await this.comboBox?.focus();
+    await this.comboBox.focus();
   }
 
   protected hassSubscribe(): (UnsubscribeFunc | Promise<UnsubscribeFunc>)[] {
@@ -162,7 +162,7 @@ export class HaLabelPicker extends SubscribeMixin(LitElement) {
         inputEntities = entities.filter((entity) => entity.labels.length > 0);
 
         if (includeDomains) {
-          inputDevices = inputDevices!.filter((device) => {
+          inputDevices = inputDevices.filter((device) => {
             const devEntities = deviceEntityLookup[device.id];
             if (!devEntities || !devEntities.length) {
               return false;
@@ -171,13 +171,13 @@ export class HaLabelPicker extends SubscribeMixin(LitElement) {
               includeDomains.includes(computeDomain(entity.entity_id))
             );
           });
-          inputEntities = inputEntities!.filter((entity) =>
+          inputEntities = inputEntities.filter((entity) =>
             includeDomains.includes(computeDomain(entity.entity_id))
           );
         }
 
         if (excludeDomains) {
-          inputDevices = inputDevices!.filter((device) => {
+          inputDevices = inputDevices.filter((device) => {
             const devEntities = deviceEntityLookup[device.id];
             if (!devEntities || !devEntities.length) {
               return true;
@@ -187,14 +187,14 @@ export class HaLabelPicker extends SubscribeMixin(LitElement) {
                 !excludeDomains.includes(computeDomain(entity.entity_id))
             );
           });
-          inputEntities = inputEntities!.filter(
+          inputEntities = inputEntities.filter(
             (entity) =>
               !excludeDomains.includes(computeDomain(entity.entity_id))
           );
         }
 
         if (includeDeviceClasses) {
-          inputDevices = inputDevices!.filter((device) => {
+          inputDevices = inputDevices.filter((device) => {
             const devEntities = deviceEntityLookup[device.id];
             if (!devEntities || !devEntities.length) {
               return false;
@@ -210,7 +210,7 @@ export class HaLabelPicker extends SubscribeMixin(LitElement) {
               );
             });
           });
-          inputEntities = inputEntities!.filter((entity) => {
+          inputEntities = inputEntities.filter((entity) => {
             const stateObj = this.hass.states[entity.entity_id];
             return (
               stateObj.attributes.device_class &&
@@ -220,13 +220,13 @@ export class HaLabelPicker extends SubscribeMixin(LitElement) {
         }
 
         if (deviceFilter) {
-          inputDevices = inputDevices!.filter((device) =>
-            deviceFilter!(device)
+          inputDevices = inputDevices.filter((device) =>
+            deviceFilter(device)
           );
         }
 
         if (entityFilter) {
-          inputDevices = inputDevices!.filter((device) => {
+          inputDevices = inputDevices.filter((device) => {
             const devEntities = deviceEntityLookup[device.id];
             if (!devEntities || !devEntities.length) {
               return false;
@@ -239,12 +239,12 @@ export class HaLabelPicker extends SubscribeMixin(LitElement) {
               return entityFilter(stateObj);
             });
           });
-          inputEntities = inputEntities!.filter((entity) => {
+          inputEntities = inputEntities.filter((entity) => {
             const stateObj = this.hass.states[entity.entity_id];
             if (!stateObj) {
               return false;
             }
-            return entityFilter!(stateObj);
+            return entityFilter(stateObj);
           });
         }
       }
@@ -284,7 +284,7 @@ export class HaLabelPicker extends SubscribeMixin(LitElement) {
 
       if (excludeLabels) {
         outputLabels = outputLabels.filter(
-          (label) => !excludeLabels!.includes(label.label_id)
+          (label) => !excludeLabels.includes(label.label_id)
         );
       }
 
@@ -460,9 +460,9 @@ export class HaLabelPicker extends SubscribeMixin(LitElement) {
         const labels = [...this._labels!, label];
         this.comboBox.filteredItems = this._getLabels(
           labels,
-          this.hass.areas!,
-          Object.values(this.hass.devices)!,
-          Object.values(this.hass.entities)!,
+          this.hass.areas,
+          Object.values(this.hass.devices),
+          Object.values(this.hass.entities),
           this.includeDomains,
           this.excludeDomains,
           this.includeDeviceClasses,

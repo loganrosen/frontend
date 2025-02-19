@@ -218,7 +218,7 @@ export class ThreadConfigPanel extends SubscribeMixin(LitElement) {
                     domain: router.brand,
                     brand: true,
                     type: "icon",
-                    darkOptimized: this.hass.themes?.darkMode,
+                    darkOptimized: this.hass.themes.darkMode,
                   })}
                   alt=${router.brand}
                   crossorigin="anonymous"
@@ -327,7 +327,7 @@ export class ThreadConfigPanel extends SubscribeMixin(LitElement) {
   }
 
   private async _sendCredentials(ev) {
-    const dataset = (ev.currentTarget as any).networkDataset as ThreadDataSet;
+    const dataset = (ev.currentTarget).networkDataset as ThreadDataSet;
     if (!dataset) {
       return;
     }
@@ -417,7 +417,7 @@ export class ThreadConfigPanel extends SubscribeMixin(LitElement) {
           preferred = {
             name: dataset.network_name,
             dataset: dataset,
-            routers: networks[network]?.routers,
+            routers: networks[network].routers,
           };
           delete networks[network];
           continue;
@@ -495,7 +495,7 @@ export class ThreadConfigPanel extends SubscribeMixin(LitElement) {
   }
 
   private _resetBorderRouterEvent(ev) {
-    const otbr = (ev.currentTarget as any).otbr as OTBRInfo;
+    const otbr = (ev.currentTarget).otbr as OTBRInfo;
     this._resetBorderRouter(otbr);
   }
 

@@ -97,7 +97,7 @@ export class HuiClimateHvacModesCardFeatureEditor
     }
 
     const stateObj = this.context?.entity_id
-      ? this.hass.states[this.context?.entity_id]
+      ? this.hass.states[this.context.entity_id]
       : undefined;
 
     const data: ClimateHvacModesCardFeatureData = {
@@ -129,7 +129,7 @@ export class HuiClimateHvacModesCardFeatureEditor
       .value as ClimateHvacModesCardFeatureData;
 
     const stateObj = this.context?.entity_id
-      ? this.hass!.states[this.context?.entity_id]
+      ? this.hass!.states[this.context.entity_id]
       : undefined;
 
     if (customize_modes && !config.hvac_modes) {

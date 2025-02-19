@@ -32,7 +32,7 @@ export class HaBackupAddonsPicker extends LitElement {
 
   private _addons = memoizeOne((addons: BackupAddonItem[]) =>
     addons.sort((a, b) =>
-      stringCompare(a.name, b.name, this.hass?.locale?.language)
+      stringCompare(a.name, b.name, this.hass?.locale.language)
     )
   );
 
@@ -47,7 +47,7 @@ export class HaBackupAddonsPicker extends LitElement {
                 .label=${item.name}
                 .version=${this.hideVersion ? undefined : item.version}
                 .iconPath=${item.iconPath || mdiPuzzle}
-                .imageUrl=${this.addons?.find((a) => a.slug === item.slug)?.icon
+                .imageUrl=${this.addons.find((a) => a.slug === item.slug)?.icon
                   ? `/api/hassio/addons/${item.slug}/icon`
                   : undefined}
               >

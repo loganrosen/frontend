@@ -21,10 +21,10 @@ class HuiConditionalRow extends HuiConditionalBase implements LovelaceRow {
       (config as EntityCardConfig).state_color
         ? ({
             state_color: true,
-            ...(config.row as EntityConfig),
+            ...(config.row),
           } as EntityConfig)
         : config.row
-    ) as LovelaceRow;
+    );
   }
 }
 

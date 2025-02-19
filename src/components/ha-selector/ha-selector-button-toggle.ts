@@ -28,7 +28,7 @@ export class HaButtonToggleSelector extends LitElement {
 
   protected render() {
     const options =
-      this.selector.button_toggle?.options?.map((option) =>
+      this.selector.button_toggle?.options.map((option) =>
         typeof option === "object"
           ? (option as SelectOption)
           : ({ value: option, label: option } as SelectOption)

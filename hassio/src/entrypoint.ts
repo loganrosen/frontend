@@ -4,7 +4,7 @@ import "./hassio-main";
 
 import("../../src/resources/ha-style");
 import("@polymer/polymer/lib/utils/settings").then(
-  ({ setCancelSyntheticClickEvents }) => setCancelSyntheticClickEvents(false)
+  ({ setCancelSyntheticClickEvents }) => { setCancelSyntheticClickEvents(false); }
 );
 
 const styleEl = document.createElement("style");

@@ -116,7 +116,7 @@ export class HUIView extends ReactiveElement {
       "ll-rebuild",
       (ev: Event) => {
         // In edit mode let it go to hui-root and rebuild whole view.
-        if (!this.lovelace!.editMode) {
+        if (!this.lovelace.editMode) {
           ev.stopPropagation();
           this._rebuildSection(element, sectionConfig);
         }
@@ -220,7 +220,7 @@ export class HUIView extends ReactiveElement {
       isStrategy = true;
       viewConfig = await generateLovelaceViewStrategy(
         viewConfig.strategy,
-        this.hass!
+        this.hass
       );
     }
 
@@ -348,12 +348,12 @@ export class HUIView extends ReactiveElement {
     const newSectionEl = this.createSectionElement(config);
     newSectionEl.index = sectionElToReplace.index;
     if (sectionElToReplace.parentElement) {
-      sectionElToReplace.parentElement!.replaceChild(
+      sectionElToReplace.parentElement.replaceChild(
         newSectionEl,
         sectionElToReplace
       );
     }
-    this._sections = this._sections!.map((curSectionEl) =>
+    this._sections = this._sections.map((curSectionEl) =>
       curSectionEl === sectionElToReplace ? newSectionEl : curSectionEl
     );
   }

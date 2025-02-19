@@ -214,7 +214,7 @@ export const getUpdateType = (
   entitySources: EntitySources
 ): UpdateType => {
   const entity_id = stateObj.entity_id;
-  const domain = entitySources[entity_id]?.domain;
+  const domain = entitySources[entity_id].domain;
   if (domain !== "hassio") {
     return "generic";
   }

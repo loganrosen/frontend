@@ -54,7 +54,7 @@ export class CloudAlexaPref extends LitElement {
     }
 
     const alexa_registered = this.cloudStatus.alexa_registered;
-    const { alexa_enabled, alexa_report_state } = this.cloudStatus!.prefs;
+    const { alexa_enabled, alexa_report_state } = this.cloudStatus.prefs;
 
     const manualConfig = !isEmptyFilter(this.cloudStatus.alexa_entities);
 
@@ -66,7 +66,7 @@ export class CloudAlexaPref extends LitElement {
             src=${brandsUrl({
               domain: "alexa",
               type: "icon",
-              darkOptimized: this.hass.themes?.darkMode,
+              darkOptimized: this.hass.themes.darkMode,
             })}
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
@@ -93,7 +93,7 @@ export class CloudAlexaPref extends LitElement {
         </div>
         <div class="card-content">
           <p>
-            ${this.hass!.localize("ui.panel.config.cloud.account.alexa.info")}
+            ${this.hass.localize("ui.panel.config.cloud.account.alexa.info")}
           </p>
           ${manualConfig
             ? html`<ha-alert alert-type="warning">
@@ -121,7 +121,7 @@ export class CloudAlexaPref extends LitElement {
                             target="_blank"
                             rel="noreferrer"
                           >
-                            ${this.hass!.localize(
+                            ${this.hass.localize(
                               "ui.panel.config.cloud.account.alexa.enable_ha_skill"
                             )}
                           </a>
@@ -132,7 +132,7 @@ export class CloudAlexaPref extends LitElement {
                             target="_blank"
                             rel="noreferrer"
                           >
-                            ${this.hass!.localize(
+                            ${this.hass.localize(
                               "ui.panel.config.cloud.account.alexa.config_documentation"
                             )}
                           </a>
@@ -141,12 +141,12 @@ export class CloudAlexaPref extends LitElement {
                     </ha-alert>`
                   : ""}<ha-settings-row>
                   <span slot="heading">
-                    ${this.hass!.localize(
+                    ${this.hass.localize(
                       "ui.panel.config.cloud.account.alexa.expose_new_entities"
                     )}
                   </span>
                   <span slot="description">
-                    ${this.hass!.localize(
+                    ${this.hass.localize(
                       "ui.panel.config.cloud.account.alexa.expose_new_entities_info"
                     )}
                   </span>
@@ -159,12 +159,12 @@ export class CloudAlexaPref extends LitElement {
                   ? html`
                       <ha-settings-row>
                         <span slot="heading">
-                          ${this.hass!.localize(
+                          ${this.hass.localize(
                             "ui.panel.config.cloud.account.alexa.enable_state_reporting"
                           )}
                         </span>
                         <span slot="description">
-                          ${this.hass!.localize(
+                          ${this.hass.localize(
                             "ui.panel.config.cloud.account.alexa.info_state_reporting"
                           )}
                         </span>
@@ -183,7 +183,7 @@ export class CloudAlexaPref extends LitElement {
               >
                 <mwc-button>
                   ${manualConfig
-                    ? this.hass!.localize(
+                    ? this.hass.localize(
                         "ui.panel.config.cloud.account.alexa.show_entities"
                       )
                     : this.hass.localize(
@@ -217,7 +217,7 @@ export class CloudAlexaPref extends LitElement {
   private async _enabledToggleChanged(ev) {
     const toggle = ev.target as HaSwitch;
     try {
-      await updateCloudPref(this.hass!, { alexa_enabled: toggle.checked! });
+      await updateCloudPref(this.hass, { alexa_enabled: toggle.checked });
       fireEvent(this, "ha-refresh-cloud-status");
     } catch (_err: any) {
       toggle.checked = !toggle.checked;
@@ -227,16 +227,16 @@ export class CloudAlexaPref extends LitElement {
   private async _reportToggleChanged(ev) {
     const toggle = ev.target as HaSwitch;
     try {
-      await updateCloudPref(this.hass!, {
-        alexa_report_state: toggle.checked!,
+      await updateCloudPref(this.hass, {
+        alexa_report_state: toggle.checked,
       });
       fireEvent(this, "ha-refresh-cloud-status");
     } catch (err: any) {
       alert(
-        `${this.hass!.localize(
+        `${this.hass.localize(
           "ui.panel.config.cloud.account.alexa.state_reporting_error",
           {
-            enable_disable: this.hass!.localize(
+            enable_disable: this.hass.localize(
               toggle.checked
                 ? "ui.panel.config.cloud.account.alexa.enable"
                 : "ui.panel.config.cloud.account.alexa.disable"

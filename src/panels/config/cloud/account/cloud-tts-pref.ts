@@ -93,7 +93,7 @@ export class CloudTTSPref extends LitElement {
   protected updated(changedProps) {
     if (
       changedProps.has("cloudStatus") &&
-      this.cloudStatus?.prefs.tts_default_voice?.[0] !==
+      this.cloudStatus?.prefs.tts_default_voice[0] !==
         changedProps.get("cloudStatus")?.prefs.tts_default_voice?.[0]
     ) {
       this.renderRoot.querySelector("ha-select")?.layoutOptions();

@@ -105,7 +105,7 @@ export class HaCardConditionsEditor extends LitElement {
             ${UI_CONDITION.map(
               (condition) => html`
                 <ha-list-item .value=${condition} graphic="icon">
-                  ${this.hass!.localize(
+                  ${this.hass.localize(
                     `ui.panel.lovelace.editor.condition-editor.condition.${condition}.label`
                   ) || condition}
                   <ha-svg-icon

@@ -159,15 +159,15 @@ class HassioRegistriesDialog extends LitElement {
 
   public focus(): void {
     this.updateComplete.then(() =>
-      (
+      { (
         this.shadowRoot?.querySelector("[dialogInitialFocus]") as HTMLElement
-      )?.focus()
+      ).focus(); }
     );
   }
 
   private async _loadRegistries(): Promise<void> {
     const registries = await fetchHassioDockerRegistries(this.hass);
-    this._registries = Object.keys(registries!.registries).map((key) => ({
+    this._registries = Object.keys(registries.registries).map((key) => ({
       registry: key,
       username: registries.registries[key].username,
     }));

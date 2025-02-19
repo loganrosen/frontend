@@ -86,7 +86,7 @@ export class HaYamlEditor extends LitElement {
 
   public focus(): void {
     if (this._codeEditor?.codemirror) {
-      this._codeEditor?.codemirror.focus();
+      this._codeEditor.codemirror.focus();
     }
   }
 
@@ -105,7 +105,7 @@ export class HaYamlEditor extends LitElement {
         mode="yaml"
         autocomplete-entities
         autocomplete-icons
-        .error=${this.isValid === false}
+        .error=${!this.isValid}
         @value-changed=${this._onChange}
         dir="ltr"
       ></ha-code-editor>

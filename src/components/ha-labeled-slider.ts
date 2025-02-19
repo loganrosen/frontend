@@ -57,7 +57,7 @@ class HaLabeledSlider extends LitElement {
 
   private _inputChanged(ev) {
     fireEvent(this, "value-changed", {
-      value: Number((ev.target as any).value),
+      value: Number((ev.target).value),
     });
   }
 

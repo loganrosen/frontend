@@ -261,11 +261,11 @@ class ZHAConfigDashboard extends LitElement {
   }
 
   private async _fetchConfiguration(): Promise<void> {
-    this._configuration = await fetchZHAConfiguration(this.hass!);
+    this._configuration = await fetchZHAConfiguration(this.hass);
   }
 
   private async _fetchSettings(): Promise<void> {
-    this._networkSettings = await fetchZHANetworkSettings(this.hass!);
+    this._networkSettings = await fetchZHANetworkSettings(this.hass);
   }
 
   private async _showChannelMigrationDialog(): Promise<void> {
@@ -293,7 +293,7 @@ class ZHAConfigDashboard extends LitElement {
     this._generatingBackup = true;
 
     try {
-      backup_and_metadata = await createZHANetworkBackup(this.hass!);
+      backup_and_metadata = await createZHANetworkBackup(this.hass);
     } catch (err: any) {
       showAlertDialog(this, {
         title: "Failed to create backup",
@@ -348,7 +348,7 @@ class ZHAConfigDashboard extends LitElement {
   }
 
   private async _updateConfiguration(): Promise<any> {
-    await updateZHAConfiguration(this.hass!, this._configuration!.data);
+    await updateZHAConfiguration(this.hass, this._configuration!.data);
   }
 
   private _computeLabelCallback(localize, section: string) {

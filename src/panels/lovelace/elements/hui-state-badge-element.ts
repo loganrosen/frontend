@@ -94,8 +94,8 @@ export class HuiStateBadgeElement
         show-name
         @action=${this._handleAction}
         .actionHandler=${actionHandler({
-          hasHold: hasAction(this._config!.hold_action),
-          hasDoubleClick: hasAction(this._config!.double_tap_action),
+          hasHold: hasAction(this._config.hold_action),
+          hasDoubleClick: hasAction(this._config.double_tap_action),
         })}
         tabindex=${ifDefined(
           hasAction(this._config.tap_action) ? "0" : undefined
@@ -105,7 +105,7 @@ export class HuiStateBadgeElement
   }
 
   private _handleAction(ev: ActionHandlerEvent) {
-    handleAction(this, this.hass!, this._config!, ev.detail.action!);
+    handleAction(this, this.hass!, this._config!, ev.detail.action);
   }
 }
 

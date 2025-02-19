@@ -286,10 +286,10 @@ export class HuiStatisticsGraphCardEditor
       this.hass.localize,
       this._configEntities,
       this._metaDatas,
-      this._config!.min_y_axis !== undefined ||
-        this._config!.max_y_axis !== undefined
+      this._config.min_y_axis !== undefined ||
+        this._config.max_y_axis !== undefined
     );
-    const configured_stat_types = this._config!.stat_types
+    const configured_stat_types = this._config.stat_types
       ? ensureArray(this._config.stat_types)
       : stat_types.filter((stat_type) =>
           this._metaDatas?.some((metaData) =>
@@ -318,10 +318,10 @@ export class HuiStatisticsGraphCardEditor
         <ha-statistics-picker
           allow-custom-entity
           .hass=${this.hass}
-          .pickStatisticLabel=${this.hass!.localize(
+          .pickStatisticLabel=${this.hass.localize(
             "ui.panel.lovelace.editor.card.statistics-graph.pick_statistic"
           )}
-          .pickedStatisticLabel=${this.hass!.localize(
+          .pickedStatisticLabel=${this.hass.localize(
             "ui.panel.lovelace.editor.card.statistics-graph.picked_statistic"
           )}
           .includeStatisticsUnitOfMeasurement=${statisticsUnit}
@@ -373,7 +373,7 @@ export class HuiStatisticsGraphCardEditor
       config.unit &&
       !metadata!.some(
         (metaData) =>
-          getDisplayUnit(this.hass!, metaData?.statistic_id, metaData) ===
+          getDisplayUnit(this.hass!, metaData.statistic_id, metaData) ===
           config.unit
       )
     ) {

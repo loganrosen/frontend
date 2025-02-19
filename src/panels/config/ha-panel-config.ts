@@ -381,10 +381,10 @@ class HaPanelConfig extends SubscribeMixin(HassRouterPage) {
 
   public hassSubscribe(): UnsubscribeFunc[] {
     return [
-      subscribeEntityRegistry(this.hass.connection!, (entities) => {
+      subscribeEntityRegistry(this.hass.connection, (entities) => {
         this._entitiesContext.setValue(entities);
       }),
-      subscribeLabelRegistry(this.hass.connection!, (labels) => {
+      subscribeLabelRegistry(this.hass.connection, (labels) => {
         this._labelsContext.setValue(labels);
       }),
     ];

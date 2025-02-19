@@ -72,8 +72,8 @@ export class HuiGenericEntityRow extends LitElement {
         .stateColor=${this.config.state_color}
         @action=${this._handleAction}
         .actionHandler=${actionHandler({
-          hasHold: hasAction(this.config!.hold_action),
-          hasDoubleClick: hasAction(this.config!.double_tap_action),
+          hasHold: hasAction(this.config.hold_action),
+          hasDoubleClick: hasAction(this.config.double_tap_action),
         })}
         tabindex=${ifDefined(
           !this.config.tap_action || hasAction(this.config.tap_action)
@@ -89,8 +89,8 @@ export class HuiGenericEntityRow extends LitElement {
             })}"
             @action=${this._handleAction}
             .actionHandler=${actionHandler({
-              hasHold: hasAction(this.config!.hold_action),
-              hasDoubleClick: hasAction(this.config!.double_tap_action),
+              hasHold: hasAction(this.config.hold_action),
+              hasDoubleClick: hasAction(this.config.double_tap_action),
             })}
             .title=${name}
           >
@@ -165,8 +165,8 @@ export class HuiGenericEntityRow extends LitElement {
             })}"
             @action=${this._handleAction}
             .actionHandler=${actionHandler({
-              hasHold: hasAction(this.config!.hold_action),
-              hasDoubleClick: hasAction(this.config!.double_tap_action),
+              hasHold: hasAction(this.config.hold_action),
+              hasDoubleClick: hasAction(this.config.double_tap_action),
             })}
           >
             <div class="state"><slot></slot></div>
@@ -185,7 +185,7 @@ export class HuiGenericEntityRow extends LitElement {
   }
 
   private _handleAction(ev: ActionHandlerEvent) {
-    handleAction(this, this.hass!, this.config!, ev.detail.action!);
+    handleAction(this, this.hass!, this.config!, ev.detail.action);
   }
 
   static styles = css`

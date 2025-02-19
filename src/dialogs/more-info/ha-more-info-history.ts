@@ -145,7 +145,7 @@ export class MoreInfoHistory extends LitElement {
   private _setRedrawTimer() {
     // redraw the graph every minute to update the time axis
     clearInterval(this._interval);
-    this._interval = window.setInterval(() => this._redrawGraph(), 1000 * 60);
+    this._interval = window.setInterval(() => { this._redrawGraph(); }, 1000 * 60);
   }
 
   private async _getStatisticsMetaData(statisticIds: string[] | undefined) {
@@ -175,7 +175,7 @@ export class MoreInfoHistory extends LitElement {
         // faster.
         const _metadata = this._getStatisticsMetaData([this.entityId]);
         const _statistics = fetchStatistics(
-          this.hass!,
+          this.hass,
           subHours(new Date(), 24),
           undefined,
           [this.entityId],
@@ -207,17 +207,17 @@ export class MoreInfoHistory extends LitElement {
       await getSensorNumericDeviceClasses(this.hass);
 
     this._subscribed = subscribeHistoryStatesTimeWindow(
-      this.hass!,
+      this.hass,
       (combinedHistory) => {
         if (!this._subscribed) {
           // Message came in before we had a chance to unload
           return;
         }
         this._stateHistory = computeHistory(
-          this.hass!,
+          this.hass,
           combinedHistory,
           [this.entityId],
-          this.hass!.localize,
+          this.hass.localize,
           sensorNumericDeviceClasses
         );
       },

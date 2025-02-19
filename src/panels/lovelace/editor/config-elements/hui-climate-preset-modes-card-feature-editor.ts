@@ -96,7 +96,7 @@ export class HuiClimatePresetModesCardFeatureEditor
     }
 
     const stateObj = this.context?.entity_id
-      ? this.hass.states[this.context?.entity_id]
+      ? this.hass.states[this.context.entity_id]
       : undefined;
 
     const data: ClimatePresetModesCardFeatureData = {
@@ -128,7 +128,7 @@ export class HuiClimatePresetModesCardFeatureEditor
       .value as ClimatePresetModesCardFeatureData;
 
     const stateObj = this.context?.entity_id
-      ? this.hass!.states[this.context?.entity_id]
+      ? this.hass!.states[this.context.entity_id]
       : undefined;
 
     if (customize_modes && !config.preset_modes) {

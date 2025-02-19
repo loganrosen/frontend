@@ -112,7 +112,7 @@ class HaHLSPlayer extends LitElement {
     this._cleanUp();
     this._resetError();
 
-    if (!isComponentLoaded(this.hass!, "stream")) {
+    if (!isComponentLoaded(this.hass, "stream")) {
       this._setFatalError("Streaming component is not loaded.");
       return;
     }
@@ -121,7 +121,7 @@ class HaHLSPlayer extends LitElement {
       return;
     }
     try {
-      const { url } = await fetchStreamUrl(this.hass!, this.entityid);
+      const { url } = await fetchStreamUrl(this.hass, this.entityid);
 
       this._url = url;
       this._cleanUp();
@@ -216,7 +216,7 @@ class HaHLSPlayer extends LitElement {
     window.addEventListener("resize", this._resizeExoPlayer);
     this.updateComplete.then(() => nextRender()).then(this._resizeExoPlayer);
     this._videoEl.style.visibility = "hidden";
-    await this.hass!.auth.external!.fireMessage({
+    await this.hass.auth.external!.fireMessage({
       type: "exoplayer/play_hls",
       payload: {
         url: new URL(url, window.location.href).toString(),
@@ -230,7 +230,7 @@ class HaHLSPlayer extends LitElement {
       return;
     }
     const rect = this._videoEl.getBoundingClientRect();
-    this.hass!.auth.external!.fireMessage({
+    this.hass.auth.external!.fireMessage({
       type: "exoplayer/resize",
       payload: {
         left: rect.left,
@@ -342,7 +342,7 @@ class HaHLSPlayer extends LitElement {
     }
     if (this._exoPlayer) {
       window.removeEventListener("resize", this._resizeExoPlayer);
-      this.hass!.auth.external!.fireMessage({ type: "exoplayer/stop" });
+      this.hass.auth.external!.fireMessage({ type: "exoplayer/stop" });
       this._exoPlayer = false;
     }
     if (this._videoEl) {
@@ -373,7 +373,7 @@ class HaHLSPlayer extends LitElement {
     fireEvent(this, "streams", {
       hasAudio: codec?.includes("mp4a") ?? false,
       hasVideo: codec?.includes("mp4a")
-        ? codec?.length > 1
+        ? codec.length > 1
         : Boolean(codec?.length),
     });
   }

@@ -232,7 +232,7 @@ class HaConfigHardware extends SubscribeMixin(LitElement) {
         category: "boards",
         manufacturer: boardData.board!.manufacturer,
         model: boardData.board!.model,
-        darkOptimized: this.hass.themes?.darkMode,
+        darkOptimized: this.hass.themes.darkMode,
       });
     } else if (this._OSData?.board) {
       boardId = this._OSData.board;
@@ -392,8 +392,8 @@ class HaConfigHardware extends SubscribeMixin(LitElement) {
                       ${round(this._systemStatusData.memory_used_mb / 1024, 1)}
                       GB /
                       ${round(
-                        (this._systemStatusData.memory_used_mb! +
-                          this._systemStatusData.memory_free_mb!) /
+                        (this._systemStatusData.memory_used_mb +
+                          this._systemStatusData.memory_free_mb) /
                           1024,
                         0
                       )}

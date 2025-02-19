@@ -115,7 +115,7 @@ class HuiMapCard extends LitElement implements LovelaceCard {
     const ratio = parseAspectRatio(this._config.aspect_ratio);
     const ar =
       ratio && ratio.w > 0 && ratio.h > 0
-        ? `${((100 * ratio.h) / ratio.w).toFixed(2)}`
+        ? ((100 * ratio.h) / ratio.w).toFixed(2)
         : "100";
 
     return 1 + Math.floor(Number(ar) / 25) || 3;
@@ -182,7 +182,7 @@ class HuiMapCard extends LitElement implements LovelaceCard {
           ></ha-map>
           <div id="buttons">
             <ha-icon-button
-              .label=${this.hass!.localize(
+              .label=${this.hass.localize(
                 "ui.panel.lovelace.cards.map.toggle_grouping"
               )}
               .path=${this._clusterMarkers
@@ -193,7 +193,7 @@ class HuiMapCard extends LitElement implements LovelaceCard {
               tabindex="0"
             ></ha-icon-button>
             <ha-icon-button
-              .label=${this.hass!.localize(
+              .label=${this.hass.localize(
                 "ui.panel.lovelace.cards.map.reset_focus"
               )}
               .path=${mdiImageFilterCenterFocus}
@@ -265,14 +265,14 @@ class HuiMapCard extends LitElement implements LovelaceCard {
 
   private _subscribeHistory() {
     if (
-      !isComponentLoaded(this.hass!, "history") ||
+      !isComponentLoaded(this.hass, "history") ||
       this._subscribed ||
       !(this._config?.hours_to_show ?? DEFAULT_HOURS_TO_SHOW)
     ) {
       return;
     }
     this._subscribed = subscribeHistoryStatesTimeWindow(
-      this.hass!,
+      this.hass,
       (combinedHistory) => {
         if (!this._subscribed) {
           // Message came in before we had a chance to unload
@@ -281,7 +281,7 @@ class HuiMapCard extends LitElement implements LovelaceCard {
         this._stateHistory = combinedHistory;
       },
       this._config!.hours_to_show ?? DEFAULT_HOURS_TO_SHOW,
-      (this._configEntities || []).map((entity) => entity.entity)!,
+      (this._configEntities || []).map((entity) => entity.entity),
       false,
       false,
       false
@@ -396,7 +396,7 @@ class HuiMapCard extends LitElement implements LovelaceCard {
         focus: entityConf.focus,
         name: entityConf.name,
       })),
-      ...this._getSourceEntities(this.hass?.states).map((entity) => ({
+      ...this._getSourceEntities(this.hass.states).map((entity) => ({
         ...entity,
         color: this._getColor(entity.entity_id),
       })),
@@ -419,7 +419,7 @@ class HuiMapCard extends LitElement implements LovelaceCard {
           continue;
         }
         const entityStates = history[entityId];
-        if (!entityStates?.length) {
+        if (!entityStates.length) {
           continue;
         }
         // filter location data from states and remove all invalid locations

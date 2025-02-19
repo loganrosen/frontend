@@ -69,7 +69,7 @@ class DialogShowBackupEncryptionKey extends LitElement implements HassDialog {
             )}
           </p>
           <div class="encryption-key">
-            <p>${this._params?.currentKey}</p>
+            <p>${this._params.currentKey}</p>
             <ha-icon-button
               .path=${mdiContentCopy}
               @click=${this._copyKeyToClipboard}
@@ -110,7 +110,7 @@ class DialogShowBackupEncryptionKey extends LitElement implements HassDialog {
       return;
     }
     await copyToClipboard(
-      this._params?.currentKey,
+      this._params.currentKey,
       this.renderRoot.querySelector("div")!
     );
     showToast(this, {

@@ -57,7 +57,7 @@ class HaTimerRemainingTime extends ReactiveElement {
 
     if (stateObj.state === "active") {
       this._updateRemaining = setInterval(
-        () => this._calculateRemaining(this.stateObj),
+        () => { this._calculateRemaining(this.stateObj); },
         1000
       );
     }

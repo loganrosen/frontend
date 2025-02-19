@@ -166,8 +166,8 @@ export class HuiEnergyUsageGraphCard
               return "";
             }
             params.sort((a, b) => {
-              const aValue = (a.value as number[])?.[1];
-              const bValue = (b.value as number[])?.[1];
+              const aValue = (a.value as number[])[1];
+              const bValue = (b.value as number[])[1];
               if (aValue > 0 && bValue < 0) {
                 return -1;
               }
@@ -180,7 +180,7 @@ export class HuiEnergyUsageGraphCard
               return a.componentIndex - b.componentIndex;
             });
             return (
-              (commonOptions.tooltip as TooltipOption)?.formatter as any
+              (commonOptions.tooltip as TooltipOption).formatter as any
             )?.(params);
           },
         },
@@ -372,7 +372,7 @@ export class HuiEnergyUsageGraphCard
       const add = !["solar", "from_battery"].includes(key);
       const totalStats: Record<number, number> = {};
       const sets: Record<string, Record<number, number>> = {};
-      statIds!.forEach((id) => {
+      statIds.forEach((id) => {
         const stats = statistics[id];
         if (!stats) {
           return;
@@ -432,7 +432,7 @@ export class HuiEnergyUsageGraphCard
         const used_battery = {};
         for (const start of Object.keys(summedData.from_battery)) {
           used_battery[start] =
-            (summedData.from_battery![start] || 0) -
+            (summedData.from_battery[start] || 0) -
             (battery_to_grid[start] || 0);
         }
         combinedData.used_battery = { used_battery };
@@ -483,7 +483,7 @@ export class HuiEnergyUsageGraphCard
 
     const compareTransform = getCompareTransform(
       this._start,
-      this._compareStart!
+      this._compareStart
     );
 
     Object.entries(combinedData).forEach(([type, sources], idx) => {
@@ -532,7 +532,7 @@ export class HuiEnergyUsageGraphCard
               false,
               compare,
               colorPropertyMap[type],
-              colorIndices[type]?.[statId]
+              colorIndices[type][statId]
             ),
           },
           color: getEnergyColor(
@@ -541,7 +541,7 @@ export class HuiEnergyUsageGraphCard
             true,
             compare,
             colorPropertyMap[type],
-            colorIndices[type]?.[statId]
+            colorIndices[type][statId]
           ),
           stack: compare ? "compare" : "usage",
           data: points,

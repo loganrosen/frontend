@@ -28,8 +28,8 @@ export class HaLanguageSelector extends LitElement {
         .label=${this.label}
         .helper=${this.helper}
         .languages=${this.selector.language?.languages}
-        .nativeName=${Boolean(this.selector?.language?.native_name)}
-        .noSort=${Boolean(this.selector?.language?.no_sort)}
+        .nativeName=${Boolean(this.selector.language?.native_name)}
+        .noSort=${Boolean(this.selector.language?.no_sort)}
         .disabled=${this.disabled}
         .required=${this.required}
       ></ha-language-picker>

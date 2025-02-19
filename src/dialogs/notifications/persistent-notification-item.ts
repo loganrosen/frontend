@@ -80,7 +80,7 @@ export class HuiPersistentNotificationItem extends LitElement {
       return undefined;
     }
 
-    const d = new Date(notification.created_at!);
+    const d = new Date(notification.created_at);
     return formatDateTime(d, hass.locale, hass.config);
   }
 }

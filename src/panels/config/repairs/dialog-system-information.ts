@@ -19,7 +19,6 @@ import type { HassioResolution } from "../../../data/hassio/resolution";
 import { fetchHassioResolution } from "../../../data/hassio/resolution";
 import { domainToName } from "../../../data/integration";
 import type {
-  SystemCheckValueObject,
   SystemHealthInfo,
 } from "../../../data/system_health";
 import { subscribeSystemHealthInfo } from "../../../data/system_health";
@@ -70,7 +69,7 @@ class DialogSystemInformation extends LitElement {
 
   public showDialog(): void {
     this._opened = true;
-    this.hass!.loadBackendTranslation("system_health");
+    this.hass.loadBackendTranslation("system_health");
     this._subscribe();
   }
 
@@ -114,7 +113,7 @@ class DialogSystemInformation extends LitElement {
   }
 
   private _unsubscribe() {
-    this._systemHealthSubscription?.then((unsubFunc) => unsubFunc());
+    this._systemHealthSubscription?.then((unsubFunc) => { unsubFunc(); });
     this._systemHealthSubscription = undefined;
     this._hassIOSubscription?.();
     this._hassIOSubscription = undefined;
@@ -311,7 +310,7 @@ class DialogSystemInformation extends LitElement {
             domainInfo.info[key] &&
             typeof domainInfo.info[key] === "object"
           ) {
-            const info = domainInfo.info[key] as SystemCheckValueObject;
+            const info = domainInfo.info[key];
 
             if (info.type === "pending") {
               value = html`
@@ -395,21 +394,19 @@ class DialogSystemInformation extends LitElement {
       const domainInfo = this._systemInfo![domain];
       let first = true;
       const parts = [
-        `${
-          domain !== "homeassistant"
+        domain !== "homeassistant"
             ? `<details><summary>${domainToName(
                 this.hass.localize,
                 domain
               )}</summary>\n`
-            : ""
-        }`,
+            : "",
       ];
 
       for (const key of Object.keys(domainInfo.info)) {
         let value: unknown;
 
         if (domainInfo.info[key] && typeof domainInfo.info[key] === "object") {
-          const info = domainInfo.info[key] as SystemCheckValueObject;
+          const info = domainInfo.info[key];
 
           if (info.type === "pending") {
             value = "pending";
@@ -444,7 +441,7 @@ class DialogSystemInformation extends LitElement {
     }
 
     await copyToClipboard(
-      `${"## "}System Information\n${haContent}\n\n${domainParts.join("\n\n")}`
+      `## System Information\n${haContent}\n\n${domainParts.join("\n\n")}`
     );
 
     showToast(this, {

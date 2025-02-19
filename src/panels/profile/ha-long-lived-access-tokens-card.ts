@@ -28,7 +28,7 @@ class HaLongLivedTokens extends LitElement {
   private _accessTokens = memoizeOne(
     (refreshTokens: RefreshToken[]): RefreshToken[] =>
       refreshTokens
-        ?.filter((token) => token.type === "long_lived_access_token")
+        .filter((token) => token.type === "long_lived_access_token")
         .reverse()
   );
 
@@ -55,13 +55,13 @@ class HaLongLivedTokens extends LitElement {
               "ui.panel.profile.long_lived_access_tokens.learn_auth_requests"
             )}
           </a>
-          ${!accessTokens?.length
+          ${!accessTokens.length
             ? html`<p>
                 ${this.hass.localize(
                   "ui.panel.profile.long_lived_access_tokens.empty_state"
                 )}
               </p>`
-            : accessTokens!.map(
+            : accessTokens.map(
                 (token) =>
                   html`<ha-settings-row two-line>
                     <span slot="heading">${token.client_name}</span>

@@ -120,7 +120,7 @@ export class HaAnalytics extends LitElement {
       el.addEventListener("click", () => {
         const toFocus = this.shadowRoot!.querySelector(
           `*[name=${forEl}]`
-        ) as HTMLElement | null;
+        );
 
         if (toFocus) {
           toFocus.focus();

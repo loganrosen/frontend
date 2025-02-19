@@ -57,7 +57,7 @@ export const subscribeDiscoverThreadRouters = (
 ) => {
   const stream = new DiscoveryStream();
   return hass.connection.subscribeMessage<ThreadRouterDiscoveryEvent>(
-    (message) => callbackFunction(stream.processEvent(message)),
+    (message) => { callbackFunction(stream.processEvent(message)); },
     {
       type: "thread/discover_routers",
     }

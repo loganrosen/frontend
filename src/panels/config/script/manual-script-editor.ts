@@ -166,14 +166,14 @@ export class HaManualScriptEditor extends LitElement {
   private _fieldsChanged(ev: CustomEvent): void {
     ev.stopPropagation();
     fireEvent(this, "value-changed", {
-      value: { ...this.config!, fields: ev.detail.value as Fields },
+      value: { ...this.config, fields: ev.detail.value as Fields },
     });
   }
 
   private _sequenceChanged(ev: CustomEvent): void {
     ev.stopPropagation();
     fireEvent(this, "value-changed", {
-      value: { ...this.config!, sequence: ev.detail.value as Action[] },
+      value: { ...this.config, sequence: ev.detail.value as Action[] },
     });
   }
 

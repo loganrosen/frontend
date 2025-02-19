@@ -71,14 +71,14 @@ class HuiLightColorTempCardFeature
     const maxKelvin =
       this.stateObj.attributes.max_color_temp_kelvin ?? DEFAULT_MAX_KELVIN;
 
-    const gradient = this._generateTemperatureGradient(minKelvin!, maxKelvin);
+    const gradient = this._generateTemperatureGradient(minKelvin, maxKelvin);
 
     return html`
       <ha-control-slider
         .value=${position}
         mode="cursor"
         .showHandle=${stateActive(this.stateObj)}
-        .disabled=${this.stateObj!.state === UNAVAILABLE}
+        .disabled=${this.stateObj.state === UNAVAILABLE}
         @value-changed=${this._valueChanged}
         .label=${this.hass.localize("ui.card.light.color_temperature")}
         .min=${minKelvin}

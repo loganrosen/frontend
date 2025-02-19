@@ -85,11 +85,11 @@ export class HuiLogbookCard extends LitElement implements LovelaceCard {
       };
     }
 
-    if (config.target?.entity_id) {
+    if (config.target.entity_id) {
       return {
         ...config.target,
         entity_id: processConfigEntities<EntityConfig>(
-          ensureArray(config.target!.entity_id)
+          ensureArray(config.target.entity_id)
         ).map((entity) => entity.entity),
       };
     }
@@ -110,7 +110,7 @@ export class HuiLogbookCard extends LitElement implements LovelaceCard {
       ...config,
     };
     this._time = {
-      recent: this._config!.hours_to_show! * 60 * 60,
+      recent: this._config.hours_to_show! * 60 * 60,
     };
 
     this._targetPickerValue = target;
@@ -152,7 +152,7 @@ export class HuiLogbookCard extends LitElement implements LovelaceCard {
 
     if (
       (hassChanged && oldHass?.themes !== this.hass.themes) ||
-      (configChanged && oldConfig?.theme !== this._config.theme)
+      (configChanged && oldConfig.theme !== this._config.theme)
     ) {
       applyThemesOnElement(this, this.hass.themes, this._config.theme);
     }
@@ -175,8 +175,8 @@ export class HuiLogbookCard extends LitElement implements LovelaceCard {
 
     return html`
       <ha-card
-        .header=${this._config!.title}
-        class=${classMap({ "no-header": !this._config!.title })}
+        .header=${this._config.title}
+        class=${classMap({ "no-header": !this._config.title })}
       >
         <div class="content">
           <ha-logbook

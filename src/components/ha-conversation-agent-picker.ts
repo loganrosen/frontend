@@ -73,7 +73,7 @@ export class HaConversationAgentPicker extends LitElement {
     return html`
       <ha-select
         .label=${this.label ||
-        this.hass!.localize(
+        this.hass.localize(
           "ui.components.coversation-agent-picker.conversation_agent"
         )}
         .value=${value}
@@ -86,7 +86,7 @@ export class HaConversationAgentPicker extends LitElement {
       >
         ${!this.required
           ? html`<ha-list-item .value=${NONE}>
-              ${this.hass!.localize(
+              ${this.hass.localize(
                 "ui.components.coversation-agent-picker.none"
               )}
             </ha-list-item>`

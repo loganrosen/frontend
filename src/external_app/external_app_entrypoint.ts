@@ -26,10 +26,10 @@ const barCodeListeners = new Set<
 
 export const attachExternalToApp = (hassMainEl: HomeAssistantMain) => {
   window.addEventListener("haptic", (ev) =>
-    hassMainEl.hass.auth.external!.fireMessage({
+    { hassMainEl.hass.auth.external!.fireMessage({
       type: "haptic",
       payload: { hapticType: ev.detail },
-    })
+    }); }
   );
 
   hassMainEl.hass.auth.external!.addCommandHandler((msg) =>

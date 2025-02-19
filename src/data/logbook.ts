@@ -140,7 +140,7 @@ export const subscribeLogbook = (
     params.device_ids = deviceIds;
   }
   return hass.connection.subscribeMessage<LogbookStreamMessage>(
-    (message) => callbackFunction(message),
+    (message) => { callbackFunction(message); },
     params
   );
 };
@@ -154,22 +154,22 @@ export const createHistoricState = (
     state: state,
     attributes: {
       // Rebuild the historical state by copying static attributes only
-      device_class: currentStateObj?.attributes.device_class,
-      source_type: currentStateObj?.attributes.source_type,
-      has_date: currentStateObj?.attributes.has_date,
-      has_time: currentStateObj?.attributes.has_time,
+      device_class: currentStateObj.attributes.device_class,
+      source_type: currentStateObj.attributes.source_type,
+      has_date: currentStateObj.attributes.has_date,
+      has_time: currentStateObj.attributes.has_time,
       // We do not want to use dynamic entity pictures (e.g., from media player) for the log book rendering,
       // as they would present a false state in the log (played media right now vs actual historic data).
       entity_picture_local: DOMAINS_WITH_DYNAMIC_PICTURE.has(
         computeDomain(currentStateObj.entity_id)
       )
         ? undefined
-        : currentStateObj?.attributes.entity_picture_local,
+        : currentStateObj.attributes.entity_picture_local,
       entity_picture: DOMAINS_WITH_DYNAMIC_PICTURE.has(
         computeDomain(currentStateObj.entity_id)
       )
         ? undefined
-        : currentStateObj?.attributes.entity_picture,
+        : currentStateObj.attributes.entity_picture,
     },
   }) as unknown as HassEntity;
 
@@ -184,7 +184,7 @@ export const localizeTriggerSource = (
     if (source.startsWith(phrase)) {
       return source.replace(
         phrase,
-        `${localize(`ui.components.logbook.${triggerPhraseKey}`)}`
+        localize(`ui.components.logbook.${triggerPhraseKey}`)
       );
     }
   }
@@ -270,7 +270,7 @@ export const localizeStateMessage = (
 
       const event_type = hass
         .formatEntityAttributeValue(stateObj, "event_type")
-        ?.toString();
+        .toString();
 
       if (!event_type) {
         return localize(`${LOGBOOK_LOCALIZE_PATH}.detected_unknown_event`);

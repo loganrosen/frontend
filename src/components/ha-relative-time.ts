@@ -53,7 +53,7 @@ class HaRelativeTime extends ReactiveElement {
     this._clearInterval();
 
     // update every 60 seconds
-    this._interval = window.setInterval(() => this._updateRelative(), 60000);
+    this._interval = window.setInterval(() => { this._updateRelative(); }, 60000);
   }
 
   private _updateRelative(): void {

@@ -114,7 +114,7 @@ export class HaRelatedItems extends LitElement {
       const configEntries =
         relatedConfigEntries && entries
           ? relatedConfigEntries.map((entryId) =>
-              entries!.find((configEntry) => configEntry.entry_id === entryId)
+              entries.find((configEntry) => configEntry.entry_id === entryId)
             )
           : undefined;
 
@@ -171,7 +171,7 @@ export class HaRelatedItems extends LitElement {
                           domain: entry.domain,
                           type: "icon",
                           useFallback: true,
-                          darkOptimized: this.hass.themes?.darkMode,
+                          darkOptimized: this.hass.themes.darkMode,
                         })}
                         crossorigin="anonymous"
                         referrerpolicy="no-referrer"
@@ -197,7 +197,7 @@ export class HaRelatedItems extends LitElement {
                             domain: integration,
                             type: "icon",
                             useFallback: true,
-                            darkOptimized: this.hass.themes?.darkMode,
+                            darkOptimized: this.hass.themes.darkMode,
                           })}
                           crossorigin="anonymous"
                           referrerpolicy="no-referrer"

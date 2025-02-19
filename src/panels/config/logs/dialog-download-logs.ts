@@ -31,7 +31,7 @@ class DownloadLogsDialog extends LitElement {
 
   public showDialog(dialogParams: DownloadLogsDialogParams) {
     this._dialogParams = dialogParams;
-    this._lineCount = this._dialogParams?.defaultLineCount || 500;
+    this._lineCount = this._dialogParams.defaultLineCount || 500;
   }
 
   public closeDialog() {

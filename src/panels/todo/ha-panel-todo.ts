@@ -88,7 +88,7 @@ class PanelTodo extends LitElement {
 
   public disconnectedCallback() {
     super.disconnectedCallback();
-    this._mql?.removeListener(this._setIsMobile!);
+    this._mql?.removeListener(this._setIsMobile);
     this._mql = undefined;
   }
 
@@ -334,8 +334,8 @@ class PanelTodo extends LitElement {
             : this._entityId,
       }),
       text: this.hass.localize("ui.panel.todo.delete_confirm_text"),
-      confirmText: this.hass!.localize("ui.common.delete"),
-      dismissText: this.hass!.localize("ui.common.cancel"),
+      confirmText: this.hass.localize("ui.common.delete"),
+      dismissText: this.hass.localize("ui.common.cancel"),
       destructive: true,
     });
 

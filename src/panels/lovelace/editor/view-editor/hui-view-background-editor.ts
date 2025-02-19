@@ -108,7 +108,7 @@ export class HuiViewBackgroundEditor extends LitElement {
       return nothing;
     }
 
-    let background = this._config?.background;
+    let background = this._config.background;
     if (typeof background === "string") {
       const backgroundUrl = background.match(/url\(['"]?([^'"]+)['"]?\)/)?.[1];
 

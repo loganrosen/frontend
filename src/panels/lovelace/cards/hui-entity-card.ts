@@ -243,7 +243,7 @@ export class HuiEntityCard extends LitElement implements LovelaceCard {
       oldHass.themes !== this.hass.themes ||
       oldConfig.theme !== this._config.theme
     ) {
-      applyThemesOnElement(this, this.hass.themes, this._config!.theme);
+      applyThemesOnElement(this, this.hass.themes, this._config.theme);
     }
   }
 

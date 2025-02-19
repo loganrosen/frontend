@@ -33,7 +33,7 @@ class MoreInfoDate extends LitElement {
 
   private _dateChanged(ev: CustomEvent<{ value: string }>): void {
     if (ev.detail.value) {
-      setDateValue(this.hass!, this.stateObj!.entity_id, ev.detail.value);
+      setDateValue(this.hass, this.stateObj!.entity_id, ev.detail.value);
     }
   }
 

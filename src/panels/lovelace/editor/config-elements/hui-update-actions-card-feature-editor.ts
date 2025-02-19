@@ -54,7 +54,7 @@ export class HuiUpdateActionsCardFeatureEditor
 
   private get _stateObj() {
     return this.context?.entity_id
-      ? this.hass!.states[this.context?.entity_id]
+      ? this.hass!.states[this.context.entity_id]
       : undefined;
   }
 

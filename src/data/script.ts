@@ -396,7 +396,7 @@ export const hasScriptFields = (
   hass: HomeAssistant,
   entityId: string
 ): boolean => {
-  const fields = hass.services.script[computeObjectId(entityId)]?.fields;
+  const fields = hass.services.script[computeObjectId(entityId)].fields;
   return fields !== undefined && Object.keys(fields).length > 0;
 };
 

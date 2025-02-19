@@ -58,7 +58,7 @@ export const startExternalCommissioning = async (hass: HomeAssistant) => {
       (dataset) => dataset.preferred
     );
     if (preferredDataset) {
-      return hass.auth.external!.fireMessage({
+      hass.auth.external!.fireMessage({
         type: "matter/commission",
         payload: {
           active_operational_dataset: (
@@ -68,11 +68,11 @@ export const startExternalCommissioning = async (hass: HomeAssistant) => {
           mac_extended_address: preferredDataset.preferred_extended_address,
           extended_pan_id: preferredDataset.extended_pan_id,
         },
-      });
+      }); return;
     }
   }
 
-  return hass.auth.external!.fireMessage({
+  hass.auth.external!.fireMessage({
     type: "matter/commission",
   });
 };

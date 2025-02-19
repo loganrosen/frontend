@@ -44,27 +44,27 @@ export class HaDeviceInfoZha extends LitElement {
         <div>
           LQI:
           ${this._zhaDevice.lqi ||
-          this.hass!.localize("ui.dialogs.zha_device_info.unknown")}
+          this.hass.localize("ui.dialogs.zha_device_info.unknown")}
         </div>
         <div>
           RSSI:
           ${this._zhaDevice.rssi ||
-          this.hass!.localize("ui.dialogs.zha_device_info.unknown")}
+          this.hass.localize("ui.dialogs.zha_device_info.unknown")}
         </div>
         <div>
-          ${this.hass!.localize("ui.dialogs.zha_device_info.last_seen")}:
+          ${this.hass.localize("ui.dialogs.zha_device_info.last_seen")}:
           ${this._zhaDevice.last_seen ||
-          this.hass!.localize("ui.dialogs.zha_device_info.unknown")}
+          this.hass.localize("ui.dialogs.zha_device_info.unknown")}
         </div>
         <div>
-          ${this.hass!.localize("ui.dialogs.zha_device_info.power_source")}:
+          ${this.hass.localize("ui.dialogs.zha_device_info.power_source")}:
           ${this._zhaDevice.power_source ||
-          this.hass!.localize("ui.dialogs.zha_device_info.unknown")}
+          this.hass.localize("ui.dialogs.zha_device_info.unknown")}
         </div>
         ${this._zhaDevice.quirk_applied
           ? html`
               <div>
-                ${this.hass!.localize("ui.dialogs.zha_device_info.quirk")}:
+                ${this.hass.localize("ui.dialogs.zha_device_info.quirk")}:
                 ${this._zhaDevice.quirk_class}
               </div>
             `

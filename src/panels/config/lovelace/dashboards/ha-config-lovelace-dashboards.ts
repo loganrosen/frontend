@@ -249,7 +249,7 @@ export class HaConfigLovelaceDashboards extends LitElement {
 
   private _getItems = memoize((dashboards: LovelaceDashboard[]) => {
     const defaultMode = (
-      this.hass.panels?.lovelace?.config as LovelacePanelConfig
+      this.hass.panels.lovelace.config as LovelacePanelConfig
     ).mode;
     const defaultUrlPath = this.hass.defaultPanel;
     const isDefault = defaultUrlPath === "lovelace";
@@ -409,8 +409,8 @@ export class HaConfigLovelaceDashboards extends LitElement {
       dashboard,
       urlPath,
       createDashboard: async (values: LovelaceDashboardCreateParams) => {
-        const created = await createDashboard(this.hass!, values);
-        this._dashboards = this._dashboards!.concat(created).sort(
+        const created = await createDashboard(this.hass, values);
+        this._dashboards = this._dashboards.concat(created).sort(
           (res1, res2) =>
             stringCompare(
               res1.url_path,
@@ -419,37 +419,37 @@ export class HaConfigLovelaceDashboards extends LitElement {
             )
         );
         if (defaultConfig) {
-          await saveConfig(this.hass!, created.url_path, defaultConfig);
+          await saveConfig(this.hass, created.url_path, defaultConfig);
         }
       },
       updateDashboard: async (values) => {
         const updated = await updateDashboard(
-          this.hass!,
+          this.hass,
           dashboard!.id,
           values
         );
-        this._dashboards = this._dashboards!.map((res) =>
+        this._dashboards = this._dashboards.map((res) =>
           res === dashboard ? updated : res
         );
       },
       removeDashboard: async () => {
         const confirm = await showConfirmationDialog(this, {
-          title: this.hass!.localize(
+          title: this.hass.localize(
             "ui.panel.config.lovelace.dashboards.confirm_delete_title",
             { dashboard_title: dashboard!.title }
           ),
-          text: this.hass!.localize(
+          text: this.hass.localize(
             "ui.panel.config.lovelace.dashboards.confirm_delete_text"
           ),
-          confirmText: this.hass!.localize("ui.common.delete"),
+          confirmText: this.hass.localize("ui.common.delete"),
           destructive: true,
         });
         if (!confirm) {
           return false;
         }
         try {
-          await deleteDashboard(this.hass!, dashboard!.id);
-          this._dashboards = this._dashboards!.filter(
+          await deleteDashboard(this.hass, dashboard!.id);
+          this._dashboards = this._dashboards.filter(
             (res) => res !== dashboard
           );
           return true;

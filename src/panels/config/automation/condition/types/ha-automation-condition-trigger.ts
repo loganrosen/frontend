@@ -60,7 +60,7 @@ export class HaTriggerCondition extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    const details = { callback: (config) => this._automationUpdated(config) };
+    const details = { callback: (config) => { this._automationUpdated(config); } };
     fireEvent(this, "subscribe-automation-config", details);
     this._unsub = (details as any).unsub;
   }

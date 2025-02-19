@@ -77,7 +77,7 @@ export class HomeAssistantAppEl extends QuickBarMixin(HassElement) {
       this._databaseMigration === undefined &&
       changedProps.has("hass") &&
       this.hass?.config &&
-      changedProps.get("hass")?.config !== this.hass?.config
+      changedProps.get("hass")?.config !== this.hass.config
     ) {
       this.checkDataBaseMigration();
     }
@@ -118,17 +118,17 @@ export class HomeAssistantAppEl extends QuickBarMixin(HassElement) {
       };
 
       this._panelUrl = panelUrl(path);
-      this.panelUrlChanged(this._panelUrl!);
+      this.panelUrlChanged(this._panelUrl);
       this._updateHass({ panelUrl: this._panelUrl });
     };
 
-    window.addEventListener("location-changed", () => updateRoute());
+    window.addEventListener("location-changed", () => { updateRoute(); });
 
     // Handle history changes
     if (useHash) {
-      window.addEventListener("hashchange", () => updateRoute());
+      window.addEventListener("hashchange", () => { updateRoute(); });
     } else {
-      window.addEventListener("popstate", () => updateRoute());
+      window.addEventListener("popstate", () => { updateRoute(); });
     }
 
     // Handle clicking on links
@@ -173,11 +173,11 @@ export class HomeAssistantAppEl extends QuickBarMixin(HassElement) {
 
     document.addEventListener(
       "visibilitychange",
-      () => this._checkVisibility(),
+      () => { this._checkVisibility(); },
       false
     );
-    document.addEventListener("freeze", () => this._suspendApp());
-    document.addEventListener("resume", () => this._checkVisibility());
+    document.addEventListener("freeze", () => { this._suspendApp(); });
+    document.addEventListener("resume", () => { this._checkVisibility(); });
   }
 
   protected hassReconnected() {
@@ -269,7 +269,7 @@ export class HomeAssistantAppEl extends QuickBarMixin(HassElement) {
         this._visiblePromiseResolve = resolve;
       })
     );
-    if (this.hass!.suspendWhenHidden !== false) {
+    if (this.hass!.suspendWhenHidden) {
       // We close the connection to Home Assistant after being hidden for 5 minutes
       this._hiddenTimeout = window.setTimeout(() => {
         this._hiddenTimeout = undefined;
@@ -280,7 +280,7 @@ export class HomeAssistantAppEl extends QuickBarMixin(HassElement) {
         }
       }, 300000);
     }
-    window.addEventListener("focus", () => this._onVisible(), { once: true });
+    window.addEventListener("focus", () => { this._onVisible(); }, { once: true });
   }
 
   private _suspendApp() {

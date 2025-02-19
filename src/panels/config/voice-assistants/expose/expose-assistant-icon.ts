@@ -35,7 +35,7 @@ export class VoiceAssistantExposeAssistantIcon extends LitElement {
           src=${brandsUrl({
             domain: voiceAssistants[this.assistant].domain,
             type: "icon",
-            darkOptimized: this.hass.themes?.darkMode,
+            darkOptimized: this.hass.themes.darkMode,
           })}
           crossorigin="anonymous"
           referrerpolicy="no-referrer"

@@ -64,7 +64,7 @@ export class HaMoreInfoLightFavoriteColors extends LitElement {
   private _apply = (index: number) => {
     const favorite = this._favoriteColors[index];
     this.hass.callService("light", "turn_on", {
-      entity_id: this.stateObj!.entity_id,
+      entity_id: this.stateObj.entity_id,
       ...favorite,
     });
   };
@@ -194,12 +194,12 @@ export class HaMoreInfoLightFavoriteColors extends LitElement {
                       }`,
                       { number: index }
                     )}
-                    .disabled=${this.stateObj!.state === UNAVAILABLE}
+                    .disabled=${this.stateObj.state === UNAVAILABLE}
                     .color=${color}
                     .index=${index}
                     .actionHandler=${actionHandler({
                       hasHold: !this.editMode && this.hass.user?.is_admin,
-                      disabled: this.stateObj!.state === UNAVAILABLE,
+                      disabled: this.stateObj.state === UNAVAILABLE,
                     })}
                     @action=${this._handleColorAction}
                   >

@@ -11,7 +11,6 @@ import type { LevelDefinition } from "../../../../components/ha-gauge";
 import "../../../../components/ha-svg-icon";
 import type {
   EnergyData,
-  GridSourceTypeEnergyPreference,
 } from "../../../../data/energy";
 import { getEnergyDataCollection } from "../../../../data/energy";
 import { calculateStatisticsSumGrowth } from "../../../../data/recorder";
@@ -79,7 +78,7 @@ class HuiEnergyGridGaugeCard
     const prefs = this._data.prefs;
     const gridSource = prefs.energy_sources.find(
       (src) => src.type === "grid"
-    ) as GridSourceTypeEnergyPreference | undefined;
+    );
 
     let value: number | undefined;
 
@@ -133,7 +132,7 @@ class HuiEnergyGridGaugeCard
                   this.hass.locale,
                   { maximumFractionDigits: 2 }
                 )}
-                .locale=${this.hass!.locale}
+                .locale=${this.hass.locale}
                 .levels=${LEVELS}
                 label="kWh"
                 needle

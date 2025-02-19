@@ -10,6 +10,6 @@ export const getMQTTDeviceActions = (
   {
     label: "MQTT Info",
     icon: mdiInformation,
-    action: async () => showMQTTDeviceDebugInfoDialog(el, { device }),
+    action: async () => { showMQTTDeviceDebugInfoDialog(el, { device }); },
   },
 ];

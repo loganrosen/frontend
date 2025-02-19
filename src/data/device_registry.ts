@@ -154,7 +154,7 @@ export const getDeviceIntegrationLookup = (
 
   for (const entity of entities) {
     const source = entitySources[entity.entity_id];
-    if (!source?.domain || entity.device_id === null) {
+    if (!source.domain || entity.device_id === null) {
       continue;
     }
 

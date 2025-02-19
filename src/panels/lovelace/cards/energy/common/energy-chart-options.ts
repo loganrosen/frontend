@@ -148,12 +148,12 @@ function formatTooltip(
   }
   // when comparing the first value is offset to match the main period
   // and the real date is in the third value
-  const date = new Date(params[0].value?.[2] ?? params[0].value?.[0]);
+  const date = new Date(params[0].value[2] ?? params[0].value[0]);
   let period: string;
   if (dayDifference > 89) {
-    period = `${formatDateMonthYear(date, locale, config)}`;
+    period = formatDateMonthYear(date, locale, config);
   } else if (dayDifference > 0) {
-    period = `${formatDateVeryShort(date, locale, config)}`;
+    period = formatDateVeryShort(date, locale, config);
   } else {
     period = `${
       compare ? `${formatDateVeryShort(date, locale, config)}: ` : ""

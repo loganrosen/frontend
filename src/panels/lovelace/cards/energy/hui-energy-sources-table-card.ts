@@ -576,7 +576,7 @@ export class HuiEnergySourcesTableCard
                                         this.hass.locale,
                                         {
                                           style: "currency",
-                                          currency: this.hass.config.currency!,
+                                          currency: this.hass.config.currency,
                                         }
                                       )
                                     : ""}
@@ -595,7 +595,7 @@ export class HuiEnergySourcesTableCard
                             ${cost !== null
                               ? formatNumber(cost, this.hass.locale, {
                                   style: "currency",
-                                  currency: this.hass.config.currency!,
+                                  currency: this.hass.config.currency,
                                 })
                               : ""}
                           </td>`
@@ -693,7 +693,7 @@ export class HuiEnergySourcesTableCard
                                         this.hass.locale,
                                         {
                                           style: "currency",
-                                          currency: this.hass.config.currency!,
+                                          currency: this.hass.config.currency,
                                         }
                                       )
                                     : ""}
@@ -712,7 +712,7 @@ export class HuiEnergySourcesTableCard
                             ${cost !== null
                               ? formatNumber(cost, this.hass.locale, {
                                   style: "currency",
-                                  currency: this.hass.config.currency!,
+                                  currency: this.hass.config.currency,
                                 })
                               : ""}
                           </td>`
@@ -721,8 +721,8 @@ export class HuiEnergySourcesTableCard
                   })}`
               )}
               ${types.grid &&
-              (types.grid?.[0].flow_from?.length ||
-                types.grid?.[0].flow_to?.length)
+              (types.grid[0].flow_from.length ||
+                types.grid[0].flow_to.length)
                 ? html` <tr class="mdc-data-table__row total">
                     <td class="mdc-data-table__cell"></td>
                     <th class="mdc-data-table__cell" scope="row">
@@ -747,7 +747,7 @@ export class HuiEnergySourcesTableCard
                                       this.hass.locale,
                                       {
                                         style: "currency",
-                                        currency: this.hass.config.currency!,
+                                        currency: this.hass.config.currency,
                                       }
                                     )
                                   : ""}
@@ -766,7 +766,7 @@ export class HuiEnergySourcesTableCard
                           ${hasGridCost
                             ? formatNumber(totalGridCost, this.hass.locale, {
                                 style: "currency",
-                                currency: this.hass.config.currency!,
+                                currency: this.hass.config.currency,
                               })
                             : ""}
                         </td>`
@@ -861,7 +861,7 @@ export class HuiEnergySourcesTableCard
                               ${costCompare !== null
                                 ? formatNumber(costCompare, this.hass.locale, {
                                     style: "currency",
-                                    currency: this.hass.config.currency!,
+                                    currency: this.hass.config.currency,
                                   })
                                 : ""}
                             </td>`
@@ -879,7 +879,7 @@ export class HuiEnergySourcesTableCard
                         ${cost !== null
                           ? formatNumber(cost, this.hass.locale, {
                               style: "currency",
-                              currency: this.hass.config.currency!,
+                              currency: this.hass.config.currency,
                             })
                           : ""}
                       </td>`
@@ -911,7 +911,7 @@ export class HuiEnergySourcesTableCard
                                       this.hass.locale,
                                       {
                                         style: "currency",
-                                        currency: this.hass.config.currency!,
+                                        currency: this.hass.config.currency,
                                       }
                                     )
                                   : ""}
@@ -930,7 +930,7 @@ export class HuiEnergySourcesTableCard
                           ${hasGasCost
                             ? formatNumber(totalGasCost, this.hass.locale, {
                                 style: "currency",
-                                currency: this.hass.config.currency!,
+                                currency: this.hass.config.currency,
                               })
                             : ""}
                         </td>`
@@ -1025,7 +1025,7 @@ export class HuiEnergySourcesTableCard
                               ${costCompare !== null
                                 ? formatNumber(costCompare, this.hass.locale, {
                                     style: "currency",
-                                    currency: this.hass.config.currency!,
+                                    currency: this.hass.config.currency,
                                   })
                                 : ""}
                             </td>`
@@ -1043,7 +1043,7 @@ export class HuiEnergySourcesTableCard
                         ${cost !== null
                           ? formatNumber(cost, this.hass.locale, {
                               style: "currency",
-                              currency: this.hass.config.currency!,
+                              currency: this.hass.config.currency,
                             })
                           : ""}
                       </td>`
@@ -1075,7 +1075,7 @@ export class HuiEnergySourcesTableCard
                                       this.hass.locale,
                                       {
                                         style: "currency",
-                                        currency: this.hass.config.currency!,
+                                        currency: this.hass.config.currency,
                                       }
                                     )
                                   : ""}
@@ -1094,7 +1094,7 @@ export class HuiEnergySourcesTableCard
                           ${hasWaterCost
                             ? formatNumber(totalWaterCost, this.hass.locale, {
                                 style: "currency",
-                                currency: this.hass.config.currency!,
+                                currency: this.hass.config.currency,
                               })
                             : ""}
                         </td>`
@@ -1122,7 +1122,7 @@ export class HuiEnergySourcesTableCard
                               this.hass.locale,
                               {
                                 style: "currency",
-                                currency: this.hass.config.currency!,
+                                currency: this.hass.config.currency,
                               }
                             )}
                           </td>`
@@ -1136,7 +1136,7 @@ export class HuiEnergySourcesTableCard
                         this.hass.locale,
                         {
                           style: "currency",
-                          currency: this.hass.config.currency!,
+                          currency: this.hass.config.currency,
                         }
                       )}
                     </td>

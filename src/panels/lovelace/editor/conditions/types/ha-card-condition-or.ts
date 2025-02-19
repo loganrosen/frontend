@@ -29,7 +29,7 @@ export class HaCardConditionOr extends LitElement {
   }
 
   protected static validateUIConfig(condition: StateCondition) {
-    return assert(condition, orConditionStruct);
+    assert(condition, orConditionStruct);
   }
 
   protected render() {

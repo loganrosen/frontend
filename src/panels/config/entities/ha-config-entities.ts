@@ -288,7 +288,7 @@ export class HaConfigEntities extends SubscribeMixin(LitElement) {
             : entry.entity
               ? html`
                   <ha-state-icon
-                    title=${ifDefined(entry.entity?.state)}
+                    title=${ifDefined(entry.entity.state)}
                     slot="item-icon"
                     .hass=${this.hass}
                     .stateObj=${entry.entity}
@@ -481,21 +481,21 @@ export class HaConfigEntities extends SubscribeMixin(LitElement) {
       const stateFilters = filters["ha-filter-states"] as string[];
 
       const showEnabled =
-        !stateFilters?.length || stateFilters.includes("enabled");
+        !stateFilters.length || stateFilters.includes("enabled");
       const showDisabled =
-        !stateFilters?.length || stateFilters.includes("disabled");
+        !stateFilters.length || stateFilters.includes("disabled");
       const showVisible =
-        !stateFilters?.length || stateFilters.includes("visible");
+        !stateFilters.length || stateFilters.includes("visible");
       const showHidden =
-        !stateFilters?.length || stateFilters.includes("hidden");
+        !stateFilters.length || stateFilters.includes("hidden");
       const showAvailable =
-        !stateFilters?.length || stateFilters.includes("available");
+        !stateFilters.length || stateFilters.includes("available");
       const showUnavailable =
-        !stateFilters?.length || stateFilters.includes("unavailable");
+        !stateFilters.length || stateFilters.includes("unavailable");
       const showRestored =
-        !stateFilters?.length || stateFilters.includes("restored");
+        !stateFilters.length || stateFilters.includes("restored");
       const showReadOnly =
-        !stateFilters?.length || stateFilters.includes("readonly");
+        !stateFilters.length || stateFilters.includes("readonly");
 
       let filteredEntities = entities.concat(stateEntities);
 
@@ -507,7 +507,7 @@ export class HaConfigEntities extends SubscribeMixin(LitElement) {
           filteredEntities = filteredEntities.filter(
             (entity) =>
               entity.config_entry_id &&
-              (filter as string[]).includes(entity.config_entry_id)
+              (filter).includes(entity.config_entry_id)
           );
 
           if (!entries) {
@@ -517,7 +517,7 @@ export class HaConfigEntities extends SubscribeMixin(LitElement) {
 
           const configEntries = entries.filter(
             (entry) =>
-              entry.entry_id && (filter as string[]).includes(entry.entry_id)
+              entry.entry_id && (filter).includes(entry.entry_id)
           );
 
           configEntries.forEach((configEntry) => {
@@ -542,7 +542,7 @@ export class HaConfigEntities extends SubscribeMixin(LitElement) {
           filteredEntities = filteredEntities.filter(
             (entity) =>
               entity.config_subentry_id &&
-              (filter as string[]).includes(entity.config_subentry_id)
+              (filter).includes(entity.config_subentry_id)
           );
           if (!this._subEntries) {
             this._loadSubEntries(this._filters.config_entry[0]);
@@ -557,7 +557,7 @@ export class HaConfigEntities extends SubscribeMixin(LitElement) {
             return;
           }
           const entryIds = entries
-            .filter((entry) => (filter as string[]).includes(entry.domain))
+            .filter((entry) => (filter).includes(entry.domain))
             .map((entry) => entry.entry_id);
 
           const filteredEntitiesByDomain = new Set<string>();
@@ -584,18 +584,18 @@ export class HaConfigEntities extends SubscribeMixin(LitElement) {
           filteredEntities = filteredEntities.filter(
             (entity) =>
               filteredEntitiesByDomain.has(entity.entity_id) ||
-              (filter as string[]).includes(entity.platform) ||
+              (filter).includes(entity.platform) ||
               (entity.config_entry_id &&
                 entryIds.includes(entity.config_entry_id))
           );
-          filter!.forEach((domain) => filteredDomains.add(domain));
+          filter.forEach((domain) => filteredDomains.add(domain));
         } else if (
           key === "ha-filter-domains" &&
           Array.isArray(filter) &&
           filter.length
         ) {
           filteredEntities = filteredEntities.filter((entity) =>
-            (filter as string[]).includes(computeDomain(entity.entity_id))
+            (filter).includes(computeDomain(entity.entity_id))
           );
         } else if (
           key === "ha-filter-labels" &&
@@ -603,7 +603,7 @@ export class HaConfigEntities extends SubscribeMixin(LitElement) {
           filter.length
         ) {
           filteredEntities = filteredEntities.filter((entity) =>
-            entity.labels.some((lbl) => (filter as string[]).includes(lbl))
+            entity.labels.some((lbl) => (filter).includes(lbl))
           );
         }
       });
@@ -618,14 +618,14 @@ export class HaConfigEntities extends SubscribeMixin(LitElement) {
 
       for (const entry of filteredEntities) {
         const entity = this.hass.states[entry.entity_id];
-        const unavailable = entity?.state === UNAVAILABLE;
-        const restored = entity?.attributes.restored === true;
-        const areaId = entry.area_id ?? devices[entry.device_id!]?.area_id;
+        const unavailable = entity.state === UNAVAILABLE;
+        const restored = entity.attributes.restored === true;
+        const areaId = entry.area_id ?? devices[entry.device_id!].area_id;
         const area = areaId ? areas[areaId] : undefined;
         const hidden = !!entry.hidden_by;
         const disabled = !!entry.disabled_by;
         const readonly = entry.readonly;
-        const available = entity?.state && entity.state !== UNAVAILABLE;
+        const available = entity.state && entity.state !== UNAVAILABLE;
 
         if (
           !(
@@ -642,7 +642,7 @@ export class HaConfigEntities extends SubscribeMixin(LitElement) {
           continue;
         }
 
-        const labels = labelReg && entry?.labels;
+        const labels = labelReg && entry.labels;
         const labelsEntries = (labels || []).map(
           (lbl) => labelReg!.find((label) => label.label_id === lbl)!
         );
@@ -651,7 +651,7 @@ export class HaConfigEntities extends SubscribeMixin(LitElement) {
           ...entry,
           entity,
           name: computeEntityRegistryName(
-            this.hass!,
+            this.hass,
             entry as EntityRegistryEntry
           ),
           unavailable,
@@ -723,15 +723,15 @@ export class HaConfigEntities extends SubscribeMixin(LitElement) {
         [...filteredDomains][0]
       );
 
-    const labelItems = html` ${this._labels?.map((label) => {
+    const labelItems = html` ${this._labels.map((label) => {
         const color = label.color ? computeCssColor(label.color) : undefined;
         const selected = this._selected.every((entityId) =>
-          this.hass.entities[entityId]?.labels.includes(label.label_id)
+          this.hass.entities[entityId].labels.includes(label.label_id)
         );
         const partial =
           !selected &&
           this._selected.some((entityId) =>
-            this.hass.entities[entityId]?.labels.includes(label.label_id)
+            this.hass.entities[entityId].labels.includes(label.label_id)
           );
         return html`<ha-md-menu-item
           .value=${label.label_id}
@@ -1393,14 +1393,14 @@ ${rejected
       destructive: true,
       confirm: () => {
         removeableEntities.forEach((entity_id) =>
-          deleteEntity(
+          { deleteEntity(
             this.hass,
             entity_id,
             this._manifests!,
             this._entities,
             this._entries!,
             fetchedHelpers
-          )
+          ); }
         );
         this._clearSelection();
       },
@@ -1428,7 +1428,7 @@ ${rejected
     const { filteredConfigEntry, filteredDomains } =
       this._filteredEntitiesAndDomains(
         this.hass.localize,
-        this._entities!,
+        this._entities,
         this.hass.devices,
         this.hass.areas,
         this._stateEntities,

@@ -52,7 +52,7 @@ class HaDataTableLabels extends LitElement {
   }
 
   private _renderLabel(label: LabelRegistryEntry, clickAction: boolean) {
-    const color = label?.color ? computeCssColor(label.color) : undefined;
+    const color = label.color ? computeCssColor(label.color) : undefined;
     return html`
       <ha-label
         dense
@@ -63,7 +63,7 @@ class HaDataTableLabels extends LitElement {
         @keydown=${clickAction ? this._labelClicked : undefined}
         style=${color ? `--color: ${color}` : ""}
       >
-        ${label?.icon
+        ${label.icon
           ? html`<ha-icon slot="icon" .icon=${label.icon}></ha-icon>`
           : nothing}
         ${label.name}
@@ -76,7 +76,7 @@ class HaDataTableLabels extends LitElement {
     if (ev.type === "keydown" && ev.key !== "Enter" && ev.key !== " ") {
       return;
     }
-    const label = (ev.currentTarget as any).item as LabelRegistryEntry;
+    const label = (ev.currentTarget).item as LabelRegistryEntry;
     fireEvent(this, "label-clicked", { label });
   }
 
@@ -85,14 +85,14 @@ class HaDataTableLabels extends LitElement {
     // If this component is used inside a data table, the z-index of the row
     // needs to be increased. Otherwise the ha-button-menu would be displayed
     // underneath the next row in the table.
-    const row = this.closest(".mdc-data-table__row") as HTMLDivElement | null;
+    const row = this.closest(".mdc-data-table__row");
     if (row) {
       row.style.zIndex = "1";
     }
   }
 
   protected _handleIconOverflowMenuClosed() {
-    const row = this.closest(".mdc-data-table__row") as HTMLDivElement | null;
+    const row = this.closest(".mdc-data-table__row");
     if (row) {
       row.style.zIndex = "";
     }

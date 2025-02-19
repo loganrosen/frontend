@@ -114,12 +114,12 @@ export class HaAreaFloorPicker extends LitElement {
 
   public async open() {
     await this.updateComplete;
-    await this.comboBox?.open();
+    await this.comboBox.open();
   }
 
   public async focus() {
     await this.updateComplete;
-    await this.comboBox?.focus();
+    await this.comboBox.focus();
   }
 
   private _rowRenderer: ComboBoxLitRenderer<FloorAreaEntry> = (item) => {
@@ -203,7 +203,7 @@ export class HaAreaFloorPicker extends LitElement {
         inputEntities = entities.filter((entity) => entity.area_id);
 
         if (includeDomains) {
-          inputDevices = inputDevices!.filter((device) => {
+          inputDevices = inputDevices.filter((device) => {
             const devEntities = deviceEntityLookup[device.id];
             if (!devEntities || !devEntities.length) {
               return false;
@@ -212,13 +212,13 @@ export class HaAreaFloorPicker extends LitElement {
               includeDomains.includes(computeDomain(entity.entity_id))
             );
           });
-          inputEntities = inputEntities!.filter((entity) =>
+          inputEntities = inputEntities.filter((entity) =>
             includeDomains.includes(computeDomain(entity.entity_id))
           );
         }
 
         if (excludeDomains) {
-          inputDevices = inputDevices!.filter((device) => {
+          inputDevices = inputDevices.filter((device) => {
             const devEntities = deviceEntityLookup[device.id];
             if (!devEntities || !devEntities.length) {
               return true;
@@ -228,14 +228,14 @@ export class HaAreaFloorPicker extends LitElement {
                 !excludeDomains.includes(computeDomain(entity.entity_id))
             );
           });
-          inputEntities = inputEntities!.filter(
+          inputEntities = inputEntities.filter(
             (entity) =>
               !excludeDomains.includes(computeDomain(entity.entity_id))
           );
         }
 
         if (includeDeviceClasses) {
-          inputDevices = inputDevices!.filter((device) => {
+          inputDevices = inputDevices.filter((device) => {
             const devEntities = deviceEntityLookup[device.id];
             if (!devEntities || !devEntities.length) {
               return false;
@@ -251,7 +251,7 @@ export class HaAreaFloorPicker extends LitElement {
               );
             });
           });
-          inputEntities = inputEntities!.filter((entity) => {
+          inputEntities = inputEntities.filter((entity) => {
             const stateObj = this.hass.states[entity.entity_id];
             return (
               stateObj.attributes.device_class &&
@@ -261,13 +261,13 @@ export class HaAreaFloorPicker extends LitElement {
         }
 
         if (deviceFilter) {
-          inputDevices = inputDevices!.filter((device) =>
-            deviceFilter!(device)
+          inputDevices = inputDevices.filter((device) =>
+            deviceFilter(device)
           );
         }
 
         if (entityFilter) {
-          inputDevices = inputDevices!.filter((device) => {
+          inputDevices = inputDevices.filter((device) => {
             const devEntities = deviceEntityLookup[device.id];
             if (!devEntities || !devEntities.length) {
               return false;
@@ -280,12 +280,12 @@ export class HaAreaFloorPicker extends LitElement {
               return entityFilter(stateObj);
             });
           });
-          inputEntities = inputEntities!.filter((entity) => {
+          inputEntities = inputEntities.filter((entity) => {
             const stateObj = this.hass.states[entity.entity_id];
             if (!stateObj) {
               return false;
             }
-            return entityFilter!(stateObj);
+            return entityFilter(stateObj);
           });
         }
       }
@@ -310,19 +310,19 @@ export class HaAreaFloorPicker extends LitElement {
 
       if (areaIds) {
         outputAreas = outputAreas.filter((area) =>
-          areaIds!.includes(area.area_id)
+          areaIds.includes(area.area_id)
         );
       }
 
       if (excludeAreas) {
         outputAreas = outputAreas.filter(
-          (area) => !excludeAreas!.includes(area.area_id)
+          (area) => !excludeAreas.includes(area.area_id)
         );
       }
 
       if (excludeFloors) {
         outputAreas = outputAreas.filter(
-          (area) => !area.floor_id || !excludeFloors!.includes(area.floor_id)
+          (area) => !area.floor_id || !excludeFloors.includes(area.floor_id)
         );
       }
 
@@ -454,7 +454,7 @@ export class HaAreaFloorPicker extends LitElement {
           ? this.hass.localize("ui.components.area-picker.area")
           : this.label}
         .placeholder=${this.placeholder
-          ? this.hass.areas[this.placeholder]?.name
+          ? this.hass.areas[this.placeholder].name
           : undefined}
         .renderer=${this._rowRenderer}
         @filter-changed=${this._filterChanged}

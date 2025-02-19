@@ -39,12 +39,12 @@ export type HassMessage =
   | ShowLovelaceViewMessage;
 
 export const castSendAuth = (cast: CastManager, auth: Auth) =>
-  cast.sendMessage({
+  { cast.sendMessage({
     type: "connect",
     refreshToken: auth.data.refresh_token,
     clientId: auth.data.clientId,
     hassUrl: CAST_DEV ? CAST_DEV_HASS_URL : auth.data.hassUrl,
-  });
+  }); };
 
 export const castSendShowLovelaceView = (
   cast: CastManager,
@@ -52,17 +52,17 @@ export const castSendShowLovelaceView = (
   viewPath: ShowLovelaceViewMessage["viewPath"],
   urlPath?: string | null
 ) =>
-  cast.sendMessage({
+  { cast.sendMessage({
     type: "show_lovelace_view",
     viewPath,
     urlPath: urlPath || null,
     hassUrl: CAST_DEV ? CAST_DEV_HASS_URL : hassUrl,
-  });
+  }); };
 
 export const castSendShowDemo = (cast: CastManager) =>
-  cast.sendMessage({
+  { cast.sendMessage({
     type: "show_demo",
-  });
+  }); };
 
 export const ensureConnectedCastSession = (cast: CastManager, auth: Auth) => {
   if (cast.castConnectedToOurHass) {

@@ -42,7 +42,7 @@ class HaConfigUpdates extends SubscribeMixin(LitElement) {
       subscribeDeviceRegistry(this.hass.connection, (entries) => {
         this._devices = entries;
       }),
-      subscribeEntityRegistry(this.hass.connection!, (entities) => {
+      subscribeEntityRegistry(this.hass.connection, (entities) => {
         this._entities = entities.filter((entity) => entity.device_id !== null);
       }),
     ];

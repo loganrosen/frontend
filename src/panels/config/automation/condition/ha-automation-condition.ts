@@ -101,7 +101,7 @@ export default class HaAutomationCondition extends LitElement {
   public expandAll() {
     const rows = this.shadowRoot!.querySelectorAll<HaAutomationConditionRow>(
       "ha-automation-condition-row"
-    )!;
+    );
     rows.forEach((row) => {
       row.expand();
     });
@@ -225,14 +225,14 @@ export default class HaAutomationCondition extends LitElement {
 
   private _moveUp(ev) {
     ev.stopPropagation();
-    const index = (ev.target as any).index;
+    const index = (ev.target).index;
     const newIndex = index - 1;
     this._move(index, newIndex);
   }
 
   private _moveDown(ev) {
     ev.stopPropagation();
-    const index = (ev.target as any).index;
+    const index = (ev.target).index;
     const newIndex = index + 1;
     this._move(index, newIndex);
   }

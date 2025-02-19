@@ -462,26 +462,26 @@ export const handleMediaControlClick = (
   stateObj: MediaPlayerEntity,
   action: string
 ) =>
-  hass!.callService(
+  hass.callService(
     "media_player",
     action,
     action === "shuffle_set"
       ? {
-          entity_id: stateObj!.entity_id,
-          shuffle: !stateObj!.attributes.shuffle,
+          entity_id: stateObj.entity_id,
+          shuffle: !stateObj.attributes.shuffle,
         }
       : action === "repeat_set"
         ? {
-            entity_id: stateObj!.entity_id,
+            entity_id: stateObj.entity_id,
             repeat:
-              stateObj!.attributes.repeat === "all"
+              stateObj.attributes.repeat === "all"
                 ? "one"
-                : stateObj!.attributes.repeat === "off"
+                : stateObj.attributes.repeat === "off"
                   ? "all"
                   : "off",
           }
         : {
-            entity_id: stateObj!.entity_id,
+            entity_id: stateObj.entity_id,
           }
   );
 

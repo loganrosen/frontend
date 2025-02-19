@@ -66,8 +66,8 @@ export class HuiCardEditMode extends LitElement {
   protected _clipboard?: LovelaceCardConfig;
 
   private get _cards() {
-    const containerPath = getLovelaceContainerPath(this.path!);
-    return findLovelaceItems("cards", this.lovelace!.config, containerPath)!;
+    const containerPath = getLovelaceContainerPath(this.path);
+    return findLovelaceItems("cards", this.lovelace.config, containerPath)!;
   }
 
   private _touchStarted = false;
@@ -139,7 +139,7 @@ export class HuiCardEditMode extends LitElement {
           class="more"
           corner="BOTTOM_END"
           menu-corner="END"
-          .path=${[this.path!]}
+          .path=${[this.path]}
           @action=${this._handleAction}
           @opened=${this._handleOpened}
           @closed=${this._handleClosed}
@@ -253,34 +253,34 @@ export class HuiCardEditMode extends LitElement {
   }
 
   private _duplicateCard(): void {
-    const { cardIndex } = parseLovelaceCardPath(this.path!);
-    const containerPath = getLovelaceContainerPath(this.path!);
-    const cardConfig = this._cards![cardIndex];
+    const { cardIndex } = parseLovelaceCardPath(this.path);
+    const containerPath = getLovelaceContainerPath(this.path);
+    const cardConfig = this._cards[cardIndex];
     showEditCardDialog(this, {
-      lovelaceConfig: this.lovelace!.config,
-      saveConfig: this.lovelace!.saveConfig,
+      lovelaceConfig: this.lovelace.config,
+      saveConfig: this.lovelace.saveConfig,
       path: containerPath,
       cardConfig,
     });
   }
 
   private _editCard(): void {
-    fireEvent(this, "ll-edit-card", { path: this.path! });
+    fireEvent(this, "ll-edit-card", { path: this.path });
   }
 
   private _cutCard(): void {
     this._copyCard();
-    fireEvent(this, "ll-delete-card", { path: this.path!, silent: true });
+    fireEvent(this, "ll-delete-card", { path: this.path, silent: true });
   }
 
   private _copyCard(): void {
-    const { cardIndex } = parseLovelaceCardPath(this.path!);
+    const { cardIndex } = parseLovelaceCardPath(this.path);
     const cardConfig = this._cards[cardIndex];
     this._clipboard = deepClone(cardConfig);
   }
 
   private _deleteCard(): void {
-    fireEvent(this, "ll-delete-card", { path: this.path!, silent: false });
+    fireEvent(this, "ll-delete-card", { path: this.path, silent: false });
   }
 
   static get styles(): CSSResultGroup {

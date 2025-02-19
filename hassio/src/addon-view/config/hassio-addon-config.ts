@@ -78,15 +78,15 @@ class HassioAddonConfig extends LitElement {
   @query("ha-yaml-editor") private _editor?: HaYamlEditor;
 
   public computeLabel = (entry: HaFormSchema): string =>
-    this.addon.translations[this.hass.language]?.configuration?.[entry.name]
+    this.addon.translations[this.hass.language].configuration?.[entry.name]
       ?.name ||
-    this.addon.translations.en?.configuration?.[entry.name]?.name ||
+    this.addon.translations.en.configuration?.[entry.name]?.name ||
     entry.name;
 
   public computeHelper = (entry: HaFormSchema): string =>
-    this.addon.translations[this.hass.language]?.configuration?.[entry.name]
+    this.addon.translations[this.hass.language].configuration?.[entry.name]
       ?.description ||
-    this.addon.translations.en?.configuration?.[entry.name]?.description ||
+    this.addon.translations.en.configuration?.[entry.name]?.description ||
     "";
 
   private _convertSchema = memoizeOne(
@@ -372,7 +372,7 @@ class HassioAddonConfig extends LitElement {
       });
 
       this._configHasChanged = false;
-      if (this.addon?.state === "started") {
+      if (this.addon.state === "started") {
         await suggestAddonRestart(this, this.hass, this.supervisor, this.addon);
       }
     } catch (err: any) {

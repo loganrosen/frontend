@@ -111,7 +111,7 @@ export class HaManualAutomationEditor extends LitElement {
           ></ha-icon-button>
         </a>
       </div>
-      ${!ensureArray(this.config.triggers)?.length
+      ${!ensureArray(this.config.triggers).length
         ? html`<p>
             ${this.hass.localize(
               "ui.panel.config.automation.editor.triggers.description"
@@ -151,7 +151,7 @@ export class HaManualAutomationEditor extends LitElement {
           ></ha-icon-button>
         </a>
       </div>
-      ${!ensureArray(this.config.conditions)?.length
+      ${!ensureArray(this.config.conditions).length
         ? html`<p>
             ${this.hass.localize(
               "ui.panel.config.automation.editor.conditions.description",
@@ -191,7 +191,7 @@ export class HaManualAutomationEditor extends LitElement {
           </a>
         </div>
       </div>
-      ${!ensureArray(this.config.actions)?.length
+      ${!ensureArray(this.config.actions).length
         ? html`<p>
             ${this.hass.localize(
               "ui.panel.config.automation.editor.actions.description"
@@ -215,7 +215,7 @@ export class HaManualAutomationEditor extends LitElement {
   private _triggerChanged(ev: CustomEvent): void {
     ev.stopPropagation();
     fireEvent(this, "value-changed", {
-      value: { ...this.config!, triggers: ev.detail.value as Trigger[] },
+      value: { ...this.config, triggers: ev.detail.value as Trigger[] },
     });
   }
 
@@ -223,7 +223,7 @@ export class HaManualAutomationEditor extends LitElement {
     ev.stopPropagation();
     fireEvent(this, "value-changed", {
       value: {
-        ...this.config!,
+        ...this.config,
         conditions: ev.detail.value as Condition[],
       },
     });
@@ -232,7 +232,7 @@ export class HaManualAutomationEditor extends LitElement {
   private _actionChanged(ev: CustomEvent): void {
     ev.stopPropagation();
     fireEvent(this, "value-changed", {
-      value: { ...this.config!, actions: ev.detail.value as Action[] },
+      value: { ...this.config, actions: ev.detail.value as Action[] },
     });
   }
 

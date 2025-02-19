@@ -74,7 +74,7 @@ class PanelCalendar extends LitElement {
 
   public disconnectedCallback() {
     super.disconnectedCallback();
-    this._mql?.removeListener(this._setIsMobile!);
+    this._mql?.removeListener(this._setIsMobile);
     this._mql = undefined;
   }
 
@@ -275,13 +275,13 @@ class PanelCalendar extends LitElement {
     if (error_entity_ids.length > 0) {
       const nameList = error_entity_ids
         .map((error_entity_id) =>
-          this.hass!.states[error_entity_id]
-            ? computeStateName(this.hass!.states[error_entity_id])
+          this.hass.states[error_entity_id]
+            ? computeStateName(this.hass.states[error_entity_id])
             : error_entity_id
         )
         .join(", ");
 
-      this._error = `${this.hass!.localize(
+      this._error = `${this.hass.localize(
         "ui.components.calendar.event_retrieval_error"
       )} ${nameList}`;
     }

@@ -202,7 +202,7 @@ export class HuiMarkdownCard extends LitElement implements LovelaceCard {
         this._errorLevel = undefined;
       }
       this._templateResult = {
-        result: this._config!.content,
+        result: this._config.content,
         listeners: { all: false, domains: [], entities: [], time: false },
       };
       this._unsubRenderTemplate = undefined;
@@ -214,7 +214,7 @@ export class HuiMarkdownCard extends LitElement implements LovelaceCard {
       return;
     }
 
-    this._unsubRenderTemplate.then((unsub) => unsub()).catch(/* ignore */);
+    this._unsubRenderTemplate.then((unsub) => { unsub(); }).catch(/* ignore */);
     this._unsubRenderTemplate = undefined;
     this._error = undefined;
     this._errorLevel = undefined;

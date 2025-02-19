@@ -75,7 +75,7 @@ class HuiWaterHeaterOperationModeCardFeature
   }
 
   private async _valueChanged(ev: CustomEvent) {
-    const mode = (ev.detail as any).value as OperationMode;
+    const mode = (ev.detail).value as OperationMode;
 
     if (mode === this.stateObj!.state) return;
 
@@ -118,7 +118,7 @@ class HuiWaterHeaterOperationModeCardFeature
     ).map<ControlSelectOption>((mode) => ({
       value: mode,
       label: this.hass!.formatEntityState(this.stateObj!, mode),
-      path: computeOperationModeIcon(mode as OperationMode),
+      path: computeOperationModeIcon(mode),
     }));
 
     return html`
@@ -131,7 +131,7 @@ class HuiWaterHeaterOperationModeCardFeature
         style=${styleMap({
           "--control-select-color": color,
         })}
-        .disabled=${this.stateObj!.state === UNAVAILABLE}
+        .disabled=${this.stateObj.state === UNAVAILABLE}
       >
       </ha-control-select>
     `;

@@ -37,7 +37,7 @@ class MoreInfoTime extends LitElement {
 
   private _timeChanged(ev: CustomEvent<{ value: string }>): void {
     if (ev.detail.value) {
-      setTimeValue(this.hass!, this.stateObj!.entity_id, ev.detail.value);
+      setTimeValue(this.hass, this.stateObj!.entity_id, ev.detail.value);
     }
   }
 

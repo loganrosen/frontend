@@ -38,7 +38,7 @@ export const showRepairsFlowDialog = (
   issue: RepairsIssue,
   dialogClosedCallback?: (params: { flowFinished: boolean }) => void
 ): void =>
-  showFlowDialog(
+  { showFlowDialog(
     element,
     {
       startFlowHandler: issue.domain,
@@ -135,7 +135,7 @@ export const showRepairsFlowDialog = (
         return hass.localize(
           `component.${issue.domain}.issues.${
             issue.translation_key || issue.issue_id
-          }.fix_flow.step.${step.step_id}.${options?.prefix ? `section.${options.prefix[0]}.` : ""}data.${field.name}`,
+          }.fix_flow.step.${step.step_id}.${options.prefix ? `section.${options.prefix[0]}.` : ""}data.${field.name}`,
           mergePlaceholders(issue, step)
         );
       },
@@ -144,7 +144,7 @@ export const showRepairsFlowDialog = (
         const description = hass.localize(
           `component.${issue.domain}.issues.${
             issue.translation_key || issue.issue_id
-          }.fix_flow.step.${step.step_id}.${options?.prefix ? `section.${options.prefix[0]}.` : ""}data_description.${field.name}`,
+          }.fix_flow.step.${step.step_id}.${options.prefix ? `section.${options.prefix[0]}.` : ""}data_description.${field.name}`,
           mergePlaceholders(issue, step)
         );
         return html`${renderIssueDescription(hass, issue)}
@@ -286,4 +286,4 @@ export const showRepairsFlowDialog = (
         );
       },
     }
-  );
+  ); };

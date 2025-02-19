@@ -51,14 +51,14 @@ export class HaDomainIcon extends LitElement {
   private _renderFallback() {
     if (this.domain && this.domain in FALLBACK_DOMAIN_ICONS) {
       return html`
-        <ha-svg-icon .path=${FALLBACK_DOMAIN_ICONS[this.domain!]}></ha-svg-icon>
+        <ha-svg-icon .path=${FALLBACK_DOMAIN_ICONS[this.domain]}></ha-svg-icon>
       `;
     }
     if (this.brandFallback) {
       const image = brandsUrl({
         domain: this.domain!,
         type: "icon",
-        darkOptimized: this.hass.themes?.darkMode,
+        darkOptimized: this.hass.themes.darkMode,
       });
       return html`
         <img

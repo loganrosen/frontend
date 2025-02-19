@@ -29,7 +29,7 @@ export const SubscribeMixin = <T extends Constructor<ReactiveElement>>(
         while (this.__unsubs.length) {
           const unsub = this.__unsubs.pop()!;
           if (unsub instanceof Promise) {
-            unsub.then((unsubFunc) => unsubFunc());
+            unsub.then((unsubFunc) => { unsubFunc(); });
           } else {
             unsub();
           }

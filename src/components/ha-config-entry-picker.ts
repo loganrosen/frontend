@@ -37,11 +37,11 @@ class HaConfigEntryPicker extends LitElement {
   @query("ha-combo-box") private _comboBox!: HaComboBox;
 
   public open() {
-    this._comboBox?.open();
+    this._comboBox.open();
   }
 
   public focus() {
-    this._comboBox?.focus();
+    this._comboBox.focus();
   }
 
   protected firstUpdated() {
@@ -63,7 +63,7 @@ class HaConfigEntryPicker extends LitElement {
         src=${brandsUrl({
           domain: item.domain,
           type: "icon",
-          darkOptimized: this.hass.themes?.darkMode,
+          darkOptimized: this.hass.themes.darkMode,
         })}
         crossorigin="anonymous"
         referrerpolicy="no-referrer"

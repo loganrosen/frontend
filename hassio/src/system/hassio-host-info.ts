@@ -51,7 +51,7 @@ class HassioHostInfo extends LitElement {
 
   protected render(): TemplateResult | undefined {
     const primaryIpAddress = this.supervisor.host.features.includes("network")
-      ? this._primaryIpAddress(this.supervisor.network!)
+      ? this._primaryIpAddress(this.supervisor.network)
       : "";
 
     const metrics = [
@@ -239,7 +239,7 @@ class HassioHostInfo extends LitElement {
   });
 
   private async _handleMenuAction(ev) {
-    switch ((ev.target as any).action) {
+    switch ((ev.target).action) {
       case "hardware":
         await this._showHardware();
         break;

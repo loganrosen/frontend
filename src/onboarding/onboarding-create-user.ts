@@ -144,7 +144,7 @@ class OnboardingCreateUser extends LitElement {
   }
 
   private _debouncedCheckPasswordMatch = debounce(
-    () => this._checkPasswordMatch(),
+    () => { this._checkPasswordMatch(); },
     500
   );
 

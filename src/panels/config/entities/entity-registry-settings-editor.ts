@@ -239,7 +239,7 @@ export class EntityRegistrySettingsEditor extends LitElement {
     if (domain === "number" || domain === "sensor") {
       const stateObj: HassEntity | undefined =
         this.hass.states[this.entry.entity_id];
-      this._unit_of_measurement = stateObj?.attributes?.unit_of_measurement;
+      this._unit_of_measurement = stateObj.attributes.unit_of_measurement;
     }
 
     if (domain === "sensor") {
@@ -257,11 +257,11 @@ export class EntityRegistrySettingsEditor extends LitElement {
     if (domain === "weather") {
       const stateObj: HassEntity | undefined =
         this.hass.states[this.entry.entity_id];
-      this._precipitation_unit = stateObj?.attributes?.precipitation_unit;
-      this._pressure_unit = stateObj?.attributes?.pressure_unit;
-      this._temperature_unit = stateObj?.attributes?.temperature_unit;
-      this._visibility_unit = stateObj?.attributes?.visibility_unit;
-      this._wind_speed_unit = stateObj?.attributes?.wind_speed_unit;
+      this._precipitation_unit = stateObj.attributes.precipitation_unit;
+      this._pressure_unit = stateObj.attributes.pressure_unit;
+      this._temperature_unit = stateObj.attributes.temperature_unit;
+      this._visibility_unit = stateObj.attributes.visibility_unit;
+      this._wind_speed_unit = stateObj.attributes.wind_speed_unit;
     }
 
     const deviceClasses: string[][] = OVERRIDE_DEVICE_CLASSES[domain];
@@ -362,7 +362,7 @@ export class EntityRegistrySettingsEditor extends LitElement {
     const invalidDefaultCode =
       domain === "lock" &&
       this._isInvalidDefaultCode(
-        stateObj?.attributes?.code_format,
+        stateObj.attributes.code_format,
         this._defaultCode
       );
 
@@ -392,12 +392,12 @@ export class EntityRegistrySettingsEditor extends LitElement {
                 "ui.dialogs.entity_registry.editor.icon"
               )}
               .placeholder=${this.entry.original_icon ||
-              stateObj?.attributes.icon ||
+              stateObj.attributes.icon ||
               (stateObj && until(entityIcon(this.hass, stateObj))) ||
               until(entryIcon(this.hass, this.entry))}
               .disabled=${this.disabled}
             >
-              ${!this._icon && !stateObj?.attributes.icon && stateObj
+              ${!this._icon && !stateObj.attributes.icon && stateObj
                 ? html`
                     <ha-state-icon
                       slot="fallback"
@@ -540,9 +540,9 @@ export class EntityRegistrySettingsEditor extends LitElement {
         : ""}
       ${domain === "number" &&
       this._deviceClass &&
-      stateObj?.attributes.unit_of_measurement &&
+      stateObj.attributes.unit_of_measurement &&
       this._numberDeviceClassConvertibleUnits?.includes(
-        stateObj?.attributes.unit_of_measurement
+        stateObj.attributes.unit_of_measurement
       )
         ? html`
             <ha-select
@@ -595,9 +595,9 @@ export class EntityRegistrySettingsEditor extends LitElement {
         : ""}
       ${domain === "sensor" &&
       this._deviceClass &&
-      stateObj?.attributes.unit_of_measurement &&
+      stateObj.attributes.unit_of_measurement &&
       this._sensorDeviceClassConvertibleUnits?.includes(
-        stateObj?.attributes.unit_of_measurement
+        stateObj.attributes.unit_of_measurement
       )
         ? html`
             <ha-select
@@ -623,8 +623,8 @@ export class EntityRegistrySettingsEditor extends LitElement {
       // a unit of measurement or state class
       ((this._deviceClass &&
         this._sensorNumericalDeviceClasses?.includes(this._deviceClass)) ||
-        stateObj?.attributes.unit_of_measurement ||
-        stateObj?.attributes.state_class)
+        stateObj.attributes.unit_of_measurement ||
+        stateObj.attributes.state_class)
         ? html`
             <ha-select
               .label=${this.hass.localize(
@@ -644,7 +644,7 @@ export class EntityRegistrySettingsEditor extends LitElement {
                   {
                     value: this._precisionLabel(
                       defaultPrecision,
-                      stateObj?.state
+                      stateObj.state
                     ),
                   }
                 )}</ha-list-item
@@ -652,7 +652,7 @@ export class EntityRegistrySettingsEditor extends LitElement {
               ${PRECISIONS.map(
                 (precision) => html`
                   <ha-list-item .value=${precision.toString()}>
-                    ${this._precisionLabel(precision, stateObj?.state)}
+                    ${this._precisionLabel(precision, stateObj.state)}
                   </ha-list-item>
                 `
               )}
@@ -904,7 +904,7 @@ export class EntityRegistrySettingsEditor extends LitElement {
               "ui.dialogs.entity_registry.editor.enabled_cause",
               {
                 cause: this.hass.localize(
-                  `config_entry.disabled_by.${this._disabledBy!}`
+                  `config_entry.disabled_by.${this._disabledBy}`
                 ),
               }
             )}</ha-alert
@@ -939,7 +939,7 @@ export class EntityRegistrySettingsEditor extends LitElement {
               "ui.dialogs.entity_registry.editor.hidden_cause",
               {
                 cause: this.hass.localize(
-                  `config_entry.hidden_by.${this._hiddenBy!}`
+                  `config_entry.hidden_by.${this._hiddenBy}`
                 ),
               }
             )}</ha-alert
@@ -974,7 +974,7 @@ export class EntityRegistrySettingsEditor extends LitElement {
                   ? `(${
                       this.hass.areas[
                         this.hass.devices[this.entry.device_id].area_id!
-                      ]?.name
+                      ].name
                     })`
                   : ""}</span
               >
@@ -1020,7 +1020,7 @@ export class EntityRegistrySettingsEditor extends LitElement {
     let close = true;
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     let parent: HTMLElement = this;
-    while (parent?.localName !== "home-assistant") {
+    while (parent.localName !== "home-assistant") {
       parent = (parent.getRootNode() as ShadowRoot).host as HTMLElement;
     }
 
@@ -1058,7 +1058,7 @@ export class EntityRegistrySettingsEditor extends LitElement {
     }
     if (
       (domain === "number" || domain === "sensor") &&
-      stateObj?.attributes?.unit_of_measurement !== this._unit_of_measurement
+      stateObj.attributes.unit_of_measurement !== this._unit_of_measurement
     ) {
       params.options_domain = domain;
       params.options = this.entry.options?.[domain] || {};
@@ -1092,11 +1092,11 @@ export class EntityRegistrySettingsEditor extends LitElement {
     }
     if (
       domain === "weather" &&
-      (stateObj?.attributes?.precipitation_unit !== this._precipitation_unit ||
-        stateObj?.attributes?.pressure_unit !== this._pressure_unit ||
-        stateObj?.attributes?.temperature_unit !== this._temperature_unit ||
-        stateObj?.attributes?.visbility_unit !== this._visibility_unit ||
-        stateObj?.attributes?.wind_speed_unit !== this._wind_speed_unit)
+      (stateObj.attributes.precipitation_unit !== this._precipitation_unit ||
+        stateObj.attributes.pressure_unit !== this._pressure_unit ||
+        stateObj.attributes.temperature_unit !== this._temperature_unit ||
+        stateObj.attributes.visbility_unit !== this._visibility_unit ||
+        stateObj.attributes.wind_speed_unit !== this._wind_speed_unit)
     ) {
       params.options_domain = "weather";
       params.options = {
@@ -1109,7 +1109,7 @@ export class EntityRegistrySettingsEditor extends LitElement {
     }
 
     const result = await updateEntityRegistryEntry(
-      this.hass!,
+      this.hass,
       this.entry.entity_id,
       params
     );
@@ -1133,7 +1133,7 @@ export class EntityRegistrySettingsEditor extends LitElement {
       // generate config flow for switch_as_x
       if (
         await showConfirmationDialog(this, {
-          text: this.hass!.localize(
+          text: this.hass.localize(
             "ui.dialogs.entity_registry.editor.switch_as_x_confirm",
             {
               domain: autoCaseNoun(
@@ -1175,7 +1175,7 @@ export class EntityRegistrySettingsEditor extends LitElement {
         await showConfirmationDialog(this, {
           text:
             this._switchAsDomain === "switch"
-              ? this.hass!.localize(
+              ? this.hass.localize(
                   "ui.dialogs.entity_registry.editor.switch_as_x_remove_confirm",
                   {
                     domain: autoCaseNoun(
@@ -1184,7 +1184,7 @@ export class EntityRegistrySettingsEditor extends LitElement {
                     ),
                   }
                 )
-              : this.hass!.localize(
+              : this.hass.localize(
                   "ui.dialogs.entity_registry.editor.switch_as_x_change_confirm",
                   {
                     domain_1: autoCaseNoun(
@@ -1408,7 +1408,7 @@ export class EntityRegistrySettingsEditor extends LitElement {
         this.hass,
         this.entry.entity_id,
         {
-          preload_stream: checkbox.checked!,
+          preload_stream: checkbox.checked,
         }
       );
     } catch (err: any) {

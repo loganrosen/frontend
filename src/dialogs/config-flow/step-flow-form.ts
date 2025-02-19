@@ -114,7 +114,7 @@ class StepFlowForm extends LitElement {
 
   protected willUpdate(changedProps: PropertyValues): void {
     super.willUpdate(changedProps);
-    if (changedProps.has("step") && this.step?.preview) {
+    if (changedProps.has("step") && this.step.preview) {
       import(`./previews/flow-preview-${previewModule(this.step.preview)}`);
     }
   }
@@ -154,7 +154,7 @@ class StepFlowForm extends LitElement {
           this.step.data_schema.every(
             (field) =>
               !field.required ||
-              !["", undefined].includes(stepData![field.name])
+              !["", undefined].includes(stepData[field.name])
           );
 
     if (!allRequiredInfoFilledIn) {

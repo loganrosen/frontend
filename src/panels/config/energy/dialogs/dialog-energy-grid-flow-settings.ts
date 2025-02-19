@@ -91,10 +91,10 @@ export class DialogEnergyGridFlowSettings
     ).units;
 
     this._excludeList = [
-      ...(this._params.grid_source?.flow_from?.map(
+      ...(this._params.grid_source?.flow_from.map(
         (entry) => entry.stat_energy_from
       ) || []),
-      ...(this._params.grid_source?.flow_to?.map(
+      ...(this._params.grid_source?.flow_to.map(
         (entry) => entry.stat_energy_to
       ) || []),
     ].filter((id) => id !== initialSourceId);
@@ -217,7 +217,7 @@ export class DialogEnergyGridFlowSettings
               .hass=${this.hass}
               statistic-types="sum"
               .value=${this._source[
-                this._params!.direction === "from"
+                this._params.direction === "from"
                   ? "stat_cost"
                   : "stat_compensation"
               ]}
@@ -286,7 +286,7 @@ export class DialogEnergyGridFlowSettings
         <mwc-button
           @click=${this._save}
           .disabled=${!this._source[
-            this._params!.direction === "from"
+            this._params.direction === "from"
               ? "stat_energy_from"
               : "stat_energy_to"
           ]}

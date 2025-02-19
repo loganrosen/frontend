@@ -74,7 +74,7 @@ class ZWaveJSCapabilityColorSwitch extends LitElement {
         "getSupported",
         [],
         true
-      )) as number[];
+      ));
     } catch (error) {
       this._error = extractApiErrorMessage(error);
     }

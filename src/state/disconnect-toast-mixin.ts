@@ -161,7 +161,7 @@ export default <T extends Constructor<HassBaseEl>>(superClass: T) =>
 
     private _unsubscribeBootstrapIntegrations() {
       if (this._subscribedBootstrapIntegrations) {
-        this._subscribedBootstrapIntegrations.then((unsub) => unsub());
+        this._subscribedBootstrapIntegrations.then((unsub) => { unsub(); });
         this._subscribedBootstrapIntegrations = undefined;
       }
     }
@@ -171,7 +171,7 @@ export default <T extends Constructor<HassBaseEl>>(superClass: T) =>
         return;
       }
       this._subscribedBootstrapIntegrations = subscribeBootstrapIntegrations(
-        this.hass!,
+        this.hass,
         (message) => {
           this._handleMessage(message);
         }

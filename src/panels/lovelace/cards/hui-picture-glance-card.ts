@@ -191,8 +191,8 @@ class HuiPictureGlanceCard extends LitElement implements LovelaceCard {
           image = computeImageUrl(stateObj as ImageEntity);
           break;
         case "person":
-          if ((stateObj as PersonEntity).attributes.entity_picture) {
-            image = (stateObj as PersonEntity).attributes.entity_picture;
+          if ((stateObj).attributes.entity_picture) {
+            image = (stateObj).attributes.entity_picture;
           }
           break;
       }
@@ -211,8 +211,8 @@ class HuiPictureGlanceCard extends LitElement implements LovelaceCard {
           })}
           @action=${this._handleAction}
           .actionHandler=${actionHandler({
-            hasHold: hasAction(this._config!.hold_action),
-            hasDoubleClick: hasAction(this._config!.double_tap_action),
+            hasHold: hasAction(this._config.hold_action),
+            hasDoubleClick: hasAction(this._config.double_tap_action),
           })}
           tabindex=${ifDefined(
             hasAction(this._config.tap_action) ? "0" : undefined
@@ -250,7 +250,7 @@ class HuiPictureGlanceCard extends LitElement implements LovelaceCard {
     entityConf: PictureGlanceEntityConfig,
     dialog: boolean
   ): TemplateResult {
-    const stateObj = this.hass!.states[entityConf.entity];
+    const stateObj = this.hass.states[entityConf.entity];
 
     entityConf = {
       tap_action: { action: dialog ? "more-info" : "toggle" },
@@ -261,7 +261,7 @@ class HuiPictureGlanceCard extends LitElement implements LovelaceCard {
     if (!stateObj) {
       return html`
         <hui-warning-element
-          .label=${createEntityNotFoundWarning(this.hass!, entityConf.entity)}
+          .label=${createEntityNotFoundWarning(this.hass, entityConf.entity)}
         ></hui-warning-element>
       `;
     }
@@ -311,8 +311,8 @@ class HuiPictureGlanceCard extends LitElement implements LovelaceCard {
   }
 
   private _handleAction(ev: ActionHandlerEvent) {
-    const config = (ev.currentTarget as any).config as any;
-    handleAction(this, this.hass!, config, ev.detail.action!);
+    const config = (ev.currentTarget as any).config;
+    handleAction(this, this.hass, config, ev.detail.action);
   }
 
   static styles = css`

@@ -165,7 +165,7 @@ export class TopAppBarBaseBase extends BaseElement {
     return {
       ...addHasRemoveClass(this.mdcRoot),
       setStyle: (prprty: string, value: string) =>
-        this.mdcRoot.style.setProperty(prprty, value),
+        { this.mdcRoot.style.setProperty(prprty, value); },
       getTopAppBarHeight: () => this.mdcRoot.clientHeight,
       notifyNavigationIconClicked: () => {
         this.dispatchEvent(

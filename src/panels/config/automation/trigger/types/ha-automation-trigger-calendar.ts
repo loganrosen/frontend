@@ -85,7 +85,7 @@ export class HaCalendarTrigger extends LitElement implements TriggerElement {
     const duration: HaDurationData = createDurationData(trigger_offset)!;
     let offset_type = "after";
     if (
-      (typeof trigger_offset === "object" && duration!.hours! < 0) ||
+      (typeof trigger_offset === "object" && duration.hours! < 0) ||
       (typeof trigger_offset === "string" && trigger_offset.startsWith("-"))
     ) {
       duration.hours = Math.abs(duration.hours!);

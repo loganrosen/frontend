@@ -53,7 +53,7 @@ class HaMfaModulesCard extends LitElement {
   private _enable(ev) {
     showMfaModuleSetupFlowDialog(this, {
       mfaModuleId: ev.currentTarget.module.id,
-      dialogClosedCallback: () => this._refreshCurrentUser(),
+      dialogClosedCallback: () => { this._refreshCurrentUser(); },
     });
   }
 

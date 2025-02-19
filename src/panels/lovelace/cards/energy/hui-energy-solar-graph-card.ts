@@ -158,7 +158,7 @@ export class HuiEnergySolarGraphCard
     const solarSources: SolarSourceTypeEnergyPreference[] =
       energyData.prefs.energy_sources.filter(
         (source) => source.type === "solar"
-      ) as SolarSourceTypeEnergyPreference[];
+      );
 
     let forecasts: EnergySolarForecasts | undefined;
     if (
@@ -234,7 +234,7 @@ export class HuiEnergySolarGraphCard
     const data: BarSeriesOption[] = [];
     const compareTransform = getCompareTransform(
       this._start,
-      this._compareStart!
+      this._compareStart
     );
 
     solarSources.forEach((source, idx) => {
@@ -330,10 +330,10 @@ export class HuiEnergySolarGraphCard
       if (source.config_entry_solar_forecast) {
         const forecastsData: Record<string, number> | undefined = {};
         source.config_entry_solar_forecast.forEach((configEntryId) => {
-          if (!forecasts![configEntryId]) {
+          if (!forecasts[configEntryId]) {
             return;
           }
-          Object.entries(forecasts![configEntryId].wh_hours).forEach(
+          Object.entries(forecasts[configEntryId].wh_hours).forEach(
             ([date, value]) => {
               const dateObj = new Date(date);
               if (dateObj < start || (end && dateObj > end)) {

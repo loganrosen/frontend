@@ -36,7 +36,7 @@ export class HaTextSelector extends LitElement {
     await this.updateComplete;
     (
       this.renderRoot.querySelector("ha-textarea, ha-textfield") as HTMLElement
-    )?.focus();
+    ).focus();
   }
 
   protected render() {
@@ -47,11 +47,11 @@ export class HaTextSelector extends LitElement {
           .value=${ensureArray(this.value ?? [])}
           .disabled=${this.disabled}
           .label=${this.label}
-          .inputType=${this.selector.text?.type}
-          .inputSuffix=${this.selector.text?.suffix}
-          .inputPrefix=${this.selector.text?.prefix}
+          .inputType=${this.selector.text.type}
+          .inputSuffix=${this.selector.text.suffix}
+          .inputPrefix=${this.selector.text.prefix}
           .helper=${this.helper}
-          .autocomplete=${this.selector.text?.autocomplete}
+          .autocomplete=${this.selector.text.autocomplete}
           @value-changed=${this._handleChange}
         >
         </ha-multi-textfield>
@@ -68,7 +68,7 @@ export class HaTextSelector extends LitElement {
         .disabled=${this.disabled}
         @input=${this._handleChange}
         autocapitalize="none"
-        .autocomplete=${this.selector.text?.autocomplete}
+        .autocomplete=${this.selector.text.autocomplete}
         spellcheck="false"
         .required=${this.required}
         autogrow

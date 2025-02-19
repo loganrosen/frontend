@@ -343,7 +343,7 @@ export class HaConfigDevicePage extends LitElement {
               src=${brandsUrl({
                 domain: integration.domain,
                 type: "icon",
-                darkOptimized: this.hass.themes?.darkMode,
+                darkOptimized: this.hass.themes.darkMode,
               })}
               crossorigin="anonymous"
               referrerpolicy="no-referrer"
@@ -715,7 +715,7 @@ export class HaConfigDevicePage extends LitElement {
                     src=${brandsUrl({
                       domain: integrations[0].domain,
                       type: "logo",
-                      darkOptimized: this.hass.themes?.darkMode,
+                      darkOptimized: this.hass.themes.darkMode,
                     })}
                     crossorigin="anonymous"
                     referrerpolicy="no-referrer"
@@ -1006,7 +1006,7 @@ export class HaConfigDevicePage extends LitElement {
 
             try {
               await removeConfigEntryFromDevice(
-                this.hass!,
+                this.hass,
                 this.deviceId,
                 entry.entry_id
               );
@@ -1462,7 +1462,7 @@ export class HaConfigDevicePage extends LitElement {
           }
 
           if (renameEntityid) {
-            const entityRename = entityIdRenames?.find(
+            const entityRename = entityIdRenames.find(
               (item) => item.oldId === entity.entity_id
             );
             if (entityRename?.newId) {
@@ -1475,7 +1475,7 @@ export class HaConfigDevicePage extends LitElement {
             return undefined;
           }
 
-          return updateEntityRegistryEntry(this.hass!, entity.entity_id, {
+          return updateEntityRegistryEntry(this.hass, entity.entity_id, {
             name: shouldUpdateName ? newName : undefined,
             new_entity_id: shouldUpdateEntityId ? newEntityId : undefined,
           });
@@ -1507,7 +1507,7 @@ export class HaConfigDevicePage extends LitElement {
 
     ev.preventDefault();
 
-    (ev.currentTarget as any).action(ev);
+    (ev.currentTarget).action(ev);
   }
 
   private _voiceAssistantSetup = () => {

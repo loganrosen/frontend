@@ -25,7 +25,7 @@ const setTouchControlsVisibility = (visible: boolean) => {
   }
   controls =
     controls ||
-    (document.body.querySelector("touch-controls") as HTMLElement | null);
+    (document.body.querySelector("touch-controls"));
   if (controls) {
     controls.style.display = visible ? "initial" : "none";
   }
@@ -52,7 +52,7 @@ const playDummyMedia = (viewTitle?: string) => {
     timeOut = undefined;
   }
   if (castContext.getDeviceCapabilities().touch_input_supported) {
-    timeOut = window.setTimeout(() => playDummyMedia(viewTitle), 540000); // repeat every 9 minutes to keep it active (gets deactivated after 10 minutes)
+    timeOut = window.setTimeout(() => { playDummyMedia(viewTitle); }, 540000); // repeat every 9 minutes to keep it active (gets deactivated after 10 minutes)
   }
 };
 
@@ -142,8 +142,8 @@ playerManager.addEventListener(
   (event) => {
     if (
       event.mediaStatus?.playerState === framework.messages.PlayerState.IDLE &&
-      event.mediaStatus?.idleReason &&
-      event.mediaStatus?.idleReason !==
+      event.mediaStatus.idleReason &&
+      event.mediaStatus.idleReason !==
         framework.messages.IdleReason.INTERRUPTED
     ) {
       // media finished or stopped, return to default Lovelace

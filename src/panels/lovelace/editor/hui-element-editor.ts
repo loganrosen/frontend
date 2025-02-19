@@ -249,7 +249,7 @@ export abstract class HuiElementEditor<
                 ></ha-yaml-editor>
               </div>
             `}
-        ${this._guiSupported === false && this._loading === false
+        ${this._guiSupported === false && !this._loading
           ? html`
               <ha-alert
                 alert-type="info"
@@ -402,7 +402,7 @@ export abstract class HuiElementEditor<
       }
       configElement.context = this.context;
       configElement.addEventListener("config-changed", (ev) =>
-        this._handleUIConfigChanged(ev as UIConfigChangedEvent<T>)
+        { this._handleUIConfigChanged(ev as UIConfigChangedEvent<T>); }
       );
       this._guiSupported = true;
     } else {

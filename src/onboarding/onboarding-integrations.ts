@@ -67,7 +67,7 @@ class OnboardingIntegrations extends SubscribeMixin(LitElement) {
                 fullUpdate = true;
               }
             } else if (message.type === "removed") {
-              this._entries = this._entries!.filter(
+              this._entries = this._entries.filter(
                 (entry) => entry.entry_id !== message.entry.entry_id
               );
             } else if (message.type === "updated") {
@@ -75,7 +75,7 @@ class OnboardingIntegrations extends SubscribeMixin(LitElement) {
                 return;
               }
               const newEntry = message.entry;
-              this._entries = this._entries!.map((entry) =>
+              this._entries = this._entries.map((entry) =>
                 entry.entry_id === newEntry.entry_id ? newEntry : entry
               );
             }
@@ -85,7 +85,7 @@ class OnboardingIntegrations extends SubscribeMixin(LitElement) {
           }
           this.hass.loadBackendTranslation("title", Array.from(integrations));
           const existingEntries = fullUpdate ? [] : this._entries;
-          this._entries = [...existingEntries!, ...newEntries];
+          this._entries = [...existingEntries, ...newEntries];
         },
         { type: ["device", "hub", "service"] }
       ),
@@ -155,7 +155,7 @@ class OnboardingIntegrations extends SubscribeMixin(LitElement) {
             html`<integration-badge
               .domain=${domain}
               .title=${title}
-              .darkOptimizedIcon=${this.hass.themes?.darkMode}
+              .darkOptimizedIcon=${this.hass.themes.darkMode}
             ></integration-badge>`
         )}
         ${foundIntegrations > domains.length

@@ -44,7 +44,7 @@ export class HaSelectSelector extends LitElement {
   private _itemMoved(ev: CustomEvent): void {
     ev.stopPropagation();
     const { oldIndex, newIndex } = ev.detail;
-    this._move(oldIndex!, newIndex);
+    this._move(oldIndex, newIndex);
   }
 
   private _move(index: number, newIndex: number) {
@@ -62,7 +62,7 @@ export class HaSelectSelector extends LitElement {
 
   protected render() {
     const options =
-      this.selector.select?.options?.map((option) =>
+      this.selector.select?.options.map((option) =>
         typeof option === "object"
           ? (option as SelectOption)
           : ({ value: option, label: option } as SelectOption)
@@ -146,11 +146,11 @@ export class HaSelectSelector extends LitElement {
         !this.value || this.value === "" ? [] : ensureArray(this.value);
 
       const optionItems = options.filter(
-        (option) => !option.disabled && !value?.includes(option.value)
+        (option) => !option.disabled && !value.includes(option.value)
       );
 
       return html`
-        ${value?.length
+        ${value.length
           ? html`
               <ha-sortable
                 no-style
@@ -272,7 +272,7 @@ export class HaSelectSelector extends LitElement {
   private get _mode(): "list" | "dropdown" {
     return (
       this.selector.select?.mode ||
-      ((this.selector.select?.options?.length || 0) < 6 ? "list" : "dropdown")
+      ((this.selector.select?.options.length || 0) < 6 ? "list" : "dropdown")
     );
   }
 
@@ -314,7 +314,7 @@ export class HaSelectSelector extends LitElement {
       }
       newValue = [...oldValue, value];
     } else {
-      if (!oldValue?.includes(value)) {
+      if (!oldValue.includes(value)) {
         return;
       }
       newValue = oldValue.filter((v) => v !== value);
@@ -380,7 +380,7 @@ export class HaSelectSelector extends LitElement {
 
     const filteredItems = this.comboBox.items?.filter((item) => {
       const label = item.label || item.value;
-      return label.toLowerCase().includes(this._filter?.toLowerCase());
+      return label.toLowerCase().includes(this._filter.toLowerCase());
     });
 
     if (

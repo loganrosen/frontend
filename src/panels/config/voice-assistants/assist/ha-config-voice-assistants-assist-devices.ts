@@ -79,11 +79,11 @@ class AssistDevicesPage extends LitElement {
     ): AssistDeviceExtra[] =>
       assistDevices.map((assistDevice) => {
         const device = deviceReg[assistDevice.device_id];
-        const selected = states[assistDevice.pipeline_entity]?.state;
+        const selected = states[assistDevice.pipeline_entity].state;
         const isPreferred = selected === "preferred";
         const pipeline = isPreferred ? preferred : selected;
         const pipelineName =
-          (pipeline && pipelines[pipeline]?.name) || pipeline;
+          (pipeline && pipelines[pipeline].name) || pipeline;
 
         return {
           ...assistDevice,
@@ -94,7 +94,7 @@ class AssistDevicesPage extends LitElement {
               })
             : pipelineName || "",
           area:
-            (device && device.area_id && areaReg[device.area_id]?.name) || "",
+            (device && device.area_id && areaReg[device.area_id].name) || "",
         };
       })
   );

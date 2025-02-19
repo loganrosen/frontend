@@ -35,7 +35,7 @@ export class HaIntegrationHeader extends LitElement {
           src=${brandsUrl({
             domain: this.domain,
             type: "icon",
-            darkOptimized: this.hass.themes?.darkMode,
+            darkOptimized: this.hass.themes.darkMode,
           })}
           crossorigin="anonymous"
           referrerpolicy="no-referrer"

@@ -106,7 +106,7 @@ export class HuiStackCardEditor
     if (!this.hass || !this._config) {
       return nothing;
     }
-    const selected = this._selectedCard!;
+    const selected = this._selectedCard;
     const numcards = this._config.cards.length;
 
     const isGuiMode = !this._cardEditorEl || this._GUImode;
@@ -149,7 +149,7 @@ export class HuiStackCardEditor
                     class="gui-mode-button"
                     @click=${this._toggleMode}
                     .disabled=${!this._guiModeAvailable}
-                    .label=${this.hass!.localize(
+                    .label=${this.hass.localize(
                       isGuiMode
                         ? "ui.panel.lovelace.editor.edit_card.show_code_editor"
                         : "ui.panel.lovelace.editor.edit_card.show_visual_editor"
@@ -159,7 +159,7 @@ export class HuiStackCardEditor
 
                   <ha-icon-button-arrow-prev
                     .disabled=${selected === 0}
-                    .label=${this.hass!.localize(
+                    .label=${this.hass.localize(
                       "ui.panel.lovelace.editor.edit_card.move_before"
                     )}
                     @click=${this._handleMove}
@@ -167,7 +167,7 @@ export class HuiStackCardEditor
                   ></ha-icon-button-arrow-prev>
 
                   <ha-icon-button-arrow-next
-                    .label=${this.hass!.localize(
+                    .label=${this.hass.localize(
                       "ui.panel.lovelace.editor.edit_card.move_after"
                     )}
                     .disabled=${selected === numcards - 1}
@@ -176,7 +176,7 @@ export class HuiStackCardEditor
                   ></ha-icon-button-arrow-next>
 
                   <ha-icon-button
-                    .label=${this.hass!.localize(
+                    .label=${this.hass.localize(
                       "ui.panel.lovelace.editor.edit_card.copy"
                     )}
                     .path=${mdiContentCopy}
@@ -184,7 +184,7 @@ export class HuiStackCardEditor
                   ></ha-icon-button>
 
                   <ha-icon-button
-                    .label=${this.hass!.localize(
+                    .label=${this.hass.localize(
                       "ui.panel.lovelace.editor.edit_card.cut"
                     )}
                     .path=${mdiContentCut}
@@ -192,7 +192,7 @@ export class HuiStackCardEditor
                   ></ha-icon-button>
 
                   <ha-icon-button
-                    .label=${this.hass!.localize(
+                    .label=${this.hass.localize(
                       "ui.panel.lovelace.editor.edit_card.delete"
                     )}
                     .path=${mdiDelete}
@@ -307,7 +307,7 @@ export class HuiStackCardEditor
   protected _setMode(value: boolean): void {
     this._GUImode = value;
     if (this._cardEditorEl) {
-      this._cardEditorEl!.GUImode = value;
+      this._cardEditorEl.GUImode = value;
     }
   }
 

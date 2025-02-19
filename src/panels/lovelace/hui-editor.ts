@@ -54,10 +54,10 @@ class LovelaceFullConfigEditor extends LitElement {
           slot="navigationIcon"
           .path=${mdiClose}
           @click=${this._closeEditor}
-          .label=${this.hass!.localize("ui.common.close")}
+          .label=${this.hass.localize("ui.common.close")}
         ></ha-icon-button>
         <div slot="title">
-          ${this.hass!.localize("ui.panel.lovelace.editor.raw_editor.header")}
+          ${this.hass.localize("ui.panel.lovelace.editor.raw_editor.header")}
         </div>
         <div
           slot="actionItems"
@@ -67,17 +67,17 @@ class LovelaceFullConfigEditor extends LitElement {
           })}"
         >
           ${this._changed
-            ? this.hass!.localize(
+            ? this.hass.localize(
                 "ui.panel.lovelace.editor.raw_editor.unsaved_changes"
               )
-            : this.hass!.localize("ui.panel.lovelace.editor.raw_editor.saved")}
+            : this.hass.localize("ui.panel.lovelace.editor.raw_editor.saved")}
         </div>
         <mwc-button
           raised
           slot="actionItems"
           @click=${this._handleSave}
           .disabled=${!this._changed}
-          >${this.hass!.localize(
+          >${this.hass.localize(
             "ui.panel.lovelace.editor.raw_editor.save"
           )}</mwc-button
         >
@@ -113,14 +113,14 @@ class LovelaceFullConfigEditor extends LitElement {
       !deepEqual(oldLovelace.rawConfig, this.lovelace.rawConfig)
     ) {
       showToast(this, {
-        message: this.hass!.localize(
+        message: this.hass.localize(
           "ui.panel.lovelace.editor.raw_editor.lovelace_changed"
         ),
         action: {
           action: () => {
             this.yamlEditor.value = dump(this.lovelace!.rawConfig);
           },
-          text: this.hass!.localize(
+          text: this.hass.localize(
             "ui.panel.lovelace.editor.raw_editor.reload"
           ),
         },
@@ -185,8 +185,8 @@ class LovelaceFullConfigEditor extends LitElement {
         text: this.hass.localize(
           "ui.panel.lovelace.editor.raw_editor.confirm_unsaved_changes"
         ),
-        dismissText: this.hass!.localize("ui.common.stay"),
-        confirmText: this.hass!.localize("ui.common.leave"),
+        dismissText: this.hass.localize("ui.common.stay"),
+        confirmText: this.hass.localize("ui.common.leave"),
       }))
     ) {
       return;
@@ -300,7 +300,7 @@ class LovelaceFullConfigEditor extends LitElement {
   }
 
   private get yamlEditor(): HaCodeEditor {
-    return this.shadowRoot!.querySelector("ha-code-editor")! as HaCodeEditor;
+    return this.shadowRoot!.querySelector("ha-code-editor")!;
   }
 }
 

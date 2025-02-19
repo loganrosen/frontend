@@ -34,7 +34,7 @@ export class HaCardConditionUser extends LitElement {
   @state() private _users: User[] = [];
 
   protected static validateUIConfig(condition: UserCondition) {
-    return assert(condition, userConditionStruct);
+    assert(condition, userConditionStruct);
   }
 
   private _sortedUsers = memoizeOne((users: User[]) =>

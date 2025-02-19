@@ -375,7 +375,7 @@ export class StatisticsChart extends LitElement {
 
     const names = this.names || {};
     statisticsData.forEach(([statistic_id, stats]) => {
-      const meta = statisticsMetaData?.[statistic_id];
+      const meta = statisticsMetaData[statistic_id];
       let name = names[statistic_id];
       if (name === undefined) {
         name = getStatisticLabel(this.hass, statistic_id, meta);
@@ -422,11 +422,11 @@ export class StatisticsChart extends LitElement {
             // if the end of the previous data doesn't match the start of the current data,
             // we have to draw a gap so add a value at the end time, and then an empty value.
             d.data!.push(
-              this._transformDataValue([prevEndTime, ...prevValues[i]!])
+              this._transformDataValue([prevEndTime, ...prevValues[i]])
             );
             d.data!.push([prevEndTime, null]);
           }
-          d.data!.push(this._transformDataValue([start, ...dataValues[i]!]));
+          d.data!.push(this._transformDataValue([start, ...dataValues[i]]));
         });
         prevValues = dataValues;
         prevEndTime = end;
@@ -468,7 +468,7 @@ export class StatisticsChart extends LitElement {
           if (!this.hideLegend) {
             const showLegend = hasMean
               ? type === "mean"
-              : displayedLegend === false;
+              : !displayedLegend;
             if (showLegend) {
               statLegendData.push({ name, color });
             }

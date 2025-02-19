@@ -205,7 +205,7 @@ class HaConfigIntegrationPage extends SubscribeMixin(LitElement) {
 
   public hassSubscribe(): UnsubscribeFunc[] {
     return [
-      subscribeEntityRegistry(this.hass.connection!, (entities) => {
+      subscribeEntityRegistry(this.hass.connection, (entities) => {
         this._entities = entities;
       }),
       subscribeLogInfo(this.hass.connection, (log_infos) => {
@@ -342,7 +342,7 @@ class HaConfigIntegrationPage extends SubscribeMixin(LitElement) {
                     src=${brandsUrl({
                       domain: this.domain,
                       type: "logo",
-                      darkOptimized: this.hass.themes?.darkMode,
+                      darkOptimized: this.hass.themes.darkMode,
                     })}
                     crossorigin="anonymous"
                     referrerpolicy="no-referrer"
@@ -376,7 +376,7 @@ class HaConfigIntegrationPage extends SubscribeMixin(LitElement) {
                       </a>
                     </div>`
                   : nothing}
-                ${this._manifest?.iot_class?.startsWith("cloud_")
+                ${this._manifest?.iot_class.startsWith("cloud_")
                   ? html`<div class="integration-info">
                       <ha-svg-icon .path=${mdiWeb}></ha-svg-icon>
                       ${this.hass.localize(
@@ -811,10 +811,10 @@ class HaConfigIntegrationPage extends SubscribeMixin(LitElement) {
     return html`<ha-md-list-item
         class=${classMap({
           config_entry: true,
-          "state-not-loaded": item!.state === "not_loaded",
-          "state-failed-unload": item!.state === "failed_unload",
-          "state-setup": item!.state === "setup_in_progress",
-          "state-error": ERROR_STATES.includes(item!.state),
+          "state-not-loaded": item.state === "not_loaded",
+          "state-failed-unload": item.state === "failed_unload",
+          "state-setup": item.state === "setup_in_progress",
+          "state-error": ERROR_STATES.includes(item.state),
           "state-disabled": item.disabled_by !== null,
         })}
         data-entry-id=${item.entry_id}
@@ -1038,13 +1038,13 @@ class HaConfigIntegrationPage extends SubscribeMixin(LitElement) {
 
   private _renderSubEntry(configEntry: ConfigEntry, subEntry: SubEntry) {
     const devices = this._getConfigEntryDevices(configEntry).filter((device) =>
-      device.config_entries_subentries[configEntry.entry_id]?.includes(
+      device.config_entries_subentries[configEntry.entry_id].includes(
         subEntry.subentry_id
       )
     );
     const services = this._getConfigEntryServices(configEntry).filter(
       (device) =>
-        device.config_entries_subentries[configEntry.entry_id]?.includes(
+        device.config_entries_subentries[configEntry.entry_id].includes(
           subEntry.subentry_id
         )
     );
@@ -1069,7 +1069,7 @@ class HaConfigIntegrationPage extends SubscribeMixin(LitElement) {
         )}</span
       >
       ${configEntry.supported_subentry_types[subEntry.subentry_type]
-        ?.supports_reconfigure
+        .supports_reconfigure
         ? html`
             <ha-button slot="end" @click=${this._handleReconfigureSub}>
               ${this.hass.localize(
@@ -1103,7 +1103,7 @@ class HaConfigIntegrationPage extends SubscribeMixin(LitElement) {
     const entryId = this._searchParms.get("config_entry")!;
     const row = this.shadowRoot!.querySelector(
       `[data-entry-id="${entryId}"]`
-    ) as any;
+    );
     if (row) {
       row.scrollIntoView({
         block: "center",
@@ -1283,33 +1283,33 @@ class HaConfigIntegrationPage extends SubscribeMixin(LitElement) {
 
   private _handleRename(ev: Event): void {
     this._editEntryName(
-      ((ev.target as HTMLElement).closest(".config_entry") as any).configEntry
+      ((ev.target as HTMLElement).closest(".config_entry")).configEntry
     );
   }
 
   private _handleReload(ev: Event): void {
     this._reloadIntegration(
-      ((ev.target as HTMLElement).closest(".config_entry") as any).configEntry
+      ((ev.target as HTMLElement).closest(".config_entry")).configEntry
     );
   }
 
   private _handleReconfigure(ev: Event): void {
     this._reconfigureIntegration(
-      ((ev.target as HTMLElement).closest(".config_entry") as any).configEntry
+      ((ev.target as HTMLElement).closest(".config_entry")).configEntry
     );
   }
 
   private _handleDelete(ev: Event): void {
     this._removeIntegration(
-      ((ev.target as HTMLElement).closest(".config_entry") as any).configEntry
+      ((ev.target as HTMLElement).closest(".config_entry")).configEntry
     );
   }
 
   private async _handleReconfigureSub(ev: Event): Promise<void> {
     const configEntry = (
-      (ev.target as HTMLElement).closest(".sub-entry") as any
+      (ev.target as HTMLElement).closest(".sub-entry")
     ).configEntry;
-    const subEntry = ((ev.target as HTMLElement).closest(".sub-entry") as any)
+    const subEntry = ((ev.target as HTMLElement).closest(".sub-entry"))
       .subEntry;
 
     showSubConfigFlowDialog(
@@ -1325,9 +1325,9 @@ class HaConfigIntegrationPage extends SubscribeMixin(LitElement) {
 
   private async _handleDeleteSub(ev: Event): Promise<void> {
     const configEntry = (
-      (ev.target as HTMLElement).closest(".sub-entry") as any
+      (ev.target as HTMLElement).closest(".sub-entry")
     ).configEntry;
-    const subEntry = ((ev.target as HTMLElement).closest(".sub-entry") as any)
+    const subEntry = ((ev.target as HTMLElement).closest(".sub-entry"))
       .subEntry;
     const confirmed = await showConfirmationDialog(this, {
       title: this.hass.localize(
@@ -1337,8 +1337,8 @@ class HaConfigIntegrationPage extends SubscribeMixin(LitElement) {
       text: this.hass.localize(
         "ui.panel.config.integrations.config_entry.delete_confirm_text"
       ),
-      confirmText: this.hass!.localize("ui.common.delete"),
-      dismissText: this.hass!.localize("ui.common.cancel"),
+      confirmText: this.hass.localize("ui.common.delete"),
+      dismissText: this.hass.localize("ui.common.cancel"),
       destructive: true,
     });
 
@@ -1350,19 +1350,19 @@ class HaConfigIntegrationPage extends SubscribeMixin(LitElement) {
 
   private _handleDisable(ev: Event): void {
     this._disableIntegration(
-      ((ev.target as HTMLElement).closest(".config_entry") as any).configEntry
+      ((ev.target as HTMLElement).closest(".config_entry")).configEntry
     );
   }
 
   private _handleEnable(ev: Event): void {
     this._enableIntegration(
-      ((ev.target as HTMLElement).closest(".config_entry") as any).configEntry
+      ((ev.target as HTMLElement).closest(".config_entry")).configEntry
     );
   }
 
   private _handleSystemOptions(ev: Event): void {
     this._showSystemOptions(
-      ((ev.target as HTMLElement).closest(".config_entry") as any).configEntry
+      ((ev.target as HTMLElement).closest(".config_entry")).configEntry
     );
   }
 
@@ -1384,8 +1384,8 @@ class HaConfigIntegrationPage extends SubscribeMixin(LitElement) {
       text: this.hass.localize(
         "ui.panel.config.integrations.config_entry.disable_confirm_text"
       ),
-      confirmText: this.hass!.localize("ui.common.disable"),
-      dismissText: this.hass!.localize("ui.common.cancel"),
+      confirmText: this.hass.localize("ui.common.disable"),
+      dismissText: this.hass.localize("ui.common.cancel"),
       destructive: true,
     });
 
@@ -1452,8 +1452,8 @@ class HaConfigIntegrationPage extends SubscribeMixin(LitElement) {
       text: this.hass.localize(
         "ui.panel.config.integrations.config_entry.delete_confirm_text"
       ),
-      confirmText: this.hass!.localize("ui.common.delete"),
-      dismissText: this.hass!.localize("ui.common.cancel"),
+      confirmText: this.hass.localize("ui.common.delete"),
+      dismissText: this.hass.localize("ui.common.cancel"),
       destructive: true,
     });
 
@@ -1597,7 +1597,7 @@ class HaConfigIntegrationPage extends SubscribeMixin(LitElement) {
       });
       return;
     }
-    if (this._manifest?.single_config_entry) {
+    if (this._manifest.single_config_entry) {
       const entries = this._domainConfigEntries(
         this.domain,
         this._extraConfigEntries || this.configEntries

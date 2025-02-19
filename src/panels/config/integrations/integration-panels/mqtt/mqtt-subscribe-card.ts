@@ -68,7 +68,7 @@ class MqttSubscribeCard extends LitElement {
         <form>
           <p>
             <ha-formfield
-              label=${this.hass!.localize(
+              label=${this.hass.localize(
                 "ui.panel.config.mqtt.json_formatting"
               )}
             >
@@ -117,8 +117,8 @@ class MqttSubscribeCard extends LitElement {
                   topic: msg.message.topic,
                   time: formatTime(
                     msg.time,
-                    this.hass!.locale,
-                    this.hass!.config
+                    this.hass.locale,
+                    this.hass.config
                   ),
                 })}
                 <pre>${msg.payload}</pre>
@@ -155,9 +155,9 @@ class MqttSubscribeCard extends LitElement {
       this._subscribed = undefined;
     } else {
       this._subscribed = await subscribeMQTTTopic(
-        this.hass!,
+        this.hass,
         this._topic,
-        (message) => this._handleMessage(message),
+        (message) => { this._handleMessage(message); },
         parseInt(this._qos)
       );
     }

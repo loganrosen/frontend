@@ -18,7 +18,7 @@ export const isDeletableEntity = (
   configEntries: ConfigEntry[],
   fetchedHelpers: Helper[]
 ): boolean => {
-  const restored = !!hass.states[entity_id]?.attributes.restored;
+  const restored = !!hass.states[entity_id].attributes.restored;
   if (restored) {
     return true;
   }
@@ -66,7 +66,7 @@ export const deleteEntity = (
       }
     }
     const stateObj = hass.states[entity_id];
-    if (!stateObj?.attributes.restored) {
+    if (!stateObj.attributes.restored) {
       return;
     }
     removeEntityRegistryEntry(hass, entity_id);

@@ -139,7 +139,7 @@ export async function getTranslation(
   fallback = true
 ) {
   const metadata = translationMetadata.translations[language];
-  if (!metadata?.hash) {
+  if (!metadata.hash) {
     if (fallback && language !== "en") {
       return getTranslation(fragment, "en");
     }

@@ -56,7 +56,7 @@ export class EntityRegistrySettings extends SubscribeMixin(LitElement) {
 
   private async _fetchHelperConfigEntry() {
     this._helperConfigEntry = undefined;
-    if (!this.entry?.config_entry_id) {
+    if (!this.entry.config_entry_id) {
       return;
     }
     try {
@@ -87,32 +87,32 @@ export class EntityRegistrySettings extends SubscribeMixin(LitElement) {
         ? html`
             <ha-alert alert-type="warning">
               ${device?.disabled_by
-                ? html`${this.hass!.localize(
+                ? html`${this.hass.localize(
                       "ui.dialogs.entity_registry.editor.device_disabled"
                     )}<mwc-button
                       @click=${this._openDeviceSettings}
                       slot="action"
                     >
-                      ${this.hass!.localize(
+                      ${this.hass.localize(
                         "ui.dialogs.entity_registry.editor.open_device_settings"
                       )}
                     </mwc-button>`
                 : this.entry.disabled_by
-                  ? html`${this.hass!.localize(
+                  ? html`${this.hass.localize(
                       "ui.dialogs.entity_registry.editor.entity_disabled"
                     )}${["user", "integration"].includes(
-                      this.entry.disabled_by!
+                      this.entry.disabled_by
                     )
                       ? html`<mwc-button
                           slot="action"
                           @click=${this._enableEntry}
                         >
-                          ${this.hass!.localize(
+                          ${this.hass.localize(
                             "ui.dialogs.entity_registry.editor.enable_entity"
                           )}</mwc-button
                         >`
                       : ""}`
-                  : this.hass!.localize(
+                  : this.hass.localize(
                       "ui.dialogs.entity_registry.editor.unavailable"
                     )}
             </ha-alert>
@@ -135,7 +135,7 @@ export class EntityRegistrySettings extends SubscribeMixin(LitElement) {
           class="warning"
           @click=${this._confirmDeleteEntry}
           .disabled=${this._submitting ||
-          (!this._helperConfigEntry && !stateObj?.attributes.restored)}
+          (!this._helperConfigEntry && !stateObj.attributes.restored)}
         >
           ${this.hass.localize("ui.dialogs.entity_registry.editor.delete")}
         </mwc-button>
@@ -169,7 +169,7 @@ export class EntityRegistrySettings extends SubscribeMixin(LitElement) {
     this._submitting = true;
     try {
       const result = await updateEntityRegistryEntry(
-        this.hass!,
+        this.hass,
         this.entry.entity_id,
         { disabled_by: null }
       );
@@ -230,7 +230,7 @@ export class EntityRegistrySettings extends SubscribeMixin(LitElement) {
       if (this._helperConfigEntry) {
         await deleteConfigEntry(this.hass, this._helperConfigEntry.entry_id);
       } else {
-        await removeEntityRegistryEntry(this.hass!, this.entry.entity_id);
+        await removeEntityRegistryEntry(this.hass, this.entry.entity_id);
       }
       fireEvent(this, "close-dialog");
     } finally {

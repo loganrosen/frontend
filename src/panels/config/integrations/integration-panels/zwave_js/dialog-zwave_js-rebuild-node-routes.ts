@@ -69,7 +69,7 @@ class DialogZWaveJSRebuildNodeRoutes extends LitElement {
                       "ui.panel.config.zwave_js.rebuild_node_routes.introduction",
                       {
                         device: html`<em
-                          >${computeDeviceName(this.device, this.hass!)}</em
+                          >${computeDeviceName(this.device, this.hass)}</em
                         >`,
                       }
                     )}
@@ -103,7 +103,7 @@ class DialogZWaveJSRebuildNodeRoutes extends LitElement {
                       "ui.panel.config.zwave_js.rebuild_node_routes.in_progress",
                       {
                         device: html`<em
-                          >${computeDeviceName(this.device, this.hass!)}</em
+                          >${computeDeviceName(this.device, this.hass)}</em
                         >`,
                       }
                     )}
@@ -128,7 +128,7 @@ class DialogZWaveJSRebuildNodeRoutes extends LitElement {
                       "ui.panel.config.zwave_js.rebuild_node_routes.rebuilding_routes_failed",
                       {
                         device: html`<em
-                          >${computeDeviceName(this.device, this.hass!)}</em
+                          >${computeDeviceName(this.device, this.hass)}</em
                         >`,
                       }
                     )}
@@ -162,7 +162,7 @@ class DialogZWaveJSRebuildNodeRoutes extends LitElement {
                       "ui.panel.config.zwave_js.rebuild_node_routes.rebuilding_routes_complete",
                       {
                         device: html`<em
-                          >${computeDeviceName(this.device, this.hass!)}</em
+                          >${computeDeviceName(this.device, this.hass)}</em
                         >`,
                       }
                     )}
@@ -202,7 +202,7 @@ class DialogZWaveJSRebuildNodeRoutes extends LitElement {
     if (!this.hass) {
       return;
     }
-    const network: ZWaveJSNetwork = await fetchZwaveNetworkStatus(this.hass!, {
+    const network: ZWaveJSNetwork = await fetchZwaveNetworkStatus(this.hass, {
       device_id: this.device!.id,
     });
     if (network.controller.is_rebuilding_routes) {

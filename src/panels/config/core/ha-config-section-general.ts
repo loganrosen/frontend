@@ -262,7 +262,7 @@ class HaConfigSectionGeneral extends LitElement {
                 @click=${this._updateEntry}
                 .disabled=${disabled}
               >
-                ${this.hass!.localize("ui.panel.config.zone.detail.update")}
+                ${this.hass.localize("ui.panel.config.zone.detail.update")}
               </ha-progress-button>
             </div>
           </ha-card>
@@ -323,10 +323,10 @@ class HaConfigSectionGeneral extends LitElement {
           text: this.hass.localize(
             "ui.panel.config.core.section.core.core_config.update_units_confirm_text"
           ),
-          confirmText: this.hass!.localize(
+          confirmText: this.hass.localize(
             "ui.panel.config.core.section.core.core_config.update_units_confirm_update"
           ),
-          dismissText: this.hass!.localize("ui.common.cancel"),
+          dismissText: this.hass.localize("ui.common.cancel"),
         }))
       ) {
         return;

@@ -153,7 +153,7 @@ class HuiInputNumberEntityRow extends LitElement implements LovelaceRow {
   private async _attachObserver(): Promise<void> {
     if (!this._resizeObserver) {
       this._resizeObserver = new ResizeObserver(
-        debounce(() => this._measureCard(), 250, false)
+        debounce(() => { this._measureCard(); }, 250, false)
       );
     }
     if (this.isConnected) {

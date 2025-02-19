@@ -115,10 +115,10 @@ export class HaAreaSelector extends LitElement {
         .helper=${this.helper}
         .pickAreaLabel=${this.label}
         no-add
-        .deviceFilter=${this.selector.area?.device
+        .deviceFilter=${this.selector.area.device
           ? this._filterDevices
           : undefined}
-        .entityFilter=${this.selector.area?.entity
+        .entityFilter=${this.selector.area.entity
           ? this._filterEntities
           : undefined}
         .disabled=${this.disabled}

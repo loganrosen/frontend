@@ -155,7 +155,7 @@ class MoreInfoMediaPlayer extends LitElement {
                 naturalMenuWidth
                 @closed=${stopPropagation}
               >
-                ${stateObj.attributes.source_list!.map(
+                ${stateObj.attributes.source_list.map(
                   (source) => html`
                     <mwc-list-item .value=${source}>
                       ${this.hass.formatEntityAttributeValue(
@@ -268,21 +268,21 @@ class MoreInfoMediaPlayer extends LitElement {
 
   private _handleClick(e: MouseEvent): void {
     handleMediaControlClick(
-      this.hass!,
+      this.hass,
       this.stateObj!,
       (e.currentTarget as HTMLElement).getAttribute("action")!
     );
   }
 
   private _toggleMute() {
-    this.hass!.callService("media_player", "volume_mute", {
+    this.hass.callService("media_player", "volume_mute", {
       entity_id: this.stateObj!.entity_id,
       is_volume_muted: !this.stateObj!.attributes.is_volume_muted,
     });
   }
 
   private _selectedValueChanged(e: Event): void {
-    this.hass!.callService("media_player", "volume_set", {
+    this.hass.callService("media_player", "volume_set", {
       entity_id: this.stateObj!.entity_id,
       volume_level: (e.target as any).value / 100,
     });

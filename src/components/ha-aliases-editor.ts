@@ -22,9 +22,9 @@ class AliasesEditor extends LitElement {
         .hass=${this.hass}
         .value=${this.aliases}
         .disabled=${this.disabled}
-        .label=${this.hass!.localize("ui.dialogs.aliases.label")}
-        .removeLabel=${this.hass!.localize("ui.dialogs.aliases.remove")}
-        .addLabel=${this.hass!.localize("ui.dialogs.aliases.add")}
+        .label=${this.hass.localize("ui.dialogs.aliases.label")}
+        .removeLabel=${this.hass.localize("ui.dialogs.aliases.remove")}
+        .addLabel=${this.hass.localize("ui.dialogs.aliases.add")}
         item-index
         @value-changed=${this._aliasesChanged}
       >

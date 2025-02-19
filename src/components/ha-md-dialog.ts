@@ -108,9 +108,9 @@ export class HaMdDialog extends MdDialog {
     link.href = href;
 
     return new Promise<void>((resolve, reject) => {
-      link.onload = () => resolve();
+      link.onload = () => { resolve(); };
       link.onerror = () =>
-        reject(new Error(`Stylesheet failed to load: ${href}`));
+        { reject(new Error(`Stylesheet failed to load: ${href}`)); };
 
       this.shadowRoot?.appendChild(link);
     });

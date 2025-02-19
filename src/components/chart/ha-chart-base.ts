@@ -117,8 +117,8 @@ export class HaChartBase extends LitElement {
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
     this._listeners.push(
-      () => window.removeEventListener("keydown", handleKeyDown),
-      () => window.removeEventListener("keyup", handleKeyUp)
+      () => { window.removeEventListener("keydown", handleKeyDown); },
+      () => { window.removeEventListener("keyup", handleKeyUp); }
     );
   }
 
@@ -216,7 +216,7 @@ export class HaChartBase extends LitElement {
       this.chart.on("mousemove", (e: ECElementEvent) => {
         if (e.componentType === "series" && e.componentSubType === "custom") {
           // custom series do not support cursor style so we need to set it manually
-          this.chart?.getZr()?.setCursorStyle("default");
+          this.chart?.getZr().setCursorStyle("default");
         }
       });
       this.chart.setOption({ ...this._createOptions(), series: this.data });

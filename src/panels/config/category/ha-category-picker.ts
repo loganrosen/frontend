@@ -87,12 +87,12 @@ export class HaCategoryPicker extends SubscribeMixin(LitElement) {
 
   public async open() {
     await this.updateComplete;
-    await this.comboBox?.open();
+    await this.comboBox.open();
   }
 
   public async focus() {
     await this.updateComplete;
-    await this.comboBox?.focus();
+    await this.comboBox.focus();
   }
 
   private _getCategories = memoizeOne(
@@ -101,7 +101,7 @@ export class HaCategoryPicker extends SubscribeMixin(LitElement) {
       noAdd: this["noAdd"]
     ): CategoryRegistryEntry[] => {
       const result = categories ? [...categories] : [];
-      if (!result?.length) {
+      if (!result.length) {
         result.push({
           category_id: NO_CATEGORIES_ID,
           name: this.hass.localize(
@@ -182,7 +182,7 @@ export class HaCategoryPicker extends SubscribeMixin(LitElement) {
         (item) => ![NO_CATEGORIES_ID, ADD_NEW_ID].includes(item.category_id)
       ) || []
     );
-    if (filteredItems?.length === 0) {
+    if (filteredItems.length === 0) {
       if (this.noAdd) {
         this.comboBox.filteredItems = [
           {

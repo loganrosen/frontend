@@ -95,7 +95,7 @@ export class EnergySolarSettings extends LitElement {
             const entityState = this.hass.states[source.stat_energy_from];
             return html`
               <div class="row" .source=${source}>
-                ${entityState?.attributes.icon
+                ${entityState.attributes.icon
                   ? html`<ha-icon
                       .icon=${entityState.attributes.icon}
                     ></ha-icon>`
@@ -150,7 +150,7 @@ export class EnergySolarSettings extends LitElement {
       info: this.info!,
       solar_sources: this.preferences.energy_sources.filter(
         (src) => src.type === "solar"
-      ) as SolarSourceTypeEnergyPreference[],
+      ),
       saveCallback: async (source) => {
         await this._savePreferences({
           ...this.preferences,
@@ -168,7 +168,7 @@ export class EnergySolarSettings extends LitElement {
       source: { ...origSource },
       solar_sources: this.preferences.energy_sources.filter(
         (src) => src.type === "solar"
-      ) as SolarSourceTypeEnergyPreference[],
+      ),
       saveCallback: async (newSource) => {
         await this._savePreferences({
           ...this.preferences,

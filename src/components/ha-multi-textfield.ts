@@ -41,7 +41,7 @@ class HaMultiTextField extends LitElement {
   protected render() {
     return html`
       ${this._items.map((item, index) => {
-        const indexSuffix = `${this.itemIndex ? ` ${index + 1}` : ""}`;
+        const indexSuffix = this.itemIndex ? ` ${index + 1}` : "";
         return html`
           <div class="layout horizontal center-center row">
             <ha-textfield
@@ -53,7 +53,7 @@ class HaMultiTextField extends LitElement {
               dialogInitialFocus=${index}
               .index=${index}
               class="flex-auto"
-              .label=${`${this.label ? `${this.label}${indexSuffix}` : ""}`}
+              .label=${this.label ? `${this.label}${indexSuffix}` : ""}
               .value=${item}
               ?data-last=${index === this._items.length - 1}
               @input=${this._editItem}

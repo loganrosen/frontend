@@ -70,7 +70,7 @@ class HuiViewContainer extends LitElement {
 
   private _applyTheme() {
     if (this.hass) {
-      applyThemesOnElement(this, this.hass?.themes, this.theme);
+      applyThemesOnElement(this, this.hass.themes, this.theme);
     }
   }
 

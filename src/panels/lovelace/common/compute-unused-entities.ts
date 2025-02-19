@@ -53,22 +53,22 @@ const addEntities = (entities: Set<string>, obj) => {
     addEntityId(entities, obj.entity);
   }
   if (obj.entities && Array.isArray(obj.entities)) {
-    obj.entities.forEach((entity) => addEntityId(entities, entity));
+    obj.entities.forEach((entity) => { addEntityId(entities, entity); });
   }
   if (obj.card) {
     addEntities(entities, obj.card);
   }
   if (obj.cards && Array.isArray(obj.cards)) {
-    obj.cards.forEach((card) => addEntities(entities, card));
+    obj.cards.forEach((card) => { addEntities(entities, card); });
   }
   if (obj.elements && Array.isArray(obj.elements)) {
-    obj.elements.forEach((card) => addEntities(entities, card));
+    obj.elements.forEach((card) => { addEntities(entities, card); });
   }
   if (obj.badges && Array.isArray(obj.badges)) {
-    obj.badges.forEach((badge) => addEntityId(entities, badge));
+    obj.badges.forEach((badge) => { addEntityId(entities, badge); });
   }
   if (obj.sections && Array.isArray(obj.sections)) {
-    obj.sections.forEach((section) => addEntities(entities, section));
+    obj.sections.forEach((section) => { addEntities(entities, section); });
   }
 };
 

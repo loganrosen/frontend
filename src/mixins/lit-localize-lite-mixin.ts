@@ -31,7 +31,7 @@ export const litLocalizeLiteMixin = <T extends Constructor<LitElement>>(
     protected firstUpdated(changedProps: PropertyValues) {
       super.firstUpdated(changedProps);
       computeDirectionStyles(
-        translationMetadata.translations[this.language!].isRTL,
+        translationMetadata.translations[this.language].isRTL,
         this
       );
     }
@@ -87,11 +87,11 @@ export const litLocalizeLiteMixin = <T extends Constructor<LitElement>>(
       }
 
       const { data } = await getTranslation(
-        this.translationFragment!,
-        this.language!
+        this.translationFragment,
+        this.language
       );
       this._resources = {
-        [this.language!]: data,
+        [this.language]: data,
       };
     }
   }

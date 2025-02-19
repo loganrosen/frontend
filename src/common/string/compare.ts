@@ -26,7 +26,7 @@ export const stringCompare = (
   language: string | undefined = undefined
 ) => {
   // @ts-ignore
-  if (Intl?.Collator) {
+  if (Intl.Collator) {
     return collator(language).compare(a, b);
   }
 
@@ -39,7 +39,7 @@ export const caseInsensitiveStringCompare = (
   language: string | undefined = undefined
 ) => {
   // @ts-ignore
-  if (Intl?.Collator) {
+  if (Intl.Collator) {
     return caseInsensitiveCollator(language).compare(a, b);
   }
 

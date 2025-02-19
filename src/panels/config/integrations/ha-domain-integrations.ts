@@ -59,7 +59,7 @@ class HaDomainIntegrations extends LitElement {
                       domain: flow.handler,
                       type: "icon",
                       useFallback: true,
-                      darkOptimized: this.hass.themes?.darkMode,
+                      darkOptimized: this.hass.themes.darkMode,
                     })}
                     crossorigin="anonymous"
                     referrerpolicy="no-referrer"
@@ -105,7 +105,7 @@ class HaDomainIntegrations extends LitElement {
                     domain,
                     type: "icon",
                     useFallback: true,
-                    darkOptimized: this.hass.themes?.darkMode,
+                    darkOptimized: this.hass.themes.darkMode,
                   })}
                   crossorigin="anonymous"
                   referrerpolicy="no-referrer"
@@ -168,7 +168,7 @@ class HaDomainIntegrations extends LitElement {
                 domain: this.domain,
                 type: "icon",
                 useFallback: true,
-                darkOptimized: this.hass.themes?.darkMode,
+                darkOptimized: this.hass.themes.darkMode,
               })}
               crossorigin="anonymous"
               referrerpolicy="no-referrer"
@@ -266,7 +266,7 @@ class HaDomainIntegrations extends LitElement {
               !(domain in this.integration!.integrations))))) ||
       // config_flow being undefined means its false
       (!("integration_type" in this.integration!) &&
-        !this.integration!.integrations?.[domain]?.config_flow)
+        !this.integration!.integrations?.[domain].config_flow)
     ) {
       const manifest = await fetchIntegrationManifest(this.hass, domain);
       showYamlIntegrationDialog(this, { manifest });

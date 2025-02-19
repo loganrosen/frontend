@@ -124,7 +124,7 @@ class ZWaveJSCapabilityDoorLock extends LitElement {
           .label=${this.hass.localize(
             "ui.panel.config.zwave_js.node_installer.capability_controls.door_lock.mode"
           )}
-          .value=${this._currentDoorLockMode?.toString() ?? ""}
+          .value=${this._currentDoorLockMode.toString() ?? ""}
           @selected=${this._doorLockModeChanged}
         >
           ${supportedDoorLockModes.map(
@@ -180,7 +180,7 @@ class ZWaveJSCapabilityDoorLock extends LitElement {
             </div>
           `
         : nothing}
-      ${this._capabilities?.twistAssistSupported
+      ${this._capabilities.twistAssistSupported
         ? html`
             <div class="row">
               <ha-formfield
@@ -191,14 +191,14 @@ class ZWaveJSCapabilityDoorLock extends LitElement {
                 <ha-switch
                   @change=${this._booleanChanged}
                   key="twistAssist"
-                  .checked=${this._configuration?.twistAssist}
+                  .checked=${this._configuration.twistAssist}
                 >
                 </ha-switch>
               </ha-formfield>
             </div>
           `
         : nothing}
-      ${this._capabilities?.blockToBlockSupported
+      ${this._capabilities.blockToBlockSupported
         ? html`
             <div class="row">
               <ha-formfield
@@ -209,14 +209,14 @@ class ZWaveJSCapabilityDoorLock extends LitElement {
                 <ha-switch
                   @change=${this._booleanChanged}
                   key="blockToBlock"
-                  .checked=${this._configuration?.blockToBlock}
+                  .checked=${this._configuration.blockToBlock}
                 >
                 </ha-switch>
               </ha-formfield>
             </div>
           `
         : nothing}
-      ${this._capabilities?.autoRelockSupported
+      ${this._capabilities.autoRelockSupported
         ? html`
             <div class="row">
               <ha-textfield
@@ -224,7 +224,7 @@ class ZWaveJSCapabilityDoorLock extends LitElement {
                 .label=${this.hass.localize(
                   "ui.panel.config.zwave_js.node_installer.capability_controls.door_lock.auto_relock_time"
                 )}
-                .value=${this._configuration?.autoRelockTime?.toString() ?? ""}
+                .value=${this._configuration.autoRelockTime?.toString() ?? ""}
                 @change=${this._numberChanged}
                 key="autoRelockTime"
               >
@@ -232,7 +232,7 @@ class ZWaveJSCapabilityDoorLock extends LitElement {
             </div>
           `
         : nothing}
-      ${this._capabilities?.holdAndReleaseSupported
+      ${this._capabilities.holdAndReleaseSupported
         ? html`
             <div class="row">
               <ha-textfield
@@ -240,7 +240,7 @@ class ZWaveJSCapabilityDoorLock extends LitElement {
                 .label=${this.hass.localize(
                   "ui.panel.config.zwave_js.node_installer.capability_controls.door_lock.hold_release_time"
                 )}
-                .value=${this._configuration?.holdAndReleaseTime?.toString() ??
+                .value=${this._configuration.holdAndReleaseTime?.toString() ??
                 ""}
                 @change=${this._numberChanged}
                 key="holdAndReleaseTime"

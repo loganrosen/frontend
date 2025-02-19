@@ -415,12 +415,12 @@ const getEnergyData = async (
   };
 
   const _energyStats: Statistics | Promise<Statistics> = energyStatIds.length
-    ? fetchStatistics(hass!, start, end, energyStatIds, period, energyUnits, [
+    ? fetchStatistics(hass, start, end, energyStatIds, period, energyUnits, [
         "change",
       ])
     : {};
   const _waterStats: Statistics | Promise<Statistics> = waterStatIds.length
-    ? fetchStatistics(hass!, start, end, waterStatIds, period, waterUnits, [
+    ? fetchStatistics(hass, start, end, waterStatIds, period, waterUnits, [
         "change",
       ])
     : {};
@@ -472,7 +472,7 @@ const getEnergyData = async (
     endCompare = addMilliseconds(start, -1);
     if (energyStatIds.length) {
       _energyStatsCompare = fetchStatistics(
-        hass!,
+        hass,
         startCompare,
         endCompare,
         energyStatIds,
@@ -483,7 +483,7 @@ const getEnergyData = async (
     }
     if (waterStatIds.length) {
       _waterStatsCompare = fetchStatistics(
-        hass!,
+        hass,
         startCompare,
         endCompare,
         waterStatIds,
@@ -500,7 +500,7 @@ const getEnergyData = async (
     | Promise<FossilEnergyConsumption>;
   if (co2SignalEntity !== undefined) {
     _fossilEnergyConsumption = getFossilEnergyConsumption(
-      hass!,
+      hass,
       start,
       consumptionStatIDs,
       co2SignalEntity,
@@ -509,7 +509,7 @@ const getEnergyData = async (
     );
     if (compare) {
       _fossilEnergyConsumptionCompare = getFossilEnergyConsumption(
-        hass!,
+        hass,
         startCompare,
         consumptionStatIDs,
         co2SignalEntity,
@@ -765,7 +765,7 @@ export const getEnergyGasUnitClass = (
     const statisticIdWithMeta = statisticsMetaData[source.stat_energy_from];
     if (
       energyGasUnitClass.includes(
-        statisticIdWithMeta?.unit_class as EnergyGasUnitClass
+        statisticIdWithMeta.unit_class as EnergyGasUnitClass
       )
     ) {
       return statisticIdWithMeta.unit_class as EnergyGasUnitClass;
@@ -878,7 +878,7 @@ const getSummedDataPartial = (
   Object.entries(statIds).forEach(([key, subStatIds]) => {
     const totalStats: Record<number, number> = {};
     const sets: Record<string, Record<number, number>> = {};
-    subStatIds!.forEach((id) => {
+    subStatIds.forEach((id) => {
       const stats = compare ? data.statsCompare[id] : data.stats[id];
       if (!stats) {
         return;

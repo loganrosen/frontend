@@ -46,11 +46,11 @@ class HaAddonPicker extends LitElement {
   @state() private _error?: string;
 
   public open() {
-    this._comboBox?.open();
+    this._comboBox.open();
   }
 
   public focus() {
-    this._comboBox?.focus();
+    this._comboBox.focus();
   }
 
   protected firstUpdated() {

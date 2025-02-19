@@ -96,7 +96,7 @@ class HuiTimestampDisplay extends LitElement {
     this._clearInterval();
     if (this._connected && INTERVAL_FORMAT.includes(this._format)) {
       this._updateRelative();
-      this._interval = window.setInterval(() => this._updateRelative(), 1000);
+      this._interval = window.setInterval(() => { this._updateRelative(); }, 1000);
     }
   }
 
@@ -111,8 +111,8 @@ class HuiTimestampDisplay extends LitElement {
     if (this.ts && this.hass?.localize) {
       this._relative =
         this._format === "relative"
-          ? relativeTime(this.ts, this.hass!.locale)
-          : relativeTime(new Date(), this.hass!.locale, this.ts, false);
+          ? relativeTime(this.ts, this.hass.locale)
+          : relativeTime(new Date(), this.hass.locale, this.ts, false);
 
       this._relative = this.capitalize
         ? capitalizeFirstLetter(this._relative)

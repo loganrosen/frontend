@@ -134,7 +134,7 @@ export class HaConfigTags extends SubscribeMixin(LitElement) {
                 "ui.panel.config.tag.create_automation"
               ),
               path: mdiRobot,
-              action: () => this._createAutomation(tag),
+              action: () => { this._createAutomation(tag); },
             },
             {
               label: this.hass.localize("ui.common.delete"),
@@ -216,7 +216,7 @@ export class HaConfigTags extends SubscribeMixin(LitElement) {
   }
 
   private _handleWriteClick = (ev: Event) =>
-    this._openWrite((ev.currentTarget as any).tag);
+    { this._openWrite((ev.currentTarget as any).tag); };
 
   private _createAutomation = (tag: Tag) => {
     const data = {
@@ -243,7 +243,7 @@ export class HaConfigTags extends SubscribeMixin(LitElement) {
               href="https://companion.home-assistant.io/"
               target="_blank"
               rel="noreferrer"
-              >${this.hass!.localize(
+              >${this.hass.localize(
                 "ui.panel.config.tag.detail.companion_apps"
               )}</a
             >`,
@@ -280,7 +280,7 @@ export class HaConfigTags extends SubscribeMixin(LitElement) {
   private _openDialog(entry?: Tag) {
     showTagDetailDialog(this, {
       entry,
-      openWrite: this._canWriteTags ? (tag) => this._openWrite(tag) : undefined,
+      openWrite: this._canWriteTags ? (tag) => { this._openWrite(tag); } : undefined,
       createEntry: (values, tagId) => this._createTag(values, tagId),
       updateEntry: entry
         ? (values) => this._updateTag(entry, values)
@@ -312,12 +312,12 @@ export class HaConfigTags extends SubscribeMixin(LitElement) {
   private async _removeTag(selectedTag: Tag) {
     if (
       !(await showConfirmationDialog(this, {
-        title: this.hass!.localize("ui.panel.config.tag.confirm_delete_title"),
+        title: this.hass.localize("ui.panel.config.tag.confirm_delete_title"),
         text: this.hass.localize("ui.panel.config.tag.confirm_delete", {
           tag: selectedTag.name || selectedTag.id,
         }),
-        dismissText: this.hass!.localize("ui.common.cancel"),
-        confirmText: this.hass!.localize("ui.common.delete"),
+        dismissText: this.hass.localize("ui.common.cancel"),
+        confirmText: this.hass.localize("ui.common.delete"),
         destructive: true,
       }))
     ) {

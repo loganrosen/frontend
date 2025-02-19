@@ -91,7 +91,7 @@ export class HaDialogDatePicker extends LitElement {
       // without changing the date, should return todays date, not undefined.
       this._setToday();
     }
-    this._params?.onChange(this._value!);
+    this._params?.onChange(this._value);
     this.closeDialog();
   }
 

@@ -59,7 +59,7 @@ class MoreInfoScript extends LitElement {
     const fields =
       this.hass.services.script[
         this.entry?.unique_id || computeObjectId(this.stateObj.entity_id)
-      ]?.fields;
+      ].fields;
 
     const hasFields = fields && Object.keys(fields).length > 0;
 
@@ -128,7 +128,7 @@ class MoreInfoScript extends LitElement {
           .disabled=${isUnavailableState(stateObj.state) || !this._canRun()}
         >
           <ha-svg-icon .path=${mdiPlay}></ha-svg-icon>
-          ${this.hass!.localize("ui.card.script.run")}
+          ${this.hass.localize("ui.card.script.run")}
         </ha-control-button>
       </ha-control-button-group>
     `;
@@ -157,8 +157,8 @@ class MoreInfoScript extends LitElement {
     }
 
     if (this.entry?.unique_id && changedProperties.has("entry")) {
-      const action = `script.${this.entry?.unique_id}`;
-      if (this._scriptData?.action !== action) {
+      const action = `script.${this.entry.unique_id}`;
+      if (this._scriptData.action !== action) {
         this._scriptData = { ...this._scriptData, action };
       }
     }

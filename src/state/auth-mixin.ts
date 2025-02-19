@@ -23,7 +23,7 @@ export default <T extends Constructor<HassBaseEl>>(superClass: T) =>
     protected hassConnected() {
       super.hassConnected();
       subscribeUser(this.hass!.connection, (user) =>
-        this._updateHass({ user })
+        { this._updateHass({ user }); }
       );
     }
 

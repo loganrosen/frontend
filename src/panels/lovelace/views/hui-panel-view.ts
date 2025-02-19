@@ -54,7 +54,7 @@ export class PanelView extends LitElement implements LovelaceViewElement {
     if (
       (!changedProperties.has("cards") &&
         oldLovelace?.config !== this.lovelace?.config) ||
-      (oldLovelace && oldLovelace?.editMode !== this.lovelace?.editMode)
+      (oldLovelace && oldLovelace.editMode !== this.lovelace?.editMode)
     ) {
       this._createCard();
     }
@@ -62,9 +62,9 @@ export class PanelView extends LitElement implements LovelaceViewElement {
 
   protected render(): TemplateResult {
     return html`
-      ${this.cards!.length > 1
+      ${this.cards.length > 1
         ? html`<hui-warning>
-            ${this.hass!.localize(
+            ${this.hass.localize(
               "ui.panel.lovelace.editor.view.panel_mode.warning_multiple_cards"
             )}
           </hui-warning>`
@@ -73,13 +73,13 @@ export class PanelView extends LitElement implements LovelaceViewElement {
       ${this.lovelace?.editMode && this.cards.length === 0
         ? html`
             <ha-fab
-              .label=${this.hass!.localize(
+              .label=${this.hass.localize(
                 "ui.panel.lovelace.editor.edit_card.add"
               )}
               extended
               @click=${this._addCard}
               class=${classMap({
-                rtl: computeRTL(this.hass!),
+                rtl: computeRTL(this.hass),
               })}
             >
               <ha-svg-icon slot="icon" .path=${mdiPlus}></ha-svg-icon>

@@ -161,12 +161,12 @@ export class StateHistoryChartLine extends LitElement {
             const source =
               data.states.length === 0 ||
               param.value[0] < data.states[0].last_changed
-                ? `${this.hass.localize(
+                ? this.hass.localize(
                     "ui.components.history_charts.source_stats"
-                  )}`
-                : `${this.hass.localize(
+                  )
+                : this.hass.localize(
                     "ui.components.history_charts.source_history"
-                  )}`;
+                  );
             value += source;
           }
 
@@ -610,7 +610,7 @@ export class StateHistoryChartLine extends LitElement {
           const target = safeParseFloat(entityState.attributes.humidity);
           // If the current humidity is not available, then we fill up to the target humidity
           const current = hasCurrent
-            ? safeParseFloat(entityState.attributes?.current_humidity)
+            ? safeParseFloat(entityState.attributes.current_humidity)
             : target;
           const series = [target];
 
@@ -620,11 +620,11 @@ export class StateHistoryChartLine extends LitElement {
 
           if (hasHumidifying) {
             series.push(
-              entityState.attributes?.action === "humidifying" ? current : null
+              entityState.attributes.action === "humidifying" ? current : null
             );
           } else if (hasDrying) {
             series.push(
-              entityState.attributes?.action === "drying" ? current : null
+              entityState.attributes.action === "drying" ? current : null
             );
           } else {
             series.push(entityState.state === "on" ? current : null);
@@ -646,7 +646,7 @@ export class StateHistoryChartLine extends LitElement {
           if (value !== null && lastNullDate) {
             const dateTime = date.getTime();
             const lastNullDateTime = lastNullDate.getTime();
-            const lastDateTime = lastDate?.getTime();
+            const lastDateTime = lastDate.getTime();
             const tmpValue =
               (value - lastValue) *
                 ((lastNullDateTime - lastDateTime) /

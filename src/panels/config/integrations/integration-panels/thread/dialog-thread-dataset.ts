@@ -35,7 +35,7 @@ class DialogThreadDataset extends LitElement implements HassDialog {
     const hasOTBR =
       otbrInfo &&
       dataset.extended_pan_id &&
-      otbrInfo.active_dataset_tlvs?.includes(dataset.extended_pan_id);
+      otbrInfo.active_dataset_tlvs.includes(dataset.extended_pan_id);
 
     return html`<ha-dialog
       open

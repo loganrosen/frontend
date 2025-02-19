@@ -76,7 +76,7 @@ const renderProgress = (
   start_suffix = "-start"
 ) => {
   const startEvent = pipelineRun.events.find(
-    (ev) => ev.type === `${stage}` + start_suffix
+    (ev) => ev.type === stage + start_suffix
   );
   const finishEvent = pipelineRun.events.find(
     (ev) => ev.type === `${stage}-end`
@@ -155,8 +155,8 @@ export class AssistPipelineDebug extends LitElement {
       "text" in this.pipelineRun.init_options.input
         ? this.pipelineRun.init_options.input.text
         : undefined) ||
-      this.pipelineRun?.stt?.stt_output?.text ||
-      this.pipelineRun?.intent?.intent_input;
+      this.pipelineRun.stt?.stt_output?.text ||
+      this.pipelineRun.intent?.intent_input;
 
     if (userMessage) {
       messages.push({
@@ -166,7 +166,7 @@ export class AssistPipelineDebug extends LitElement {
     }
 
     if (
-      this.pipelineRun?.intent?.intent_output?.response?.speech?.plain?.speech
+      this.pipelineRun.intent?.intent_output?.response.speech?.plain.speech
     ) {
       messages.push({
         from: "hass",
@@ -348,7 +348,7 @@ export class AssistPipelineDebug extends LitElement {
                     `
                   : ""}
               </div>
-              ${this.pipelineRun?.tts?.tts_output
+              ${this.pipelineRun.tts?.tts_output
                 ? html`
                     <div class="card-actions">
                       <ha-button @click=${this._playTTS}>
@@ -375,7 +375,7 @@ export class AssistPipelineDebug extends LitElement {
   }
 
   private _playTTS(): void {
-    const url = this.pipelineRun!.tts!.tts_output!.url;
+    const url = this.pipelineRun.tts!.tts_output!.url;
     const audio = new Audio(url);
     audio.addEventListener("error", () => {
       showAlertDialog(this, { title: "Error", text: "Error playing audio" });

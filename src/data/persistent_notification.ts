@@ -35,11 +35,11 @@ export const subscribeNotifications = (
   };
   const stream = new NotificationStream();
   const subscription = conn.subscribeMessage<PersistentNotificationMessage>(
-    (message) => onChange(stream.processMessage(message)),
+    (message) => { onChange(stream.processMessage(message)); },
     params
   );
   return () => {
-    subscription.then((unsub) => unsub?.());
+    subscription.then((unsub) => unsub());
   };
 };
 

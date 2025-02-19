@@ -227,7 +227,7 @@ class LightRgbColorPicker extends LitElement {
     this._throttleUpdateColor();
   }
 
-  private _throttleUpdateColor = throttle(() => this._updateColor(), 500);
+  private _throttleUpdateColor = throttle(() => { this._updateColor(); }, 500);
 
   private _updateColor() {
     const hs_color = [
@@ -237,8 +237,8 @@ class LightRgbColorPicker extends LitElement {
     const rgb_color = hs2rgb(this._hsPickerValue!);
 
     if (
-      lightSupportsColorMode(this.stateObj!, LightColorMode.RGBWW) ||
-      lightSupportsColorMode(this.stateObj!, LightColorMode.RGBW)
+      lightSupportsColorMode(this.stateObj, LightColorMode.RGBWW) ||
+      lightSupportsColorMode(this.stateObj, LightColorMode.RGBW)
     ) {
       this._setRgbWColor(
         this._colorBrightnessSliderValue
@@ -248,11 +248,11 @@ class LightRgbColorPicker extends LitElement {
             )
           : rgb_color
       );
-    } else if (lightSupportsColorMode(this.stateObj!, LightColorMode.RGB)) {
+    } else if (lightSupportsColorMode(this.stateObj, LightColorMode.RGB)) {
       if (this._brightnessAdjusted) {
         const brightnessAdjust = (this._brightnessAdjusted / 255) * 100;
         const brightnessPercentage = Math.round(
-          ((this.stateObj!.attributes.brightness || 0) * brightnessAdjust) / 255
+          ((this.stateObj.attributes.brightness || 0) * brightnessAdjust) / 255
         );
         const ajustedRgbColor = this._adjustColorBrightness(
           rgb_color,
@@ -279,8 +279,8 @@ class LightRgbColorPicker extends LitElement {
     this._hsPickerValue = [hsv[0], hsv[1]];
 
     if (
-      lightSupportsColorMode(this.stateObj!, LightColorMode.RGBW) ||
-      lightSupportsColorMode(this.stateObj!, LightColorMode.RGBWW)
+      lightSupportsColorMode(this.stateObj, LightColorMode.RGBW) ||
+      lightSupportsColorMode(this.stateObj, LightColorMode.RGBWW)
     ) {
       this._colorBrightnessSliderValue = hsv[2] / 2.55;
     }
@@ -298,7 +298,7 @@ class LightRgbColorPicker extends LitElement {
   }
 
   private _wvSliderChanged(ev: CustomEvent) {
-    const target = ev.detail as any;
+    const target = ev.detail;
     let wv = Number(target.value);
     const name = (ev.target as any).name;
 
@@ -316,7 +316,7 @@ class LightRgbColorPicker extends LitElement {
 
     wv = Math.min(255, Math.round((wv * 255) / 100));
 
-    const rgb = getLightCurrentModeRgbColor(this.stateObj!);
+    const rgb = getLightCurrentModeRgbColor(this.stateObj);
 
     if (name === "wv") {
       const rgbw_color = rgb || [0, 0, 0, 0];
@@ -340,14 +340,14 @@ class LightRgbColorPicker extends LitElement {
   private _applyColor(color: LightColor, params?: Record<string, any>) {
     fireEvent(this, "color-changed", color);
     this.hass.callService("light", "turn_on", {
-      entity_id: this.stateObj!.entity_id,
+      entity_id: this.stateObj.entity_id,
       ...color,
       ...params,
     });
   }
 
   private _colorBrightnessSliderChanged(ev: CustomEvent) {
-    const target = ev.detail as any;
+    const target = ev.detail;
     let value = Number(target.value);
 
     if (isNaN(value)) {
@@ -359,7 +359,7 @@ class LightRgbColorPicker extends LitElement {
 
     value = (value * 255) / 100;
 
-    const rgb = (getLightCurrentModeRgbColor(this.stateObj!)?.slice(0, 3) || [
+    const rgb = (getLightCurrentModeRgbColor(this.stateObj)?.slice(0, 3) || [
       255, 255, 255,
     ]) as [number, number, number];
 
@@ -398,10 +398,10 @@ class LightRgbColorPicker extends LitElement {
   }
 
   private _setRgbWColor(rgbColor: [number, number, number]) {
-    if (lightSupportsColorMode(this.stateObj!, LightColorMode.RGBWW)) {
+    if (lightSupportsColorMode(this.stateObj, LightColorMode.RGBWW)) {
       const rgbwwColor: [number, number, number, number, number] = this
-        .stateObj!.attributes.rgbww_color
-        ? [...this.stateObj!.attributes.rgbww_color]
+        .stateObj.attributes.rgbww_color
+        ? [...this.stateObj.attributes.rgbww_color]
         : [0, 0, 0, 0, 0];
       const rgbww_color = rgbColor.concat(rgbwwColor.slice(3)) as [
         number,
@@ -411,10 +411,10 @@ class LightRgbColorPicker extends LitElement {
         number,
       ];
       this._applyColor({ rgbww_color });
-    } else if (lightSupportsColorMode(this.stateObj!, LightColorMode.RGBW)) {
-      const rgbwColor: [number, number, number, number] = this.stateObj!
+    } else if (lightSupportsColorMode(this.stateObj, LightColorMode.RGBW)) {
+      const rgbwColor: [number, number, number, number] = this.stateObj
         .attributes.rgbw_color
-        ? [...this.stateObj!.attributes.rgbw_color]
+        ? [...this.stateObj.attributes.rgbw_color]
         : [0, 0, 0, 0];
       const rgbw_color = rgbColor.concat(rgbwColor.slice(3)) as [
         number,

@@ -40,7 +40,7 @@ export const subscribeLabelRegistryUpdates = (
     debounce(
       () =>
         fetchLabelRegistry(conn).then((labels: LabelRegistryEntry[]) =>
-          store.setState(labels, true)
+          { store.setState(labels, true); }
         ),
       500,
       true

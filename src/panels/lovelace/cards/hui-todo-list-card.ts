@@ -100,7 +100,7 @@ export class HuiTodoListCard extends LitElement implements LovelaceCard {
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
-    this._unsubItems?.then((unsub) => unsub());
+    this._unsubItems?.then((unsub) => { unsub(); });
     this._unsubItems = undefined;
   }
 
@@ -157,7 +157,7 @@ export class HuiTodoListCard extends LitElement implements LovelaceCard {
   }
 
   private _getCheckedItems = memoizeOne(
-    (items?: TodoItem[], sort?: string | undefined): TodoItem[] =>
+    (items?: TodoItem[], sort?: string  ): TodoItem[] =>
       items
         ? this._sortItems(
             items.filter((item) => item.status === TodoItemStatus.Completed),
@@ -167,7 +167,7 @@ export class HuiTodoListCard extends LitElement implements LovelaceCard {
   );
 
   private _getUncheckedItems = memoizeOne(
-    (items?: TodoItem[], sort?: string | undefined): TodoItem[] =>
+    (items?: TodoItem[], sort?: string  ): TodoItem[] =>
       items
         ? this._sortItems(
             items.filter((item) => item.status === TodoItemStatus.NeedsAction),
@@ -248,7 +248,7 @@ export class HuiTodoListCard extends LitElement implements LovelaceCard {
               <div class="addRow">
                 <ha-textfield
                   class="addBox"
-                  .placeholder=${this.hass!.localize(
+                  .placeholder=${this.hass.localize(
                     "ui.panel.lovelace.cards.todo-list.add_item"
                   )}
                   @keydown=${this._addKeyPress}
@@ -257,7 +257,7 @@ export class HuiTodoListCard extends LitElement implements LovelaceCard {
                 <ha-icon-button
                   class="addButton"
                   .path=${mdiPlus}
-                  .title=${this.hass!.localize(
+                  .title=${this.hass.localize(
                     "ui.panel.lovelace.cards.todo-list.add_item"
                   )}
                   .disabled=${unavailable}
@@ -278,7 +278,7 @@ export class HuiTodoListCard extends LitElement implements LovelaceCard {
               ? html`
                   <div class="header" role="seperator">
                     <h2>
-                      ${this.hass!.localize(
+                      ${this.hass.localize(
                         "ui.panel.lovelace.cards.todo-list.unchecked_items"
                       )}
                     </h2>
@@ -297,7 +297,7 @@ export class HuiTodoListCard extends LitElement implements LovelaceCard {
                             .path=${mdiDotsVertical}
                           ></ha-icon-button>
                           <ha-list-item graphic="icon">
-                            ${this.hass!.localize(
+                            ${this.hass.localize(
                               this._reordering
                                 ? "ui.panel.lovelace.cards.todo-list.exit_reorder_items"
                                 : "ui.panel.lovelace.cards.todo-list.reorder_items"
@@ -325,7 +325,7 @@ export class HuiTodoListCard extends LitElement implements LovelaceCard {
                     <div class="divider"></div>
                     <div class="header">
                       <h2>
-                        ${this.hass!.localize(
+                        ${this.hass.localize(
                           "ui.panel.lovelace.cards.todo-list.checked_items"
                         )}
                       </h2>
@@ -342,7 +342,7 @@ export class HuiTodoListCard extends LitElement implements LovelaceCard {
                               .path=${mdiDotsVertical}
                             ></ha-icon-button>
                             <ha-list-item graphic="icon" class="warning">
-                              ${this.hass!.localize(
+                              ${this.hass.localize(
                                 "ui.panel.lovelace.cards.todo-list.clear_items"
                               )}
                               <ha-svg-icon
@@ -474,7 +474,7 @@ export class HuiTodoListCard extends LitElement implements LovelaceCard {
 
   private async _subscribeItems(): Promise<void> {
     if (this._unsubItems) {
-      this._unsubItems.then((unsub) => unsub());
+      this._unsubItems.then((unsub) => { unsub(); });
       this._unsubItems = undefined;
     }
     if (!this.hass || !this._entityId) {
@@ -483,7 +483,7 @@ export class HuiTodoListCard extends LitElement implements LovelaceCard {
     if (!(this._entityId in this.hass.states)) {
       return;
     }
-    this._unsubItems = subscribeItems(this.hass!, this._entityId, (update) => {
+    this._unsubItems = subscribeItems(this.hass, this._entityId, (update) => {
       this._items = update.items;
     });
   }
@@ -587,9 +587,9 @@ export class HuiTodoListCard extends LitElement implements LovelaceCard {
 
   private _addItem(ev): void {
     const newItem = this._newItem;
-    if (newItem.value!.length > 0) {
+    if (newItem.value.length > 0) {
       createItem(this.hass!, this._entityId!, {
-        summary: newItem.value!,
+        summary: newItem.value,
       });
     }
 

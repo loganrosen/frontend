@@ -67,7 +67,7 @@ class HaBackupAgentsPicker extends LitElement {
                       domain,
                       type: "icon",
                       useFallback: true,
-                      darkOptimized: this.hass.themes?.darkMode,
+                      darkOptimized: this.hass.themes.darkMode,
                     })}
                     crossorigin="anonymous"
                     referrerpolicy="no-referrer"

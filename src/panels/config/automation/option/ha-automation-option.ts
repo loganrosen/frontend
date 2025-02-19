@@ -134,7 +134,7 @@ export default class HaAutomationOption extends LitElement {
   public expandAll() {
     const rows = this.shadowRoot!.querySelectorAll<HaAutomationOptionRow>(
       "ha-automation-option-row"
-    )!;
+    );
     rows.forEach((row) => {
       row.expand();
     });
@@ -156,14 +156,14 @@ export default class HaAutomationOption extends LitElement {
 
   private _moveUp(ev) {
     ev.stopPropagation();
-    const index = (ev.target as any).index;
+    const index = (ev.target).index;
     const newIndex = index - 1;
     this._move(index, newIndex);
   }
 
   private _moveDown(ev) {
     ev.stopPropagation();
-    const index = (ev.target as any).index;
+    const index = (ev.target).index;
     const newIndex = index + 1;
     this._move(index, newIndex);
   }

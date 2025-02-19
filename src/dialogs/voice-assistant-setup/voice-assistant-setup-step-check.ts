@@ -27,7 +27,7 @@ export class HaVoiceAssistantSetupStepCheck extends LitElement {
     if (
       this._status === "success" &&
       changedProperties.has("hass") &&
-      this.hass.states[this.assistEntityId!]?.state === "idle"
+      this.hass.states[this.assistEntityId!].state === "idle"
     ) {
       this._nextStep();
     }

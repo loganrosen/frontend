@@ -34,7 +34,7 @@ export const graphHeaderFooterConfigStruct = object({
 
 export const headerFooterConfigStructs = dynamic<any>((value) => {
   if (value && typeof value === "object" && "type" in value) {
-    switch ((value as LovelaceHeaderFooterConfig).type!) {
+    switch ((value as LovelaceHeaderFooterConfig).type) {
       case "buttons": {
         return buttonsHeaderFooterConfigStruct;
       }

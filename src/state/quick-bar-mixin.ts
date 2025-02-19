@@ -59,17 +59,17 @@ export default <T extends Constructor<HassElement>>(superClass: T) =>
     private _registerShortcut() {
       tinykeys(window, {
         // Those are for latin keyboards that have e, c, m keys
-        e: (ev) => this._showQuickBar(ev),
-        c: (ev) => this._showQuickBar(ev, QuickBarMode.Command),
+        e: (ev) => { this._showQuickBar(ev); },
+        c: (ev) => { this._showQuickBar(ev, QuickBarMode.Command); },
         m: (ev) => this._createMyLink(ev),
-        a: (ev) => this._showVoiceCommandDialog(ev),
-        d: (ev) => this._showQuickBar(ev, QuickBarMode.Device),
+        a: (ev) => { this._showVoiceCommandDialog(ev); },
+        d: (ev) => { this._showQuickBar(ev, QuickBarMode.Device); },
         // Those are fallbacks for non-latin keyboards that don't have e, c, m keys (qwerty-based shortcuts)
-        KeyE: (ev) => this._showQuickBar(ev),
-        KeyC: (ev) => this._showQuickBar(ev, QuickBarMode.Command),
+        KeyE: (ev) => { this._showQuickBar(ev); },
+        KeyC: (ev) => { this._showQuickBar(ev, QuickBarMode.Command); },
         KeyM: (ev) => this._createMyLink(ev),
-        KeyA: (ev) => this._showVoiceCommandDialog(ev),
-        KeyD: (ev) => this._showQuickBar(ev, QuickBarMode.Device),
+        KeyA: (ev) => { this._showVoiceCommandDialog(ev); },
+        KeyD: (ev) => { this._showQuickBar(ev, QuickBarMode.Device); },
       });
     }
 
@@ -91,7 +91,7 @@ export default <T extends Constructor<HassElement>>(superClass: T) =>
       }
       e.preventDefault();
 
-      showVoiceCommandDialog(this, this.hass!, { pipeline_id: "last_used" });
+      showVoiceCommandDialog(this, this.hass, { pipeline_id: "last_used" });
     }
 
     private _showQuickBar(

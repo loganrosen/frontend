@@ -24,7 +24,7 @@ class PersonBadge extends LitElement {
     }
     const initials = computeUserInitials(this.person.name);
     return html`<div
-      class="initials ${classMap({ long: initials!.length > 2 })}"
+      class="initials ${classMap({ long: initials.length > 2 })}"
     >
       ${initials}
     </div>`;

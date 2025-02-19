@@ -99,14 +99,14 @@ export class HaIconOverflowMenu extends LitElement {
     // If this component is used inside a data table, the z-index of the row
     // needs to be increased. Otherwise the ha-button-menu would be displayed
     // underneath the next row in the table.
-    const row = this.closest(".mdc-data-table__row") as HTMLDivElement | null;
+    const row = this.closest(".mdc-data-table__row");
     if (row) {
       row.style.zIndex = "1";
     }
   }
 
   protected _handleIconOverflowMenuClosed() {
-    const row = this.closest(".mdc-data-table__row") as HTMLDivElement | null;
+    const row = this.closest(".mdc-data-table__row");
     if (row) {
       row.style.zIndex = "";
     }

@@ -91,7 +91,7 @@ class DialogCalendarEventEditor extends LitElement {
       this.hass.config.time_zone
     );
     if (params.entry) {
-      const entry = params.entry!;
+      const entry = params.entry;
       this._allDay = isDate(entry.dtstart);
       this._summary = entry.summary;
       this._description = entry.description;
@@ -354,7 +354,7 @@ class DialogCalendarEventEditor extends LitElement {
 
     // Prevent that the end time can be before the start time. Try to keep the
     // duration the same.
-    if (this._dtend! <= this._dtstart!) {
+    if (this._dtend! <= this._dtstart) {
       this._dtend = addMilliseconds(this._dtstart, duration);
       this._info = this.hass.localize(
         "ui.components.calendar.event.end_auto_adjusted"
@@ -378,7 +378,7 @@ class DialogCalendarEventEditor extends LitElement {
 
     // Prevent that the end time can be before the start time. Try to keep the
     // duration the same.
-    if (this._dtend! <= this._dtstart!) {
+    if (this._dtend! <= this._dtstart) {
       this._dtend = addMilliseconds(new Date(this._dtstart), duration);
       this._info = this.hass.localize(
         "ui.components.calendar.event.end_auto_adjusted"
@@ -446,8 +446,8 @@ class DialogCalendarEventEditor extends LitElement {
     this._submitting = true;
     try {
       await createCalendarEvent(
-        this.hass!,
-        this._calendarId!,
+        this.hass,
+        this._calendarId,
         this._calculateData()
       );
     } catch (err: any) {
@@ -511,12 +511,12 @@ class DialogCalendarEventEditor extends LitElement {
     }
     try {
       await updateCalendarEvent(
-        this.hass!,
-        this._calendarId!,
+        this.hass,
+        this._calendarId,
         entry.uid!,
         eventData,
         entry.recurrence_id || "",
-        range!
+        range
       );
     } catch (err: any) {
       this._error = err ? err.message : "Unknown error";
@@ -562,11 +562,11 @@ class DialogCalendarEventEditor extends LitElement {
     }
     try {
       await deleteCalendarEvent(
-        this.hass!,
+        this.hass,
         this._calendarId!,
         entry.uid!,
         entry.recurrence_id || "",
-        range!
+        range
       );
     } catch (err: any) {
       this._error = err ? err.message : "Unknown error";

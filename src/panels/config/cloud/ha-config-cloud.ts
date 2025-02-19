@@ -68,7 +68,7 @@ class HaConfigCloud extends HassRouterPage {
   protected firstUpdated(changedProps) {
     super.firstUpdated(changedProps);
     this.addEventListener("cloud-done", (ev) => {
-      this._flashMessage = (ev as any).detail.flashMessage;
+      this._flashMessage = (ev).detail.flashMessage;
       navigate("/config/cloud/login");
     });
   }

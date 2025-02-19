@@ -162,7 +162,7 @@ class DialogZWaveJSRemoveFailedNode extends LitElement {
     this._subscribed = removeFailedZwaveNode(
       this.hass,
       this.device_id!,
-      (message: any) => this._handleMessage(message)
+      (message: any) => { this._handleMessage(message); }
     ).catch((error) => {
       this._status = "failed";
       this._error = error;

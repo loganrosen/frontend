@@ -140,8 +140,8 @@ class HassioAddonNetwork extends LitElement {
   private _computeLabel = (_: HaFormSchema): string => "";
 
   private _computeHelper = (item: HaFormSchema): string =>
-    this.addon.translations[this.hass.language]?.network?.[item.name] ||
-    this.addon.translations.en?.network?.[item.name] ||
+    this.addon.translations[this.hass.language].network?.[item.name] ||
+    this.addon.translations.en.network?.[item.name] ||
     this.addon.network_description?.[item.name] ||
     item.name;
 
@@ -170,7 +170,7 @@ class HassioAddonNetwork extends LitElement {
       };
       button.actionSuccess();
       fireEvent(this, "hass-api-called", eventdata);
-      if (this.addon?.state === "started") {
+      if (this.addon.state === "started") {
         await suggestAddonRestart(this, this.hass, this.supervisor, this.addon);
       }
     } catch (err: any) {
@@ -208,7 +208,7 @@ class HassioAddonNetwork extends LitElement {
       };
       button.actionSuccess();
       fireEvent(this, "hass-api-called", eventdata);
-      if (this.addon?.state === "started") {
+      if (this.addon.state === "started") {
         await suggestAddonRestart(this, this.hass, this.supervisor, this.addon);
       }
     } catch (err: any) {

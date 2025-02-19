@@ -96,7 +96,7 @@ export class HuiClimateSwingModesCardFeatureEditor
     }
 
     const stateObj = this.context?.entity_id
-      ? this.hass.states[this.context?.entity_id]
+      ? this.hass.states[this.context.entity_id]
       : undefined;
 
     const data: ClimateSwingModesCardFeatureData = {
@@ -128,7 +128,7 @@ export class HuiClimateSwingModesCardFeatureEditor
       .value as ClimateSwingModesCardFeatureData;
 
     const stateObj = this.context?.entity_id
-      ? this.hass!.states[this.context?.entity_id]
+      ? this.hass!.states[this.context.entity_id]
       : undefined;
 
     if (customize_modes && !config.swing_modes) {

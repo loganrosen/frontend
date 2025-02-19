@@ -190,9 +190,9 @@ export class HaSortable extends LitElement {
   private _handleEnd = async (evt) => {
     fireEvent(this, "drag-end");
     // put back in original location
-    if (this.rollback && (evt.item as any).placeholder) {
-      (evt.item as any).placeholder.replaceWith(evt.item);
-      delete (evt.item as any).placeholder;
+    if (this.rollback && (evt.item).placeholder) {
+      (evt.item).placeholder.replaceWith(evt.item);
+      delete (evt.item).placeholder;
     }
   };
 

@@ -115,13 +115,13 @@ export class HaComboBox extends LitElement {
 
   public async open() {
     await this.updateComplete;
-    this._comboBox?.open();
+    this._comboBox.open();
   }
 
   public async focus() {
     await this.updateComplete;
-    await this._inputElement?.updateComplete;
-    this._inputElement?.focus();
+    await this._inputElement.updateComplete;
+    this._inputElement.focus();
   }
 
   public disconnectedCallback() {
@@ -224,10 +224,10 @@ export class HaComboBox extends LitElement {
 
   private _toggleOpen(ev: Event) {
     if (this.opened) {
-      this._comboBox?.close();
+      this._comboBox.close();
       ev.stopPropagation();
     } else {
-      this._comboBox?.inputElement.focus();
+      this._comboBox.inputElement.focus();
     }
   }
 

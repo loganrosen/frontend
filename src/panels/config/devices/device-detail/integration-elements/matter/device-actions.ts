@@ -33,9 +33,9 @@ export const getMatterDeviceDefaultActions = (
     label: hass.localize("ui.panel.config.matter.device_actions.ping_device"),
     icon: mdiChatQuestion,
     action: () =>
-      showMatterPingNodeDialog(el, {
+      { showMatterPingNodeDialog(el, {
         device_id: device.id,
-      }),
+      }); },
   });
 
   return actions;
@@ -63,9 +63,9 @@ export const getMatterDeviceActions = async (
       ),
       icon: mdiExportVariant,
       action: () =>
-        showMatterOpenCommissioningWindowDialog(el, {
+        { showMatterOpenCommissioningWindowDialog(el, {
           device_id: device.id,
-        }),
+        }); },
     });
     actions.push({
       label: hass.localize(
@@ -73,9 +73,9 @@ export const getMatterDeviceActions = async (
       ),
       icon: mdiExportVariant,
       action: () =>
-        showMatterManageFabricsDialog(el, {
+        { showMatterManageFabricsDialog(el, {
           device_id: device.id,
-        }),
+        }); },
     });
     actions.push({
       label: hass.localize(
@@ -83,9 +83,9 @@ export const getMatterDeviceActions = async (
       ),
       icon: mdiChatProcessing,
       action: () =>
-        showMatterReinterviewNodeDialog(el, {
+        { showMatterReinterviewNodeDialog(el, {
           device_id: device.id,
-        }),
+        }); },
     });
   }
 

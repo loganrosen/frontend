@@ -88,7 +88,7 @@ class HuiClimateFanModesCardFeature
 
   private async _valueChanged(ev: CustomEvent) {
     const fanMode =
-      (ev.detail as any).value ?? ((ev.target as any).value as string);
+      (ev.detail).value ?? ((ev.target as any).value as string);
 
     const oldFanMode = this.stateObj!.attributes.fan_mode;
 
@@ -124,7 +124,7 @@ class HuiClimateFanModesCardFeature
 
     const options = filterModes(
       stateObj.attributes.fan_modes,
-      this._config!.fan_modes
+      this._config.fan_modes
     ).map<ControlSelectOption>((mode) => ({
       value: mode,
       label: this.hass!.formatEntityAttributeValue(
@@ -148,11 +148,11 @@ class HuiClimateFanModesCardFeature
           .value=${this._currentFanMode}
           @value-changed=${this._valueChanged}
           hide-label
-          .ariaLabel=${this.hass!.formatEntityAttributeName(
+          .ariaLabel=${this.hass.formatEntityAttributeName(
             stateObj,
             "fan_mode"
           )}
-          .disabled=${this.stateObj!.state === UNAVAILABLE}
+          .disabled=${this.stateObj.state === UNAVAILABLE}
         >
         </ha-control-select>
       `;
@@ -162,7 +162,7 @@ class HuiClimateFanModesCardFeature
       <ha-control-select-menu
         show-arrow
         hide-label
-        .label=${this.hass!.formatEntityAttributeName(stateObj, "fan_mode")}
+        .label=${this.hass.formatEntityAttributeName(stateObj, "fan_mode")}
         .value=${this._currentFanMode}
         .disabled=${this.stateObj.state === UNAVAILABLE}
         fixedMenuPosition

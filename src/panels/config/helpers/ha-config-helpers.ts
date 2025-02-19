@@ -141,8 +141,8 @@ const getConfigEntry = (
   configEntries: Record<string, ConfigEntry>,
   entityId: string
 ) => {
-  const configEntryId = entityEntries![entityId]?.config_entry_id;
-  return configEntryId ? configEntries![configEntryId] : undefined;
+  const configEntryId = entityEntries[entityId].config_entry_id;
+  return configEntryId ? configEntries[configEntryId] : undefined;
 };
 
 @customElement("ha-config-helpers")
@@ -260,7 +260,7 @@ export class HaConfigHelpers extends SubscribeMixin(LitElement) {
               this._entitySource &&
               this._configEntries &&
               message.entry.state === "loaded" &&
-              this._configEntries[message.entry.entry_id]?.state !== "loaded"
+              this._configEntries[message.entry.entry_id].state !== "loaded"
             ) {
               this._debouncedFetchEntitySources();
             }
@@ -269,7 +269,7 @@ export class HaConfigHelpers extends SubscribeMixin(LitElement) {
         },
         { type: ["helper"] }
       ),
-      subscribeEntityRegistry(this.hass.connection!, (entries) => {
+      subscribeEntityRegistry(this.hass.connection, (entries) => {
         this._entityEntries = groupByOne(entries, (entry) => entry.entity_id);
       }),
       subscribeLabelRegistry(this.hass.connection, (labels) => {
@@ -391,7 +391,7 @@ export class HaConfigHelpers extends SubscribeMixin(LitElement) {
                         "ui.panel.config.helpers.picker.error_information"
                       ),
                       warning: true,
-                      action: () => this._showError(helper),
+                      action: () => { this._showError(helper); },
                     },
                   ]
                 : []),
@@ -400,14 +400,14 @@ export class HaConfigHelpers extends SubscribeMixin(LitElement) {
                 label: this.hass.localize(
                   "ui.panel.config.automation.picker.show_settings"
                 ),
-                action: () => this._openSettings(helper),
+                action: () => { this._openSettings(helper); },
               },
               {
                 path: mdiTag,
                 label: this.hass.localize(
                   `ui.panel.config.automation.picker.${helper.category ? "edit_category" : "assign_category"}`
                 ),
-                action: () => this._editCategory(helper),
+                action: () => { this._editCategory(helper); },
               },
               ...(helper.configEntry &&
               helper.editable &&
@@ -456,7 +456,7 @@ export class HaConfigHelpers extends SubscribeMixin(LitElement) {
         );
 
         if (configEntry) {
-          delete configEntriesCopy[configEntry!.entry_id];
+          delete configEntriesCopy[configEntry.entry_id];
         }
 
         return {
@@ -513,7 +513,7 @@ export class HaConfigHelpers extends SubscribeMixin(LitElement) {
       return [...states, ...entries, ...disabledItems]
         .filter((item) =>
           filteredStateItems
-            ? filteredStateItems?.includes(item.entity_id)
+            ? filteredStateItems.includes(item.entity_id)
             : true
         )
         .map((item) => {
@@ -543,7 +543,7 @@ export class HaConfigHelpers extends SubscribeMixin(LitElement) {
 
   private _labelsForEntity(entityId: string): string[] {
     return (
-      this.hass.entities[entityId]?.labels ||
+      this.hass.entities[entityId].labels ||
       this._entityReg.find((e) => e.entity_id === entityId)?.labels ||
       []
     );
@@ -559,7 +559,7 @@ export class HaConfigHelpers extends SubscribeMixin(LitElement) {
       return html`<hass-loading-screen></hass-loading-screen>`;
     }
 
-    const categoryItems = html`${this._categories?.map(
+    const categoryItems = html`${this._categories.map(
         (category) =>
           html`<ha-md-menu-item
             .value=${category.category_id}
@@ -584,7 +584,7 @@ export class HaConfigHelpers extends SubscribeMixin(LitElement) {
           ${this.hass.localize("ui.panel.config.category.editor.add")}
         </div>
       </ha-md-menu-item>`;
-    const labelItems = html`${this._labels?.map((label) => {
+    const labelItems = html`${this._labels.map((label) => {
         const color = label.color ? computeCssColor(label.color) : undefined;
         const selected = this._selected.every((entityId) =>
           this._labelsForEntity(entityId).includes(label.label_id)
@@ -870,7 +870,7 @@ export class HaConfigHelpers extends SubscribeMixin(LitElement) {
         "intersection" in items
           ? // @ts-ignore
             items.intersection(itms)
-          : new Set([...items].filter((x) => itms!.has(x)));
+          : new Set([...items].filter((x) => itms.has(x)));
     });
 
     for (const [key, filter] of filters) {
@@ -898,7 +898,7 @@ export class HaConfigHelpers extends SubscribeMixin(LitElement) {
           "intersection" in items
             ? // @ts-ignore
               items.intersection(labelItems)
-            : new Set([...items].filter((x) => labelItems!.has(x)));
+            : new Set([...items].filter((x) => labelItems.has(x)));
       }
       if (
         key === "ha-filter-categories" &&
@@ -926,7 +926,7 @@ export class HaConfigHelpers extends SubscribeMixin(LitElement) {
           "intersection" in items
             ? // @ts-ignore
               items.intersection(categoryItems)
-            : new Set([...items].filter((x) => categoryItems!.has(x)));
+            : new Set([...items].filter((x) => categoryItems.has(x)));
       }
     }
 
@@ -1170,7 +1170,7 @@ ${rejected
 
     const entityIds = Object.keys(this._entitySource);
 
-    const newStates = Object.values(this.hass!.states).filter(
+    const newStates = Object.values(this.hass.states).filter(
       (entity) =>
         entityIds.includes(entity.entity_id) ||
         isHelperDomain(computeStateDomain(entity))
@@ -1210,8 +1210,8 @@ ${rejected
       text: this.hass.localize(
         "ui.panel.config.integrations.config_entry.delete_confirm_text"
       ),
-      confirmText: this.hass!.localize("ui.common.delete"),
-      dismissText: this.hass!.localize("ui.common.cancel"),
+      confirmText: this.hass.localize("ui.common.delete"),
+      dismissText: this.hass.localize("ui.common.cancel"),
       destructive: true,
     });
 

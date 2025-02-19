@@ -127,7 +127,7 @@ export class HuiHumidifierCard extends LitElement implements LovelaceCard {
       `;
     }
 
-    const name = this._config!.name || computeStateName(stateObj);
+    const name = this._config.name || computeStateName(stateObj);
 
     const color = stateColorCss(stateObj);
 
@@ -152,7 +152,7 @@ export class HuiHumidifierCard extends LitElement implements LovelaceCard {
         </div>
         <ha-icon-button
           class="more-info"
-          .label=${this.hass!.localize(
+          .label=${this.hass.localize(
             "ui.panel.lovelace.cards.show_more_info"
           )}
           .path=${mdiDotsVertical}

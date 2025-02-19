@@ -85,7 +85,7 @@ export class HuiDialogEditSection
       return nothing;
     }
 
-    const heading = this.hass!.localize(
+    const heading = this.hass.localize(
       "ui.panel.lovelace.editor.edit_section.header"
     );
 
@@ -154,7 +154,7 @@ export class HuiDialogEditSection
           >
             <ha-icon-button
               slot="trigger"
-              .label=${this.hass!.localize("ui.common.menu")}
+              .label=${this.hass.localize("ui.common.menu")}
               .path=${mdiDotsVertical}
             ></ha-icon-button>
             <ha-list-item graphic="icon">
@@ -176,7 +176,7 @@ export class HuiDialogEditSection
                   ${TABS.map(
                     (tab) => html`
                       <mwc-tab
-                        .label=${this.hass!.localize(
+                        .label=${this.hass.localize(
                           `ui.panel.lovelace.editor.edit_section.${tab.replace("-", "_")}`
                         )}
                       >
@@ -189,11 +189,11 @@ export class HuiDialogEditSection
         </ha-dialog-header>
         ${content}
         <ha-button slot="secondaryAction" @click=${this._cancel}>
-          ${this.hass!.localize("ui.common.cancel")}
+          ${this.hass.localize("ui.common.cancel")}
         </ha-button>
 
         <ha-button slot="primaryAction" @click=${this._save}>
-          ${this.hass!.localize("ui.common.save")}
+          ${this.hass.localize("ui.common.save")}
         </ha-button>
       </ha-dialog>
     `;

@@ -125,13 +125,13 @@ export class HuiGraphFooterEditor
         (target.type === "number" && isNaN(Number(target.value)))
       ) {
         this._config = { ...this._config };
-        delete this._config[target.configValue!];
+        delete this._config[target.configValue];
       } else {
         let value: any = target.value;
         if (target.type === "number") {
           value = Number(value);
         }
-        this._config = { ...this._config, [target.configValue!]: value };
+        this._config = { ...this._config, [target.configValue]: value };
       }
     }
 

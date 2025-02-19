@@ -167,7 +167,7 @@ export class HassRouterPage extends ReactiveElement {
 
       // Removes either loading screen or the panel
       if (this.lastChild) {
-        this.removeChild(this.lastChild!);
+        this.removeChild(this.lastChild);
       }
 
       if (showLoadingScreenTimeout) {

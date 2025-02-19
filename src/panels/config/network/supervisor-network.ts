@@ -129,14 +129,14 @@ export class HassioNetwork extends LitElement {
                   "ui.panel.config.network.supervisor.wifi"
                 )}
                 outlined
-                .expanded=${!this._interface?.wifi?.ssid}
+                .expanded=${!this._interface.wifi?.ssid}
               >
-                ${this._interface?.wifi?.ssid
+                ${this._interface.wifi?.ssid
                   ? html`<p>
                       <ha-svg-icon slot="icon" .path=${mdiWifi}></ha-svg-icon>
                       ${this.hass.localize(
                         "ui.panel.config.network.supervisor.connected_to",
-                        { ssid: this._interface?.wifi?.ssid }
+                        { ssid: this._interface.wifi.ssid }
                       )}
                     </p>`
                   : nothing}
@@ -291,7 +291,7 @@ export class HassioNetwork extends LitElement {
     try {
       const aps = await accesspointScan(this.hass, this._interface.interface);
       this._accessPoints = [];
-      aps.accesspoints?.forEach((ap) => {
+      aps.accesspoints.forEach((ap) => {
         if (ap.ssid) {
           // filter out duplicates
           const existing = this._accessPoints.find((a) => a.ssid === ap.ssid);
@@ -636,7 +636,7 @@ export class HassioNetwork extends LitElement {
 
   private _handleRadioValueChangedAp(ev: Event): void {
     const source = ev.target as HaRadio;
-    const value = source.value as string as "open" | "wep" | "wpa-psk";
+    const value = source.value as "open" | "wep" | "wpa-psk";
     this._wifiConfiguration!.auth = value;
     this._dirty = true;
     this.requestUpdate("_wifiConfiguration");
@@ -656,25 +656,25 @@ export class HassioNetwork extends LitElement {
     if (id === "address") {
       const index = (ev.target as any).index as number;
       const { mask: oldMask } = parseAddress(
-        this._interface![version]!.address![index]
+        this._interface[version].address![index]
       );
       const { mask } = parseAddress(value);
-      this._interface[version]!.address![index] = formatAddress(
+      this._interface[version].address![index] = formatAddress(
         value,
         mask || oldMask || ""
       );
       this.requestUpdate("_interface");
     } else if (id === "netmask") {
       const index = (ev.target as any).index as number;
-      const { ip } = parseAddress(this._interface![version]!.address![index]);
-      this._interface[version]!.address![index] = formatAddress(ip, value);
+      const { ip } = parseAddress(this._interface[version].address![index]);
+      this._interface[version].address![index] = formatAddress(ip, value);
       this.requestUpdate("_interface");
     } else if (id === "nameserver") {
       const index = (ev.target as any).index as number;
-      this._interface[version]!.nameservers![index] = value;
+      this._interface[version].nameservers![index] = value;
       this.requestUpdate("_interface");
     } else {
-      this._interface[version]![id] = value;
+      this._interface[version][id] = value;
     }
   }
 
@@ -686,12 +686,12 @@ export class HassioNetwork extends LitElement {
     if (
       !value ||
       !this._wifiConfiguration ||
-      this._wifiConfiguration![id] === value
+      this._wifiConfiguration[id] === value
     ) {
       return;
     }
     this._dirty = true;
-    this._wifiConfiguration![id] = value;
+    this._wifiConfiguration[id] = value;
   }
 
   private _addAddress(ev: Event): void {
@@ -727,7 +727,7 @@ export class HassioNetwork extends LitElement {
     if (!this._interface![version]!.nameservers) {
       this._interface![version]!.nameservers = [];
     }
-    this._interface![version]!.nameservers!.push(...addresses);
+    this._interface![version]!.nameservers.push(...addresses);
     this._dirty = true;
     this.requestUpdate("_interface");
   }
@@ -738,7 +738,7 @@ export class HassioNetwork extends LitElement {
     if (!this._interface![version]!.nameservers) {
       this._interface![version]!.nameservers = [];
     }
-    this._interface![version]!.nameservers!.push("");
+    this._interface![version]!.nameservers.push("");
     this._dirty = true;
     this.requestUpdate("_interface");
   }

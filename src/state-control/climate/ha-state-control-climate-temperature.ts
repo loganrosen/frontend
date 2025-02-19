@@ -89,7 +89,7 @@ export class HaStateControlClimateTemperature extends LitElement {
   }
 
   private _valueChanged(ev: CustomEvent) {
-    const value = (ev.detail as any).value;
+    const value = (ev.detail).value;
     if (isNaN(value)) return;
     const target = ev.type.replace("-changed", "");
     this._targetTemperature = {
@@ -101,7 +101,7 @@ export class HaStateControlClimateTemperature extends LitElement {
   }
 
   private _valueChanging(ev: CustomEvent) {
-    const value = (ev.detail as any).value;
+    const value = (ev.detail).value;
     if (isNaN(value)) return;
     const target = ev.type.replace("-changing", "");
     this._targetTemperature = {
@@ -112,21 +112,21 @@ export class HaStateControlClimateTemperature extends LitElement {
   }
 
   private _debouncedCallService = debounce(
-    (target: Target) => this._callService(target),
+    (target: Target) => { this._callService(target); },
     1000
   );
 
   private _callService(type: string) {
     if (type === "high" || type === "low") {
       this.hass.callService("climate", "set_temperature", {
-        entity_id: this.stateObj!.entity_id,
+        entity_id: this.stateObj.entity_id,
         target_temp_low: this._targetTemperature.low,
         target_temp_high: this._targetTemperature.high,
       });
       return;
     }
     this.hass.callService("climate", "set_temperature", {
-      entity_id: this.stateObj!.entity_id,
+      entity_id: this.stateObj.entity_id,
       temperature: this._targetTemperature.value,
     });
   }
@@ -230,7 +230,7 @@ export class HaStateControlClimateTemperature extends LitElement {
     style: "normal" | "big",
     hideUnit?: boolean
   ) {
-    const digits = this._step.toString().split(".")?.[1]?.length ?? 0;
+    const digits = this._step.toString().split(".")[1]?.length ?? 0;
     const formatOptions: Intl.NumberFormatOptions = {
       maximumFractionDigits: digits,
       minimumFractionDigits: digits,

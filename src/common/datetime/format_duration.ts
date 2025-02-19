@@ -103,7 +103,7 @@ export const formatDuration = (
   locale: FrontendLocaleData,
   duration: string,
   unit: DurationUnit,
-  precision?: number | undefined
+  precision?: number  
 ): string => {
   const value =
     precision !== undefined

@@ -246,7 +246,7 @@ export class HuiCardFeaturesEditor extends LitElement {
       ${supportedFeaturesType.length === 0 && this.features.length === 0
         ? html`
             <ha-alert type="info">
-              ${this.hass!.localize(
+              ${this.hass.localize(
                 "ui.panel.lovelace.editor.features.no_compatible_available"
               )}
             </ha-alert>
@@ -319,7 +319,7 @@ export class HuiCardFeaturesEditor extends LitElement {
               <ha-button
                 slot="trigger"
                 outlined
-                .label=${this.hass!.localize(
+                .label=${this.hass.localize(
                   `ui.panel.lovelace.editor.features.add`
                 )}
               >

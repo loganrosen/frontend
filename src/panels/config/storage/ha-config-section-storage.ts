@@ -100,8 +100,8 @@ class HaConfigSectionStorage extends LitElement {
                         "ui.panel.config.storage.used_space"
                       )}
                       .value=${this._getUsedSpace(
-                        this._hostInfo?.disk_used,
-                        this._hostInfo?.disk_total
+                        this._hostInfo.disk_used,
+                        this._hostInfo.disk_total
                       )}
                       .tooltip=${`${this._hostInfo.disk_used} GB/${this._hostInfo.disk_total} GB`}
                     ></ha-metric>

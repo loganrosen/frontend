@@ -73,7 +73,7 @@ export class HuiHeadingCard extends LitElement implements LovelaceCard {
   }
 
   private _handleAction(ev: ActionHandlerEvent) {
-    handleAction(this, this.hass!, this._config!, ev.detail.action!);
+    handleAction(this, this.hass!, this._config!, ev.detail.action);
   }
 
   protected render() {

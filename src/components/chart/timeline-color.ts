@@ -41,7 +41,7 @@ function computeTimelineStateColor(
   if (!rgb) return undefined;
 
   const domain = computeDomain(stateObj.entity_id);
-  const shade = DOMAIN_STATE_SHADES[domain]?.[state] as number | number;
+  const shade = DOMAIN_STATE_SHADES[domain][state];
   if (!shade) {
     return rgb;
   }

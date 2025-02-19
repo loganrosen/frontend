@@ -56,7 +56,7 @@ class UserBadge extends LitElement {
     }
     const initials = computeUserInitials(this.user.name);
     return html`<div
-      class="initials ${classMap({ long: initials!.length > 2 })}"
+      class="initials ${classMap({ long: initials.length > 2 })}"
     >
       ${initials}
     </div>`;

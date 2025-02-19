@@ -697,7 +697,7 @@ export const entityMeetsTargetSelector = (
   entitySources?: EntitySources
 ): boolean => {
   if (targetSelector.target?.entity) {
-    return ensureArray(targetSelector.target!.entity).some((filterEntity) =>
+    return ensureArray(targetSelector.target.entity).some((filterEntity) =>
       filterSelectorEntities(filterEntity, entity, entitySources)
     );
   }
@@ -707,7 +707,7 @@ export const entityMeetsTargetSelector = (
 export const filterSelectorDevices = (
   filterDevice: DeviceSelectorFilter,
   device: DeviceRegistryEntry,
-  deviceIntegrationLookup?: Record<string, Set<string>> | undefined
+  deviceIntegrationLookup?: Record<string, Set<string>>  
 ): boolean => {
   const {
     manufacturer: filterManufacturer,
@@ -724,7 +724,7 @@ export const filterSelectorDevices = (
   }
 
   if (filterIntegration && deviceIntegrationLookup) {
-    if (!deviceIntegrationLookup?.[device.id]?.has(filterIntegration)) {
+    if (!deviceIntegrationLookup[device.id].has(filterIntegration)) {
       return false;
     }
   }
@@ -794,7 +794,7 @@ export const handleLegacyEntitySelector = (
 
   const { domain, integration, device_class, ...rest } = (
     selector as LegacyEntitySelector
-  ).entity!;
+  ).entity;
 
   if (domain || integration || device_class) {
     return {
@@ -822,7 +822,7 @@ export const handleLegacyDeviceSelector = (
 
   const { integration, manufacturer, model, ...rest } = (
     selector as LegacyDeviceSelector
-  ).device!;
+  ).device;
 
   if (integration || manufacturer || model) {
     return {

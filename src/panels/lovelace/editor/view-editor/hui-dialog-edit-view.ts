@@ -454,7 +454,7 @@ export class HuiDialogEditView extends LitElement {
     newConfig.type = SECTIONS_VIEW_LAYOUT;
     newConfig.sections = [generateDefaultSection(this.hass!.localize)];
     newConfig.path = undefined;
-    const lovelace = this._params!.lovelace!;
+    const lovelace = this._params.lovelace;
 
     try {
       await lovelace.saveConfig(
@@ -480,8 +480,8 @@ export class HuiDialogEditView extends LitElement {
       return;
     }
     try {
-      await this._params.lovelace!.saveConfig(
-        deleteView(this._params.lovelace!.config, this._params.viewIndex!)
+      await this._params.lovelace.saveConfig(
+        deleteView(this._params.lovelace.config, this._params.viewIndex!)
       );
       this.closeDialog();
       navigate(`/${window.location.pathname.split("/")[1]}`);
@@ -545,7 +545,7 @@ export class HuiDialogEditView extends LitElement {
       viewConf.cards = [];
     }
 
-    const lovelace = this._params.lovelace!;
+    const lovelace = this._params.lovelace;
 
     try {
       await lovelace.saveConfig(
@@ -613,7 +613,7 @@ export class HuiDialogEditView extends LitElement {
       this._creatingView ||
       JSON.stringify(this._config) !==
         JSON.stringify(
-          this._params!.lovelace!.config.views[this._params!.viewIndex!]
+          this._params!.lovelace.config.views[this._params!.viewIndex!]
         )
     );
   }

@@ -223,7 +223,7 @@ class EntityPreviewRow extends LitElement {
       const image: string = computeImageUrl(stateObj as ImageEntity);
       return html`
         <img
-          alt=${ifDefined(stateObj?.attributes.friendly_name)}
+          alt=${ifDefined(stateObj.attributes.friendly_name)}
           src=${this.hass.hassUrl(image)}
         />
       `;
@@ -236,8 +236,8 @@ class EntityPreviewRow extends LitElement {
           class="text-content"
         >
           ${stateObj.state === "locked"
-            ? this.hass!.localize("ui.card.lock.unlock")
-            : this.hass!.localize("ui.card.lock.lock")}
+            ? this.hass.localize("ui.card.lock.unlock")
+            : this.hass.localize("ui.card.lock.lock")}
         </mwc-button>
       `;
     }
@@ -294,7 +294,7 @@ class EntityPreviewRow extends LitElement {
             ? stateObj.attributes.options.map(
                 (option) => html`
                   <mwc-list-item .value=${option}>
-                    ${this.hass!.formatEntityState(stateObj, option)}
+                    ${this.hass.formatEntityState(stateObj, option)}
                   </mwc-list-item>
                 `
               )
@@ -331,7 +331,7 @@ class EntityPreviewRow extends LitElement {
           .autoValidate=${stateObj.attributes.pattern}
           .pattern=${stateObj.attributes.pattern}
           .type=${stateObj.attributes.mode}
-          placeholder=${this.hass!.localize("ui.card.text.emtpy_value")}
+          placeholder=${this.hass.localize("ui.card.text.emtpy_value")}
         ></ha-textfield>
       `;
     }

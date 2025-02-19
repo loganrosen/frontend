@@ -89,8 +89,8 @@ export class HuiThermostatCardEditor
       return nothing;
     }
 
-    const entityId = this._config!.entity;
-    const stateObj = entityId ? this.hass!.states[entityId] : undefined;
+    const entityId = this._config.entity;
+    const stateObj = entityId ? this.hass.states[entityId] : undefined;
 
     return html`
       <ha-form
@@ -103,7 +103,7 @@ export class HuiThermostatCardEditor
       <ha-expansion-panel outlined>
         <h3 slot="header">
           <ha-svg-icon .path=${mdiListBox}></ha-svg-icon>
-          ${this.hass!.localize(
+          ${this.hass.localize(
             "ui.panel.lovelace.editor.card.generic.features"
           )}
         </h3>
@@ -112,7 +112,7 @@ export class HuiThermostatCardEditor
             .hass=${this.hass}
             .stateObj=${stateObj}
             .featuresTypes=${COMPATIBLE_FEATURES_TYPES}
-            .features=${this._config!.features ?? []}
+            .features=${this._config.features ?? []}
             @features-changed=${this._featuresChanged}
             @edit-detail-element=${this._editDetailElement}
           ></hui-card-features-editor>
@@ -150,7 +150,7 @@ export class HuiThermostatCardEditor
 
     fireEvent(this, "edit-sub-element", {
       config: config,
-      saveConfig: (newConfig) => this._updateFeature(index!, newConfig),
+      saveConfig: (newConfig) => { this._updateFeature(index!, newConfig); },
       context: {
         entity_id: this._config!.entity,
       },

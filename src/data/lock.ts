@@ -91,10 +91,10 @@ export const callProtectedLockService = async (
   ).catch(() => undefined);
   const defaultCode = lockRegistryEntry?.options?.lock?.default_code;
 
-  if (stateObj!.attributes.code_format && !defaultCode) {
+  if (stateObj.attributes.code_format && !defaultCode) {
     const response = await showEnterCodeDialog(element, {
       codeFormat: "text",
-      codePattern: stateObj!.attributes.code_format,
+      codePattern: stateObj.attributes.code_format,
       title: hass.localize(`ui.card.lock.${service}`),
       submitText: hass.localize(`ui.card.lock.${service}`),
     });
@@ -105,7 +105,7 @@ export const callProtectedLockService = async (
   }
 
   await hass.callService("lock", service, {
-    entity_id: stateObj!.entity_id,
+    entity_id: stateObj.entity_id,
     code,
   });
 };

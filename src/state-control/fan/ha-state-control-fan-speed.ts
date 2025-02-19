@@ -41,26 +41,26 @@ export class HaStateControlFanSpeed extends LitElement {
   }
 
   private _speedValueChanged(ev: CustomEvent) {
-    const speed = (ev.detail as any).value as FanSpeed;
+    const speed = (ev.detail).value as FanSpeed;
 
     this.speedValue = speed;
 
     const percentage = fanSpeedToPercentage(this.stateObj, speed);
 
     this.hass.callService("fan", "set_percentage", {
-      entity_id: this.stateObj!.entity_id,
+      entity_id: this.stateObj.entity_id,
       percentage: percentage,
     });
   }
 
   private _valueChanged(ev: CustomEvent) {
-    const value = (ev.detail as any).value;
+    const value = (ev.detail).value;
     if (isNaN(value)) return;
 
     this.sliderValue = value;
 
     this.hass.callService("fan", "set_percentage", {
-      entity_id: this.stateObj!.entity_id,
+      entity_id: this.stateObj.entity_id,
       percentage: value,
     });
   }

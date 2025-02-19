@@ -76,7 +76,7 @@ export class HaAssistChat extends LitElement {
     ) {
       this._toggleListening();
     }
-    setTimeout(() => this._messageInput.focus(), 0);
+    setTimeout(() => { this._messageInput.focus(); }, 0);
   }
 
   protected updated(changedProps: PropertyValues) {
@@ -120,7 +120,7 @@ export class HaAssistChat extends LitElement {
           `}
       <div class="messages">
         <div class="messages-container" id="scroll-container">
-          ${this._conversation!.map(
+          ${this._conversation.map(
             // New lines matter for messages
             // prettier-ignore
             (message) => html`
@@ -241,7 +241,7 @@ export class HaAssistChat extends LitElement {
   }
 
   private _addMessage(message: AssistMessage) {
-    this._conversation = [...this._conversation!, message];
+    this._conversation = [...this._conversation, message];
   }
 
   private async _showNotSupportedMessage() {

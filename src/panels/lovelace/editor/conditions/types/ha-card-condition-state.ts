@@ -40,7 +40,7 @@ export class HaCardConditionState extends LitElement {
   }
 
   protected static validateUIConfig(condition: StateCondition) {
-    return assert(condition, stateConditionStruct);
+    assert(condition, stateConditionStruct);
   }
 
   protected willUpdate(changedProperties: PropertyValues): void {

@@ -149,13 +149,13 @@ export class DialogAddApplicationCredential extends LitElement {
                 )}
                 <a
                   href=${documentationUrl(
-                    this.hass!,
+                    this.hass,
                     "/integrations/application_credentials"
                   )}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  ${this.hass!.localize(
+                  ${this.hass.localize(
                     "ui.panel.config.application_credentials.editor.view_documentation"
                   )}
                   <ha-svg-icon .path=${mdiOpenInNew}></ha-svg-icon>

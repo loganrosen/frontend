@@ -207,7 +207,7 @@ export class HassioBackups extends LitElement {
       >
         <ha-button-menu slot="toolbar-icon" @action=${this._handleAction}>
           <ha-icon-button
-            .label=${this.supervisor?.localize("common.menu")}
+            .label=${this.supervisor.localize("common.menu")}
             .path=${mdiDotsVertical}
             slot="trigger"
           ></ha-icon-button>
@@ -300,11 +300,11 @@ export class HassioBackups extends LitElement {
   private _showUploadBackupDialog() {
     showBackupUploadDialog(this, {
       showBackup: (slug: string) =>
-        showHassioBackupDialog(this, {
+        { showHassioBackupDialog(this, {
           slug,
           supervisor: this.supervisor,
           onDelete: () => this._fetchBackups(),
-        }),
+        }); },
       reloadBackup: () => this._fetchBackups(),
     });
   }
@@ -355,17 +355,17 @@ export class HassioBackups extends LitElement {
   }
 
   private _createBackup() {
-    if (this.supervisor!.info.state !== "running") {
+    if (this.supervisor.info.state !== "running") {
       showAlertDialog(this, {
-        title: this.supervisor!.localize("backup.could_not_create"),
-        text: this.supervisor!.localize("backup.create_blocked_not_running", {
-          state: this.supervisor!.info.state,
+        title: this.supervisor.localize("backup.could_not_create"),
+        text: this.supervisor.localize("backup.create_blocked_not_running", {
+          state: this.supervisor.info.state,
         }),
       });
       return;
     }
     showHassioCreateBackupDialog(this, {
-      supervisor: this.supervisor!,
+      supervisor: this.supervisor,
       onCreate: () => this._fetchBackups(),
     });
   }

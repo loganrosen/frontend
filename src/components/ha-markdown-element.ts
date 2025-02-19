@@ -138,7 +138,7 @@ class HaMarkdownElement extends ReactiveElement {
                   if (
                     firstChild.nodeType === Node.TEXT_NODE &&
                     firstChild.textContent === gitHubAlertMatch.input &&
-                    firstChild.textContent?.includes("\n")
+                    firstChild.textContent.includes("\n")
                   ) {
                     firstChild.textContent = firstChild.textContent
                       .split("\n")

@@ -21,7 +21,7 @@ const calcZonedDate = (
   const inputZoned = toZonedTime(date, tz);
   const fnZoned = fn(inputZoned, options);
   if (fnZoned instanceof Date) {
-    return fromZonedTime(fnZoned, tz) as Date;
+    return fromZonedTime(fnZoned, tz);
   }
   return fnZoned;
 };

@@ -84,12 +84,12 @@ export class HaLabelsPicker extends SubscribeMixin(LitElement) {
 
   public async open() {
     await this.updateComplete;
-    await this.labelPicker?.open();
+    await this.labelPicker.open();
   }
 
   public async focus() {
     await this.updateComplete;
-    await this.labelPicker?.focus();
+    await this.labelPicker.focus();
   }
 
   protected hassSubscribe(): (UnsubscribeFunc | Promise<UnsubscribeFunc>)[] {

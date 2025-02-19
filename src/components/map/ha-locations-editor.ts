@@ -77,9 +77,9 @@ export class HaLocationsEditor extends LitElement {
 
     this._loadPromise = import("leaflet").then((module) =>
       import("leaflet-draw").then(() => {
-        this.Leaflet = module.default as LeafletModuleType;
+        this.Leaflet = module.default;
         this._updateMarkers();
-        return this.updateComplete.then(() => this.fitMap());
+        return this.updateComplete.then(() => { this.fitMap(); });
       })
     );
   }
@@ -111,7 +111,7 @@ export class HaLocationsEditor extends LitElement {
     }
     if ("getBounds" in marker) {
       this.map.leafletMap.fitBounds(marker.getBounds());
-      (marker as Circle).bringToFront();
+      (marker).bringToFront();
     } else {
       const circle = this._circles[id];
       if (circle) {
@@ -187,7 +187,7 @@ export class HaLocationsEditor extends LitElement {
               lng: oldLocations[idx].longitude,
             }) &&
             !this.map.leafletMap
-              ?.getBounds()
+              .getBounds()
               .contains({ lat: loc.latitude, lng: loc.longitude }))
       );
       if (movedLocations?.length === 1) {
@@ -316,18 +316,18 @@ export class HaLocationsEditor extends LitElement {
               .addEventListener(
                 "dragend",
                 // @ts-ignore
-                (ev: DragEndEvent) => this._updateLocation(ev)
+                (ev: DragEndEvent) => { this._updateLocation(ev); }
               )
               .addEventListener(
                 "click",
                 // @ts-ignore
-                (ev: MouseEvent) => this._markerClicked(ev)
+                (ev: MouseEvent) => { this._markerClicked(ev); }
               );
             if (location.radius_editable) {
               resizeMarker.addEventListener(
                 "dragend",
                 // @ts-ignore
-                (ev: DragEndEvent) => this._updateRadius(ev)
+                (ev: DragEndEvent) => { this._updateRadius(ev); }
               );
             } else {
               resizeMarker.remove();
@@ -356,13 +356,13 @@ export class HaLocationsEditor extends LitElement {
           options
         )
           .addEventListener("dragend", (ev: DragEndEvent) =>
-            this._updateLocation(ev)
+            { this._updateLocation(ev); }
           )
           .addEventListener(
             // @ts-ignore
             "click",
             // @ts-ignore
-            (ev: MouseEvent) => this._markerClicked(ev)
+            (ev: MouseEvent) => { this._markerClicked(ev); }
           );
         (marker as any).id = location.id;
 

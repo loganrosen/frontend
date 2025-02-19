@@ -124,29 +124,29 @@ export class HaTargetPicker extends SubscribeMixin(LitElement) {
               return this._renderChip(
                 "floor_id",
                 floor_id,
-                floor?.name || floor_id,
+                floor.name || floor_id,
                 undefined,
-                floor?.icon,
+                floor.icon,
                 floor ? floorDefaultIconPath(floor) : mdiHome
               );
             })
           : ""}
         ${this.value?.area_id
           ? ensureArray(this.value.area_id).map((area_id) => {
-              const area = this.hass.areas![area_id];
+              const area = this.hass.areas[area_id];
               return this._renderChip(
                 "area_id",
                 area_id,
-                area?.name || area_id,
+                area.name || area_id,
                 undefined,
-                area?.icon,
+                area.icon,
                 mdiTextureBox
               );
             })
           : nothing}
         ${this.value?.device_id
           ? ensureArray(this.value.device_id).map((device_id) => {
-              const device = this.hass.devices![device_id];
+              const device = this.hass.devices[device_id];
               return this._renderChip(
                 "device_id",
                 device_id,
@@ -504,7 +504,7 @@ export class HaTargetPicker extends SubscribeMixin(LitElement) {
   }
 
   private _handleExpand(ev) {
-    const target = ev.currentTarget as any;
+    const target = ev.currentTarget;
     const newAreas: string[] = [];
     const newDevices: string[] = [];
     const newEntities: string[] = [];
@@ -594,7 +594,7 @@ export class HaTargetPicker extends SubscribeMixin(LitElement) {
   }
 
   private _handleRemove(ev) {
-    const target = ev.currentTarget as any;
+    const target = ev.currentTarget;
     fireEvent(this, "value-changed", {
       value: this._removeItem(this.value, target.type, target.id),
     });
@@ -607,7 +607,7 @@ export class HaTargetPicker extends SubscribeMixin(LitElement) {
   ): this["value"] {
     return {
       ...value,
-      [type]: value![type] ? ensureArray(value![type])!.concat(ids) : ids,
+      [type]: value![type] ? ensureArray(value![type]).concat(ids) : ids,
     };
   }
 
@@ -616,7 +616,7 @@ export class HaTargetPicker extends SubscribeMixin(LitElement) {
     type: string,
     id: string
   ): this["value"] {
-    const newVal = ensureArray(value![type])!.filter(
+    const newVal = ensureArray(value![type]).filter(
       (val) => String(val) !== id
     );
     if (newVal.length) {
@@ -714,7 +714,7 @@ export class HaTargetPicker extends SubscribeMixin(LitElement) {
       }
       if (
         !stateObj.attributes.device_class ||
-        !this.includeDeviceClasses!.includes(stateObj.attributes.device_class)
+        !this.includeDeviceClasses.includes(stateObj.attributes.device_class)
       ) {
         return false;
       }
@@ -725,7 +725,7 @@ export class HaTargetPicker extends SubscribeMixin(LitElement) {
       if (!stateObj) {
         return false;
       }
-      if (!this.entityFilter!(stateObj)) {
+      if (!this.entityFilter(stateObj)) {
         return false;
       }
     }

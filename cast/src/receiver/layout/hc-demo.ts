@@ -38,7 +38,7 @@ class HcDemo extends HassElement {
     const initial: Partial<MockHomeAssistant> = {
       // Override updateHass so that the correct hass lifecycle methods are called
       updateHass: (hassUpdate: Partial<HomeAssistant>) =>
-        this._updateHass(hassUpdate),
+        { this._updateHass(hassUpdate); },
     };
 
     const hass = (this.hass = provideHass(this, initial));

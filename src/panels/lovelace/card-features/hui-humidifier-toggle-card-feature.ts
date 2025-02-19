@@ -57,7 +57,7 @@ class HuiHumidifierToggleCardFeature
   }
 
   private async _valueChanged(ev: CustomEvent) {
-    const newState = (ev.detail as any).value as HumidifierState;
+    const newState = (ev.detail).value as HumidifierState;
 
     if (newState === this.stateObj!.state) return;
 
@@ -109,7 +109,7 @@ class HuiHumidifierToggleCardFeature
         style=${styleMap({
           "--control-select-color": color,
         })}
-        .disabled=${this.stateObj!.state === UNAVAILABLE}
+        .disabled=${this.stateObj.state === UNAVAILABLE}
       >
       </ha-control-select>
     `;

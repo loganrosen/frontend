@@ -110,7 +110,7 @@ class HUIRoot extends LitElement {
     // The view can trigger a re-render when it knows that certain
     // web components have been loaded.
     this._debouncedConfigChanged = debounce(
-      () => this._selectView(this._curView, true),
+      () => { this._selectView(this._curView, true); },
       100,
       false
     );
@@ -123,7 +123,7 @@ class HUIRoot extends LitElement {
         html`<mwc-button
             outlined
             class="exit-edit-mode"
-            .label=${this.hass!.localize(
+            .label=${this.hass.localize(
               "ui.panel.lovelace.menu.exit_edit_mode"
             )}
             @click=${this._editModeDisable}
@@ -135,7 +135,7 @@ class HUIRoot extends LitElement {
             target="_blank"
           >
             <ha-icon-button
-              .label=${this.hass!.localize("ui.panel.lovelace.menu.help")}
+              .label=${this.hass.localize("ui.panel.lovelace.menu.help")}
               .path=${mdiHelpCircle}
             ></ha-icon-button>
           </a>`
@@ -216,7 +216,7 @@ class HUIRoot extends LitElement {
         overflowAction: this._handleReloadResources,
         visible:
           !this._editMode &&
-          (this.hass.panels.lovelace?.config as LovelacePanelConfig)?.mode ===
+          (this.hass.panels.lovelace.config as LovelacePanelConfig).mode ===
             "yaml",
         overflow: true,
       },
@@ -227,8 +227,8 @@ class HUIRoot extends LitElement {
         buttonAction: this._enableEditMode,
         visible:
           !this._editMode &&
-          this.hass!.user?.is_admin &&
-          !this.hass!.config.recovery_mode,
+          this.hass.user?.is_admin &&
+          !this.hass.config.recovery_mode,
         overflow: true,
         overflow_can_promote: true,
       },
@@ -245,7 +245,7 @@ class HUIRoot extends LitElement {
       result.push(
         html`<ha-icon-button
           slot="actionItems"
-          .label=${this.hass!.localize(i.key)}
+          .label=${this.hass.localize(i.key)}
           .path=${i.icon}
           @click=${i.buttonAction}
         ></ha-icon-button>`
@@ -259,7 +259,7 @@ class HUIRoot extends LitElement {
             graphic="icon"
             @request-selected=${i.overflowAction}
           >
-            ${this.hass!.localize(i.key)}
+            ${this.hass.localize(i.key)}
             <ha-svg-icon slot="graphic" .path=${i.icon}></ha-svg-icon>
           </mwc-list-item>`
         );
@@ -268,7 +268,7 @@ class HUIRoot extends LitElement {
         html`<ha-button-menu slot="actionItems">
           <ha-icon-button
             slot="trigger"
-            .label=${this.hass!.localize("ui.panel.lovelace.editor.menu.open")}
+            .label=${this.hass.localize("ui.panel.lovelace.editor.menu.open")}
             .path=${mdiDotsVertical}
           ></ha-icon-button>
           ${listItems}
@@ -302,10 +302,10 @@ class HUIRoot extends LitElement {
               ? html`
                   <div class="main-title">
                     ${dashboardTitle ||
-                    this.hass!.localize("ui.panel.lovelace.editor.header")}
+                    this.hass.localize("ui.panel.lovelace.editor.header")}
                     <ha-icon-button
                       slot="actionItems"
-                      .label=${this.hass!.localize(
+                      .label=${this.hass.localize(
                         "ui.panel.lovelace.editor.edit_lovelace.edit_title"
                       )}
                       .path=${mdiPencil}
@@ -339,7 +339,7 @@ class HUIRoot extends LitElement {
                             scrollable
                             .selected=${this._curView}
                             @iron-activate=${this._handleViewSelected}
-                            dir=${computeRTLDirection(this.hass!)}
+                            dir=${computeRTLDirection(this.hass)}
                           >
                             ${views.map(
                               (view) => html`
@@ -352,7 +352,7 @@ class HUIRoot extends LitElement {
                                           ((Array.isArray(view.visible) &&
                                             !view.visible.some(
                                               (e) =>
-                                                e.user === this.hass!.user?.id
+                                                e.user === this.hass.user?.id
                                             )) ||
                                             view.visible === false))
                                     ),
@@ -385,7 +385,7 @@ class HUIRoot extends LitElement {
                   scrollable
                   .selected=${this._curView}
                   @iron-activate=${this._handleViewSelected}
-                  dir=${computeRTLDirection(this.hass!)}
+                  dir=${computeRTLDirection(this.hass)}
                 >
                   ${views.map(
                     (view) => html`
@@ -397,7 +397,7 @@ class HUIRoot extends LitElement {
                               view.visible !== undefined &&
                               ((Array.isArray(view.visible) &&
                                 !view.visible.some(
-                                  (e) => e.user === this.hass!.user?.id
+                                  (e) => e.user === this.hass.user?.id
                                 )) ||
                                 view.visible === false)
                           ),
@@ -407,7 +407,7 @@ class HUIRoot extends LitElement {
                           ? html`
                               <ha-icon-button-arrow-prev
                                 .hass=${this.hass}
-                                .label=${this.hass!.localize(
+                                .label=${this.hass.localize(
                                   "ui.panel.lovelace.editor.edit_view.move_left"
                                 )}
                                 class="edit-icon view"
@@ -430,7 +430,7 @@ class HUIRoot extends LitElement {
                         ${this._editMode
                           ? html`
                               <ha-svg-icon
-                                title=${this.hass!.localize(
+                                title=${this.hass.localize(
                                   "ui.panel.lovelace.editor.edit_view.edit"
                                 )}
                                 class="edit-icon view"
@@ -439,7 +439,7 @@ class HUIRoot extends LitElement {
                               ></ha-svg-icon>
                               <ha-icon-button-arrow-next
                                 .hass=${this.hass}
-                                .label=${this.hass!.localize(
+                                .label=${this.hass.localize(
                                   "ui.panel.lovelace.editor.edit_view.move_right"
                                 )}
                                 class="edit-icon view"
@@ -457,7 +457,7 @@ class HUIRoot extends LitElement {
                         <ha-icon-button
                           id="add-view"
                           @click=${this._addView}
-                          .label=${this.hass!.localize(
+                          .label=${this.hass.localize(
                             "ui.panel.lovelace.editor.edit_view.add"
                           )}
                           .path=${mdiPlus}
@@ -491,7 +491,7 @@ class HUIRoot extends LitElement {
         view.visible === undefined ||
         view.visible === true ||
         (Array.isArray(view.visible) &&
-          view.visible.some((show) => show.user === this.hass!.user?.id))
+          view.visible.some((show) => show.user === this.hass.user?.id))
     );
 
   private _clearParam(param: string) {
@@ -508,7 +508,7 @@ class HUIRoot extends LitElement {
     const searchParams = extractSearchParamsObject();
     if (searchParams.edit === "1") {
       this._clearParam("edit");
-      if (this.hass!.user?.is_admin && this.lovelace!.mode === "storage") {
+      if (this.hass.user?.is_admin && this.lovelace!.mode === "storage") {
         this.lovelace!.setEditMode(true);
       }
     } else if (searchParams.conversation === "1") {
@@ -574,7 +574,7 @@ class HUIRoot extends LitElement {
       }
 
       // Will allow to override history scroll restoration when using back button
-      setTimeout(() => scrollTo({ behavior: "auto", top: 0 }), 1);
+      setTimeout(() => { scrollTo({ behavior: "auto", top: 0 }); }, 1);
     }
 
     if (changedProperties.has("lovelace")) {
@@ -613,7 +613,7 @@ class HUIRoot extends LitElement {
         newSelectView = this._curView;
       }
       // Will allow for ripples to start rendering
-      afterNextRender(() => this._selectView(newSelectView, force));
+      afterNextRender(() => { this._selectView(newSelectView, force); });
     }
   }
 
@@ -646,15 +646,15 @@ class HUIRoot extends LitElement {
     }
     this.hass.callService("lovelace", "reload_resources");
     showConfirmationDialog(this, {
-      title: this.hass!.localize(
+      title: this.hass.localize(
         "ui.panel.lovelace.reload_resources.refresh_header"
       ),
-      text: this.hass!.localize(
+      text: this.hass.localize(
         "ui.panel.lovelace.reload_resources.refresh_body"
       ),
       confirmText: this.hass.localize("ui.common.refresh"),
       dismissText: this.hass.localize("ui.common.not_now"),
-      confirm: () => location.reload(),
+      confirm: () => { location.reload(); },
     });
   }
 
@@ -743,7 +743,7 @@ class HUIRoot extends LitElement {
   private async _enableEditMode() {
     if (this._yamlMode) {
       showAlertDialog(this, {
-        text: this.hass!.localize("ui.panel.lovelace.editor.yaml_unsupported"),
+        text: this.hass.localize("ui.panel.lovelace.editor.yaml_unsupported"),
       });
       return;
     }
@@ -759,7 +759,7 @@ class HUIRoot extends LitElement {
         showSaveDialog(this, {
           lovelace: this.lovelace!,
           mode: "storage",
-          narrow: this.narrow!,
+          narrow: this.narrow,
         });
         return;
       }
@@ -770,7 +770,7 @@ class HUIRoot extends LitElement {
           showSaveDialog(this, {
             lovelace: this.lovelace!,
             mode: "storage",
-            narrow: this.narrow!,
+            narrow: this.narrow,
           });
         },
         showRawConfigEditor: () => {
@@ -796,25 +796,25 @@ class HUIRoot extends LitElement {
       dashboard,
       urlPath,
       updateDashboard: async (values) => {
-        await updateDashboard(this.hass!, dashboard!.id, values);
+        await updateDashboard(this.hass, dashboard!.id, values);
       },
       removeDashboard: async () => {
         const confirm = await showConfirmationDialog(this, {
-          title: this.hass!.localize(
+          title: this.hass.localize(
             "ui.panel.config.lovelace.dashboards.confirm_delete_title",
             { dashboard_title: dashboard!.title }
           ),
-          text: this.hass!.localize(
+          text: this.hass.localize(
             "ui.panel.config.lovelace.dashboards.confirm_delete_text"
           ),
-          confirmText: this.hass!.localize("ui.common.delete"),
+          confirmText: this.hass.localize("ui.common.delete"),
           destructive: true,
         });
         if (!confirm) {
           return false;
         }
         try {
-          await deleteDashboard(this.hass!, dashboard!.id);
+          await deleteDashboard(this.hass, dashboard!.id);
           return true;
         } catch (_err: any) {
           return false;

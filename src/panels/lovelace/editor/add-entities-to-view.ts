@@ -24,8 +24,8 @@ export const addEntitiesToLovelaceView = async (
   );
 
   const mainLovelaceMode = (
-    hass!.panels.lovelace?.config as LovelacePanelConfig
-  )?.mode;
+    hass.panels.lovelace.config as LovelacePanelConfig
+  ).mode;
 
   if (mainLovelaceMode !== "storage" && !storageDashs.length) {
     // no storage dashboards, just show the YAML config
@@ -97,7 +97,7 @@ export const addEntitiesToLovelaceView = async (
       lovelaceConfig: lovelaceConfig!,
       saveConfig: async (newConfig: LovelaceConfig): Promise<void> => {
         try {
-          await saveConfig(hass!, null, newConfig);
+          await saveConfig(hass, null, newConfig);
         } catch (_err: any) {
           alert(hass.localize("ui.panel.lovelace.add_entities.saving_failed"));
         }
@@ -121,7 +121,7 @@ export const addEntitiesToLovelaceView = async (
         lovelaceConfig: selectedDashConfig,
         saveConfig: async (newConfig: LovelaceConfig): Promise<void> => {
           try {
-            await saveConfig(hass!, newUrlPath, newConfig);
+            await saveConfig(hass, newUrlPath, newConfig);
           } catch {
             alert(
               hass.localize("ui.panel.lovelace.add_entities.saving_failed")

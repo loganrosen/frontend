@@ -159,7 +159,7 @@ export class DialogUploadBackup
       return;
     }
 
-    const agentIds = isComponentLoaded(this.hass!, "hassio")
+    const agentIds = isComponentLoaded(this.hass, "hassio")
       ? [HASSIO_LOCAL_AGENT]
       : [CORE_LOCAL_AGENT];
 

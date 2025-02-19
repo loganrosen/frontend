@@ -115,7 +115,7 @@ class HaQrScanner extends LitElement {
                     )}
                     .path=${mdiCamera}
                   ></ha-icon-button>
-                  ${this._cameras!.map(
+                  ${this._cameras.map(
                     (camera) => html`
                       <ha-list-item
                         .value=${camera.id}

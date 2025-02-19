@@ -37,7 +37,7 @@ class HuiEntitiesToggle extends LitElement {
         aria-label=${this.hass!.localize(
           "ui.panel.lovelace.card.entities.toggle"
         )}
-        .checked=${this._toggleEntities!.some((entityId) => {
+        .checked=${this._toggleEntities.some((entityId) => {
           const stateObj = this.hass!.states[entityId];
           return stateObj && stateObj.state === "on";
         })}
@@ -60,7 +60,7 @@ class HuiEntitiesToggle extends LitElement {
   private _callService(ev: MouseEvent): void {
     forwardHaptic("light");
     const turnOn = (ev.target as HaSwitch).checked;
-    turnOnOffEntities(this.hass!, this._toggleEntities!, turnOn!);
+    turnOnOffEntities(this.hass!, this._toggleEntities!, turnOn);
   }
 }
 

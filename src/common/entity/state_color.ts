@@ -43,7 +43,7 @@ const STATE_COLORED_DOMAIN = new Set([
 ]);
 
 export const stateColorCss = (stateObj: HassEntity, state?: string) => {
-  const compareState = state !== undefined ? state : stateObj?.state;
+  const compareState = state !== undefined ? state : stateObj.state;
   if (compareState === UNAVAILABLE) {
     return `var(--state-unavailable-color)`;
   }
@@ -88,7 +88,7 @@ export const stateColorProperties = (
   stateObj: HassEntity,
   state?: string
 ): string[] | undefined => {
-  const compareState = state !== undefined ? state : stateObj?.state;
+  const compareState = state !== undefined ? state : stateObj.state;
   const domain = computeDomain(stateObj.entity_id);
   const dc = stateObj.attributes.device_class;
 

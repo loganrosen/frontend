@@ -58,7 +58,7 @@ class DialogRepairsIssue extends LitElement {
       this.hass.localize(
         `component.${this._issue.domain}.issues.${this._issue.translation_key || this._issue.issue_id}.title`,
         this._issue.translation_placeholders || {}
-      ) || this.hass!.localize("ui.panel.config.repairs.dialog.title");
+      ) || this.hass.localize("ui.panel.config.repairs.dialog.title");
 
     return html`
       <ha-md-dialog
@@ -123,9 +123,9 @@ class DialogRepairsIssue extends LitElement {
         </div>
         <div slot="actions">
           <ha-button @click=${this._ignoreIssue}>
-            ${this._issue!.ignored
-              ? this.hass!.localize("ui.panel.config.repairs.dialog.unignore")
-              : this.hass!.localize("ui.panel.config.repairs.dialog.ignore")}
+            ${this._issue.ignored
+              ? this.hass.localize("ui.panel.config.repairs.dialog.unignore")
+              : this.hass.localize("ui.panel.config.repairs.dialog.ignore")}
           </ha-button>
           ${this._issue.learn_more_url
             ? html`
@@ -144,7 +144,7 @@ class DialogRepairsIssue extends LitElement {
                       ? this.closeDialog
                       : undefined}
                   >
-                    ${this.hass!.localize(
+                    ${this.hass.localize(
                       "ui.panel.config.repairs.dialog.learn"
                     )}
                   </ha-button>

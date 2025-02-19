@@ -527,7 +527,7 @@ export class MoreInfoDialog extends LitElement {
 
   protected firstUpdated(changedProps: PropertyValues) {
     super.firstUpdated(changedProps);
-    this.addEventListener("close-dialog", () => this.closeDialog());
+    this.addEventListener("close-dialog", () => { this.closeDialog(); });
     this._loadNumericDeviceClasses();
   }
 

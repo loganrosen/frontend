@@ -124,7 +124,7 @@ export class HaLocationSelector extends LitElement {
               : "mdi:map-marker",
           location_editable: true,
           radius_editable:
-            !!selector.location?.radius && !selector.location?.radius_readonly,
+            !!selector.location?.radius && !selector.location.radius_readonly,
         },
       ];
     }
@@ -152,7 +152,7 @@ export class HaLocationSelector extends LitElement {
         latitude: value.latitude,
         longitude: value.longitude,
         ...(this.selector.location?.radius &&
-        !this.selector.location?.radius_readonly
+        !this.selector.location.radius_readonly
           ? {
               radius,
             }

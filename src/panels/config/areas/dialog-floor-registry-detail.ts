@@ -184,7 +184,7 @@ class DialogFloorDetail extends LitElement {
                         .area=${area}
                         @click=${this._openArea}
                         @remove=${this._removeArea}
-                        .label=${area?.name}
+                        .label=${area.name}
                       >
                         ${area.icon
                           ? html`<ha-icon
@@ -248,7 +248,7 @@ class DialogFloorDetail extends LitElement {
     showAreaRegistryDetailDialog(this, {
       entry: area,
       updateEntry: (values) =>
-        updateAreaRegistryEntry(this.hass!, area.area_id, values),
+        updateAreaRegistryEntry(this.hass, area.area_id, values),
     });
   }
 

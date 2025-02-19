@@ -1,6 +1,6 @@
 import { TimeZone } from "../../data/translation";
 
-const RESOLVED_TIME_ZONE = Intl.DateTimeFormat?.().resolvedOptions?.().timeZone;
+const RESOLVED_TIME_ZONE = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 // Browser time zone can be determined from Intl, with fallback to UTC for polyfill or no support.
 export const LOCAL_TIME_ZONE = RESOLVED_TIME_ZONE ?? "UTC";

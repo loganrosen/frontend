@@ -212,7 +212,7 @@ class OnboardingLocation extends LitElement {
   protected firstUpdated(changedProps) {
     super.firstUpdated(changedProps);
     setTimeout(
-      () => this.renderRoot.querySelector("ha-textfield")!.focus(),
+      () => { this.renderRoot.querySelector("ha-textfield")!.focus(); },
       100
     );
     this.addEventListener("keyup", (ev) => {
@@ -227,7 +227,7 @@ class OnboardingLocation extends LitElement {
       const place = this._places?.find(
         (plc) => plc.place_id === this._highlightedMarker
       );
-      if (place?.boundingbox?.length === 4) {
+      if (place?.boundingbox.length === 4) {
         this.map.fitBounds(
           [
             [place.boundingbox[0], place.boundingbox[2]],
@@ -257,7 +257,7 @@ class OnboardingLocation extends LitElement {
           },
         ];
       }
-      return places?.length
+      return places.length
         ? places.map((place) => ({
             id: String(place.place_id),
             iconPath:
@@ -333,7 +333,7 @@ class OnboardingLocation extends LitElement {
     );
     try {
       this._places = await searchPlaces(address, this.hass, true, 3);
-      if (this._places?.length) {
+      if (this._places.length) {
         this._highlightedMarker = this._places[0].place_id;
         this._location = [
           Number(this._places[0].lat),
@@ -466,7 +466,7 @@ class OnboardingLocation extends LitElement {
     ev.preventDefault();
     fireEvent(this, "value-changed", {
       value: {
-        location: this._location!,
+        location: this._location,
         country: this._country,
         elevation: this._elevation,
         unit_system: this._unitSystem,

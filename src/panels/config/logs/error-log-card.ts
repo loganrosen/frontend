@@ -611,7 +611,7 @@ class ErrorLogCard extends LitElement {
     if (this._logElement) {
       this._newLogsIndicator = false;
       if (this.provider !== "core") {
-        this._logElement!.scrollTo(0, this._logElement!.scrollHeight);
+        this._logElement.scrollTo(0, this._logElement.scrollHeight);
       } else {
         this._debounceScrollToBottom();
       }

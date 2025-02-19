@@ -103,7 +103,7 @@ class DialogGenerateBackup extends LitElement implements HassDialog {
         (agent) =>
           agent.agent_id !== CLOUD_AGENT ||
           (this._params?.cloudStatus?.logged_in &&
-            this._params?.cloudStatus?.active_subscription)
+            this._params.cloudStatus.active_subscription)
       )
       .sort((a, b) => compareAgents(a.agent_id, b.agent_id));
   }

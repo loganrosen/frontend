@@ -362,8 +362,8 @@ class DialogZWaveJSNodeStatistics extends LitElement {
           string,
           WorkingRouteStatistics | null | undefined,
         ][] = [
-          ["lwr", this._nodeStatistics?.lwr],
-          ["nlwr", this._nodeStatistics?.nlwr],
+          ["lwr", this._nodeStatistics.lwr],
+          ["nlwr", this._nodeStatistics.nlwr],
         ];
 
         const workingRoutes: {
@@ -428,7 +428,7 @@ class DialogZWaveJSNodeStatistics extends LitElement {
 
   private _unsubscribe(): void {
     if (this._subscribedNodeStatistics) {
-      this._subscribedNodeStatistics.then((unsub) => unsub());
+      this._subscribedNodeStatistics.then((unsub) => { unsub(); });
       this._subscribedNodeStatistics = undefined;
     }
     if (this._subscribedDeviceRegistry) {

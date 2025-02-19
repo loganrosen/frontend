@@ -42,7 +42,7 @@ export const findEntities = (
   const conditions: ((value: string) => boolean)[] = [];
 
   if (includeDomains?.length) {
-    conditions.push((eid) => includeDomains!.includes(computeDomain(eid)));
+    conditions.push((eid) => includeDomains.includes(computeDomain(eid)));
   }
 
   if (entityFilter) {

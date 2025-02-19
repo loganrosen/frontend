@@ -26,7 +26,7 @@ class MoreInfoCounter extends LitElement {
           .disabled=${disabled ||
           Number(this.stateObj.state) === this.stateObj.attributes.maximum}
         >
-          ${this.hass!.localize("ui.card.counter.actions.increment")}
+          ${this.hass.localize("ui.card.counter.actions.increment")}
         </mwc-button>
         <mwc-button
           .action=${"decrement"}
@@ -34,14 +34,14 @@ class MoreInfoCounter extends LitElement {
           .disabled=${disabled ||
           Number(this.stateObj.state) === this.stateObj.attributes.minimum}
         >
-          ${this.hass!.localize("ui.card.counter.actions.decrement")}
+          ${this.hass.localize("ui.card.counter.actions.decrement")}
         </mwc-button>
         <mwc-button
           .action=${"reset"}
           @click=${this._handleActionClick}
           .disabled=${disabled}
         >
-          ${this.hass!.localize("ui.card.counter.actions.reset")}
+          ${this.hass.localize("ui.card.counter.actions.reset")}
         </mwc-button>
       </div>
     `;

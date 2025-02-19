@@ -233,7 +233,7 @@ class UpdateAvailableCard extends LitElement {
 
   protected firstUpdated(changedProps: PropertyValues) {
     super.firstUpdated(changedProps);
-    const pathPart = this.route?.path.substring(1, this.route.path.length);
+    const pathPart = this.route.path.substring(1, this.route.path.length);
     const updateType = ["core", "os", "supervisor"].includes(pathPart)
       ? pathPart
       : "addon";
@@ -304,7 +304,7 @@ class UpdateAvailableCard extends LitElement {
     return this._updateType
       ? this._updateType === "addon"
         ? this._addonInfo!.version
-        : this.supervisor[this._updateType]?.version || ""
+        : this.supervisor[this._updateType].version || ""
       : "";
   }
 
@@ -312,7 +312,7 @@ class UpdateAvailableCard extends LitElement {
     return this._updateType
       ? this._updateType === "addon"
         ? this._addonInfo!.version_latest
-        : this.supervisor[this._updateType]?.version_latest || ""
+        : this.supervisor[this._updateType].version_latest || ""
       : "";
   }
 

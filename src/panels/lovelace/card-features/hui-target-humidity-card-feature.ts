@@ -60,7 +60,7 @@ class HuiTargetHumidityCardFeature
   }
 
   private _valueChanged(ev: CustomEvent) {
-    const value = (ev.detail as any).value;
+    const value = (ev.detail).value;
     if (isNaN(value)) return;
     this._targetHumidity = value;
     this._callService();
@@ -89,7 +89,7 @@ class HuiTargetHumidityCardFeature
         .min=${this._min}
         .max=${this._max}
         .step=${this._step}
-        .disabled=${this.stateObj!.state === UNAVAILABLE}
+        .disabled=${this.stateObj.state === UNAVAILABLE}
         @value-changed=${this._valueChanged}
         .label=${this.hass.formatEntityAttributeName(this.stateObj, "humidity")}
         unit="%"

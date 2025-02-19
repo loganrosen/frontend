@@ -51,7 +51,7 @@ export class HaImagecropperDialog extends LitElement {
         minCropBoxWidth: 50,
         ready: () => {
           this._isTargetAspectRatio = this._checkMatchAspectRatio();
-          URL.revokeObjectURL(this._image!.src);
+          URL.revokeObjectURL(this._image.src);
         },
       });
     } else {

@@ -78,7 +78,7 @@ export class HaEntityToggle extends LitElement {
 
   protected firstUpdated(changedProps) {
     super.firstUpdated(changedProps);
-    this.addEventListener("click", (ev) => ev.stopPropagation());
+    this.addEventListener("click", (ev) => { ev.stopPropagation(); });
   }
 
   public willUpdate(changedProps: PropertyValues): void {

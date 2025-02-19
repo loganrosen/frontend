@@ -78,7 +78,7 @@ export class HuiLightCard extends LitElement implements LovelaceCard {
       return nothing;
     }
 
-    const stateObj = this.hass.states[this._config!.entity] as LightEntity;
+    const stateObj = this.hass.states[this._config.entity] as LightEntity;
 
     if (!stateObj) {
       return html`
@@ -98,7 +98,7 @@ export class HuiLightCard extends LitElement implements LovelaceCard {
       <ha-card>
         <ha-icon-button
           class="more-info"
-          .label=${this.hass!.localize(
+          .label=${this.hass.localize(
             "ui.panel.lovelace.cards.show_more_info"
           )}
           .path=${mdiDotsVertical}
@@ -136,8 +136,8 @@ export class HuiLightCard extends LitElement implements LovelaceCard {
                 })}
                 @action=${this._handleAction}
                 .actionHandler=${actionHandler({
-                  hasHold: hasAction(this._config!.hold_action),
-                  hasDoubleClick: hasAction(this._config!.double_tap_action),
+                  hasHold: hasAction(this._config.hold_action),
+                  hasDoubleClick: hasAction(this._config.double_tap_action),
                 })}
                 tabindex="0"
               >
@@ -171,7 +171,7 @@ export class HuiLightCard extends LitElement implements LovelaceCard {
       return;
     }
 
-    const stateObj = this.hass!.states[this._config!.entity];
+    const stateObj = this.hass.states[this._config.entity];
 
     if (!stateObj) {
       return;
@@ -238,7 +238,7 @@ export class HuiLightCard extends LitElement implements LovelaceCard {
   }
 
   private _handleAction(ev: ActionHandlerEvent) {
-    handleAction(this, this.hass!, this._config!, ev.detail.action!);
+    handleAction(this, this.hass!, this._config!, ev.detail.action);
   }
 
   private _handleMoreInfo() {

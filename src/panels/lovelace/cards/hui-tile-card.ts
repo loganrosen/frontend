@@ -137,7 +137,7 @@ export class HuiTileCard extends LitElement implements LovelaceCard {
   }
 
   private _handleAction(ev: ActionHandlerEvent) {
-    handleAction(this, this.hass!, this._config!, ev.detail.action!);
+    handleAction(this, this.hass!, this._config!, ev.detail.action);
   }
 
   private _handleIconAction(ev: CustomEvent) {
@@ -148,7 +148,7 @@ export class HuiTileCard extends LitElement implements LovelaceCard {
       hold_action: this._config!.icon_hold_action,
       double_tap_action: this._config!.icon_double_tap_action,
     };
-    handleAction(this, this.hass!, config, ev.detail.action!);
+    handleAction(this, this.hass!, config, ev.detail.action);
   }
 
   private _getImageUrl(entity: HassEntity): string | undefined {
@@ -208,15 +208,15 @@ export class HuiTileCard extends LitElement implements LovelaceCard {
   private get _hasCardAction() {
     return (
       !this._config?.tap_action ||
-      hasAction(this._config?.tap_action) ||
-      hasAction(this._config?.hold_action) ||
-      hasAction(this._config?.double_tap_action)
+      hasAction(this._config.tap_action) ||
+      hasAction(this._config.hold_action) ||
+      hasAction(this._config.double_tap_action)
     );
   }
 
   private get _hasIconAction() {
     return (
-      !this._config?.icon_tap_action || hasAction(this._config?.icon_tap_action)
+      !this._config?.icon_tap_action || hasAction(this._config.icon_tap_action)
     );
   }
 
@@ -302,8 +302,8 @@ export class HuiTileCard extends LitElement implements LovelaceCard {
           class="background"
           @action=${this._handleAction}
           .actionHandler=${actionHandler({
-            hasHold: hasAction(this._config!.hold_action),
-            hasDoubleClick: hasAction(this._config!.double_tap_action),
+            hasHold: hasAction(this._config.hold_action),
+            hasDoubleClick: hasAction(this._config.double_tap_action),
           })}
           role=${ifDefined(this._hasCardAction ? "button" : undefined)}
           tabindex=${ifDefined(this._hasCardAction ? "0" : undefined)}
@@ -318,14 +318,14 @@ export class HuiTileCard extends LitElement implements LovelaceCard {
               tabindex=${ifDefined(this._hasIconAction ? "0" : undefined)}
               @action=${this._handleIconAction}
               .actionHandler=${actionHandler({
-                hasHold: hasAction(this._config!.icon_hold_action),
-                hasDoubleClick: hasAction(this._config!.icon_double_tap_action),
+                hasHold: hasAction(this._config.icon_hold_action),
+                hasDoubleClick: hasAction(this._config.icon_double_tap_action),
               })}
               .interactive=${this._hasIconAction}
               .imageStyle=${DOMAIN_IMAGE_SHAPE[domain]}
               .imageUrl=${imageUrl}
               data-domain=${ifDefined(domain)}
-              data-state=${ifDefined(stateObj?.state)}
+              data-state=${ifDefined(stateObj.state)}
             >
               <ha-state-icon
                 slot="icon"

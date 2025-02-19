@@ -49,7 +49,7 @@ export class DialogManageCloudhook extends LitElement {
         hideActions
         @closed=${this.closeDialog}
         .heading=${createCloseHeading(
-          this.hass!,
+          this.hass,
           this.hass!.localize(
             "ui.panel.config.cloud.dialog_cloudhook.webhook_for",
             { name: webhook.name }

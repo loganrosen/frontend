@@ -81,7 +81,7 @@ class HassioAddonDashboard extends LitElement {
       ></hass-error-screen>`;
     }
 
-    if (!this.addon || !this.supervisor?.addon) {
+    if (!this.addon || !this.supervisor.addon) {
       return html`<hass-loading-screen></hass-loading-screen>`;
     }
 

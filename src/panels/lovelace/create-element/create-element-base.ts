@@ -292,7 +292,7 @@ export const tryCreateLovelaceElement = <
   if (domainTypes && !config.type && config.entity) {
     // @ts-ignore
     const domain = config.entity.split(".", 1)[0];
-    type = `${domainTypes![domain] || domainTypes!._domain_not_found}-entity`;
+    type = `${domainTypes[domain] || domainTypes._domain_not_found}-entity`;
   } else {
     type = config.type || defaultType;
   }
@@ -339,13 +339,13 @@ export const getLovelaceElementClass = async <
     return new Promise((resolve, reject) => {
       // We will give custom components up to TIMEOUT seconds to get defined
       setTimeout(
-        () => reject(new Error(`Custom element not found: ${customTag}`)),
+        () => { reject(new Error(`Custom element not found: ${customTag}`)); },
         TIMEOUT
       );
 
       customElements
         .whenDefined(customTag)
-        .then(() => resolve(customElements.get(customTag)));
+        .then(() => { resolve(customElements.get(customTag)); });
     });
   }
 

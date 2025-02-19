@@ -97,7 +97,7 @@ export class HatScriptGraph extends LitElement {
         ?active=${this.selected === path}
         .iconPath=${mdiAsterisk}
         .notEnabled=${"enabled" in config && config.enabled === false}
-        .error=${this.trace.trace[path]?.some((tr) => tr.error)}
+        .error=${this.trace.trace[path].some((tr) => tr.error)}
         tabindex=${track ? "0" : "-1"}
       ></hat-graph-node>
     `;
@@ -177,13 +177,13 @@ export class HatScriptGraph extends LitElement {
           ?track=${trace !== undefined}
           ?active=${this.selected === path}
           .notEnabled=${disabled || config.enabled === false}
-          .error=${this.trace.trace[path]?.some((tr) => tr.error)}
+          .error=${this.trace.trace[path].some((tr) => tr.error)}
           slot="head"
           nofocus
         ></hat-graph-node>
 
         ${config.choose
-          ? ensureArray(config.choose)?.map((branch, i) => {
+          ? ensureArray(config.choose).map((branch, i) => {
               const branchPath = `${path}/choose/${i}`;
               const trackThis = tracePath.includes(i);
               this.renderedNodes[branchPath] = { config, path: branchPath };
@@ -218,7 +218,7 @@ export class HatScriptGraph extends LitElement {
         <div ?track=${trackDefault}>
           <hat-graph-spacer ?track=${trackDefault}></hat-graph-spacer>
           ${config.default !== null
-            ? ensureArray<Action | undefined>(config.default)?.map(
+            ? ensureArray<Action | undefined>(config.default).map(
                 (action, i) =>
                   this._renderActionNode(
                     action,
@@ -377,7 +377,7 @@ export class HatScriptGraph extends LitElement {
     disabled = false
   ) {
     const trace: any = this.trace.trace[path];
-    const repeats = this.trace?.trace[`${path}/repeat/sequence/0`]?.length;
+    const repeats = this.trace.trace[`${path}/repeat/sequence/0`].length;
     return html`
       <hat-graph-branch
         tabindex=${trace === undefined ? "-1" : "0"}
@@ -431,7 +431,7 @@ export class HatScriptGraph extends LitElement {
         ?track=${path in this.trace.trace}
         ?active=${this.selected === path}
         .notEnabled=${disabled || node.enabled === false}
-        .error=${this.trace.trace[path]?.some((tr) => tr.error)}
+        .error=${this.trace.trace[path].some((tr) => tr.error)}
         tabindex=${this.trace && path in this.trace.trace ? "0" : "-1"}
       >
         ${node.action
@@ -459,7 +459,7 @@ export class HatScriptGraph extends LitElement {
         ?track=${path in this.trace.trace}
         ?active=${this.selected === path}
         .notEnabled=${disabled || node.enabled === false}
-        .error=${this.trace.trace[path]?.some((tr) => tr.error)}
+        .error=${this.trace.trace[path].some((tr) => tr.error)}
         tabindex=${this.trace && path in this.trace.trace ? "0" : "-1"}
       ></hat-graph-node>
     `;
@@ -565,7 +565,7 @@ export class HatScriptGraph extends LitElement {
         @focus=${this._selectNode(node, path)}
         ?track=${path in this.trace.trace}
         ?active=${this.selected === path}
-        .error=${this.trace.trace[path]?.some((tr) => tr.error)}
+        .error=${this.trace.trace[path].some((tr) => tr.error)}
         .notEnabled=${disabled || node.enabled === false}
       ></hat-graph-node>
     `;
@@ -593,7 +593,7 @@ export class HatScriptGraph extends LitElement {
               </hat-graph-branch>`
             : ""}
           ${conditionKey in this.trace.config
-            ? html`${ensureArray(this.trace.config[conditionKey])?.map(
+            ? html`${ensureArray(this.trace.config[conditionKey]).map(
                 (condition, i) => this._renderCondition(condition, i)
               )}`
             : ""}

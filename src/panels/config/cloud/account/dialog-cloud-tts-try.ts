@@ -167,7 +167,7 @@ export class DialogTryTts extends LitElement {
   }
 
   private _createAutomation() {
-    const message = this._messageInput!.value!;
+    const message = this._messageInput!.value;
     this._message = message;
     showAutomationEditor({
       action: [

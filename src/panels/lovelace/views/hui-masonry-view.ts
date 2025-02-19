@@ -89,7 +89,7 @@ export class MasonryView extends LitElement implements LovelaceViewElement {
       ${this.lovelace?.editMode
         ? html`
             <ha-fab
-              .label=${this.hass!.localize(
+              .label=${this.hass.localize(
                 "ui.panel.lovelace.editor.edit_card.add"
               )}
               extended
@@ -132,7 +132,7 @@ export class MasonryView extends LitElement implements LovelaceViewElement {
         | HomeAssistant
         | undefined;
 
-      if (this.hass!.dockedSidebar !== oldHass?.dockedSidebar) {
+      if (this.hass.dockedSidebar !== oldHass?.dockedSidebar) {
         this._updateColumns();
         return;
       }
@@ -235,7 +235,7 @@ export class MasonryView extends LitElement implements LovelaceViewElement {
       }
       // Calculate in which column the card should go based on the size and the cards already in there
       this._addCardToColumn(
-        columnElements[getColumnIndex(columnSizes, cardSize as number)],
+        columnElements[getColumnIndex(columnSizes, cardSize)],
         index,
         this.lovelace!.editMode
       );
@@ -274,7 +274,7 @@ export class MasonryView extends LitElement implements LovelaceViewElement {
     const newColumns = Math.max(
       1,
       matchColumns -
-        Number(!this.narrow && this.hass!.dockedSidebar === "docked")
+        Number(!this.narrow && this.hass.dockedSidebar === "docked")
     );
     if (newColumns === this._columns) {
       return;

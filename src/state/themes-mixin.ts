@@ -36,7 +36,7 @@ export default <T extends Constructor<HassBaseEl>>(superClass: T) =>
         this._applyTheme(mql.matches);
         storeState(this.hass!);
       });
-      mql.addListener((ev) => this._applyTheme(ev.matches));
+      mql.addListener((ev) => { this._applyTheme(ev.matches); });
       if (!this._themeApplied && mql.matches) {
         applyThemesOnElement(
           document.documentElement,
@@ -103,7 +103,7 @@ export default <T extends Constructor<HassBaseEl>>(superClass: T) =>
 
       themeSettings = { ...themeSettings, dark: darkMode };
       this._updateHass({
-        themes: { ...this.hass.themes!, theme: themeName },
+        themes: { ...this.hass.themes, theme: themeName },
       });
 
       applyThemesOnElement(
@@ -116,7 +116,7 @@ export default <T extends Constructor<HassBaseEl>>(superClass: T) =>
 
       if (darkMode !== this.hass.themes.darkMode) {
         this._updateHass({
-          themes: { ...this.hass.themes!, darkMode },
+          themes: { ...this.hass.themes, darkMode },
         });
 
         const schemeMeta = document.querySelector("meta[name=color-scheme]");
@@ -144,11 +144,11 @@ export default <T extends Constructor<HassBaseEl>>(superClass: T) =>
           );
         }
         const themeColor =
-          themeMetaColor?.trim() ||
+          themeMetaColor.trim() ||
           (themeMeta.getAttribute("default-content") as string);
         themeMeta.setAttribute("content", themeColor);
       }
 
-      this.hass!.auth.external?.fireMessage({ type: "theme-update" });
+      this.hass.auth.external?.fireMessage({ type: "theme-update" });
     }
   };

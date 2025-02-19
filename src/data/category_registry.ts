@@ -40,7 +40,7 @@ export const subscribeCategoryRegistry = (
           () =>
             fetchCategoryRegistry(conn2, scope).then(
               (categories: CategoryRegistryEntry[]) =>
-                store.setState(categories, true)
+                { store.setState(categories, true); }
             ),
           500,
           true

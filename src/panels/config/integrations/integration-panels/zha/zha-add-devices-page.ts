@@ -85,7 +85,7 @@ class ZHAAddDevicesPage extends LitElement {
           ${this._active
             ? html`
                 <h1>
-                  ${this.hass!.localize(
+                  ${this.hass.localize(
                     "ui.panel.config.zha.add_device_page.spinner"
                   )}
                 </h1>
@@ -97,7 +97,7 @@ class ZHAAddDevicesPage extends LitElement {
             : html`
                 <div>
                   <mwc-button @click=${this._subscribe} class="search-button">
-                    ${this.hass!.localize(
+                    ${this.hass.localize(
                       "ui.panel.config.zha.add_device_page.search_again"
                     )}
                   </mwc-button>
@@ -131,7 +131,7 @@ class ZHAAddDevicesPage extends LitElement {
                     )}
                   </h4>
                   <h4>
-                    ${this.hass!.localize(
+                    ${this.hass.localize(
                       this._active
                         ? "ui.panel.config.zha.add_device_page.discovered_text"
                         : "ui.panel.config.zha.add_device_page.no_devices_found"
@@ -207,11 +207,11 @@ class ZHAAddDevicesPage extends LitElement {
       data.ieee = this._ieeeAddress;
     }
     this._subscribed = this.hass.connection.subscribeMessage(
-      (message) => this._handleMessage(message),
+      (message) => { this._handleMessage(message); },
       data
     );
     this._addDevicesTimeoutHandle = setTimeout(
-      () => this._deactivate(),
+      () => { this._deactivate(); },
       254000
     );
   }

@@ -44,9 +44,9 @@ export class HuiLawnMowerCommandsCardFeatureEditor
                   stateObj && supportsLawnMowerCommand(stateObj, command)
               ).map((command) => ({
                 value: command,
-                label: `${localize(
+                label: localize(
                   `ui.panel.lovelace.editor.features.types.lawn-mower-commands.commands_list.${command}`
-                )}`,
+                ),
               })),
             },
           },
@@ -60,7 +60,7 @@ export class HuiLawnMowerCommandsCardFeatureEditor
     }
 
     const stateObj = this.context?.entity_id
-      ? this.hass.states[this.context?.entity_id]
+      ? this.hass.states[this.context.entity_id]
       : undefined;
 
     const schema = this._schema(this.hass.localize, stateObj);

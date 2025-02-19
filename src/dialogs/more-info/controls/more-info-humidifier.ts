@@ -128,7 +128,7 @@ class MoreInfoHumidifier extends LitElement {
                         .attributeValue=${mode}
                       ></ha-attribute-icon>
                       ${this.hass.formatEntityAttributeValue(
-                        stateObj!,
+                        stateObj,
                         "mode",
                         mode
                       )}

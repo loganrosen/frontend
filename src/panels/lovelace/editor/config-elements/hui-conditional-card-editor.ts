@@ -87,12 +87,12 @@ export class HuiConditionalCardEditor
         @MDCTabBar:activated=${this._selectTab}
       >
         <mwc-tab
-          .label=${this.hass!.localize(
+          .label=${this.hass.localize(
             "ui.panel.lovelace.editor.card.conditional.conditions"
           )}
         ></mwc-tab>
         <mwc-tab
-          .label=${this.hass!.localize(
+          .label=${this.hass.localize(
             "ui.panel.lovelace.editor.card.conditional.card"
           )}
         ></mwc-tab>
@@ -107,7 +107,7 @@ export class HuiConditionalCardEditor
                         class="gui-mode-button"
                         @click=${this._toggleMode}
                         .disabled=${!this._guiModeAvailable}
-                        .label=${this.hass!.localize(
+                        .label=${this.hass.localize(
                           isGuiMode
                             ? "ui.panel.lovelace.editor.edit_card.show_code_editor"
                             : "ui.panel.lovelace.editor.edit_card.show_visual_editor"
@@ -115,14 +115,14 @@ export class HuiConditionalCardEditor
                         .path=${isGuiMode ? mdiCodeBraces : mdiListBoxOutline}
                       ></ha-icon-button>
                       <ha-icon-button
-                        .label=${this.hass!.localize(
+                        .label=${this.hass.localize(
                           "ui.panel.lovelace.editor.edit_card.copy"
                         )}
                         .path=${mdiContentCopy}
                         @click=${this._handleCopyCard}
                       ></ha-icon-button>
                       <mwc-button @click=${this._handleReplaceCard}
-                        >${this.hass!.localize(
+                        >${this.hass.localize(
                           "ui.panel.lovelace.editor.card.conditional.change_type"
                         )}</mwc-button
                       >
@@ -146,7 +146,7 @@ export class HuiConditionalCardEditor
           `
         : html`
             <ha-alert alert-type="info">
-              ${this.hass!.localize(
+              ${this.hass.localize(
                 "ui.panel.lovelace.editor.condition-editor.explanation"
               )}
             </ha-alert>

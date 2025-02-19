@@ -178,7 +178,7 @@ export class HaScriptTrace extends LitElement {
                 <ha-icon-button
                   .disabled=${this._traces[this._traces.length - 1].run_id ===
                   this._runId}
-                  .label=${this.hass!.localize(
+                  .label=${this.hass.localize(
                     "ui.panel.config.automation.trace.older_trace"
                   )}
                   @click=${this._pickOlderTrace}
@@ -200,7 +200,7 @@ export class HaScriptTrace extends LitElement {
                 </select>
                 <ha-icon-button
                   .disabled=${this._traces[0].run_id === this._runId}
-                  .label=${this.hass!.localize(
+                  .label=${this.hass.localize(
                     "ui.panel.config.automation.trace.newer_trace"
                   )}
                   @click=${this._pickNewerTrace}
@@ -214,7 +214,7 @@ export class HaScriptTrace extends LitElement {
           ? html`<div class="container">Loading…</div>`
           : this._traces.length === 0
             ? html`<div class="container">
-                ${this.hass!.localize(
+                ${this.hass.localize(
                   "ui.panel.config.automation.trace.no_traces_found"
                 )}
               </div>`
@@ -434,7 +434,7 @@ export class HaScriptTrace extends LitElement {
       }
 
       await showAlertDialog(this, {
-        text: this.hass!.localize(
+        text: this.hass.localize(
           "ui.panel.config.automation.trace.trace_no_longer_available"
         ),
       });

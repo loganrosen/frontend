@@ -62,7 +62,7 @@ export class HaServiceAction extends LitElement implements ActionElement {
       return;
     }
 
-    const fields = this._fields(this.hass.services, this.action?.action).fields;
+    const fields = this._fields(this.hass.services, this.action.action).fields;
     if (
       this.action &&
       (Object.entries(this.action).some(
@@ -115,9 +115,9 @@ export class HaServiceAction extends LitElement implements ActionElement {
         .hidePicker=${!!this._action.metadata}
         @value-changed=${this._actionChanged}
       ></ha-service-control>
-      ${domain && service && this.hass.services[domain]?.[service]?.response
+      ${domain && service && this.hass.services[domain][service].response
         ? html`<ha-settings-row .narrow=${this.narrow}>
-            ${this.hass.services[domain][service].response!.optional
+            ${this.hass.services[domain][service].response.optional
               ? html`<ha-checkbox
                   .checked=${this._action.response_variable ||
                   this._responseChecked}
@@ -132,7 +132,7 @@ export class HaServiceAction extends LitElement implements ActionElement {
               )}</span
             >
             <span slot="description">
-              ${this.hass.services[domain][service].response!.optional
+              ${this.hass.services[domain][service].response.optional
                 ? this.hass.localize(
                     "ui.panel.config.automation.editor.actions.type.service.has_optional_response"
                   )
@@ -142,10 +142,10 @@ export class HaServiceAction extends LitElement implements ActionElement {
             </span>
             <ha-textfield
               .value=${this._action.response_variable || ""}
-              .required=${!this.hass.services[domain][service].response!
+              .required=${!this.hass.services[domain][service].response
                 .optional}
               .disabled=${this.disabled ||
-              (this.hass.services[domain][service].response!.optional &&
+              (this.hass.services[domain][service].response.optional &&
                 !this._action.response_variable &&
                 !this._responseChecked)}
               @change=${this._responseVariableChanged}
@@ -167,7 +167,7 @@ export class HaServiceAction extends LitElement implements ActionElement {
       if (
         domain &&
         service &&
-        this.hass.services[domain]?.[service] &&
+        this.hass.services[domain][service] &&
         !("response" in this.hass.services[domain][service])
       ) {
         delete value.response_variable;

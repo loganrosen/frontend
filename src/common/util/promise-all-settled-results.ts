@@ -6,4 +6,4 @@ export const rejectedItems = <T = any>(
 ): PromiseRejectedResult[] =>
   results.filter(
     (result) => result.status === "rejected"
-  ) as PromiseRejectedResult[];
+  );

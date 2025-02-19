@@ -44,7 +44,7 @@ class DialogCalendarEventDetail extends LitElement {
   ): Promise<void> {
     this._params = params;
     if (params.entry) {
-      const entry = params.entry!;
+      const entry = params.entry;
       this._data = entry;
       this._calendarId = params.calendarId;
     }
@@ -67,7 +67,7 @@ class DialogCalendarEventDetail extends LitElement {
         @closed=${this.closeDialog}
         scrimClickAction
         escapeKeyAction
-        .heading=${createCloseHeading(this.hass, this._data!.summary)}
+        .heading=${createCloseHeading(this.hass, this._data.summary)}
       >
         <div class="content">
           ${this._error
@@ -77,7 +77,7 @@ class DialogCalendarEventDetail extends LitElement {
             <ha-svg-icon .path=${mdiCalendarClock}></ha-svg-icon>
             <div class="value">
               ${this._formatDateRange()}<br />
-              ${this._data!.rrule
+              ${this._data.rrule
                 ? this._renderRRuleAsText(this._data.rrule)
                 : ""}
               ${this._data.description
@@ -142,8 +142,8 @@ class DialogCalendarEventDetail extends LitElement {
       this.hass.locale.time_zone,
       this.hass.config.time_zone
     );
-    const start = toDate(this._data!.dtstart, { timeZone: timeZone });
-    const endValue = toDate(this._data!.dtend, { timeZone: timeZone });
+    const start = toDate(this._data.dtstart, { timeZone: timeZone });
+    const endValue = toDate(this._data.dtend, { timeZone: timeZone });
     // All day events should be displayed as a day earlier
     const end = isDate(this._data.dtend) ? addDays(endValue, -1) : endValue;
     // The range can be shortened when the start and end are on the same day.
@@ -182,7 +182,7 @@ class DialogCalendarEventDetail extends LitElement {
 
   private async _deleteEvent() {
     this._submitting = true;
-    const entry = this._params!.entry!;
+    const entry = this._params!.entry;
     const range = await showConfirmEventDialog(this, {
       title: this.hass.localize(
         "ui.components.calendar.event.confirm_delete.delete"
@@ -214,11 +214,11 @@ class DialogCalendarEventDetail extends LitElement {
     }
     try {
       await deleteCalendarEvent(
-        this.hass!,
+        this.hass,
         this._calendarId!,
         entry.uid!,
         entry.recurrence_id || "",
-        range!
+        range
       );
     } catch (err: any) {
       this._error = err ? err.message : "Unknown error";

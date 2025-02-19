@@ -60,7 +60,7 @@ class DialogZHAManageZigbeeDevice extends LitElement {
 
   protected firstUpdated(changedProps: PropertyValues) {
     super.firstUpdated(changedProps);
-    this.addEventListener("close-dialog", () => this.closeDialog());
+    this.addEventListener("close-dialog", () => { this.closeDialog(); });
   }
 
   protected willUpdate(changedProps: PropertyValues) {
@@ -178,7 +178,7 @@ class DialogZHAManageZigbeeDevice extends LitElement {
               sortZHADevices
             )
           : [];
-      this._groups = (await fetchGroups(this.hass!)).sort(sortZHAGroups);
+      this._groups = (await fetchGroups(this.hass)).sort(sortZHAGroups);
     }
   }
 

@@ -52,7 +52,7 @@ export class CloudDiscover extends LitElement {
                   src=${brandsUrl({
                     domain: "google_assistant",
                     type: "icon",
-                    darkOptimized: this.hass.themes?.darkMode,
+                    darkOptimized: this.hass.themes.darkMode,
                   })}
                   crossorigin="anonymous"
                   referrerpolicy="no-referrer"
@@ -62,7 +62,7 @@ export class CloudDiscover extends LitElement {
                   src=${brandsUrl({
                     domain: "alexa",
                     type: "icon",
-                    darkOptimized: this.hass.themes?.darkMode,
+                    darkOptimized: this.hass.themes.darkMode,
                   })}
                   crossorigin="anonymous"
                   referrerpolicy="no-referrer"

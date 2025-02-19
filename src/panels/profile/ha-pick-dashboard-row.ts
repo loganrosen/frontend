@@ -36,7 +36,7 @@ class HaPickDashboardRow extends LitElement {
               .label=${this.hass.localize(
                 "ui.panel.profile.dashboard.dropdown_label"
               )}
-              .disabled=${!this._dashboards?.length}
+              .disabled=${!this._dashboards.length}
               .value=${this.hass.defaultPanel}
               @selected=${this._dashboardChanged}
               naturalMenuWidth

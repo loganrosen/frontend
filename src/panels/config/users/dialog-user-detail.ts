@@ -98,7 +98,7 @@ class DialogUserDetail extends LitElement {
                     dialogInitialFocus
                     .value=${this._name}
                     @input=${this._nameChanged}
-                    .label=${this.hass!.localize(
+                    .label=${this.hass.localize(
                       "ui.panel.config.users.editor.name"
                     )}
                   ></ha-textfield>
@@ -133,7 +133,7 @@ class DialogUserDetail extends LitElement {
                       )}
                     </span>
                     <span slot="description">************</span>
-                    ${this.hass.user?.is_owner
+                    ${this.hass.user.is_owner
                       ? html`
                           <ha-icon-button
                             .path=${mdiPencil}
@@ -228,7 +228,7 @@ class DialogUserDetail extends LitElement {
             user.system_generated ||
             user.is_owner}
           >
-            ${this.hass!.localize("ui.panel.config.users.editor.delete_user")}
+            ${this.hass.localize("ui.panel.config.users.editor.delete_user")}
           </ha-button>
         </div>
 
@@ -239,7 +239,7 @@ class DialogUserDetail extends LitElement {
             this._submitting ||
             user.system_generated}
           >
-            ${this.hass!.localize("ui.panel.config.users.editor.update_user")}
+            ${this.hass.localize("ui.panel.config.users.editor.update_user")}
           </ha-button>
         </div>
       </ha-dialog>

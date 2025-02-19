@@ -39,11 +39,11 @@ export const timeCacheEntityPromiseFunc = async <T>(
     // When successful, set timer to clear cache
     () =>
       setTimeout(() => {
-        cache![entityId] = undefined;
+        cache[entityId] = undefined;
       }, cacheTime),
     // On failure, clear cache right away
     () => {
-      cache![entityId] = undefined;
+      cache[entityId] = undefined;
     }
   );
 

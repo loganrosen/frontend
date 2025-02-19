@@ -1,4 +1,3 @@
-import type { Button } from "@material/mwc-button";
 import "@material/mwc-menu";
 import type { Corner, Menu, MenuCorner } from "@material/mwc-menu";
 import type { TemplateResult } from "lit";
@@ -6,7 +5,6 @@ import { css, html, LitElement } from "lit";
 import { customElement, property, query } from "lit/decorators";
 import { mainWindow } from "../common/dom/get_main_window";
 import { FOCUS_TARGET } from "../dialogs/make-dialog-manager";
-import type { HaIconButton } from "./ha-icon-button";
 
 @customElement("ha-button-menu")
 export class HaButtonMenu extends LitElement {
@@ -77,7 +75,7 @@ export class HaButtonMenu extends LitElement {
           const style = document.createElement("style");
           style.innerHTML =
             "span.material-icons:first-of-type { margin-left: var(--mdc-list-item-graphic-margin, 32px) !important; margin-right: 0px !important;}";
-          item!.shadowRoot!.appendChild(style);
+          item.shadowRoot!.appendChild(style);
         });
       });
     }
@@ -94,7 +92,7 @@ export class HaButtonMenu extends LitElement {
   private get _triggerButton() {
     return this.querySelector(
       'ha-icon-button[slot="trigger"], mwc-button[slot="trigger"]'
-    ) as HaIconButton | Button | null;
+    );
   }
 
   private _setTriggerAria() {

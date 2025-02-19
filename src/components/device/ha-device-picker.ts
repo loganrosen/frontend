@@ -166,7 +166,7 @@ export class HaDevicePicker extends LitElement {
 
       if (excludeDevices) {
         inputDevices = inputDevices.filter(
-          (device) => !excludeDevices!.includes(device.id)
+          (device) => !excludeDevices.includes(device.id)
         );
       }
 
@@ -209,7 +209,7 @@ export class HaDevicePicker extends LitElement {
         inputDevices = inputDevices.filter(
           (device) =>
             // We always want to include the device of the current value
-            device.id === this.value || deviceFilter!(device)
+            device.id === this.value || deviceFilter(device)
         );
       }
 
@@ -253,12 +253,12 @@ export class HaDevicePicker extends LitElement {
 
   public async open() {
     await this.updateComplete;
-    await this.comboBox?.open();
+    await this.comboBox.open();
   }
 
   public async focus() {
     await this.updateComplete;
-    await this.comboBox?.focus();
+    await this.comboBox.focus();
   }
 
   protected updated(changedProps: PropertyValues) {

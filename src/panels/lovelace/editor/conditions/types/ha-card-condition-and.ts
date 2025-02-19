@@ -29,7 +29,7 @@ export class HaCardConditionNumericAnd extends LitElement {
   }
 
   protected static validateUIConfig(condition: StateCondition) {
-    return assert(condition, andConditionStruct);
+    assert(condition, andConditionStruct);
   }
 
   protected render() {

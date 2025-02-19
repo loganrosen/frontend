@@ -234,7 +234,7 @@ export class HuiEntityFilterCard
     }
 
     if (this._config?.conditions) {
-      const entityIds = extractConditionEntityIds(this._config?.conditions);
+      const entityIds = extractConditionEntityIds(this._config.conditions);
       for (const entityId of entityIds) {
         if (this.hass.states[entityId] !== oldHass.states[entityId]) {
           return true;

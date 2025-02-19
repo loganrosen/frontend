@@ -119,7 +119,7 @@ class ZWaveJSLogs extends SubscribeMixin(LitElement) {
       return;
     }
     this._logConfig = await fetchZWaveJSLogConfig(
-      this.hass!,
+      this.hass,
       this.configEntryId
     );
   }
@@ -141,7 +141,7 @@ class ZWaveJSLogs extends SubscribeMixin(LitElement) {
     if (this._logConfig.level === selected) {
       return;
     }
-    setZWaveJSLogLevel(this.hass!, this.configEntryId, selected);
+    setZWaveJSLogLevel(this.hass, this.configEntryId, selected);
     this._textarea!.value += `${this.hass.localize(
       "ui.panel.config.zwave_js.logs.log_level_changed",
       { level: capitalizeFirstLetter(selected) }

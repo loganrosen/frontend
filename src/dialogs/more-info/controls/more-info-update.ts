@@ -89,7 +89,7 @@ class MoreInfoUpdate extends LitElement {
 
       const lastAutomaticBackupDate = this._backupConfig
         ?.last_completed_automatic_backup
-        ? new Date(this._backupConfig?.last_completed_automatic_backup)
+        ? new Date(this._backupConfig.last_completed_automatic_backup)
         : null;
       const now = new Date();
 
@@ -212,7 +212,7 @@ class MoreInfoUpdate extends LitElement {
               </div>`
             : nothing}
         </div>
-        ${supportsFeature(this.stateObj!, UpdateEntityFeature.RELEASE_NOTES) &&
+        ${supportsFeature(this.stateObj, UpdateEntityFeature.RELEASE_NOTES) &&
         !this._error
           ? this._releaseNotes === undefined
             ? html`

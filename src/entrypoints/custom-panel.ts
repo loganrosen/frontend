@@ -1,7 +1,6 @@
 // Compat needs to be first import
 import "../resources/compatibility";
 
-import type { CSSResult } from "lit";
 import { fireEvent } from "../common/dom/fire_event";
 import { isNavigationClick } from "../common/dom/is-navigation-click";
 import { loadJS } from "../common/dom/load_resource";
@@ -14,7 +13,7 @@ import { loadCustomPanel } from "../util/custom-panel/load-custom-panel";
 import { setCustomPanelProperties } from "../util/custom-panel/set-custom-panel-properties";
 
 import("@polymer/polymer/lib/utils/settings").then(
-  ({ setCancelSyntheticClickEvents }) => setCancelSyntheticClickEvents(false)
+  ({ setCancelSyntheticClickEvents }) => { setCancelSyntheticClickEvents(false); }
 );
 
 declare global {
@@ -118,7 +117,7 @@ function initialize(
         }
 
         const errorStyle = document.createElement("style");
-        errorStyle.innerHTML = (baseEntrypointStyles as CSSResult).cssText;
+        errorStyle.innerHTML = (baseEntrypointStyles).cssText;
         document.body.appendChild(errorStyle);
 
         errorScreen.hass = properties.hass;
@@ -136,7 +135,7 @@ function initialize(
 
 document.addEventListener(
   "DOMContentLoaded",
-  () => window.parent.customPanel!.registerIframe(initialize, setProperties),
+  () => { window.parent.customPanel!.registerIframe(initialize, setProperties); },
   { once: true }
 );
 

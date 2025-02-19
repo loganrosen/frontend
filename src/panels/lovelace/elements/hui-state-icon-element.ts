@@ -90,8 +90,8 @@ export class HuiStateIconElement extends LitElement implements LovelaceElement {
         .title=${computeTooltip(this.hass, this._config)}
         @action=${this._handleAction}
         .actionHandler=${actionHandler({
-          hasHold: hasAction(this._config!.hold_action),
-          hasDoubleClick: hasAction(this._config!.double_tap_action),
+          hasHold: hasAction(this._config.hold_action),
+          hasDoubleClick: hasAction(this._config.double_tap_action),
         })}
         tabindex=${ifDefined(
           hasAction(this._config.tap_action) ? "0" : undefined
@@ -114,7 +114,7 @@ export class HuiStateIconElement extends LitElement implements LovelaceElement {
   `;
 
   private _handleAction(ev: ActionHandlerEvent) {
-    handleAction(this, this.hass!, this._config!, ev.detail.action!);
+    handleAction(this, this.hass!, this._config!, ev.detail.action);
   }
 }
 

@@ -103,7 +103,7 @@ export const DOMAIN_ATTRIBUTES_FORMATERS: Record<
       const hours = Math.floor(value / 3600);
       const minutes = Math.floor((value % 3600) / 60);
       const seconds = value % 60;
-      return formatDurationDigital(locale, { hours, minutes, seconds })!;
+      return formatDurationDigital(locale, { hours, minutes, seconds });
     },
   },
 };

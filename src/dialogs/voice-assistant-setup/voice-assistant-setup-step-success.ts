@@ -112,12 +112,12 @@ export class HaVoiceAssistantSetupStepSuccess extends LitElement {
                 <ha-select
                   .label=${"Assistant"}
                   @closed=${stopPropagation}
-                  .value=${pipelineEntity?.state}
+                  .value=${pipelineEntity.state}
                   fixedMenuPosition
                   naturalMenuWidth
                   @selected=${this._pipelinePicked}
                 >
-                  ${pipelineEntity?.attributes.options.map(
+                  ${pipelineEntity.attributes.options.map(
                     (pipeline) =>
                       html`<ha-list-item .value=${pipeline}>
                         ${this.hass.formatEntityState(pipelineEntity, pipeline)}
@@ -161,7 +161,7 @@ export class HaVoiceAssistantSetupStepSuccess extends LitElement {
     }
 
     const pipelineName =
-      this.hass.states[this.assistConfiguration?.pipeline_entity_id].state;
+      this.hass.states[this.assistConfiguration.pipeline_entity_id].state;
 
     const pipelines = await listAssistPipelines(this.hass);
 
@@ -183,7 +183,7 @@ export class HaVoiceAssistantSetupStepSuccess extends LitElement {
   }
 
   private _pipelinePicked(ev) {
-    const stateObj = this.hass!.states[
+    const stateObj = this.hass.states[
       this.assistConfiguration!.pipeline_entity_id
     ] as InputSelectEntity;
     const option = ev.target.value;
@@ -193,7 +193,7 @@ export class HaVoiceAssistantSetupStepSuccess extends LitElement {
     ) {
       return;
     }
-    setSelectOption(this.hass!, stateObj.entity_id, option);
+    setSelectOption(this.hass, stateObj.entity_id, option);
   }
 
   private async _setTtsSettings() {
@@ -271,7 +271,7 @@ export class HaVoiceAssistantSetupStepSuccess extends LitElement {
         cloudStatus.logged_in && cloudStatus.active_subscription,
       pipeline,
       updatePipeline: async (values) => {
-        await updateAssistPipeline(this.hass!, pipeline!.id, values);
+        await updateAssistPipeline(this.hass, pipeline.id, values);
       },
       hideWakeWord: true,
     });

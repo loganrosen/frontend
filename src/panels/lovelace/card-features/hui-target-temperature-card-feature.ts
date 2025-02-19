@@ -98,7 +98,7 @@ class HuiTargetTemperatureCardFeature
   }
 
   private async _valueChanged(ev: CustomEvent) {
-    const value = (ev.detail as any).value;
+    const value = (ev.detail).value;
     if (isNaN(value)) return;
     const target = (ev.currentTarget as any).target ?? "value";
 
@@ -110,7 +110,7 @@ class HuiTargetTemperatureCardFeature
   }
 
   private _debouncedCallService = debounce(
-    (target: Target) => this._callService(target),
+    (target: Target) => { this._callService(target); },
     1000
   );
 
@@ -168,7 +168,7 @@ class HuiTargetTemperatureCardFeature
     }
 
     const stateColor = stateColorCss(this.stateObj);
-    const digits = this._step.toString().split(".")?.[1]?.length ?? 0;
+    const digits = this._step.toString().split(".")[1]?.length ?? 0;
 
     const options = {
       maximumFractionDigits: digits,
@@ -198,7 +198,7 @@ class HuiTargetTemperatureCardFeature
             style=${styleMap({
               "--control-number-buttons-focus-color": stateColor,
             })}
-            .disabled=${this.stateObj!.state === UNAVAILABLE}
+            .disabled=${this.stateObj.state === UNAVAILABLE}
             .locale=${this.hass.locale}
           >
           </ha-control-number-buttons>
@@ -233,7 +233,7 @@ class HuiTargetTemperatureCardFeature
             style=${styleMap({
               "--control-number-buttons-focus-color": stateColor,
             })}
-            .disabled=${this.stateObj!.state === UNAVAILABLE}
+            .disabled=${this.stateObj.state === UNAVAILABLE}
             .locale=${this.hass.locale}
           >
           </ha-control-number-buttons>
@@ -256,7 +256,7 @@ class HuiTargetTemperatureCardFeature
             style=${styleMap({
               "--control-number-buttons-focus-color": stateColor,
             })}
-            .disabled=${this.stateObj!.state === UNAVAILABLE}
+            .disabled=${this.stateObj.state === UNAVAILABLE}
             .locale=${this.hass.locale}
           >
           </ha-control-number-buttons>
@@ -267,7 +267,7 @@ class HuiTargetTemperatureCardFeature
     return html`
       <ha-control-button-group>
         <ha-control-number-buttons
-          .disabled=${this.stateObj!.state === UNAVAILABLE}
+          .disabled=${this.stateObj.state === UNAVAILABLE}
           .unit=${this.hass.config.unit_system.temperature}
           .label=${this.hass.formatEntityAttributeName(
             this.stateObj,

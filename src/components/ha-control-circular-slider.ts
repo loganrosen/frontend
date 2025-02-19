@@ -450,7 +450,7 @@ export class HaControlCircularSlider extends LitElement {
 
   private _destroyListeners() {
     if (this._managers.length > 0) {
-      this._managers.forEach((manager) => manager.destroy());
+      this._managers.forEach((manager) => { manager.destroy(); });
       this._managers = [];
     }
   }

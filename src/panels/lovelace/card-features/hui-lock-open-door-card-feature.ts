@@ -74,7 +74,7 @@ class HuiLockOpenDoorCardFeature
     if (!this.hass || !this.stateObj) {
       return;
     }
-    callProtectedLockService(this, this.hass, this.stateObj!, "open");
+    callProtectedLockService(this, this.hass, this.stateObj, "open");
 
     this._setButtonState("done", DONE_TIMEOUT_SECOND);
   }

@@ -98,9 +98,9 @@ export class HuiEntityBadge extends LitElement implements LovelaceBadge {
   get hasAction() {
     return (
       !this._config?.tap_action ||
-      hasAction(this._config?.tap_action) ||
-      hasAction(this._config?.hold_action) ||
-      hasAction(this._config?.double_tap_action)
+      hasAction(this._config.tap_action) ||
+      hasAction(this._config.hold_action) ||
+      hasAction(this._config.double_tap_action)
     );
   }
 
@@ -207,8 +207,8 @@ export class HuiEntityBadge extends LitElement implements LovelaceBadge {
         .type=${this.hasAction ? "button" : "badge"}
         @action=${this._handleAction}
         .actionHandler=${actionHandler({
-          hasHold: hasAction(this._config!.hold_action),
-          hasDoubleClick: hasAction(this._config!.double_tap_action),
+          hasHold: hasAction(this._config.hold_action),
+          hasDoubleClick: hasAction(this._config.double_tap_action),
         })}
         .label=${label}
         .iconOnly=${!content}
@@ -233,7 +233,7 @@ export class HuiEntityBadge extends LitElement implements LovelaceBadge {
   }
 
   private _handleAction(ev: ActionHandlerEvent) {
-    handleAction(this, this.hass!, this._config!, ev.detail.action!);
+    handleAction(this, this.hass!, this._config!, ev.detail.action);
   }
 
   static styles = css`

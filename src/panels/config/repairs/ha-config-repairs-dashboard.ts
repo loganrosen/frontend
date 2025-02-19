@@ -53,7 +53,7 @@ class HaConfigRepairsDashboard extends SubscribeMixin(LitElement) {
 
   public hassSubscribe(): UnsubscribeFunc[] {
     return [
-      subscribeRepairsIssueRegistry(this.hass.connection!, (repairs) => {
+      subscribeRepairsIssueRegistry(this.hass.connection, (repairs) => {
         this._repairsIssues = repairs.issues.sort(
           (a, b) => severitySort[a.severity] - severitySort[b.severity]
         );

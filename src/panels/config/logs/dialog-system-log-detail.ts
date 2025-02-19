@@ -157,8 +157,8 @@ class DialogSystemLogDetail extends LitElement {
                   )}:
                   ${formatSystemLogTime(
                     item.first_occurred,
-                    this.hass!.locale,
-                    this.hass!.config
+                    this.hass.locale,
+                    this.hass.config
                   )}
                   (${item.count}
                   ${this.hass.localize(
@@ -169,8 +169,8 @@ class DialogSystemLogDetail extends LitElement {
             ${this.hass.localize("ui.panel.config.logs.detail.last_logged")}:
             ${formatSystemLogTime(
               item.timestamp,
-              this.hass!.locale,
-              this.hass!.config
+              this.hass.locale,
+              this.hass.config
             )}
           </p>
           ${item.message.length > 1

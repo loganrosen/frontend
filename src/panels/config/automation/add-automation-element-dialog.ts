@@ -299,15 +299,15 @@ class DialogAddAutomationElement extends LitElement implements HassDialog {
       if (
         (type === undefined &&
           (ENTITY_DOMAINS_MAIN.has(domain) ||
-            (manifest?.integration_type === "entity" &&
+            (manifest.integration_type === "entity" &&
               domainUsed &&
               !ENTITY_DOMAINS_OTHER.has(domain)))) ||
-        (type === "helper" && manifest?.integration_type === "helper") ||
+        (type === "helper" && manifest.integration_type === "helper") ||
         (type === "other" &&
           !ENTITY_DOMAINS_MAIN.has(domain) &&
           (ENTITY_DOMAINS_OTHER.has(domain) ||
-            (!domainUsed && manifest?.integration_type === "entity") ||
-            !["helper", "entity"].includes(manifest?.integration_type || "")))
+            (!domainUsed && manifest.integration_type === "entity") ||
+            !["helper", "entity"].includes(manifest.integration_type || "")))
       ) {
         result.push({
           group: true,
@@ -362,13 +362,13 @@ class DialogAddAutomationElement extends LitElement implements HassDialog {
             key: `${SERVICE_PREFIX}${dmn}.${service}`,
             name: `${domain ? "" : `${domainToName(localize, dmn)}: `}${
               this.hass.localize(`component.${dmn}.services.${service}.name`) ||
-              services[dmn][service]?.name ||
+              services[dmn][service].name ||
               service
             }`,
             description:
               this.hass.localize(
                 `component.${dmn}.services.${service}.description`
-              ) || services[dmn][service]?.description,
+              ) || services[dmn][service].description,
           });
         }
       };

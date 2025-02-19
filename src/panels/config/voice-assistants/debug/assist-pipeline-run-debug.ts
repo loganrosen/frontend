@@ -238,7 +238,7 @@ export class AssistPipelineRunDebug extends LitElement {
       stopRecording = undefined;
       audioRecorder.close();
       // We're currently STTing, so finish audio
-      if (run?.stage === "stt" && run.stt!.done === false) {
+      if (run?.stage === "stt" && !run.stt!.done) {
         if (this._audioBuffer) {
           for (const chunk of this._audioBuffer) {
             this._sendAudioChunk(chunk);
@@ -321,7 +321,7 @@ export class AssistPipelineRunDebug extends LitElement {
       stopRecording = undefined;
       audioRecorder.close();
       // We're currently STTing, so finish audio
-      if (run?.stage === "stt" && run.stt!.done === false) {
+      if (run?.stage === "stt" && !run.stt!.done) {
         if (this._audioBuffer) {
           for (const chunk of this._audioBuffer) {
             this._sendAudioChunk(chunk);

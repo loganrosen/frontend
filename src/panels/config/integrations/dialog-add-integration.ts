@@ -348,7 +348,7 @@ class AddIntegrationDialog extends LitElement {
     }
     if (
       integration &&
-      !integration?.iot_standards &&
+      !integration.iot_standards &&
       !("integrations" in integration) &&
       this._flowsInProgress?.length
     ) {
@@ -641,7 +641,7 @@ class AddIntegrationDialog extends LitElement {
   private async _createFlow(domain: string) {
     const flowsInProgress = await this._fetchFlowsInProgress([domain]);
 
-    if (flowsInProgress?.length) {
+    if (flowsInProgress.length) {
       this._pickedBrand = domain;
       return;
     }

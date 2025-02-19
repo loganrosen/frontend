@@ -213,7 +213,7 @@ class DialogZWaveJSRebuildNetworkRoutes extends LitElement {
     if (!this.hass) {
       return;
     }
-    const network: ZWaveJSNetwork = await fetchZwaveNetworkStatus(this.hass!, {
+    const network: ZWaveJSNetwork = await fetchZwaveNetworkStatus(this.hass, {
       entry_id: this.entry_id!,
     });
     if (network.controller.is_rebuilding_routes) {
@@ -272,7 +272,7 @@ class DialogZWaveJSRebuildNetworkRoutes extends LitElement {
 
   private _unsubscribe(): void {
     if (this._subscribed) {
-      this._subscribed.then((unsub) => unsub());
+      this._subscribed.then((unsub) => { unsub(); });
       this._subscribed = undefined;
     }
   }

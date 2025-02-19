@@ -128,7 +128,7 @@ export default class HaAutomationTrigger extends LitElement {
         ? undefined
         : isTriggerList(this._clipboard.trigger)
           ? "list"
-          : this._clipboard?.trigger?.trigger,
+          : this._clipboard.trigger.trigger,
     });
   }
 
@@ -171,7 +171,7 @@ export default class HaAutomationTrigger extends LitElement {
   public expandAll() {
     const rows = this.shadowRoot!.querySelectorAll<HaAutomationTriggerRow>(
       "ha-automation-trigger-row"
-    )!;
+    );
     rows.forEach((row) => {
       row.expand();
     });
@@ -187,14 +187,14 @@ export default class HaAutomationTrigger extends LitElement {
 
   private _moveUp(ev) {
     ev.stopPropagation();
-    const index = (ev.target as any).index;
+    const index = (ev.target).index;
     const newIndex = index - 1;
     this._move(index, newIndex);
   }
 
   private _moveDown(ev) {
     ev.stopPropagation();
-    const index = (ev.target as any).index;
+    const index = (ev.target).index;
     const newIndex = index + 1;
     this._move(index, newIndex);
   }

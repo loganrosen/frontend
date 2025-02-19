@@ -46,19 +46,19 @@ class DialogMQTTDeviceDebugInfo extends LitElement {
       <ha-dialog
         open
         @closed=${this._close}
-        .heading=${this.hass!.localize(
+        .heading=${this.hass.localize(
           "ui.dialogs.mqtt_device_debug_info.title",
           { device: computeDeviceName(this._params.device, this.hass) }
         )}
       >
         <h4>
-          ${this.hass!.localize(
+          ${this.hass.localize(
             "ui.dialogs.mqtt_device_debug_info.payload_display"
           )}
         </h4>
         <div>
           <ha-formfield
-            .label=${this.hass!.localize(
+            .label=${this.hass.localize(
               "ui.dialogs.mqtt_device_debug_info.deserialize"
             )}
           >
@@ -72,7 +72,7 @@ class DialogMQTTDeviceDebugInfo extends LitElement {
         </div>
         <div>
           <ha-formfield
-            .label=${this.hass!.localize(
+            .label=${this.hass.localize(
               "ui.dialogs.mqtt_device_debug_info.show_as_yaml"
             )}
           >
@@ -84,31 +84,31 @@ class DialogMQTTDeviceDebugInfo extends LitElement {
           </ha-formfield>
         </div>
         <h4>
-          ${this.hass!.localize("ui.dialogs.mqtt_device_debug_info.entities")}
+          ${this.hass.localize("ui.dialogs.mqtt_device_debug_info.entities")}
         </h4>
         <ul class="entitylist">
           ${this._debugInfo.entities.length
             ? this._renderEntities()
             : html`
-                ${this.hass!.localize(
+                ${this.hass.localize(
                   "ui.dialogs.mqtt_device_debug_info.no_entities"
                 )}
               `}
         </ul>
         <h4>
-          ${this.hass!.localize("ui.dialogs.mqtt_device_debug_info.triggers")}
+          ${this.hass.localize("ui.dialogs.mqtt_device_debug_info.triggers")}
         </h4>
         <ul class="triggerlist">
           ${this._debugInfo.triggers.length
             ? this._renderTriggers()
             : html`
-                ${this.hass!.localize(
+                ${this.hass.localize(
                   "ui.dialogs.mqtt_device_debug_info.no_triggers"
                 )}
               `}
         </ul>
         <mwc-button slot="primaryAction" @click=${this._close}>
-          ${this.hass!.localize("ui.dialogs.generic.close")}
+          ${this.hass.localize("ui.dialogs.generic.close")}
         </mwc-button>
       </ha-dialog>
     `;
@@ -163,7 +163,7 @@ class DialogMQTTDeviceDebugInfo extends LitElement {
                       .showDeserialized=${this._showDeserialized}
                       .showAsYaml=${this._showAsYaml}
                       .subscribedTopic=${topic.topic}
-                      .summary=${this.hass!.localize(
+                      .summary=${this.hass.localize(
                         "ui.dialogs.mqtt_device_debug_info.recent_messages",
                         { n: topic.messages.length }
                       )}
@@ -186,7 +186,7 @@ class DialogMQTTDeviceDebugInfo extends LitElement {
                       .showDeserialized=${this._showDeserialized}
                       .showAsYaml=${this._showAsYaml}
                       .subscribedTopic=${topic.topic}
-                      .summary=${this.hass!.localize(
+                      .summary=${this.hass.localize(
                         "ui.dialogs.mqtt_device_debug_info.recent_tx_messages",
                         { n: topic.messages.length }
                       )}

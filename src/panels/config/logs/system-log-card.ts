@@ -40,7 +40,7 @@ export class SystemLogCard extends LitElement {
 
   public async fetchData(): Promise<void> {
     this._items = undefined;
-    this._items = await fetchSystemLog(this.hass!);
+    this._items = await fetchSystemLog(this.hass);
   }
 
   private _timestamp(item: LoggedError): string {
@@ -168,8 +168,8 @@ export class SystemLogCard extends LitElement {
                                   >) `}
                                 ${integrations[idx]
                                   ? `${domainToName(
-                                      this.hass!.localize,
-                                      integrations[idx]!
+                                      this.hass.localize,
+                                      integrations[idx]
                                     )}${
                                       isCustomIntegrationError(item)
                                         ? ` (${this.hass.localize(
@@ -208,7 +208,7 @@ export class SystemLogCard extends LitElement {
     this.fetchData();
     this.loaded = true;
     this.addEventListener("hass-service-called", (ev) =>
-      this.serviceCalled(ev)
+      { this.serviceCalled(ev); }
     );
   }
 

@@ -100,7 +100,7 @@ class DialogAdminChangePassword extends LitElement {
     }
 
     const canSubmit = Boolean(
-      this._data?.new_password && this._data?.password_confirm && !this._error
+      this._data?.new_password && this._data.password_confirm && !this._error
     );
 
     return html`
@@ -164,7 +164,7 @@ class DialogAdminChangePassword extends LitElement {
       this._submitting = true;
       await adminChangePassword(
         this.hass,
-        this._userId!,
+        this._userId,
         this._data.new_password
       );
       this._success = true;

@@ -27,7 +27,7 @@ const FAKE_HASS = {
 class HaGallery extends LitElement {
   @state() private _page =
     document.location.hash.substring(1) ||
-    `${SIDEBAR[0].category}/${SIDEBAR[0].pages![0]}`;
+    `${SIDEBAR[0].category}/${SIDEBAR[0].pages[0]}`;
 
   @query("notification-manager")
   private _notifications!: HTMLElementTagNameMap["notification-manager"];
@@ -43,7 +43,7 @@ class HaGallery extends LitElement {
     for (const group of SIDEBAR) {
       const links: unknown[] = [];
 
-      for (const page of group.pages!) {
+      for (const page of group.pages) {
         const key = `${group.category}/${page}`;
         const active = this._page === key;
         if (!(key in PAGES)) {

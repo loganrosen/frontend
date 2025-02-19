@@ -26,5 +26,5 @@ export const getBadgeDocumentationURL = (
     return getCustomBadgeEntry(stripCustomPrefix(type))?.documentationURL;
   }
 
-  return `${documentationUrl(hass, "/dashboards/badges")}`;
+  return documentationUrl(hass, "/dashboards/badges");
 };

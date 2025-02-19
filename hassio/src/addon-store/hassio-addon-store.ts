@@ -136,7 +136,7 @@ export class HassioAddonStore extends LitElement {
       this._manageRepositories(repositoryUrl);
     }
 
-    this.addEventListener("hass-api-called", (ev) => this._apiCalled(ev));
+    this.addEventListener("hass-api-called", (ev) => { this._apiCalled(ev); });
     this._loadData();
   }
 

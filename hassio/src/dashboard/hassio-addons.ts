@@ -63,12 +63,12 @@ class HassioAddons extends LitElement {
                         available
                         .showTopbar=${addon.update_available}
                         topbarClass="update"
-                        .icon=${addon.update_available!
+                        .icon=${addon.update_available
                           ? mdiArrowUpBoldCircle
                           : mdiPuzzle}
                         .iconTitle=${addon.state !== "started"
                           ? this.supervisor.localize("dashboard.addon_stopped")
-                          : addon.update_available!
+                          : addon.update_available
                             ? this.supervisor.localize(
                                 "dashboard.addon_new_version"
                               )

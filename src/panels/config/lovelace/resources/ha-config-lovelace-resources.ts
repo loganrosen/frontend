@@ -204,9 +204,9 @@ export class HaConfigLovelaceRescources extends LitElement {
   }
 
   private _editResource(ev: CustomEvent) {
-    if ((this.hass.panels.lovelace?.config as any)?.mode !== "storage") {
+    if ((this.hass.panels.lovelace.config as any)?.mode !== "storage") {
       showAlertDialog(this, {
-        text: this.hass!.localize(
+        text: this.hass.localize(
           "ui.panel.config.lovelace.resources.cant_edit_yaml"
         ),
       });
@@ -218,9 +218,9 @@ export class HaConfigLovelaceRescources extends LitElement {
   }
 
   private _addResource() {
-    if ((this.hass.panels.lovelace?.config as any)?.mode !== "storage") {
+    if ((this.hass.panels.lovelace.config as any)?.mode !== "storage") {
       showAlertDialog(this, {
-        text: this.hass!.localize(
+        text: this.hass.localize(
           "ui.panel.config.lovelace.resources.cant_edit_yaml"
         ),
       });
@@ -233,18 +233,18 @@ export class HaConfigLovelaceRescources extends LitElement {
     showResourceDetailDialog(this, {
       resource,
       createResource: async (values) => {
-        const created = await createResource(this.hass!, values);
-        this._resources = this._resources!.concat(created).sort((res1, res2) =>
-          stringCompare(res1.url, res2.url, this.hass!.locale.language)
+        const created = await createResource(this.hass, values);
+        this._resources = this._resources.concat(created).sort((res1, res2) =>
+          stringCompare(res1.url, res2.url, this.hass.locale.language)
         );
-        loadLovelaceResources([created], this.hass!);
+        loadLovelaceResources([created], this.hass);
       },
       updateResource: async (values) => {
-        const updated = await updateResource(this.hass!, resource!.id, values);
-        this._resources = this._resources!.map((res) =>
+        const updated = await updateResource(this.hass, resource!.id, values);
+        this._resources = this._resources.map((res) =>
           res === resource ? updated : res
         );
-        loadLovelaceResources([updated], this.hass!);
+        loadLovelaceResources([updated], this.hass);
       },
     });
   }
@@ -254,15 +254,15 @@ export class HaConfigLovelaceRescources extends LitElement {
 
     if (
       !(await showConfirmationDialog(this, {
-        title: this.hass!.localize(
+        title: this.hass.localize(
           "ui.panel.config.lovelace.resources.confirm_delete_title"
         ),
-        text: this.hass!.localize(
+        text: this.hass.localize(
           "ui.panel.config.lovelace.resources.confirm_delete_text",
           { url: resource.url }
         ),
-        dismissText: this.hass!.localize("ui.common.cancel"),
-        confirmText: this.hass!.localize("ui.common.delete"),
+        dismissText: this.hass.localize("ui.common.cancel"),
+        confirmText: this.hass.localize("ui.common.delete"),
         destructive: true,
       }))
     ) {
@@ -270,18 +270,18 @@ export class HaConfigLovelaceRescources extends LitElement {
     }
 
     try {
-      await deleteResource(this.hass!, resource.id);
-      this._resources = this._resources!.filter(({ id }) => id !== resource.id);
+      await deleteResource(this.hass, resource.id);
+      this._resources = this._resources.filter(({ id }) => id !== resource.id);
       showConfirmationDialog(this, {
-        title: this.hass!.localize(
+        title: this.hass.localize(
           "ui.panel.config.lovelace.resources.refresh_header"
         ),
-        text: this.hass!.localize(
+        text: this.hass.localize(
           "ui.panel.config.lovelace.resources.refresh_body"
         ),
         confirmText: this.hass.localize("ui.common.refresh"),
         dismissText: this.hass.localize("ui.common.not_now"),
-        confirm: () => location.reload(),
+        confirm: () => { location.reload(); },
       });
       return true;
     } catch (_err: any) {

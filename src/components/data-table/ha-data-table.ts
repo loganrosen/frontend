@@ -325,8 +325,8 @@ export class HaDataTable extends LitElement {
 
       return Object.keys(columns)
         .sort((a, b) => {
-          const orderA = columnOrder!.indexOf(a);
-          const orderB = columnOrder!.indexOf(b);
+          const orderA = columnOrder.indexOf(a);
+          const orderB = columnOrder.indexOf(b);
           if (orderA !== orderB) {
             if (orderA === -1) {
               return 1;
@@ -499,7 +499,7 @@ export class HaDataTable extends LitElement {
     `;
   }
 
-  private _keyFunction = (row: DataTableRowData) => row?.[this.id] || row;
+  private _keyFunction = (row: DataTableRowData) => row[this.id] || row;
 
   private _renderRow = (
     columns: DataTableColumnContainer,

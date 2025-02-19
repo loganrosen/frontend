@@ -75,7 +75,7 @@ export class HuiGraphHeaderFooter
 
   public setConfig(config: GraphHeaderFooterConfig): void {
     if (
-      !config?.entity ||
+      !config.entity ||
       !includeDomains.includes(computeDomain(config.entity))
     ) {
       throw new Error("Specify an entity from within the sensor domain");
@@ -185,7 +185,7 @@ export class HuiGraphHeaderFooter
     // redraw the graph every minute to update the time axis
     clearInterval(this._interval);
     this._interval = window.setInterval(
-      () => this._redrawGraph(),
+      () => { this._redrawGraph(); },
       this._config!.hours_to_show! > 24 ? HOUR : MINUTE
     );
   }

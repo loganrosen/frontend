@@ -75,7 +75,7 @@ export class SideBarView extends LitElement implements LovelaceViewElement {
     if (
       (!changedProperties.has("cards") &&
         oldLovelace?.config !== this.lovelace?.config) ||
-      (oldLovelace && oldLovelace?.editMode !== this.lovelace?.editMode)
+      (oldLovelace && oldLovelace.editMode !== this.lovelace?.editMode)
     ) {
       this._createCards();
     }
@@ -96,7 +96,7 @@ export class SideBarView extends LitElement implements LovelaceViewElement {
       ${this.lovelace?.editMode
         ? html`
             <ha-fab
-              .label=${this.hass!.localize(
+              .label=${this.hass.localize(
                 "ui.panel.lovelace.editor.edit_card.add"
               )}
               extended

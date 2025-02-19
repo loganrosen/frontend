@@ -14,7 +14,7 @@ export const showVoiceCommandDialog = (
   dialogParams: VoiceCommandDialogParams
 ): void => {
   if (hass.auth.external?.config.hasAssist) {
-    hass.auth.external!.fireMessage({
+    hass.auth.external.fireMessage({
       type: "assist/show",
       payload: {
         pipeline_id: dialogParams.pipeline_id,

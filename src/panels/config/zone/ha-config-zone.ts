@@ -112,7 +112,7 @@ export class HaConfigZone extends SubscribeMixin(LitElement) {
 
   public hassSubscribe(): UnsubscribeFunc[] {
     return [
-      subscribeEntityRegistry(this.hass.connection!, (entities) => {
+      subscribeEntityRegistry(this.hass.connection, (entities) => {
         this._regEntities = entities.map(
           (registryEntry) => registryEntry.entity_id
         );
@@ -320,15 +320,15 @@ export class HaConfigZone extends SubscribeMixin(LitElement) {
   }
 
   private async _fetchData() {
-    this._storageItems = (await fetchZones(this.hass!)).sort((ent1, ent2) =>
-      stringCompare(ent1.name, ent2.name, this.hass!.locale.language)
+    this._storageItems = (await fetchZones(this.hass)).sort((ent1, ent2) =>
+      stringCompare(ent1.name, ent2.name, this.hass.locale.language)
     );
     this._getStates();
   }
 
   private _getStates(oldHass?: HomeAssistant) {
     let changed = false;
-    const tempStates = Object.values(this.hass!.states).filter((entity) => {
+    const tempStates = Object.values(this.hass.states).filter((entity) => {
       if (computeStateDomain(entity) !== "zone") {
         return false;
       }
@@ -438,7 +438,7 @@ export class HaConfigZone extends SubscribeMixin(LitElement) {
 
   private async _editZone(id: string) {
     await this.updateComplete;
-    (this.shadowRoot?.querySelector(`[id="${id}"]`) as HTMLElement)?.click();
+    (this.shadowRoot?.querySelector(`[id="${id}"]`) as HTMLElement).click();
   }
 
   private _openEditEntry(ev: Event) {
@@ -461,10 +461,10 @@ export class HaConfigZone extends SubscribeMixin(LitElement) {
   }
 
   private async _createEntry(values: ZoneMutableParams) {
-    const created = await createZone(this.hass!, values);
+    const created = await createZone(this.hass, values);
     this._storageItems = this._storageItems!.concat(created).sort(
       (ent1, ent2) =>
-        stringCompare(ent1.name, ent2.name, this.hass!.locale.language)
+        stringCompare(ent1.name, ent2.name, this.hass.locale.language)
     );
     if (this.narrow) {
       return;
@@ -489,7 +489,7 @@ export class HaConfigZone extends SubscribeMixin(LitElement) {
     values: Partial<ZoneMutableParams>,
     fitMap = false
   ) {
-    const updated = await updateZone(this.hass!, entry!.id, values);
+    const updated = await updateZone(this.hass, entry.id, values);
     this._storageItems = this._storageItems!.map((ent) =>
       ent === entry ? updated : ent
     );
@@ -505,9 +505,9 @@ export class HaConfigZone extends SubscribeMixin(LitElement) {
   private async _removeEntry(entry: Zone) {
     if (
       !(await showConfirmationDialog(this, {
-        title: this.hass!.localize("ui.panel.config.zone.confirm_delete"),
-        dismissText: this.hass!.localize("ui.common.cancel"),
-        confirmText: this.hass!.localize("ui.common.delete"),
+        title: this.hass.localize("ui.panel.config.zone.confirm_delete"),
+        dismissText: this.hass.localize("ui.common.cancel"),
+        confirmText: this.hass.localize("ui.common.delete"),
         destructive: true,
       }))
     ) {
@@ -515,7 +515,7 @@ export class HaConfigZone extends SubscribeMixin(LitElement) {
     }
 
     try {
-      await deleteZone(this.hass!, entry!.id);
+      await deleteZone(this.hass, entry.id);
       this._storageItems = this._storageItems!.filter((ent) => ent !== entry);
       if (!this.narrow) {
         this._map?.fitMap();

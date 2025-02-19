@@ -247,7 +247,7 @@ export class CloudAccount extends SubscribeMixin(LitElement) {
     );
     return [
       this.hass.connection.subscribeEvents(() => {
-        if (!this.cloudStatus?.alexa_registered) {
+        if (!this.cloudStatus.alexa_registered) {
           fireEvent(this, "ha-refresh-cloud-status");
         }
       }, "alexa_smart_home"),
@@ -282,8 +282,8 @@ export class CloudAccount extends SubscribeMixin(LitElement) {
       text: this.hass.localize(
         "ui.panel.config.cloud.account.sign_out_confirm"
       ),
-      confirmText: this.hass!.localize("ui.common.yes"),
-      dismissText: this.hass!.localize("ui.common.no"),
+      confirmText: this.hass.localize("ui.common.yes"),
+      dismissText: this.hass.localize("ui.common.no"),
       confirm: () => this._logoutFromCloud(),
     });
   }

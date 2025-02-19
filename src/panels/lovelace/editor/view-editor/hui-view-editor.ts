@@ -169,7 +169,7 @@ export class HuiViewEditor extends LitElement {
   ) => {
     switch (schema.name) {
       case "path":
-        return this.hass!.localize("ui.panel.lovelace.editor.card.generic.url");
+        return this.hass.localize("ui.panel.lovelace.editor.card.generic.url");
       case "type":
       case "subview":
       case "max_columns":
@@ -179,7 +179,7 @@ export class HuiViewEditor extends LitElement {
           `ui.panel.lovelace.editor.edit_view.${schema.name}`
         );
       default:
-        return this.hass!.localize(
+        return this.hass.localize(
           `ui.panel.lovelace.editor.card.generic.${schema.name}`
         );
     }

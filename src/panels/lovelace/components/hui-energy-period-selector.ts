@@ -73,7 +73,7 @@ export class HuiEnergyPeriodSelector extends SubscribeMixin(LitElement) {
     return [
       getEnergyDataCollection(this.hass, {
         key: this.collectionKey,
-      }).subscribe((data) => this._updateDates(data)),
+      }).subscribe((data) => { this._updateDates(data); }),
     ];
   }
 
@@ -84,7 +84,7 @@ export class HuiEnergyPeriodSelector extends SubscribeMixin(LitElement) {
   private async _attachObserver(): Promise<void> {
     if (!this._resizeObserver) {
       this._resizeObserver = new ResizeObserver(
-        debounce(() => this._measure(), 250, false)
+        debounce(() => { this._measure(); }, 250, false)
       );
     }
     this._resizeObserver.observe(this);
@@ -115,7 +115,7 @@ export class HuiEnergyPeriodSelector extends SubscribeMixin(LitElement) {
     if (
       !this.hasUpdated ||
       (changedProps.has("hass") &&
-        this.hass?.localize !== changedProps.get("hass")?.localize)
+        this.hass.localize !== changedProps.get("hass")?.localize)
     ) {
       const today = new Date();
       const weekStartsOn = firstWeekdayIndex(this.hass.locale);
@@ -308,7 +308,7 @@ export class HuiEnergyPeriodSelector extends SubscribeMixin(LitElement) {
 
   private _simpleRange = memoizeOne(
     (startDate, endDate, locale, config): string => {
-      if (differenceInDays(endDate!, startDate!) === 0) {
+      if (differenceInDays(endDate, startDate) === 0) {
         return "day";
       }
       if (
@@ -365,7 +365,7 @@ export class HuiEnergyPeriodSelector extends SubscribeMixin(LitElement) {
     const energyCollection = getEnergyDataCollection(this.hass, {
       key: this.collectionKey,
     });
-    energyCollection.setPeriod(this._startDate!, this._endDate!);
+    energyCollection.setPeriod(this._startDate!, this._endDate);
     energyCollection.refresh();
   }
 

@@ -20,7 +20,7 @@ export const showConfigFlowDialog = (
     entryId?: string;
   }
 ): void =>
-  showFlowDialog(element, dialogParams, {
+  { showFlowDialog(element, dialogParams, {
     flowType: "config_flow",
     showDevices: true,
     createFlow: async (hass, handler) => {
@@ -85,7 +85,7 @@ export const showConfigFlowDialog = (
         );
       }
 
-      const prefix = options?.path?.[0] ? `sections.${options.path[0]}.` : "";
+      const prefix = options.path?.[0] ? `sections.${options.path[0]}.` : "";
 
       return (
         hass.localize(
@@ -101,7 +101,7 @@ export const showConfigFlowDialog = (
         );
       }
 
-      const prefix = options?.path?.[0] ? `sections.${options.path[0]}.` : "";
+      const prefix = options.path?.[0] ? `sections.${options.path[0]}.` : "";
 
       const description = hass.localize(
         `component.${step.translation_domain || step.handler}.config.step.${step.step_id}.${prefix}data_description.${field.name}`,
@@ -265,4 +265,4 @@ export const showConfigFlowDialog = (
         }
       );
     },
-  });
+  }); };

@@ -201,7 +201,7 @@ export class HaAutomationEditor extends PreventUnsavedMixin(
         .header=${this._config.alias ||
         this.hass.localize("ui.panel.config.automation.editor.default_name")}
       >
-        ${this._config?.id && !this.narrow
+        ${this._config.id && !this.narrow
           ? html`
               <mwc-button @click=${this._showTrace} slot="toolbar-icon">
                 ${this.hass.localize(
@@ -246,7 +246,7 @@ export class HaAutomationEditor extends PreventUnsavedMixin(
             @click=${this._editCategory}
           >
             ${this.hass.localize(
-              `ui.panel.config.scene.picker.${this._registryEntry?.categories?.automation ? "edit_category" : "assign_category"}`
+              `ui.panel.config.scene.picker.${this._registryEntry?.categories.automation ? "edit_category" : "assign_category"}`
             )}
             <ha-svg-icon slot="graphic" .path=${mdiTag}></ha-svg-icon>
           </ha-list-item>
@@ -569,7 +569,7 @@ export class HaAutomationEditor extends PreventUnsavedMixin(
 
     if (changedProps.has("_config")) {
       Object.values(this._configSubscriptions).forEach((sub) =>
-        sub(this._config)
+        { sub(this._config); }
       );
     }
   }
@@ -587,7 +587,7 @@ export class HaAutomationEditor extends PreventUnsavedMixin(
       return;
     }
     const stateObj = this.hass.states[this._entityId];
-    if (stateObj?.state !== UNAVAILABLE) {
+    if (stateObj.state !== UNAVAILABLE) {
       return;
     }
     const validation = await validateConfig(this.hass, {
@@ -768,8 +768,8 @@ export class HaAutomationEditor extends PreventUnsavedMixin(
 
           resolve(true);
         },
-        onClose: () => resolve(false),
-        onDiscard: () => resolve(true),
+        onClose: () => { resolve(false); },
+        onDiscard: () => { resolve(true); },
         entityRegistryUpdate: this._entityRegistryUpdate,
         entityRegistryEntry: this._registryEntry,
         title: this.hass.localize(
@@ -790,7 +790,7 @@ export class HaAutomationEditor extends PreventUnsavedMixin(
   private _backTapped = async () => {
     const result = await this._confirmUnsavedChanged();
     if (result) {
-      afterNextRender(() => history.back());
+      afterNextRender(() => { history.back(); });
     }
   };
 
@@ -868,9 +868,9 @@ export class HaAutomationEditor extends PreventUnsavedMixin(
         "ui.panel.config.automation.picker.delete_confirm_text",
         { name: this._config?.alias }
       ),
-      confirmText: this.hass!.localize("ui.common.delete"),
+      confirmText: this.hass.localize("ui.common.delete"),
       destructive: true,
-      dismissText: this.hass!.localize("ui.common.cancel"),
+      dismissText: this.hass.localize("ui.common.cancel"),
       confirm: () => this._delete(),
     });
   }
@@ -888,9 +888,9 @@ export class HaAutomationEditor extends PreventUnsavedMixin(
         text: html`${this.hass.localize(
             "ui.panel.config.automation.editor.switch_ui_yaml_error"
           )}<br /><br />${this._yamlErrors}`,
-        confirmText: this.hass!.localize("ui.common.continue"),
+        confirmText: this.hass.localize("ui.common.continue"),
         destructive: true,
-        dismissText: this.hass!.localize("ui.common.cancel"),
+        dismissText: this.hass.localize("ui.common.cancel"),
       });
       if (!result) {
         return;
@@ -916,7 +916,7 @@ export class HaAutomationEditor extends PreventUnsavedMixin(
           this.requestUpdate();
           resolve(true);
         },
-        onClose: () => resolve(false),
+        onClose: () => { resolve(false); },
         entityRegistryUpdate: this._entityRegistryUpdate,
         entityRegistryEntry: this._registryEntry,
       });
@@ -933,7 +933,7 @@ export class HaAutomationEditor extends PreventUnsavedMixin(
           this.requestUpdate();
           resolve();
         },
-        onClose: () => resolve(),
+        onClose: () => { resolve(); },
       });
     });
   }

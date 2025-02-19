@@ -14,5 +14,5 @@ export const subscribePollingCollection = (
     }
   };
   fetchData();
-  return () => clearTimeout(timeout);
+  return () => { clearTimeout(timeout); };
 };

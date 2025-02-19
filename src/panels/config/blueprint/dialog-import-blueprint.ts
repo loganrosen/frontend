@@ -104,7 +104,7 @@ class DialogImportBlueprint extends LitElement {
                 >
                   <pre>${this._result.raw_data}</pre>
                 </ha-expansion-panel>
-                ${this._result?.exists
+                ${this._result.exists
                   ? html`
                       <ha-alert
                         alert-type="warning"

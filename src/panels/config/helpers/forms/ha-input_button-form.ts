@@ -33,9 +33,9 @@ class HaInputButtonForm extends LitElement {
 
   public focus() {
     this.updateComplete.then(() =>
-      (
+      { (
         this.shadowRoot?.querySelector("[dialogInitialFocus]") as HTMLElement
-      )?.focus()
+      ).focus(); }
     );
   }
 
@@ -50,12 +50,12 @@ class HaInputButtonForm extends LitElement {
           .value=${this._name}
           .configValue=${"name"}
           @input=${this._valueChanged}
-          .label=${this.hass!.localize(
+          .label=${this.hass.localize(
             "ui.dialogs.helper_settings.generic.name"
           )}
           autoValidate
           required
-          .validationMessage=${this.hass!.localize(
+          .validationMessage=${this.hass.localize(
             "ui.dialogs.helper_settings.required_error_msg"
           )}
           dialogInitialFocus
@@ -65,7 +65,7 @@ class HaInputButtonForm extends LitElement {
           .value=${this._icon}
           .configValue=${"icon"}
           @value-changed=${this._valueChanged}
-          .label=${this.hass!.localize(
+          .label=${this.hass.localize(
             "ui.dialogs.helper_settings.generic.icon"
           )}
         ></ha-icon-picker>

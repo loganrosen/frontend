@@ -118,7 +118,7 @@ export class HaVoiceCommandDialog extends LitElement {
                       size="small"
                     ></ha-circular-progress>
                   </div>`
-                : this._pipelines?.map(
+                : this._pipelines.map(
                     (pipeline) =>
                       html`<ha-list-item
                         ?selected=${pipeline.id === this._pipelineId ||
@@ -193,7 +193,7 @@ export class HaVoiceCommandDialog extends LitElement {
     if (
       changedProperties.has("_pipelineId") ||
       (changedProperties.has("_opened") &&
-        this._opened === true &&
+        this._opened &&
         this._pipelineId)
     ) {
       this._getPipeline();

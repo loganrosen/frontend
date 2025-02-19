@@ -156,7 +156,7 @@ export class HaPasswordField extends LitElement {
   }
 
   public setCustomValidity(message: string): void {
-    return this._textField.setCustomValidity(message);
+    this._textField.setCustomValidity(message);
   }
 
   public layout(): Promise<void> {

@@ -49,7 +49,7 @@ export class HaFilterStates extends LitElement {
         <div slot="header" class="header">
           ${this.label}
           ${this.value?.length
-            ? html`<div class="badge">${this.value?.length}</div>
+            ? html`<div class="badge">${this.value.length}</div>
                 <ha-icon-button
                   .path=${mdiFilterVariantRemove}
                   @click=${this._clearFilter}

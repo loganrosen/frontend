@@ -77,15 +77,15 @@ export class DialogLovelaceResourceDetail extends LitElement {
 
     const dialogTitle =
       this._params.resource?.url ||
-      this.hass!.localize(
+      this.hass.localize(
         "ui.panel.config.lovelace.resources.detail.new_resource"
       );
 
     const ariaLabel = this._params.resource?.url
-      ? this.hass!.localize(
+      ? this.hass.localize(
           "ui.panel.config.lovelace.resources.detail.edit_resource"
         )
-      : this.hass!.localize(
+      : this.hass.localize(
           "ui.panel.config.lovelace.resources.detail.new_resource"
         );
 
@@ -108,11 +108,11 @@ export class DialogLovelaceResourceDetail extends LitElement {
         <div slot="content">
           <ha-alert
             alert-type="warning"
-            .title=${this.hass!.localize(
+            .title=${this.hass.localize(
               "ui.panel.config.lovelace.resources.detail.warning_header"
             )}
           >
-            ${this.hass!.localize(
+            ${this.hass.localize(
               "ui.panel.config.lovelace.resources.detail.warning_text"
             )}
           </ha-alert>
@@ -128,17 +128,17 @@ export class DialogLovelaceResourceDetail extends LitElement {
         </div>
         <div slot="actions">
           <mwc-button @click=${this.closeDialog}>
-            ${this.hass!.localize("ui.common.cancel")}
+            ${this.hass.localize("ui.common.cancel")}
           </mwc-button>
           <mwc-button
             @click=${this._updateResource}
             .disabled=${urlInvalid || !this._data?.res_type || this._submitting}
           >
             ${this._params.resource
-              ? this.hass!.localize(
+              ? this.hass.localize(
                   "ui.panel.config.lovelace.resources.detail.update"
                 )
-              : this.hass!.localize(
+              : this.hass.localize(
                   "ui.panel.config.lovelace.resources.detail.create"
                 )}
           </mwc-button>
@@ -165,13 +165,13 @@ export class DialogLovelaceResourceDetail extends LitElement {
               options: [
                 {
                   value: "module",
-                  label: this.hass!.localize(
+                  label: this.hass.localize(
                     "ui.panel.config.lovelace.resources.types.module"
                   ),
                 },
                 {
                   value: "css",
-                  label: this.hass!.localize(
+                  label: this.hass.localize(
                     "ui.panel.config.lovelace.resources.types.css"
                   ),
                 },
@@ -179,7 +179,7 @@ export class DialogLovelaceResourceDetail extends LitElement {
                   ? ([
                       {
                         value: "js",
-                        label: this.hass!.localize(
+                        label: this.hass.localize(
                           "ui.panel.config.lovelace.resources.types.js"
                         ),
                       },
@@ -189,7 +189,7 @@ export class DialogLovelaceResourceDetail extends LitElement {
                   ? ([
                       {
                         value: "html",
-                        label: this.hass!.localize(
+                        label: this.hass.localize(
                           "ui.panel.config.lovelace.resources.types.html"
                         ),
                       },
@@ -233,10 +233,10 @@ export class DialogLovelaceResourceDetail extends LitElement {
     this._submitting = true;
     try {
       if (this._params!.resource) {
-        await this._params!.updateResource(this._data!);
+        await this._params!.updateResource(this._data);
       } else {
         await this._params!.createResource(
-          this._data! as LovelaceResourcesMutableParams
+          this._data as LovelaceResourcesMutableParams
         );
       }
       this._params = undefined;

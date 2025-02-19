@@ -99,7 +99,7 @@ export class DialogAreaFilter
               (area) => area,
               (area, _idx) => {
                 const isVisible = !this._hidden.includes(area);
-                const name = this.hass!.areas[area]?.name || area;
+                const name = this.hass!.areas[area].name || area;
                 return html`
                   <ha-list-item
                     class=${classMap({

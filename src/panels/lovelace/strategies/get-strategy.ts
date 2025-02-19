@@ -71,7 +71,7 @@ export const getLovelaceStrategy = async <T extends LovelaceStrategyConfigType>(
       customElements.whenDefined(legacyTag),
       customElements.whenDefined(tag),
       new Promise((resolve) => {
-        setTimeout(() => resolve(true), MAX_WAIT_STRATEGY_LOAD);
+        setTimeout(() => { resolve(true); }, MAX_WAIT_STRATEGY_LOAD);
       }),
     ])) === true
   ) {

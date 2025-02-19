@@ -142,7 +142,7 @@ class ZWaveJSNodeConfig extends LitElement {
                   {
                     device_database: html`<a
                       rel="noreferrer noopener"
-                      href=${this._nodeMetadata?.device_database_url ||
+                      href=${this._nodeMetadata.device_database_url ||
                       "https://devices.zwave-js.io"}
                       target="_blank"
                       >${this.hass.localize(
@@ -261,7 +261,7 @@ class ZWaveJSNodeConfig extends LitElement {
               )}
             </em>`
           : nothing}
-        ${result?.status
+        ${result.status
           ? html`<p
               class="result ${classMap({
                 [result.status]: true,

@@ -286,7 +286,7 @@ export class HuiStatisticCard extends LitElement implements LovelaceCard {
       oldHass.themes !== this.hass.themes ||
       oldConfig.theme !== this._config.theme
     ) {
-      applyThemesOnElement(this, this.hass.themes, this._config!.theme);
+      applyThemesOnElement(this, this.hass.themes, this._config.theme);
     }
   }
 
@@ -312,11 +312,11 @@ export class HuiStatisticCard extends LitElement implements LovelaceCard {
         this._config.entity,
         this._energyStart && this._energyEnd
           ? { fixed_period: { start: this._energyStart, end: this._energyEnd } }
-          : typeof this._config?.period === "object"
-            ? this._config?.period
+          : typeof this._config.period === "object"
+            ? this._config.period
             : {}
       );
-      this._value = stats[this._config!.stat_type];
+      this._value = stats[this._config.stat_type];
       this._error = undefined;
     } catch (e: any) {
       this._error = e.message;
@@ -330,7 +330,7 @@ export class HuiStatisticCard extends LitElement implements LovelaceCard {
     try {
       this._metadata = (
         await getStatisticMetadata(this.hass, [this._config.entity])
-      )?.[0];
+      )[0];
     } catch (e: any) {
       this._error = e.message;
     }

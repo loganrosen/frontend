@@ -161,7 +161,7 @@ export const subscribeBluetoothConnectionAllocations = (
     params.config_entry_id = configEntryId;
   }
   return conn.subscribeMessage<BluetoothAllocationsData[]>(
-    (bluetoothAllocationsData) => callbackFunction(bluetoothAllocationsData),
+    (bluetoothAllocationsData) => { callbackFunction(bluetoothAllocationsData); },
     params
   );
 };

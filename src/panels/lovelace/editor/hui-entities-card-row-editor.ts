@@ -45,9 +45,9 @@ export class HuiEntitiesCardRowEditor extends LitElement {
     return html`
       <h3>
         ${this.label ||
-        `${this.hass!.localize(
+        `${this.hass.localize(
           "ui.panel.lovelace.editor.card.generic.entities"
-        )} (${this.hass!.localize(
+        )} (${this.hass.localize(
           "ui.panel.lovelace.editor.card.config.required"
         )})`}
       </h3>

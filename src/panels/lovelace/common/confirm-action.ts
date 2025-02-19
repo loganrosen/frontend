@@ -10,7 +10,7 @@ export const confirmAction = async (
 ): Promise<boolean> => {
   if (
     config.exemptions &&
-    config.exemptions.some((e) => e.user === hass!.user?.id)
+    config.exemptions.some((e) => e.user === hass.user?.id)
   ) {
     return true;
   }

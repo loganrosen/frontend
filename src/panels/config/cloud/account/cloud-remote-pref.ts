@@ -201,7 +201,7 @@ export class CloudRemotePref extends LitElement {
                 )}</span
               >
               <span slot="description"
-                >${this.cloudStatus!.remote_certificate
+                >${this.cloudStatus.remote_certificate
                   ? this.hass.localize(
                       "ui.panel.config.cloud.account.remote.certificate_expire",
                       {

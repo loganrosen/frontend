@@ -78,7 +78,7 @@ class MediaUploadButton extends LitElement {
         fireEvent(this, "uploading");
         const files = input.files!;
         document.body.removeChild(input);
-        const target = this.currentItem!.media_content_id!;
+        const target = this.currentItem!.media_content_id;
 
         for (let i = 0; i < files.length; i++) {
           this._uploading = files.length - i;

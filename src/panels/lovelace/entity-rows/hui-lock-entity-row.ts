@@ -51,8 +51,8 @@ class HuiLockEntityRow extends LitElement implements LovelaceRow {
           class="text-content"
         >
           ${stateObj.state === "locked"
-            ? this.hass!.localize("ui.card.lock.unlock")
-            : this.hass!.localize("ui.card.lock.lock")}
+            ? this.hass.localize("ui.card.lock.unlock")
+            : this.hass.localize("ui.card.lock.lock")}
         </mwc-button>
       </hui-generic-entity-row>
     `;

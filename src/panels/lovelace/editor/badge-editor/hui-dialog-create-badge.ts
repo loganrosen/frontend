@@ -79,11 +79,11 @@ export class HuiCreateDialogBadge
     }
 
     const title = this._containerConfig.title
-      ? this.hass!.localize(
+      ? this.hass.localize(
           "ui.panel.lovelace.editor.edit_badge.pick_badge_title",
           { name: this._containerConfig.title }
         )
-      : this.hass!.localize("ui.panel.lovelace.editor.edit_badge.pick_badge");
+      : this.hass.localize("ui.panel.lovelace.editor.edit_badge.pick_badge");
 
     return html`
       <ha-dialog
@@ -107,13 +107,13 @@ export class HuiCreateDialogBadge
             @MDCTabBar:activated=${this._handleTabChanged}
           >
             <mwc-tab
-              .label=${this.hass!.localize(
+              .label=${this.hass.localize(
                 "ui.panel.lovelace.editor.badge_picker.by_badge"
               )}
               dialogInitialFocus
             ></mwc-tab>
             <mwc-tab
-              .label=${this.hass!.localize(
+              .label=${this.hass.localize(
                 "ui.panel.lovelace.editor.badge_picker.by_entity"
               )}
             ></mwc-tab>
@@ -142,12 +142,12 @@ export class HuiCreateDialogBadge
 
         <div slot="primaryAction">
           <mwc-button @click=${this._cancel}>
-            ${this.hass!.localize("ui.common.cancel")}
+            ${this.hass.localize("ui.common.cancel")}
           </mwc-button>
           ${this._selectedEntities.length
             ? html`
                 <mwc-button @click=${this._suggestBadges}>
-                  ${this.hass!.localize("ui.common.continue")}
+                  ${this.hass.localize("ui.common.continue")}
                 </mwc-button>
               `
             : ""}
@@ -277,7 +277,7 @@ export class HuiCreateDialogBadge
         stateObj,
         name: computeStateName(stateObj),
         domain: computeDomain(entity),
-        last_changed: stateObj!.last_changed,
+        last_changed: stateObj.last_changed,
       } as DataTableRowData;
     })
   );

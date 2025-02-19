@@ -250,15 +250,15 @@ export default class HaNumericStateCondition extends LitElement {
     this._inputAboveIsEntity =
       this._inputAboveIsEntity ??
       (typeof this.condition.above === "string" &&
-        ((this.condition.above as string).startsWith("input_number.") ||
-          (this.condition.above as string).startsWith("number.") ||
-          (this.condition.above as string).startsWith("sensor.")));
+        ((this.condition.above).startsWith("input_number.") ||
+          (this.condition.above).startsWith("number.") ||
+          (this.condition.above).startsWith("sensor.")));
     this._inputBelowIsEntity =
       this._inputBelowIsEntity ??
       (typeof this.condition.below === "string" &&
-        ((this.condition.below as string).startsWith("input_number.") ||
-          (this.condition.below as string).startsWith("number.") ||
-          (this.condition.below as string).startsWith("sensor.")));
+        ((this.condition.below).startsWith("input_number.") ||
+          (this.condition.below).startsWith("number.") ||
+          (this.condition.below).startsWith("sensor.")));
   }
 
   public render() {

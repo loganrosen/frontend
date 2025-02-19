@@ -84,7 +84,7 @@ export class HaPanelLogbook extends LitElement {
           slot="actionItems"
           @click=${this._refreshLogbook}
           .path=${mdiRefresh}
-          .label=${this.hass!.localize("ui.common.refresh")}
+          .label=${this.hass.localize("ui.common.refresh")}
         ></ha-icon-button>
 
         <div class="content">
@@ -189,23 +189,23 @@ export class HaPanelLogbook extends LitElement {
     }
     if (entityIds) {
       const splitIds = entityIds.split(",");
-      this._targetPickerValue!.entity_id = splitIds;
+      this._targetPickerValue.entity_id = splitIds;
     }
     if (deviceIds) {
       const splitIds = deviceIds.split(",");
-      this._targetPickerValue!.device_id = splitIds;
+      this._targetPickerValue.device_id = splitIds;
     }
     if (areaIds) {
       const splitIds = areaIds.split(",");
-      this._targetPickerValue!.area_id = splitIds;
+      this._targetPickerValue.area_id = splitIds;
     }
     if (floorIds) {
       const splitIds = floorIds.split(",");
-      this._targetPickerValue!.floor_id = splitIds;
+      this._targetPickerValue.floor_id = splitIds;
     }
     if (labelsIds) {
       const splitIds = labelsIds.split(",");
-      this._targetPickerValue!.label_id = splitIds;
+      this._targetPickerValue.label_id = splitIds;
     }
 
     const startDateStr = searchParams.start_date;

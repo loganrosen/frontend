@@ -109,42 +109,42 @@ export class HaStateControlCoverButtons extends LitElement {
 
   private _onOpenTap(ev): void {
     ev.stopPropagation();
-    this.hass!.callService("cover", "open_cover", {
-      entity_id: this.stateObj!.entity_id,
+    this.hass.callService("cover", "open_cover", {
+      entity_id: this.stateObj.entity_id,
     });
   }
 
   private _onCloseTap(ev): void {
     ev.stopPropagation();
-    this.hass!.callService("cover", "close_cover", {
-      entity_id: this.stateObj!.entity_id,
+    this.hass.callService("cover", "close_cover", {
+      entity_id: this.stateObj.entity_id,
     });
   }
 
   private _onOpenTiltTap(ev): void {
     ev.stopPropagation();
-    this.hass!.callService("cover", "open_cover_tilt", {
-      entity_id: this.stateObj!.entity_id,
+    this.hass.callService("cover", "open_cover_tilt", {
+      entity_id: this.stateObj.entity_id,
     });
   }
 
   private _onCloseTiltTap(ev): void {
     ev.stopPropagation();
-    this.hass!.callService("cover", "close_cover_tilt", {
-      entity_id: this.stateObj!.entity_id,
+    this.hass.callService("cover", "close_cover_tilt", {
+      entity_id: this.stateObj.entity_id,
     });
   }
 
   private _onStopTap(ev): void {
     ev.stopPropagation();
     if (supportsFeature(this.stateObj, CoverEntityFeature.STOP)) {
-      this.hass!.callService("cover", "stop_cover", {
-        entity_id: this.stateObj!.entity_id,
+      this.hass.callService("cover", "stop_cover", {
+        entity_id: this.stateObj.entity_id,
       });
     }
     if (supportsFeature(this.stateObj, CoverEntityFeature.STOP_TILT)) {
-      this.hass!.callService("cover", "stop_cover_tilt", {
-        entity_id: this.stateObj!.entity_id,
+      this.hass.callService("cover", "stop_cover_tilt", {
+        entity_id: this.stateObj.entity_id,
       });
     }
   }

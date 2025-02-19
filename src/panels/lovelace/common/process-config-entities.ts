@@ -34,7 +34,7 @@ export const processConfigEntities = <
       throw new Error(`Invalid entity ID at position ${index}`);
     }
 
-    if (checkEntityId && !isValidEntityId((config as EntityConfig).entity!)) {
+    if (checkEntityId && !isValidEntityId((config as EntityConfig).entity)) {
       throw new Error(
         `Invalid entity ID at position ${index}: ${
           (config as EntityConfig).entity

@@ -97,7 +97,7 @@ export class HaForm extends LitElement implements HaFormElement {
         if ("selector" in item) {
           return;
         }
-        LOAD_ELEMENTS[item.type]?.();
+        LOAD_ELEMENTS[item.type]();
       });
     }
   }

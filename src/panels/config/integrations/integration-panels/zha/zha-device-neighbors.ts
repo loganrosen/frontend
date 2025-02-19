@@ -137,7 +137,7 @@ class ZHADeviceNeighbors extends LitElement {
 
   private async _fetchData(): Promise<void> {
     if (this.device && this.hass) {
-      const devices = await fetchDevices(this.hass!);
+      const devices = await fetchDevices(this.hass);
       this._devices = new Map(
         devices.map((device: ZHADevice) => [device.ieee, device])
       );

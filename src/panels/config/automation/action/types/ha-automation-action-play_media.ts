@@ -30,8 +30,8 @@ export class HaPlayMediaAction extends LitElement implements ActionElement {
   private _getSelectorValue = memoizeOne(
     (action: PlayMediaAction): MediaSelectorValue => ({
       entity_id: action.target?.entity_id || action.entity_id,
-      media_content_id: action.data?.media_content_id,
-      media_content_type: action.data?.media_content_type,
+      media_content_id: action.data.media_content_id,
+      media_content_type: action.data.media_content_type,
       metadata: action.metadata,
     })
   );

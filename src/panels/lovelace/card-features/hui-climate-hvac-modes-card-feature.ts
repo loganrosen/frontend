@@ -87,7 +87,7 @@ class HuiClimateHvacModesCardFeature
 
   private async _valueChanged(ev: CustomEvent) {
     const mode =
-      (ev.detail as any).value ?? ((ev.target as any).value as HvacMode);
+      (ev.detail).value ?? ((ev.target as any).value as HvacMode);
 
     if (mode === this.stateObj!.state) return;
 
@@ -182,7 +182,7 @@ class HuiClimateHvacModesCardFeature
         style=${styleMap({
           "--control-select-color": color,
         })}
-        .disabled=${this.stateObj!.state === UNAVAILABLE}
+        .disabled=${this.stateObj.state === UNAVAILABLE}
       >
       </ha-control-select>
     `;

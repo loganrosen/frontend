@@ -87,7 +87,7 @@ export class HaDateInput extends LitElement {
       max: this.max,
       value: this.value,
       canClear: this.canClear,
-      onChange: (value) => this._valueChanged(value),
+      onChange: (value) => { this._valueChanged(value); },
       locale: this.locale.language,
       firstWeekday: firstWeekdayIndex(this.locale),
     });

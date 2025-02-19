@@ -239,10 +239,10 @@ class HassioBackupDialog
 
     if (
       !(await showConfirmationDialog(this, {
-        title: supervisor!.localize("backup.confirm_delete_title"),
-        text: supervisor!.localize("backup.confirm_delete_text"),
-        confirmText: supervisor!.localize("backup.delete"),
-        dismissText: supervisor!.localize("backup.cancel"),
+        title: supervisor.localize("backup.confirm_delete_title"),
+        text: supervisor.localize("backup.confirm_delete_text"),
+        confirmText: supervisor.localize("backup.delete"),
+        dismissText: supervisor.localize("backup.cancel"),
         destructive: true,
       }))
     ) {
@@ -250,7 +250,7 @@ class HassioBackupDialog
     }
 
     try {
-      await removeBackup(this.hass!, this._backup!.slug);
+      await removeBackup(this.hass, this._backup!.slug);
       if (this._dialogParams!.onDelete) {
         this._dialogParams!.onDelete();
       }
@@ -267,9 +267,9 @@ class HassioBackupDialog
     let signedPath: { path: string };
     try {
       signedPath = await getSignedPath(
-        this.hass!,
+        this.hass,
         `/api/hassio/${
-          atLeastVersion(this.hass!.config.version, 2021, 9)
+          atLeastVersion(this.hass.config.version, 2021, 9)
             ? "backups"
             : "snapshots"
         }/${this._backup!.slug}/download`
@@ -286,7 +286,7 @@ class HassioBackupDialog
         title: supervisor.localize("backup.remote_download_title"),
         text: supervisor.localize("backup.remote_download_text"),
         confirmText: supervisor.localize("backup.download"),
-        dismissText: supervisor?.localize("backup.cancel"),
+        dismissText: supervisor.localize("backup.cancel"),
       });
       if (!confirm) {
         return;

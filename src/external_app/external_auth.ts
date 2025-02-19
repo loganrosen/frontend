@@ -88,7 +88,7 @@ export class ExternalAuth extends Auth {
     this._tokenCallbackPromise = new Promise<RefreshTokenResponse>(
       (resolve, reject) => {
         window[CALLBACK_SET_TOKEN] = (success, data) =>
-          success ? resolve(data) : reject(data);
+          { success ? resolve(data) : reject(data); };
       }
     );
 
@@ -113,7 +113,7 @@ export class ExternalAuth extends Auth {
 
     const callbackPromise = new Promise((resolve, reject) => {
       window[CALLBACK_REVOKE_TOKEN] = (success, data) =>
-        success ? resolve(data) : reject(data);
+        { success ? resolve(data) : reject(data); };
     });
 
     // we sleep 1 microtask to get the promise to actually set it on the window object.

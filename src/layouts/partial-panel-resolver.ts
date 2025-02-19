@@ -54,10 +54,10 @@ class PartialPanelResolver extends HassRouterPage {
     // Attach listeners for visibility
     document.addEventListener(
       "visibilitychange",
-      () => this._checkVisibility(),
+      () => { this._checkVisibility(); },
       false
     );
-    document.addEventListener("resume", () => this._checkVisibility());
+    document.addEventListener("resume", () => { this._checkVisibility(); });
   }
 
   public willUpdate(changedProps: PropertyValues) {
@@ -79,7 +79,7 @@ class PartialPanelResolver extends HassRouterPage {
     }
 
     if (this.hass.panels && (!oldHass || oldHass.panels !== this.hass.panels)) {
-      this._updateRoutes(oldHass?.panels);
+      this._updateRoutes(oldHass.panels);
     }
   }
 
@@ -101,7 +101,7 @@ class PartialPanelResolver extends HassRouterPage {
   }
 
   private _checkVisibility() {
-    if (this.hass.suspendWhenHidden === false) {
+    if (!this.hass.suspendWhenHidden) {
       return;
     }
 
@@ -165,7 +165,7 @@ class PartialPanelResolver extends HassRouterPage {
         this.removeChild(this.lastChild);
       }
     }, 300000);
-    window.addEventListener("focus", () => this._onVisible(), { once: true });
+    window.addEventListener("focus", () => { this._onVisible(); }, { once: true });
   }
 
   private _onVisible() {

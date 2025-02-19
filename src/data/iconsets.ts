@@ -50,8 +50,8 @@ export const getIcon = (iconName: string) =>
       iconStore("readonly", (store) => {
         for (const [iconName_, resolve_, reject_] of toRead) {
           promisifyRequest<string | undefined>(store.get(iconName_))
-            .then((icon) => resolve_(icon))
-            .catch((e) => reject_(e));
+            .then((icon) => { resolve_(icon); })
+            .catch((e) => { reject_(e); });
         }
         toRead = [];
       });

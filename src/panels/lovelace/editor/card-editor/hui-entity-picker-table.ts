@@ -31,7 +31,7 @@ export class HuiEntityPickerTable extends LitElement {
         .hass=${this.hass}
         selectable
         .id=${"entity_id"}
-        .columns=${this._columns(this.narrow!)}
+        .columns=${this._columns(this.narrow)}
         .data=${this.entities}
         .searchLabel=${this.hass.localize(
           "ui.panel.lovelace.unused_entities.search"
@@ -49,20 +49,20 @@ export class HuiEntityPickerTable extends LitElement {
     const columns: DataTableColumnContainer = {
       icon: {
         title: "",
-        label: this.hass!.localize(
+        label: this.hass.localize(
           "ui.panel.lovelace.unused_entities.state_icon"
         ),
         type: "icon",
         template: (entity) => html`
           <state-badge
             @click=${this._handleEntityClicked}
-            .hass=${this.hass!}
+            .hass=${this.hass}
             .stateObj=${entity.stateObj}
           ></state-badge>
         `,
       },
       name: {
-        title: this.hass!.localize("ui.panel.lovelace.unused_entities.entity"),
+        title: this.hass.localize("ui.panel.lovelace.unused_entities.entity"),
         sortable: true,
         filterable: true,
         flex: 2,
@@ -80,21 +80,21 @@ export class HuiEntityPickerTable extends LitElement {
     };
 
     columns.entity_id = {
-      title: this.hass!.localize("ui.panel.lovelace.unused_entities.entity_id"),
+      title: this.hass.localize("ui.panel.lovelace.unused_entities.entity_id"),
       sortable: true,
       filterable: true,
       hidden: narrow,
     };
 
     columns.domain = {
-      title: this.hass!.localize("ui.panel.lovelace.unused_entities.domain"),
+      title: this.hass.localize("ui.panel.lovelace.unused_entities.domain"),
       sortable: true,
       filterable: true,
       hidden: narrow,
     };
 
     columns.last_changed = {
-      title: this.hass!.localize(
+      title: this.hass.localize(
         "ui.panel.lovelace.unused_entities.last_changed"
       ),
       type: "numeric",
@@ -102,7 +102,7 @@ export class HuiEntityPickerTable extends LitElement {
       hidden: narrow,
       template: (entity) => html`
         <ha-relative-time
-          .hass=${this.hass!}
+          .hass=${this.hass}
           .datetime=${entity.last_changed}
           capitalize
         ></ha-relative-time>
@@ -122,7 +122,7 @@ export class HuiEntityPickerTable extends LitElement {
 
   private _handleEntityClicked(ev: Event) {
     const entityId = (
-      (ev.target as HTMLElement).closest(".mdc-data-table__row") as any
+      (ev.target as HTMLElement).closest(".mdc-data-table__row")
     ).rowId;
     fireEvent(this, "hass-more-info", {
       entityId,

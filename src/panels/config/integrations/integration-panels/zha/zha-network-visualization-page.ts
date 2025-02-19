@@ -182,7 +182,7 @@ export class ZHANetworkVisualizationPage extends LitElement {
           ></ha-device-picker>
           <div class="controls">
             <ha-formfield
-              .label=${this.hass!.localize(
+              .label=${this.hass.localize(
                 "ui.panel.config.zha.visualization.auto_zoom"
               )}
             >
@@ -193,7 +193,7 @@ export class ZHANetworkVisualizationPage extends LitElement {
               </ha-checkbox>
             </ha-formfield>
             <ha-formfield
-              .label=${this.hass!.localize(
+              .label=${this.hass.localize(
                 "ui.panel.config.zha.visualization.enable_physics"
               )}
               ><ha-checkbox
@@ -203,7 +203,7 @@ export class ZHANetworkVisualizationPage extends LitElement {
               </ha-checkbox
             ></ha-formfield>
             <mwc-button @click=${this._refreshTopology}>
-              ${this.hass!.localize(
+              ${this.hass.localize(
                 "ui.panel.config.zha.visualization.refresh_topology"
               )}
             </mwc-button>
@@ -215,7 +215,7 @@ export class ZHANetworkVisualizationPage extends LitElement {
   }
 
   private async _fetchData() {
-    const devices = await fetchDevices(this.hass!);
+    const devices = await fetchDevices(this.hass);
     this._devices = new Map(
       devices.map((device: ZHADevice) => [device.ieee, device])
     );

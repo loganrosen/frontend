@@ -94,7 +94,7 @@ export class MQTTConfigPanel extends LitElement {
                   )}
                 </ha-select>
                 <ha-formfield
-                  label=${this.hass!.localize("ui.panel.config.mqtt.retain")}
+                  label=${this.hass.localize("ui.panel.config.mqtt.retain")}
                 >
                   <ha-switch
                     @change=${this._handleRetain}
@@ -104,7 +104,7 @@ export class MQTTConfigPanel extends LitElement {
               </div>
               <p>
                 <ha-formfield
-                  .label=${this.hass!.localize(
+                  .label=${this.hass.localize(
                     "ui.panel.config.mqtt.allow_template"
                   )}
                 >

@@ -137,7 +137,7 @@ class BrowseMediaTTS extends LitElement {
                 this._language = countryLang;
                 return;
               }
-              this._language = engine.provider.supported_languages?.find(
+              this._language = engine.provider.supported_languages.find(
                 (lang) =>
                   lang.substring(0, 2) ===
                   this.hass.config.language.substring(0, 2)

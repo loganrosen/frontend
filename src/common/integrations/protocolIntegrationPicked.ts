@@ -27,7 +27,7 @@ export const protocolIntegrationPicked = async (
   if (options?.brand) {
     const integrationDescriptions = await getIntegrationDescriptions(hass);
     options.brand =
-      integrationDescriptions.core.integration[options.brand]?.name ||
+      integrationDescriptions.core.integration[options.brand].name ||
       options.brand;
   }
 

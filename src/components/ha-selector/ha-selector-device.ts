@@ -116,7 +116,7 @@ export class HaDeviceSelector extends LitElement {
         .value=${this.value}
         .helper=${this.helper}
         .deviceFilter=${this._filterDevices}
-        .entityFilter=${this.selector.device?.entity
+        .entityFilter=${this.selector.device.entity
           ? this._filterEntities
           : undefined}
         .disabled=${this.disabled}

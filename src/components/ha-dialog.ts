@@ -30,7 +30,7 @@ export class HaDialog extends DialogBase {
   protected readonly [FOCUS_TARGET];
 
   public scrollToPos(x: number, y: number) {
-    this.contentElement?.scrollTo(x, y);
+    this.contentElement.scrollTo(x, y);
   }
 
   protected renderHeading() {
@@ -44,7 +44,7 @@ export class HaDialog extends DialogBase {
       SUPPRESS_DEFAULT_PRESS_SELECTOR,
     ].join(", ");
     this._updateScrolledAttribute();
-    this.contentElement?.addEventListener("scroll", this._onScroll, {
+    this.contentElement.addEventListener("scroll", this._onScroll, {
       passive: true,
     });
   }

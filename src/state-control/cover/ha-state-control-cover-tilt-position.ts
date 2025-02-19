@@ -32,7 +32,7 @@ export function generateTiltSliderTrackBackgroundGradient() {
 
   return unsafeCSS(
     gradient
-      .map(([stop, color]) => `${color} ${(stop as number) * 100}%`)
+      .map(([stop, color]) => `${color} ${(stop) * 100}%`)
       .join(", ")
   );
 }
@@ -57,11 +57,11 @@ export class HaStateControlInfoCoverTiltPosition extends LitElement {
   }
 
   private _valueChanged(ev: CustomEvent) {
-    const value = (ev.detail as any).value;
+    const value = (ev.detail).value;
     if (isNaN(value)) return;
 
     this.hass.callService("cover", "set_cover_tilt_position", {
-      entity_id: this.stateObj!.entity_id,
+      entity_id: this.stateObj.entity_id,
       tilt_position: value,
     });
   }

@@ -193,7 +193,7 @@ export class HuiHeadingEntityEditor
       <ha-expansion-panel outlined>
         <h3 slot="header">
           <ha-svg-icon .path=${mdiEye}></ha-svg-icon>
-          ${this.hass!.localize(
+          ${this.hass.localize(
             "ui.panel.lovelace.editor.card.heading.entity_config.visibility"
           )}
         </h3>

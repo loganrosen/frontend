@@ -185,7 +185,7 @@ class DialogZWaveJSReinterviewNode extends LitElement {
 
   private _unsubscribe(): void {
     if (this._subscribed) {
-      this._subscribed.then((unsub) => unsub());
+      this._subscribed.then((unsub) => { unsub(); });
       this._subscribed = undefined;
     }
   }

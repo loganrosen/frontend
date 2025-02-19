@@ -71,7 +71,7 @@ class OnboardingAnalytics extends LitElement {
 
   private _preferencesChanged(event: CustomEvent): void {
     this._analyticsDetails = {
-      ...this._analyticsDetails!,
+      ...this._analyticsDetails,
       preferences: event.detail.preferences,
     };
   }
@@ -81,7 +81,7 @@ class OnboardingAnalytics extends LitElement {
     try {
       await setAnalyticsPreferences(
         this.hass,
-        this._analyticsDetails!.preferences
+        this._analyticsDetails.preferences
       );
 
       await onboardAnalyticsStep(this.hass);

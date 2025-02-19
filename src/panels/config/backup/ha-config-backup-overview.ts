@@ -213,7 +213,7 @@ class HaConfigBackupOverview extends LitElement {
             ? html`
                 <ha-backup-overview-settings
                   .hass=${this.hass}
-                  .config=${this.config!}
+                  .config=${this.config}
                   .agents=${this.agents}
                 ></ha-backup-overview-settings>
               `

@@ -43,7 +43,7 @@ export const applyThemesOnElement = (
   const darkMode =
     themeSettings?.dark !== undefined
       ? themeSettings.dark
-      : themes?.darkMode || false;
+      : themes.darkMode || false;
 
   let cacheKey = themeToApply;
   let themeRules: Partial<ThemeVars> = {};

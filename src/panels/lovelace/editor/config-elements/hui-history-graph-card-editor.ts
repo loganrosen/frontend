@@ -111,8 +111,8 @@ export class HuiHistoryGraphCardEditor
     }
 
     const schema = this._schema(
-      this._config!.min_y_axis !== undefined ||
-        this._config!.max_y_axis !== undefined
+      this._config.min_y_axis !== undefined ||
+        this._config.max_y_axis !== undefined
     );
 
     return html`

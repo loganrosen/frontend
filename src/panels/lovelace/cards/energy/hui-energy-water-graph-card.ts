@@ -161,7 +161,7 @@ export class HuiEnergyWaterGraphCard
     const waterSources: WaterSourceTypeEnergyPreference[] =
       energyData.prefs.energy_sources.filter(
         (source) => source.type === "water"
-      ) as WaterSourceTypeEnergyPreference[];
+      );
 
     this._unit = getEnergyWaterUnit(this.hass);
 
@@ -214,7 +214,7 @@ export class HuiEnergyWaterGraphCard
     const data: BarSeriesOption[] = [];
     const compareTransform = getCompareTransform(
       this._start,
-      this._compareStart!
+      this._compareStart
     );
 
     waterSources.forEach((source, idx) => {

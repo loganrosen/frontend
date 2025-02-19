@@ -42,7 +42,7 @@ class HassErrorScreen extends LitElement {
         <ha-alert alert-type="error">${this.error}</ha-alert>
         <slot>
           <mwc-button @click=${this._handleBack}>
-            ${this.hass?.localize("ui.common.back")}
+            ${this.hass.localize("ui.common.back")}
           </mwc-button>
         </slot>
       </div>

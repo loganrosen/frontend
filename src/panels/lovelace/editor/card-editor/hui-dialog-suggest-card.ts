@@ -57,12 +57,12 @@ export class HuiDialogSuggestCard extends LitElement {
   }
 
   private get _viewSupportsSection(): boolean {
-    if (!this._params?.lovelaceConfig || !this._params?.path) {
+    if (!this._params?.lovelaceConfig || !this._params.path) {
       return false;
     }
 
     const { viewIndex } = parseLovelaceContainerPath(this._params.path);
-    const viewConfig = this._params!.lovelaceConfig.views[viewIndex];
+    const viewConfig = this._params.lovelaceConfig.views[viewIndex];
 
     return !isStrategyView(viewConfig) && viewConfig.type === "sections";
   }
@@ -106,7 +106,7 @@ export class HuiDialogSuggestCard extends LitElement {
         open
         scrimClickAction
         @closed=${this.closeDialog}
-        .heading=${this.hass!.localize(
+        .heading=${this.hass.localize(
           "ui.panel.lovelace.editor.suggest_card.header"
         )}
       >
@@ -129,15 +129,15 @@ export class HuiDialogSuggestCard extends LitElement {
           dialogInitialFocus
         >
           ${this._params.yaml
-            ? this.hass!.localize("ui.common.close")
-            : this.hass!.localize("ui.common.cancel")}
+            ? this.hass.localize("ui.common.close")
+            : this.hass.localize("ui.common.cancel")}
         </mwc-button>
         ${!this._params.yaml
           ? html`
               ${!(this._sectionConfig && this._viewSupportsSection)
                 ? html`
                     <mwc-button slot="primaryAction" @click=${this._pickCard}>
-                      ${this.hass!.localize(
+                      ${this.hass.localize(
                         "ui.panel.lovelace.editor.suggest_card.create_own"
                       )}
                     </mwc-button>
@@ -156,7 +156,7 @@ export class HuiDialogSuggestCard extends LitElement {
                         size="small"
                       ></ha-circular-progress>
                     `
-                  : this.hass!.localize(
+                  : this.hass.localize(
                       "ui.panel.lovelace.editor.suggest_card.add"
                     )}
               </mwc-button>
@@ -210,17 +210,17 @@ export class HuiDialogSuggestCard extends LitElement {
   private _pickCard(): void {
     if (
       !this._params?.lovelaceConfig ||
-      !this._params?.path ||
-      !this._params?.saveConfig
+      !this._params.path ||
+      !this._params.saveConfig
     ) {
       return;
     }
 
     showCreateCardDialog(this, {
-      lovelaceConfig: this._params!.lovelaceConfig,
-      saveConfig: this._params!.saveConfig,
-      path: this._params!.path,
-      entities: this._params!.entities,
+      lovelaceConfig: this._params.lovelaceConfig,
+      saveConfig: this._params.saveConfig,
+      path: this._params.path,
+      entities: this._params.entities,
     });
     this.closeDialog();
   }
@@ -254,8 +254,8 @@ export class HuiDialogSuggestCard extends LitElement {
   private async _save(): Promise<void> {
     if (
       !this._params?.lovelaceConfig ||
-      !this._params?.path ||
-      !this._params?.saveConfig ||
+      !this._params.path ||
+      !this._params.saveConfig ||
       !this._cardConfig
     ) {
       return;
@@ -266,7 +266,7 @@ export class HuiDialogSuggestCard extends LitElement {
       this._params.lovelaceConfig,
       this._params.path
     );
-    await this._params!.saveConfig(newConfig);
+    await this._params.saveConfig(newConfig);
     this._saving = false;
     showSaveSuccessToast(this, this.hass);
     this.closeDialog();

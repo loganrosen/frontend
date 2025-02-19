@@ -62,9 +62,9 @@ export class HuiMediaControlCardEditor
           allow-custom-entity
         ></ha-entity-picker>
         <ha-theme-picker
-          .label=${`${this.hass!.localize(
+          .label=${`${this.hass.localize(
             "ui.panel.lovelace.editor.card.generic.theme"
-          )} (${this.hass!.localize(
+          )} (${this.hass.localize(
             "ui.panel.lovelace.editor.card.config.optional"
           )})`}
           .hass=${this.hass}
@@ -87,11 +87,11 @@ export class HuiMediaControlCardEditor
     if (target.configValue) {
       if (target.value === "") {
         this._config = { ...this._config };
-        delete this._config[target.configValue!];
+        delete this._config[target.configValue];
       } else {
         this._config = {
           ...this._config,
-          [target.configValue!]: target.value,
+          [target.configValue]: target.value,
         };
       }
     }

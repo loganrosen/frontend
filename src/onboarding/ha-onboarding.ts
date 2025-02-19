@@ -218,7 +218,7 @@ class HaOnboarding extends litLocalizeLiteMixin(HassElement) {
     registerServiceWorker(this, false);
     this.addEventListener("onboarding-step", (ev) => this._handleStepDone(ev));
     this.addEventListener("onboarding-progress", (ev) =>
-      this._handleProgress(ev)
+      { this._handleProgress(ev); }
     );
     if (window.innerWidth > 450) {
       import("../resources/particles");
@@ -354,7 +354,7 @@ class HaOnboarding extends litLocalizeLiteMixin(HassElement) {
         );
       }
     } else if (stepResult.type === "user") {
-      const result = stepResult.result as OnboardingResponses["user"];
+      const result = stepResult.result;
       this._loading = true;
       this._progress = 0.5;
       enableWrite();
@@ -471,11 +471,11 @@ class HaOnboarding extends litLocalizeLiteMixin(HassElement) {
     this.language = language;
     if (this.hass) {
       this._updateHass({
-        locale: { ...this.hass!.locale, language },
+        locale: { ...this.hass.locale, language },
         language,
         selectedLanguage: language,
       });
-      storeState(this.hass!);
+      storeState(this.hass);
     } else {
       try {
         window.localStorage.setItem(

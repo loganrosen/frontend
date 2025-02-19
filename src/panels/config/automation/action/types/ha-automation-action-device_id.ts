@@ -52,7 +52,7 @@ export class HaDeviceAction extends LitElement {
       const extraFieldsData: Record<string, any> = {};
       capabilities.extra_fields.forEach((item) => {
         if (action[item.name] !== undefined) {
-          extraFieldsData![item.name] = action[item.name];
+          extraFieldsData[item.name] = action[item.name];
         }
       });
       return extraFieldsData;
@@ -104,7 +104,7 @@ export class HaDeviceAction extends LitElement {
           "ui.panel.config.automation.editor.actions.type.device_id.action"
         )}
       ></ha-device-action-picker>
-      ${this._capabilities?.extra_fields?.length
+      ${this._capabilities?.extra_fields.length
         ? html`
             <ha-form
               .hass=${this.hass}

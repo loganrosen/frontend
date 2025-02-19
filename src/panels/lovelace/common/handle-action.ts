@@ -50,7 +50,7 @@ export const handleAction = async (
     actionConfig.confirmation &&
     (!actionConfig.confirmation.exemptions ||
       !actionConfig.confirmation.exemptions.some(
-        (e) => e.user === hass!.user?.id
+        (e) => e.user === hass.user?.id
       ))
   ) {
     forwardHaptic("warning");
@@ -138,7 +138,7 @@ export const handleAction = async (
     }
     case "toggle": {
       if (config.entity) {
-        toggleEntity(hass, config.entity!);
+        toggleEntity(hass, config.entity);
         forwardHaptic("light");
       } else {
         showToast(node, {

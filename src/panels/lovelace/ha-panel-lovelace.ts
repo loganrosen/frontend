@@ -105,7 +105,7 @@ export class LovelacePanel extends LitElement {
     super.disconnectedCallback();
     // On the main dashboard we want to stay subscribed as that one is cached.
     if (this.urlPath !== null && this._unsubUpdates) {
-      this._unsubUpdates.then((unsub) => unsub());
+      this._unsubUpdates.then((unsub) => { unsub(); });
       this._unsubUpdates = undefined;
     }
     // reload lovelace on reconnect so we are sure we have the latest config
@@ -198,7 +198,7 @@ export class LovelacePanel extends LitElement {
     this._unsubUpdates = subscribeLovelaceUpdates(
       this.hass!.connection,
       this.urlPath,
-      () => this._lovelaceChanged()
+      () => { this._lovelaceChanged(); }
     );
   }
 
@@ -253,7 +253,7 @@ export class LovelacePanel extends LitElement {
     if (!resourcesLoaded) {
       resourcesLoaded = true;
       (preloadWindow.llResProm || fetchResources(this.hass!.connection)).then(
-        (resources) => loadLovelaceResources(resources, this.hass!)
+        (resources) => { loadLovelaceResources(resources, this.hass!); }
       );
     }
 
@@ -273,7 +273,7 @@ export class LovelacePanel extends LitElement {
     }
 
     try {
-      rawConf = await confProm!;
+      rawConf = await confProm;
 
       // If strategy defined, apply it here.
       if (isStrategyDashboard(rawConf)) {
@@ -283,7 +283,7 @@ export class LovelacePanel extends LitElement {
         }
         conf = await generateLovelaceDashboardStrategy(
           rawConf.strategy,
-          this.hass!
+          this.hass
         );
       } else {
         conf = rawConf;
@@ -302,7 +302,7 @@ export class LovelacePanel extends LitElement {
       }
       conf = await generateLovelaceDashboardStrategy(
         DEFAULT_CONFIG.strategy,
-        this.hass!
+        this.hass
       );
       rawConf = DEFAULT_CONFIG;
       confMode = "generated";
@@ -354,7 +354,7 @@ export class LovelacePanel extends LitElement {
           showSaveDialog(this, {
             lovelace: this.lovelace!,
             mode: this.panel!.config.mode,
-            narrow: this.narrow!,
+            narrow: this.narrow,
           });
           return;
         }

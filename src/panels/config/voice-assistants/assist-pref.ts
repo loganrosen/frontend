@@ -107,7 +107,7 @@ export class AssistPref extends LitElement {
             src=${brandsUrl({
               domain: "assist_pipeline",
               type: "icon",
-              darkOptimized: this.hass.themes?.darkMode,
+              darkOptimized: this.hass.themes.darkMode,
             })}
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
@@ -150,7 +150,7 @@ export class AssistPref extends LitElement {
                 <ha-button-menu fixed slot="meta" @click=${stopPropagation}>
                   <ha-icon-button
                     slot="trigger"
-                    .label=${this.hass!.localize(
+                    .label=${this.hass.localize(
                       "ui.panel.lovelace.editor.menu.open"
                     )}
                     .path=${mdiDotsVertical}
@@ -160,7 +160,7 @@ export class AssistPref extends LitElement {
                     .id=${pipeline.id}
                     @request-selected=${this._talkWithPipeline}
                   >
-                    ${this.hass!.localize(
+                    ${this.hass.localize(
                       "ui.panel.config.voice_assistants.assistants.pipeline.start_conversation"
                     )}
                     <ha-svg-icon
@@ -214,12 +214,12 @@ export class AssistPref extends LitElement {
         </ha-button>
         <ha-settings-row>
           <span slot="heading">
-            ${this.hass!.localize(
+            ${this.hass.localize(
               "ui.panel.config.voice_assistants.expose.expose_new_entities"
             )}
           </span>
           <span slot="description">
-            ${this.hass!.localize(
+            ${this.hass.localize(
               "ui.panel.config.voice_assistants.expose.expose_new_entities_info"
             )}
           </span>
@@ -280,7 +280,7 @@ export class AssistPref extends LitElement {
 
   private async _setPreferredPipeline(ev) {
     const id = ev.currentTarget.id as string;
-    await setAssistPipelinePreferred(this.hass!, id);
+    await setAssistPipelinePreferred(this.hass, id);
     this._preferred = id;
   }
 
@@ -293,7 +293,7 @@ export class AssistPref extends LitElement {
     const id = ev.currentTarget.id as string;
     if (this._preferred === id) {
       showAlertDialog(this, {
-        text: this.hass!.localize(
+        text: this.hass.localize(
           "ui.panel.config.voice_assistants.assistants.pipeline.delete.error_preferred"
         ),
       });
@@ -302,23 +302,23 @@ export class AssistPref extends LitElement {
     const pipeline = this._pipelines.find((res) => res.id === id);
     if (
       !(await showConfirmationDialog(this, {
-        title: this.hass!.localize(
+        title: this.hass.localize(
           "ui.panel.config.voice_assistants.assistants.pipeline.delete.confirm_title",
           { name: pipeline!.name }
         ),
-        text: this.hass!.localize(
+        text: this.hass.localize(
           "ui.panel.config.voice_assistants.assistants.pipeline.delete.confirm_text",
           { name: pipeline!.name }
         ),
-        confirmText: this.hass!.localize("ui.common.delete"),
+        confirmText: this.hass.localize("ui.common.delete"),
         destructive: true,
       }))
     ) {
       return;
     }
 
-    await deleteAssistPipeline(this.hass!, pipeline!.id);
-    this._pipelines = this._pipelines!.filter((res) => res !== pipeline);
+    await deleteAssistPipeline(this.hass, pipeline!.id);
+    this._pipelines = this._pipelines.filter((res) => res !== pipeline);
   }
 
   private _editPipeline(ev) {
@@ -338,16 +338,16 @@ export class AssistPref extends LitElement {
         this.cloudStatus?.logged_in && this.cloudStatus.active_subscription,
       pipeline,
       createPipeline: async (values) => {
-        const created = await createAssistPipeline(this.hass!, values);
-        this._pipelines = this._pipelines!.concat(created);
+        const created = await createAssistPipeline(this.hass, values);
+        this._pipelines = this._pipelines.concat(created);
       },
       updatePipeline: async (values) => {
         const updated = await updateAssistPipeline(
-          this.hass!,
+          this.hass,
           pipeline!.id,
           values
         );
-        this._pipelines = this._pipelines!.map((res) =>
+        this._pipelines = this._pipelines.map((res) =>
           res === pipeline ? updated : res
         );
       },

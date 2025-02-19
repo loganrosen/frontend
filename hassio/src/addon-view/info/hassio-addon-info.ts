@@ -636,7 +636,7 @@ class HassioAddonInfo extends LitElement {
                       "addon.dashboard.not_available_version",
                       {
                         core_version_installed: this.supervisor.core.version,
-                        core_version_needed: addonStoreInfo!.homeassistant,
+                        core_version_needed: addonStoreInfo.homeassistant,
                       }
                     )}
                   </ha-alert>
@@ -823,7 +823,7 @@ class HassioAddonInfo extends LitElement {
   }
 
   private get _computeIsRunning(): boolean {
-    return (this.addon as HassioAddonDetails)?.state === "started";
+    return (this.addon as HassioAddonDetails).state === "started";
   }
 
   private get _pathWebui(): string | null {
@@ -1084,7 +1084,7 @@ class HassioAddonInfo extends LitElement {
             "addon.dashboard.action_error.start_invalid_config"
           ),
           text: validate.message.split(" Got ")[0],
-          confirm: () => this._openConfiguration(),
+          confirm: () => { this._openConfiguration(); },
           confirmText: this.supervisor.localize(
             "addon.dashboard.action_error.go_to_config"
           ),

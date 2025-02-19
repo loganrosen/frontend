@@ -89,7 +89,7 @@ export class EnergyGasSettings extends LitElement {
             const entityState = this.hass.states[source.stat_energy_from];
             return html`
               <div class="row" .source=${source}>
-                ${entityState?.attributes.icon
+                ${entityState.attributes.icon
                   ? html`<ha-icon
                       .icon=${entityState.attributes.icon}
                     ></ha-icon>`
@@ -140,7 +140,7 @@ export class EnergyGasSettings extends LitElement {
       ),
       gas_sources: this.preferences.energy_sources.filter(
         (src) => src.type === "gas"
-      ) as GasSourceTypeEnergyPreference[],
+      ),
       saveCallback: async (source) => {
         delete source.unit_of_measurement;
         await this._savePreferences({
@@ -164,7 +164,7 @@ export class EnergyGasSettings extends LitElement {
       metadata: this.statsMetadata?.[origSource.stat_energy_from],
       gas_sources: this.preferences.energy_sources.filter(
         (src) => src.type === "gas"
-      ) as GasSourceTypeEnergyPreference[],
+      ),
       saveCallback: async (newSource) => {
         await this._savePreferences({
           ...this.preferences,

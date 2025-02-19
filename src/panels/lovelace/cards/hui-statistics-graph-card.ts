@@ -127,7 +127,7 @@ export class HuiStatisticsGraphCard extends LitElement implements LovelaceCard {
     return (
       5 +
       (this._config?.title ? 2 : 0) +
-      (!this._config?.hide_legend ? this._entities?.length || 0 : 0)
+      (!this._config?.hide_legend ? this._entities.length || 0 : 0)
     );
   }
 
@@ -331,7 +331,7 @@ export class HuiStatisticsGraphCard extends LitElement implements LovelaceCard {
       if (this._config!.unit && this._metadata) {
         const metadata = Object.values(this._metadata).find(
           (metaData) =>
-            getDisplayUnit(this.hass!, metaData?.statistic_id, metaData) ===
+            getDisplayUnit(this.hass!, metaData.statistic_id, metaData) ===
             this._config!.unit
         );
         if (metadata) {
@@ -341,7 +341,7 @@ export class HuiStatisticsGraphCard extends LitElement implements LovelaceCard {
       }
       if (!unitClass && this._metadata) {
         const metadata = this._metadata[this._entities[0]];
-        unitClass = metadata?.unit_class;
+        unitClass = metadata.unit_class;
         this._unit = unitClass
           ? getDisplayUnit(this.hass!, metadata.statistic_id, metadata) ||
             undefined

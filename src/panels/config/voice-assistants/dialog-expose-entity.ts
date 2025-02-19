@@ -139,11 +139,11 @@ class DialogExposeEntity extends LitElement {
       return Object.values(this.hass.states).filter(
         (entity) =>
           this._params!.filterAssistants.some(
-            (ass) => !exposedEntities[entity.entity_id]?.[ass]
+            (ass) => !exposedEntities[entity.entity_id][ass]
           ) &&
           (!lowerFilter ||
             entity.entity_id.toLowerCase().includes(lowerFilter) ||
-            computeStateName(entity)?.toLowerCase().includes(lowerFilter))
+            computeStateName(entity).toLowerCase().includes(lowerFilter))
       );
     }
   );
@@ -157,7 +157,7 @@ class DialogExposeEntity extends LitElement {
       @request-selected=${this._handleSelected}
     >
       <ha-state-icon
-        title=${ifDefined(entityState?.state)}
+        title=${ifDefined(entityState.state)}
         slot="graphic"
         .hass=${this.hass}
         .stateObj=${entityState}

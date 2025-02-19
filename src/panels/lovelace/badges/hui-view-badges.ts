@@ -82,11 +82,11 @@ export class HuiViewBadges extends LitElement {
     ev.stopPropagation();
     const { oldIndex, newIndex } = ev.detail;
     const newConfig = moveBadge(
-      this.lovelace!.config,
-      [this.viewIndex!, oldIndex],
-      [this.viewIndex!, newIndex]
+      this.lovelace.config,
+      [this.viewIndex, oldIndex],
+      [this.viewIndex, newIndex]
     );
-    this.lovelace!.saveConfig(newConfig);
+    this.lovelace.saveConfig(newConfig);
   }
 
   private _dragStart() {
@@ -109,7 +109,7 @@ export class HuiViewBadges extends LitElement {
     const badges = this.badges;
 
     return html`
-      ${badges?.length > 0 || editMode
+      ${badges.length > 0 || editMode
         ? html`
             <ha-sortable
               .disabled=${!editMode}

@@ -417,10 +417,10 @@ export const downloadEmergencyKit = (
   key: string,
   appendFileName?: string
 ) =>
-  fileDownload(
+  { fileDownload(
     generateEmergencyKit(hass, key),
     geneateEmergencyKitFileName(hass, appendFileName)
-  );
+  ); };
 
 export const DEFAULT_OPTIMIZED_BACKUP_START_TIME = setMinutes(
   setHours(new Date(), 4),

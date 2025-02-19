@@ -92,9 +92,9 @@ export class HuiViewVisibilityEditor extends LitElement {
       return true;
     }
     if (typeof this._visible === "boolean") {
-      return this._visible as boolean;
+      return this._visible;
     }
-    return (this._visible as ShowViewConfig[]).some((u) => u.user === userId);
+    return (this._visible).some((u) => u.user === userId);
   }
 
   private _valChange(ev: Event): void {
@@ -104,7 +104,7 @@ export class HuiViewVisibilityEditor extends LitElement {
     let newVisible: ShowViewConfig[] = [];
 
     if (typeof this._visible === "boolean") {
-      const lastValue = this._visible as boolean;
+      const lastValue = this._visible;
       if (lastValue) {
         newVisible = this._users.map((u) => ({
           user: u.id,
@@ -114,13 +114,13 @@ export class HuiViewVisibilityEditor extends LitElement {
       newVisible = [...this._visible];
     }
 
-    if (checked === true) {
+    if (checked) {
       const newEntry: ShowViewConfig = {
         user: userId,
       };
       newVisible.push(newEntry);
     } else {
-      newVisible = (newVisible as ShowViewConfig[]).filter(
+      newVisible = (newVisible).filter(
         (c) => c.user !== userId
       );
     }

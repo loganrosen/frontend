@@ -9,7 +9,7 @@ export const handleFetchPromise = async <T>(
   try {
     response = await fetchPromise;
   } catch (_err: any) {
-    // eslint-disable-next-line no-throw-literal
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw {
       error: "Request error",
       status_code: undefined,
@@ -25,7 +25,7 @@ export const handleFetchPromise = async <T>(
     try {
       body = await response.json();
     } catch (err: any) {
-      // eslint-disable-next-line no-throw-literal
+      // eslint-disable-next-line @typescript-eslint/only-throw-error
       throw {
         error: "Unable to parse JSON response",
         status_code: err.status,
@@ -37,7 +37,7 @@ export const handleFetchPromise = async <T>(
   }
 
   if (!response.ok) {
-    // eslint-disable-next-line no-throw-literal
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw {
       error: `Response error: ${response.status}`,
       status_code: response.status,

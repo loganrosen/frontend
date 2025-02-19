@@ -161,7 +161,7 @@ class DialogMediaManage extends LitElement {
                     "ui.components.media-browser.file_management.no_items"
                   )}
                 </p>
-                ${this._currentItem?.children?.length
+                ${this._currentItem.children?.length
                   ? html`<span class="folders"
                       >${this.hass.localize(
                         "ui.components.media-browser.file_management.folders_not_supported"

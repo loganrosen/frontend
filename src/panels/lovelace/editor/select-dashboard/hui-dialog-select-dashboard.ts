@@ -114,7 +114,7 @@ export class HuiDialogSelectDashboard extends LitElement {
         </div>
         <div slot="actions">
           <ha-button @click=${this.closeDialog} .disabled=${this._saving}>
-            ${this.hass!.localize("ui.common.cancel")}
+            ${this.hass.localize("ui.common.cancel")}
           </ha-button>
           <ha-button
             @click=${this._selectDashboard}
@@ -122,7 +122,7 @@ export class HuiDialogSelectDashboard extends LitElement {
             this._fromUrlPath === this._toUrlPath ||
             this._saving}
           >
-            ${this._params.actionLabel || this.hass!.localize("ui.common.move")}
+            ${this._params.actionLabel || this.hass.localize("ui.common.move")}
           </ha-button>
         </div>
       </ha-md-dialog>
@@ -137,13 +137,13 @@ export class HuiDialogSelectDashboard extends LitElement {
         require_admin: false,
         show_in_sidebar: true,
         title: this.hass.localize("ui.common.default"),
-        mode: this.hass.panels.lovelace?.config?.mode,
+        mode: this.hass.panels.lovelace.config?.mode,
       },
       ...(this._params!.dashboards || (await fetchDashboards(this.hass))),
     ];
 
     const currentPath = this._fromUrlPath || this.hass.defaultPanel;
-    for (const dashboard of this._dashboards!) {
+    for (const dashboard of this._dashboards) {
       if (dashboard.url_path !== currentPath) {
         this._toUrlPath = dashboard.url_path;
         break;

@@ -6,8 +6,8 @@ export const applyPatch = (data, path, value): void => {
   if (!data[path[0]]) {
     data[path[0]] = {};
   }
-  // eslint-disable-next-line consistent-return
-  return applyPatch(data[path[0]], path.slice(1), value);
+   
+  applyPatch(data[path[0]], path.slice(1), value);
 };
 
 export const getPath = (data, path): any | undefined => {

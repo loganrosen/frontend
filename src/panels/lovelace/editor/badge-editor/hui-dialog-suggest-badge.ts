@@ -74,7 +74,7 @@ export class HuiDialogSuggestBadge extends LitElement {
         open
         scrimClickAction
         @closed=${this.closeDialog}
-        .heading=${this.hass!.localize(
+        .heading=${this.hass.localize(
           "ui.panel.lovelace.editor.suggest_badge.header"
         )}
       >
@@ -97,8 +97,8 @@ export class HuiDialogSuggestBadge extends LitElement {
           dialogInitialFocus
         >
           ${this._params.yaml
-            ? this.hass!.localize("ui.common.close")
-            : this.hass!.localize("ui.common.cancel")}
+            ? this.hass.localize("ui.common.close")
+            : this.hass.localize("ui.common.cancel")}
         </mwc-button>
         ${!this._params.yaml
           ? html`
@@ -115,7 +115,7 @@ export class HuiDialogSuggestBadge extends LitElement {
                         size="small"
                       ></ha-circular-progress>
                     `
-                  : this.hass!.localize(
+                  : this.hass.localize(
                       "ui.panel.lovelace.editor.suggest_badge.add"
                     )}
               </mwc-button>
@@ -177,8 +177,8 @@ export class HuiDialogSuggestBadge extends LitElement {
   private async _save(): Promise<void> {
     if (
       !this._params?.lovelaceConfig ||
-      !this._params?.path ||
-      !this._params?.saveConfig ||
+      !this._params.path ||
+      !this._params.saveConfig ||
       !this._badgeConfig
     ) {
       return;
@@ -189,7 +189,7 @@ export class HuiDialogSuggestBadge extends LitElement {
       this._params.lovelaceConfig,
       this._params.path
     );
-    await this._params!.saveConfig(newConfig);
+    await this._params.saveConfig(newConfig);
     this._saving = false;
     showSaveSuccessToast(this, this.hass);
     this.closeDialog();

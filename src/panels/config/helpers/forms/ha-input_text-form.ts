@@ -52,9 +52,9 @@ class HaInputTextForm extends LitElement {
 
   public focus() {
     this.updateComplete.then(() =>
-      (
+      { (
         this.shadowRoot?.querySelector("[dialogInitialFocus]") as HTMLElement
-      )?.focus()
+      ).focus(); }
     );
   }
 
@@ -69,12 +69,12 @@ class HaInputTextForm extends LitElement {
           .value=${this._name}
           .configValue=${"name"}
           @input=${this._valueChanged}
-          .label=${this.hass!.localize(
+          .label=${this.hass.localize(
             "ui.dialogs.helper_settings.generic.name"
           )}
           autoValidate
           required
-          .validationMessage=${this.hass!.localize(
+          .validationMessage=${this.hass.localize(
             "ui.dialogs.helper_settings.required_error_msg"
           )}
           dialogInitialFocus
@@ -84,7 +84,7 @@ class HaInputTextForm extends LitElement {
           .value=${this._icon}
           .configValue=${"icon"}
           @value-changed=${this._valueChanged}
-          .label=${this.hass!.localize(
+          .label=${this.hass.localize(
             "ui.dialogs.helper_settings.generic.icon"
           )}
         ></ha-icon-picker>
@@ -97,7 +97,7 @@ class HaInputTextForm extends LitElement {
                 min="0"
                 max="255"
                 @input=${this._valueChanged}
-                .label=${this.hass!.localize(
+                .label=${this.hass.localize(
                   "ui.dialogs.helper_settings.input_text.min"
                 )}
               ></ha-textfield>
@@ -108,7 +108,7 @@ class HaInputTextForm extends LitElement {
                 max="255"
                 type="number"
                 @input=${this._valueChanged}
-                .label=${this.hass!.localize(
+                .label=${this.hass.localize(
                   "ui.dialogs.helper_settings.input_text.max"
                 )}
               ></ha-textfield>
@@ -145,10 +145,10 @@ class HaInputTextForm extends LitElement {
                 .value=${this._pattern || ""}
                 .configValue=${"pattern"}
                 @input=${this._valueChanged}
-                .label=${this.hass!.localize(
+                .label=${this.hass.localize(
                   "ui.dialogs.helper_settings.input_text.pattern_label"
                 )}
-                .helper=${this.hass!.localize(
+                .helper=${this.hass.localize(
                   "ui.dialogs.helper_settings.input_text.pattern_helper"
                 )}
               ></ha-textfield>

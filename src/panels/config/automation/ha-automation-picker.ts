@@ -222,7 +222,7 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
       return (
         filteredAutomations
           ? automations.filter((automation) =>
-              filteredAutomations!.includes(automation.entity_id)
+              filteredAutomations.includes(automation.entity_id)
             )
           : automations
       ).map((automation) => {
@@ -235,7 +235,7 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
           ...automation,
           name: computeStateName(automation),
           area: entityRegEntry?.area_id
-            ? areas[entityRegEntry?.area_id]?.name
+            ? areas[entityRegEntry.area_id].name
             : undefined,
           last_triggered: automation.attributes.last_triggered || undefined,
           formatted_state: this.hass.formatEntityState(automation),
@@ -398,7 +398,7 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
   }
 
   protected render(): TemplateResult {
-    const categoryItems = html`${this._categories?.map(
+    const categoryItems = html`${this._categories.map(
         (category) =>
           html`<ha-md-menu-item
             .value=${category.category_id}
@@ -424,15 +424,15 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
         </div>
       </ha-md-menu-item>`;
 
-    const labelItems = html`${this._labels?.map((label) => {
+    const labelItems = html`${this._labels.map((label) => {
         const color = label.color ? computeCssColor(label.color) : undefined;
         const selected = this._selected.every((entityId) =>
-          this.hass.entities[entityId]?.labels.includes(label.label_id)
+          this.hass.entities[entityId].labels.includes(label.label_id)
         );
         const partial =
           !selected &&
           this._selected.some((entityId) =>
-            this.hass.entities[entityId]?.labels.includes(label.label_id)
+            this.hass.entities[entityId].labels.includes(label.label_id)
           );
         return html`<ha-md-menu-item
           .value=${label.label_id}
@@ -572,7 +572,7 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
         <ha-filter-floor-areas
           .hass=${this.hass}
           .type=${"automation"}
-          .value=${this._filters["ha-filter-floor-areas"]?.value}
+          .value=${this._filters["ha-filter-floor-areas"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-floor-areas"}
@@ -582,7 +582,7 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
         <ha-filter-devices
           .hass=${this.hass}
           .type=${"automation"}
-          .value=${this._filters["ha-filter-devices"]?.value}
+          .value=${this._filters["ha-filter-devices"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-devices"}
@@ -592,7 +592,7 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
         <ha-filter-entities
           .hass=${this.hass}
           .type=${"automation"}
-          .value=${this._filters["ha-filter-entities"]?.value}
+          .value=${this._filters["ha-filter-entities"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-entities"}
@@ -601,7 +601,7 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
         ></ha-filter-entities>
         <ha-filter-labels
           .hass=${this.hass}
-          .value=${this._filters["ha-filter-labels"]?.value}
+          .value=${this._filters["ha-filter-labels"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-labels"}
@@ -611,7 +611,7 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
         <ha-filter-categories
           .hass=${this.hass}
           scope="automation"
-          .value=${this._filters["ha-filter-categories"]?.value}
+          .value=${this._filters["ha-filter-categories"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-categories"}
@@ -621,7 +621,7 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
         <ha-filter-blueprints
           .hass=${this.hass}
           .type=${"automation"}
-          .value=${this._filters["ha-filter-blueprints"]?.value}
+          .value=${this._filters["ha-filter-blueprints"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-blueprints"}
@@ -986,7 +986,7 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
           "intersection" in items
             ? // @ts-ignore
               items.intersection(categoryItems)
-            : new Set([...items].filter((x) => categoryItems!.has(x)));
+            : new Set([...items].filter((x) => categoryItems.has(x)));
       }
       if (
         key === "ha-filter-labels" &&
@@ -1009,7 +1009,7 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
           "intersection" in items
             ? // @ts-ignore
               items.intersection(labelItems)
-            : new Set([...items].filter((x) => labelItems!.has(x)));
+            : new Set([...items].filter((x) => labelItems.has(x)));
       }
     }
     this._filteredAutomations = items ? [...items] : undefined;
@@ -1056,13 +1056,13 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
   }
 
   private _showInfo = (item: HaMdMenuItem) => {
-    const automation = ((item.parentElement as HaMenu)!.anchorElement as any)!
+    const automation = ((item.parentElement as HaMenu).anchorElement as any)!
       .automation;
     fireEvent(this, "hass-more-info", { entityId: automation.entity_id });
   };
 
   private _showSettings = (item: HaMdMenuItem) => {
-    const automation = ((item.parentElement as HaMenu)!.anchorElement as any)!
+    const automation = ((item.parentElement as HaMenu).anchorElement as any)!
       .automation;
 
     fireEvent(this, "hass-more-info", {
@@ -1072,14 +1072,14 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
   };
 
   private _runActions = (item: HaMdMenuItem) => {
-    const automation = ((item.parentElement as HaMenu)!.anchorElement as any)!
+    const automation = ((item.parentElement as HaMenu).anchorElement as any)!
       .automation;
 
     triggerAutomationActions(this.hass, automation.entity_id);
   };
 
   private _editCategory = (item: HaMdMenuItem) => {
-    const automation = ((item.parentElement as HaMenu)!.anchorElement as any)!
+    const automation = ((item.parentElement as HaMenu).anchorElement as any)!
       .automation;
 
     const entityReg = this._entityReg.find(
@@ -1103,7 +1103,7 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
   };
 
   private _showTrace = (item: HaMdMenuItem) => {
-    const automation = ((item.parentElement as HaMenu)!.anchorElement as any)!
+    const automation = ((item.parentElement as HaMenu).anchorElement as any)!
       .automation;
 
     if (!automation.attributes.id) {
@@ -1120,7 +1120,7 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
   };
 
   private _toggle = async (item: HaMdMenuItem): Promise<void> => {
-    const automation = ((item.parentElement as HaMenu)!.anchorElement as any)!
+    const automation = ((item.parentElement as HaMenu).anchorElement as any)!
       .automation;
 
     const service = automation.state === "off" ? "turn_on" : "turn_off";
@@ -1130,7 +1130,7 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
   };
 
   private _deleteConfirm = async (item: HaMdMenuItem) => {
-    const automation = ((item.parentElement as HaMenu)!.anchorElement as any)!
+    const automation = ((item.parentElement as HaMenu).anchorElement as any)!
       .automation;
 
     showConfirmationDialog(this, {
@@ -1141,8 +1141,8 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
         "ui.panel.config.automation.picker.delete_confirm_text",
         { name: automation.name }
       ),
-      confirmText: this.hass!.localize("ui.common.delete"),
-      dismissText: this.hass!.localize("ui.common.cancel"),
+      confirmText: this.hass.localize("ui.common.delete"),
+      dismissText: this.hass.localize("ui.common.cancel"),
       confirm: () => this._delete(automation),
       destructive: true,
     });
@@ -1167,7 +1167,7 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
   }
 
   private _duplicate = async (item: HaMdMenuItem) => {
-    const automation = ((item.parentElement as HaMenu)!.anchorElement as any)!
+    const automation = ((item.parentElement as HaMenu).anchorElement as any)!
       .automation;
 
     try {

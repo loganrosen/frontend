@@ -393,7 +393,7 @@ class HassioSupervisorInfo extends LitElement {
   private async _toggleDiagnostics(): Promise<void> {
     try {
       const data: SupervisorOptions = {
-        diagnostics: !this.supervisor.supervisor?.diagnostics,
+        diagnostics: !this.supervisor.supervisor.diagnostics,
       };
       await setSupervisorOption(this.hass, data);
     } catch (err: any) {

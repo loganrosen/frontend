@@ -95,7 +95,7 @@ export class HaFileUpload extends LitElement {
               ${this.progress
                 ? html`<div class="progress">
                     ${this.progress}${this.hass &&
-                    blankBeforePercent(this.hass!.locale)}%
+                    blankBeforePercent(this.hass.locale)}%
                   </div>`
                 : nothing}
             </div>

@@ -174,7 +174,7 @@ export class CloudWebhooks extends LitElement {
   private async _disableWebhook(webhookId: string) {
     this._progress = [...this._progress, webhookId];
     try {
-      await deleteCloudhook(this.hass!, webhookId!);
+      await deleteCloudhook(this.hass!, webhookId);
     } catch (err: any) {
       alert(
         `${this.hass!.localize(

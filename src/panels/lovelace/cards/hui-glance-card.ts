@@ -13,7 +13,6 @@ import "../../../components/ha-relative-time";
 import { isUnavailableState } from "../../../data/entity";
 import type { ActionHandlerEvent } from "../../../data/lovelace/action_handler";
 import type {
-  CallServiceActionConfig,
   MoreInfoActionConfig,
 } from "../../../data/lovelace/config/action";
 import { SENSOR_DEVICE_CLASS_TIMESTAMP } from "../../../data/sensor";
@@ -96,7 +95,7 @@ export class HuiGlanceCard extends LitElement implements LovelaceCard {
           !entity.tap_action.service) ||
         (entity.hold_action &&
           entity.hold_action.action === "call-service" &&
-          !(entity.hold_action as CallServiceActionConfig).service)
+          !(entity.hold_action).service)
       ) {
         throw new Error(
           'Missing required property "service" when tap_action or hold_action is call-service'
@@ -317,7 +316,7 @@ export class HuiGlanceCard extends LitElement implements LovelaceCard {
 
   private _handleAction(ev: ActionHandlerEvent) {
     const config = (ev.currentTarget as any).config as GlanceConfigEntity;
-    handleAction(this, this.hass!, config, ev.detail.action!);
+    handleAction(this, this.hass!, config, ev.detail.action);
   }
 }
 

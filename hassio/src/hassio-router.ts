@@ -65,7 +65,7 @@ class HassioRouter extends HassRouterPage {
     const route = hassioPanel
       ? this.route
       : ingressPanel && this.panel.config?.ingress
-        ? this._ingressRoute(this.panel.config?.ingress)
+        ? this._ingressRoute(this.panel.config.ingress)
         : this.routeTail;
 
     el.hass = this.hass;

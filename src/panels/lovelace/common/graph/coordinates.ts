@@ -33,9 +33,9 @@ const calcPoints = (
 
   const getCoords = (item: any[], i: number, offset = 0, depth = 1) => {
     if (depth > 1 && item) {
-      return item.forEach((subItem, index) =>
+      item.forEach((subItem, index) =>
         getCoords(subItem, i, index, depth - 1)
-      );
+      ); return;
     }
 
     const x = xRatio * (i + offset / 6);

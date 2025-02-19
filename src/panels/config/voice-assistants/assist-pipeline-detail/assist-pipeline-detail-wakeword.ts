@@ -124,7 +124,7 @@ export class AssistPipelineDetailWakeWord extends LitElement {
     this._wakeWords = wakewordInfo.wake_words;
     if (
       this.data &&
-      (!this.data?.wake_word_id ||
+      (!this.data.wake_word_id ||
         !this._wakeWords.some((ww) => ww.id === this.data!.wake_word_id))
     ) {
       fireEvent(this, "value-changed", {

@@ -506,7 +506,7 @@ export const subscribeAddZwaveNode = (
   dsk?: string,
   inclusion_strategy: InclusionStrategy = InclusionStrategy.Default
 ): Promise<UnsubscribeFunc> =>
-  hass.connection.subscribeMessage((message) => callbackFunction(message), {
+  hass.connection.subscribeMessage((message) => { callbackFunction(message); }, {
     type: "zwave_js/add_node",
     entry_id: entry_id,
     inclusion_strategy,
@@ -637,7 +637,7 @@ export const subscribeZwaveNodeStatus = (
   callbackFunction: (message: ZWaveJSNodeStatusUpdatedMessage) => void
 ): Promise<UnsubscribeFunc> =>
   hass.connection.subscribeMessage(
-    (message: any) => callbackFunction(message),
+    (message: any) => { callbackFunction(message); },
     {
       type: "zwave_js/subscribe_node_status",
       device_id,
@@ -728,7 +728,7 @@ export const reinterviewZwaveNode = (
   callbackFunction: (message: ZWaveJSRefreshNodeStatusMessage) => void
 ): Promise<UnsubscribeFunc> =>
   hass.connection.subscribeMessage(
-    (message: any) => callbackFunction(message),
+    (message: any) => { callbackFunction(message); },
     {
       type: "zwave_js/refresh_node_info",
       device_id,
@@ -750,7 +750,7 @@ export const removeFailedZwaveNode = (
   callbackFunction: (message: any) => void
 ): Promise<UnsubscribeFunc> =>
   hass.connection.subscribeMessage(
-    (message: any) => callbackFunction(message),
+    (message: any) => { callbackFunction(message); },
     {
       type: "zwave_js/remove_failed_node",
       device_id,
@@ -781,7 +781,7 @@ export const subscribeRebuildZwaveNetworkRoutesProgress = (
   callbackFunction: (message: ZWaveJSRebuildRoutesStatusMessage) => void
 ): Promise<UnsubscribeFunc> =>
   hass.connection.subscribeMessage(
-    (message: any) => callbackFunction(message),
+    (message: any) => { callbackFunction(message); },
     {
       type: "zwave_js/subscribe_rebuild_routes_progress",
       entry_id,
@@ -794,7 +794,7 @@ export const subscribeZwaveControllerStatistics = (
   callbackFunction: (message: ZWaveJSControllerStatisticsUpdatedMessage) => void
 ): Promise<UnsubscribeFunc> =>
   hass.connection.subscribeMessage(
-    (message: any) => callbackFunction(message),
+    (message: any) => { callbackFunction(message); },
     {
       type: "zwave_js/subscribe_controller_statistics",
       entry_id,
@@ -807,7 +807,7 @@ export const subscribeZwaveNodeStatistics = (
   callbackFunction: (message: ZWaveJSNodeStatisticsUpdatedMessage) => void
 ): Promise<UnsubscribeFunc> =>
   hass.connection.subscribeMessage(
-    (message: any) => callbackFunction(message),
+    (message: any) => { callbackFunction(message); },
     {
       type: "zwave_js/subscribe_node_statistics",
       device_id,
@@ -822,7 +822,7 @@ export const subscribeS2Inclusion = (
   ) => void
 ): Promise<UnsubscribeFunc> =>
   hass.connection.subscribeMessage(
-    (message: any) => callbackFunction(message),
+    (message: any) => { callbackFunction(message); },
     {
       type: "zwave_js/subscribe_s2_inclusion",
       entry_id,
@@ -900,7 +900,7 @@ export const subscribeZwaveNodeFirmwareUpdate = (
   ) => void
 ): Promise<UnsubscribeFunc> =>
   hass.connection.subscribeMessage(
-    (message: any) => callbackFunction(message),
+    (message: any) => { callbackFunction(message); },
     {
       type: "zwave_js/subscribe_firmware_update_status",
       device_id,

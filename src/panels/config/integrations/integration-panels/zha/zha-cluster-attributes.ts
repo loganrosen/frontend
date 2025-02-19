@@ -144,10 +144,10 @@ export class ZHAClusterAttributes extends LitElement {
     if (this.device && this.selectedCluster && this.hass) {
       this._attributes = await fetchAttributesForCluster(
         this.hass,
-        this.device!.ieee,
-        this.selectedCluster!.endpoint_id,
-        this.selectedCluster!.id,
-        this.selectedCluster!.type
+        this.device.ieee,
+        this.selectedCluster.endpoint_id,
+        this.selectedCluster.id,
+        this.selectedCluster.type
       );
       this._attributes.sort((a, b) => a.name.localeCompare(b.name));
       if (this._attributes.length > 0) {
@@ -163,10 +163,10 @@ export class ZHAClusterAttributes extends LitElement {
       return undefined;
     }
     return {
-      ieee: this.device!.ieee,
-      endpoint_id: this.selectedCluster!.endpoint_id,
-      cluster_id: this.selectedCluster!.id,
-      cluster_type: this.selectedCluster!.type,
+      ieee: this.device.ieee,
+      endpoint_id: this.selectedCluster.endpoint_id,
+      cluster_id: this.selectedCluster.id,
+      cluster_type: this.selectedCluster.type,
       attribute: this._selectedAttributeId!,
       manufacturer: this._manufacturerCodeOverride
         ? parseInt(this._manufacturerCodeOverride as string, 10)
@@ -181,10 +181,10 @@ export class ZHAClusterAttributes extends LitElement {
       return undefined;
     }
     return {
-      ieee: this.device!.ieee,
-      endpoint_id: this.selectedCluster!.endpoint_id,
-      cluster_id: this.selectedCluster!.id,
-      cluster_type: this.selectedCluster!.type,
+      ieee: this.device.ieee,
+      endpoint_id: this.selectedCluster.endpoint_id,
+      cluster_id: this.selectedCluster.id,
+      cluster_type: this.selectedCluster.type,
       attribute: this._selectedAttributeId!,
       value: this._attributeValue,
       manufacturer: this._manufacturerCodeOverride

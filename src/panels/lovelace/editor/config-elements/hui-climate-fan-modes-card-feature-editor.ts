@@ -96,7 +96,7 @@ export class HuiClimateFanModesCardFeatureEditor
     }
 
     const stateObj = this.context?.entity_id
-      ? this.hass.states[this.context?.entity_id]
+      ? this.hass.states[this.context.entity_id]
       : undefined;
 
     const data: ClimateFanModesCardFeatureData = {
@@ -128,7 +128,7 @@ export class HuiClimateFanModesCardFeatureEditor
       .value as ClimateFanModesCardFeatureData;
 
     const stateObj = this.context?.entity_id
-      ? this.hass!.states[this.context?.entity_id]
+      ? this.hass!.states[this.context.entity_id]
       : undefined;
 
     if (customize_modes && !config.fan_modes) {

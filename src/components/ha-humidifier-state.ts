@@ -44,10 +44,10 @@ class HaHumidifierState extends LitElement {
     }
 
     if (this.stateObj.attributes.current_humidity != null) {
-      return `${this.hass.formatEntityAttributeValue(
+      return this.hass.formatEntityAttributeValue(
         this.stateObj,
         "current_humidity"
-      )}`;
+      );
     }
 
     return undefined;
@@ -59,10 +59,10 @@ class HaHumidifierState extends LitElement {
     }
 
     if (this.stateObj.attributes.humidity != null) {
-      return `${this.hass.formatEntityAttributeValue(
+      return this.hass.formatEntityAttributeValue(
         this.stateObj,
         "humidity"
-      )}`;
+      );
     }
 
     return "";

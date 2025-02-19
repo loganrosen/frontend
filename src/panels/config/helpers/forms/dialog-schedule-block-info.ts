@@ -55,7 +55,7 @@ class DialogScheduleBlockInfo extends LitElement {
     this._params = params;
     this._error = undefined;
     this._data = params.block;
-    this._expand = !!params.block?.data;
+    this._expand = !!params.block.data;
   }
 
   public closeDialog(): void {
@@ -75,7 +75,7 @@ class DialogScheduleBlockInfo extends LitElement {
         @closed=${this.closeDialog}
         .heading=${createCloseHeading(
           this.hass,
-          this.hass!.localize(
+          this.hass.localize(
             "ui.dialogs.helper_settings.schedule.edit_schedule_block"
           )
         )}
@@ -95,10 +95,10 @@ class DialogScheduleBlockInfo extends LitElement {
           class="warning"
           @click=${this._deleteBlock}
         >
-          ${this.hass!.localize("ui.common.delete")}
+          ${this.hass.localize("ui.common.delete")}
         </ha-button>
         <ha-button slot="primaryAction" @click=${this._updateBlock}>
-          ${this.hass!.localize("ui.common.save")}
+          ${this.hass.localize("ui.common.save")}
         </ha-button>
       </ha-dialog>
     `;
@@ -132,13 +132,13 @@ class DialogScheduleBlockInfo extends LitElement {
   ) => {
     switch (schema.name) {
       case "from":
-        return this.hass!.localize("ui.dialogs.helper_settings.schedule.start");
+        return this.hass.localize("ui.dialogs.helper_settings.schedule.start");
       case "to":
-        return this.hass!.localize("ui.dialogs.helper_settings.schedule.end");
+        return this.hass.localize("ui.dialogs.helper_settings.schedule.end");
       case "data":
-        return this.hass!.localize("ui.dialogs.helper_settings.schedule.data");
+        return this.hass.localize("ui.dialogs.helper_settings.schedule.data");
       case "advanced_settings":
-        return this.hass!.localize(
+        return this.hass.localize(
           "ui.dialogs.helper_settings.schedule.advanced_settings"
         );
     }

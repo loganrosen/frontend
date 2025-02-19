@@ -97,7 +97,7 @@ export class HuiMediaControlCard extends LitElement implements LovelaceCard {
 
     this._config = config;
 
-    this.updateComplete.then(() => this._measureCard());
+    this.updateComplete.then(() => { this._measureCard(); });
   }
 
   public connectedCallback(): void {
@@ -120,7 +120,7 @@ export class HuiMediaControlCard extends LitElement implements LovelaceCard {
       stateObj.state === "playing"
     ) {
       this._progressInterval = window.setInterval(
-        () => this._updateProgressBar(),
+        () => { this._updateProgressBar(); },
         1000
       );
     }
@@ -235,8 +235,8 @@ export class HuiMediaControlCard extends LitElement implements LovelaceCard {
                 .hass=${this.hass}
               ></ha-state-icon>
               <div>
-                ${this._config!.name ||
-                computeStateName(this.hass!.states[this._config!.entity])}
+                ${this._config.name ||
+                computeStateName(this.hass.states[this._config.entity])}
               </div>
             </div>
             <div>
@@ -272,7 +272,7 @@ export class HuiMediaControlCard extends LitElement implements LovelaceCard {
                       ? ""
                       : html`
                           <div class="controls">
-                            ${controls!.map(
+                            ${controls.map(
                               (control) => html`
                                 <ha-icon-button
                                   .label=${this.hass.localize(
@@ -417,7 +417,7 @@ export class HuiMediaControlCard extends LitElement implements LovelaceCard {
       stateObj.state === "playing"
     ) {
       this._progressInterval = window.setInterval(
-        () => this._updateProgressBar(),
+        () => { this._updateProgressBar(); },
         1000
       );
     } else if (
@@ -478,7 +478,7 @@ export class HuiMediaControlCard extends LitElement implements LovelaceCard {
   private async _attachObserver(): Promise<void> {
     if (!this._resizeObserver) {
       this._resizeObserver = new ResizeObserver(
-        debounce(() => this._measureCard(), 250, false)
+        debounce(() => { this._measureCard(); }, 250, false)
       );
     }
     const card = this.shadowRoot!.querySelector("ha-card");
@@ -511,7 +511,7 @@ export class HuiMediaControlCard extends LitElement implements LovelaceCard {
 
   private _handleClick(e: MouseEvent): void {
     handleMediaControlClick(
-      this.hass!,
+      this.hass,
       this._stateObj!,
       (e.currentTarget as HTMLElement).getAttribute("action")!
     );
@@ -521,12 +521,12 @@ export class HuiMediaControlCard extends LitElement implements LovelaceCard {
     if (this._progressBar && this._stateObj?.attributes.media_duration) {
       this._progressBar.progress =
         getCurrentProgress(this._stateObj) /
-        this._stateObj!.attributes.media_duration;
+        this._stateObj.attributes.media_duration;
     }
   }
 
   private get _stateObj(): MediaPlayerEntity | undefined {
-    return this.hass!.states[this._config!.entity] as MediaPlayerEntity;
+    return this.hass.states[this._config!.entity] as MediaPlayerEntity;
   }
 
   private _handleSeek(e: MouseEvent): void {
@@ -541,7 +541,7 @@ export class HuiMediaControlCard extends LitElement implements LovelaceCard {
     const percent = e.offsetX / progressWidth;
     const position = this._stateObj!.attributes.media_duration! * percent;
 
-    this.hass!.callService("media_player", "media_seek", {
+    this.hass.callService("media_player", "media_seek", {
       entity_id: this._config!.entity,
       seek_position: position,
     });

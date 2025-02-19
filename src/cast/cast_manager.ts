@@ -147,7 +147,7 @@ export class CastManager {
   private _attachMessageListener() {
     const session = this.castSession;
     session.addMessageListener(CAST_NS, (_ns, msg) =>
-      this._receiveMessage(JSON.parse(msg))
+      { this._receiveMessage(JSON.parse(msg)); }
     );
   }
 }

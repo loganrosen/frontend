@@ -162,11 +162,11 @@ export class BluetoothAdvertisementMonitorPanel extends LitElement {
         id: row.address,
         source_address: row.source,
         source:
-          scannerDevice?.name_by_user ||
-          scannerDevice?.name ||
-          scanner?.name ||
+          scannerDevice.name_by_user ||
+          scannerDevice.name ||
+          scanner.name ||
           row.source,
-        device: device?.name_by_user || device?.name || undefined,
+        device: device.name_by_user || device.name || undefined,
       };
     })
   );

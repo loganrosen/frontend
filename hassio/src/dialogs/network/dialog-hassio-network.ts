@@ -147,11 +147,11 @@ export class DialogHassioNetwork
                 .header=${this.supervisor.localize("dialog.network.wifi")}
                 outlined
               >
-                ${this._interface?.wifi?.ssid
+                ${this._interface.wifi?.ssid
                   ? html`<p>
                       ${this.supervisor.localize(
                         "dialog.network.connected_to",
-                        { ssid: this._interface?.wifi?.ssid }
+                        { ssid: this._interface.wifi.ssid }
                       )}
                     </p>`
                   : ""}
@@ -547,12 +547,12 @@ export class DialogHassioNetwork
     if (
       !value ||
       !this._wifiConfiguration ||
-      this._wifiConfiguration![id] === value
+      this._wifiConfiguration[id] === value
     ) {
       return;
     }
     this._dirty = true;
-    this._wifiConfiguration![id] = value;
+    this._wifiConfiguration[id] = value;
   }
 
   static get styles(): CSSResultGroup {

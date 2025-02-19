@@ -143,7 +143,7 @@ class ZWaveJSConfigDashboard extends SubscribeMixin(LitElement) {
           slot="toolbar-icon"
           @click=${this._fetchData}
           .path=${mdiRefresh}
-          .label=${this.hass!.localize("ui.common.refresh")}
+          .label=${this.hass.localize("ui.common.refresh")}
         ></ha-icon-button>
         ${this._network
           ? html`
@@ -400,9 +400,9 @@ class ZWaveJSConfigDashboard extends SubscribeMixin(LitElement) {
                   <mwc-button
                     @click=${this._removeNodeClicked}
                     .disabled=${this._status !== "connected" ||
-                    (this._network?.controller.inclusion_state !==
+                    (this._network.controller.inclusion_state !==
                       InclusionState.Idle &&
-                      this._network?.controller.inclusion_state !==
+                      this._network.controller.inclusion_state !==
                         InclusionState.SmartStart)}
                   >
                     ${this.hass.localize(
@@ -430,7 +430,7 @@ class ZWaveJSConfigDashboard extends SubscribeMixin(LitElement) {
                   ${this._dataCollectionOptIn !== undefined
                     ? html`
                         <ha-switch
-                          .checked=${this._dataCollectionOptIn === true}
+                          .checked=${this._dataCollectionOptIn}
                           @change=${this._dataCollectionToggled}
                         ></ha-switch>
                       `
@@ -530,7 +530,7 @@ class ZWaveJSConfigDashboard extends SubscribeMixin(LitElement) {
             </h3>
             <p>${stateTextExtra}</p>
             <mwc-button @click=${this._handleBack}>
-              ${this.hass?.localize("ui.common.back")}
+              ${this.hass.localize("ui.common.back")}
             </mwc-button>
           </div>
         `
@@ -558,9 +558,9 @@ class ZWaveJSConfigDashboard extends SubscribeMixin(LitElement) {
 
     const [network, dataCollectionStatus, provisioningEntries] =
       await Promise.all([
-        fetchZwaveNetworkStatus(this.hass!, { entry_id: this.configEntryId }),
-        fetchZwaveDataCollectionStatus(this.hass!, this.configEntryId),
-        fetchZwaveProvisioningEntries(this.hass!, this.configEntryId),
+        fetchZwaveNetworkStatus(this.hass, { entry_id: this.configEntryId }),
+        fetchZwaveDataCollectionStatus(this.hass, this.configEntryId),
+        fetchZwaveProvisioningEntries(this.hass, this.configEntryId),
       ]);
 
     this._provisioningEntries = provisioningEntries;
@@ -573,14 +573,14 @@ class ZWaveJSConfigDashboard extends SubscribeMixin(LitElement) {
     }
 
     this._dataCollectionOptIn =
-      dataCollectionStatus.opted_in === true ||
-      dataCollectionStatus.enabled === true;
+      dataCollectionStatus.opted_in ||
+      dataCollectionStatus.enabled;
   }
 
   private async _addNodeClicked() {
     if (!this._dialogOpen) {
       showZWaveJSAddNodeDialog(this, {
-        entry_id: this.configEntryId!,
+        entry_id: this.configEntryId,
         // refresh the data after the dialog is closed. add a small delay for the inclusion state to update
         onStop: () => {
           setTimeout(() => this._fetchData(), 100);
@@ -593,7 +593,7 @@ class ZWaveJSConfigDashboard extends SubscribeMixin(LitElement) {
 
   private async _removeNodeClicked() {
     showZWaveJSRemoveNodeDialog(this, {
-      entry_id: this.configEntryId!,
+      entry_id: this.configEntryId,
       skipConfirmation:
         this._network?.controller.inclusion_state === InclusionState.Excluding,
       removedCallback: () => this._fetchData(),
@@ -602,14 +602,14 @@ class ZWaveJSConfigDashboard extends SubscribeMixin(LitElement) {
 
   private async _rebuildNetworkRoutesClicked() {
     showZWaveJSRebuildNetworkRoutesDialog(this, {
-      entry_id: this.configEntryId!,
+      entry_id: this.configEntryId,
     });
   }
 
   private _dataCollectionToggled(ev) {
     setZwaveDataCollectionPreference(
-      this.hass!,
-      this.configEntryId!,
+      this.hass,
+      this.configEntryId,
       ev.target.checked
     );
   }

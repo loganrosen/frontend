@@ -220,13 +220,13 @@ export class QuickBar extends LitElement {
                     ${this._search &&
                     html`<ha-icon-button
                       @click=${this._clearSearch}
-                      .label=${this.hass!.localize("ui.common.clear")}
+                      .label=${this.hass.localize("ui.common.clear")}
                       .path=${mdiClose}
                     ></ha-icon-button>`}
                     ${this._narrow
                       ? html`
                           <mwc-button
-                            .label=${this.hass!.localize("ui.common.close")}
+                            .label=${this.hass.localize("ui.common.close")}
                             @click=${this.closeDialog}
                           ></mwc-button>
                         `

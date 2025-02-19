@@ -149,7 +149,7 @@ export const closeDialog = async (dialogTag: string): Promise<boolean> => {
   }
   const dialogElement = await LOADED[dialogTag].element;
   if (dialogElement.closeDialog) {
-    return dialogElement.closeDialog() !== false;
+    return dialogElement.closeDialog();
   }
   return true;
 };

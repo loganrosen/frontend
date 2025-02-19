@@ -64,7 +64,7 @@ class HuiLightBrightnessCardFeature
         min="1"
         max="100"
         .showHandle=${stateActive(this.stateObj)}
-        .disabled=${this.stateObj!.state === UNAVAILABLE}
+        .disabled=${this.stateObj.state === UNAVAILABLE}
         @value-changed=${this._valueChanged}
         .label=${this.hass.localize("ui.card.light.brightness")}
         unit="%"

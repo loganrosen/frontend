@@ -177,10 +177,10 @@ export class HaAutomationTrace extends LitElement {
           ${this._traces && this._traces.length > 0
             ? html`
                 <ha-icon-button
-                  .label=${this.hass!.localize(
+                  .label=${this.hass.localize(
                     "ui.panel.config.automation.trace.older_trace"
                   )}
-                  .path=${computeRTL(this.hass!)
+                  .path=${computeRTL(this.hass)
                     ? mdiRayStartArrow
                     : mdiRayEndArrow}
                   .disabled=${this._traces[this._traces.length - 1].run_id ===
@@ -202,10 +202,10 @@ export class HaAutomationTrace extends LitElement {
                   )}
                 </select>
                 <ha-icon-button
-                  .label=${this.hass!.localize(
+                  .label=${this.hass.localize(
                     "ui.panel.config.automation.trace.newer_trace"
                   )}
-                  .path=${computeRTL(this.hass!)
+                  .path=${computeRTL(this.hass)
                     ? mdiRayEndArrow
                     : mdiRayStartArrow}
                   .disabled=${this._traces[0].run_id === this._runId}
@@ -217,11 +217,11 @@ export class HaAutomationTrace extends LitElement {
 
         ${this._traces === undefined
           ? html`<div class="container">
-              ${this.hass!.localize("ui.common.loading")}
+              ${this.hass.localize("ui.common.loading")}
             </div>`
           : this._traces.length === 0
             ? html`<div class="container">
-                ${this.hass!.localize(
+                ${this.hass.localize(
                   "ui.panel.config.automation.trace.no_traces_found"
                 )}
               </div>`
@@ -248,7 +248,7 @@ export class HaAutomationTrace extends LitElement {
                               class=${classMap({ active: this._view === view })}
                               @click=${this._showTab}
                             >
-                              ${this.hass!.localize(
+                              ${this.hass.localize(
                                 `ui.panel.config.automation.trace.tabs.${view}`
                               )}
                             </button>
@@ -264,7 +264,7 @@ export class HaAutomationTrace extends LitElement {
                                 })}
                                 @click=${this._showTab}
                               >
-                                ${this.hass!.localize(
+                                ${this.hass.localize(
                                   `ui.panel.config.automation.trace.tabs.blueprint_config`
                                 )}
                               </button>
@@ -424,7 +424,7 @@ export class HaAutomationTrace extends LitElement {
       }
 
       await showAlertDialog(this, {
-        text: this.hass!.localize(
+        text: this.hass.localize(
           "ui.panel.config.automation.trace.trace_no_longer_available"
         ),
       });

@@ -108,7 +108,7 @@ export class HaEntitySelector extends LitElement {
   }
 
   private _filterEntities = (entity: HassEntity): boolean => {
-    if (!this.selector?.entity?.filter) {
+    if (!this.selector.entity?.filter) {
       return true;
     }
     return ensureArray(this.selector.entity.filter).some((filter) =>

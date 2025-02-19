@@ -221,7 +221,7 @@ class HaConfigBackupBackups extends SubscribeMixin(LitElement) {
                       domain,
                       type: "icon",
                       useFallback: true,
-                      darkOptimized: this.hass.themes?.darkMode,
+                      darkOptimized: this.hass.themes.darkMode,
                     })}
                     height="24"
                     crossorigin="anonymous"

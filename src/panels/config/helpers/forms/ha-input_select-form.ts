@@ -60,9 +60,9 @@ class HaInputSelectForm extends LitElement {
 
   public focus() {
     this.updateComplete.then(() =>
-      (
+      { (
         this.shadowRoot?.querySelector("[dialogInitialFocus]") as HTMLElement
-      )?.focus()
+      ).focus(); }
     );
   }
 
@@ -77,11 +77,11 @@ class HaInputSelectForm extends LitElement {
           dialogInitialFocus
           autoValidate
           required
-          .validationMessage=${this.hass!.localize(
+          .validationMessage=${this.hass.localize(
             "ui.dialogs.helper_settings.required_error_msg"
           )}
           .value=${this._name}
-          .label=${this.hass!.localize(
+          .label=${this.hass.localize(
             "ui.dialogs.helper_settings.generic.name"
           )}
           .configValue=${"name"}
@@ -92,12 +92,12 @@ class HaInputSelectForm extends LitElement {
           .value=${this._icon}
           .configValue=${"icon"}
           @value-changed=${this._valueChanged}
-          .label=${this.hass!.localize(
+          .label=${this.hass.localize(
             "ui.dialogs.helper_settings.generic.icon"
           )}
         ></ha-icon-picker>
         <div class="header">
-          ${this.hass!.localize(
+          ${this.hass.localize(
             "ui.dialogs.helper_settings.input_select.options"
           )}:
         </div>
@@ -129,7 +129,7 @@ class HaInputSelectForm extends LitElement {
                 )
               : html`
                   <ha-list-item noninteractive>
-                    ${this.hass!.localize(
+                    ${this.hass.localize(
                       "ui.dialogs.helper_settings.input_select.no_options"
                     )}
                   </ha-list-item>
@@ -140,13 +140,13 @@ class HaInputSelectForm extends LitElement {
           <ha-textfield
             class="flex-auto"
             id="option_input"
-            .label=${this.hass!.localize(
+            .label=${this.hass.localize(
               "ui.dialogs.helper_settings.input_select.add_option"
             )}
             @keydown=${this._handleKeyAdd}
           ></ha-textfield>
           <ha-button @click=${this._addOption}
-            >${this.hass!.localize(
+            >${this.hass.localize(
               "ui.dialogs.helper_settings.input_select.add"
             )}</ha-button
           >

@@ -51,7 +51,7 @@ class MoreInfoDatetime extends LitElement {
       const newTime = ev.detail.value.split(":").map(Number);
       dateObj.setHours(newTime[0], newTime[1], newTime[2]);
 
-      setDateTimeValue(this.hass!, this.stateObj!.entity_id, dateObj);
+      setDateTimeValue(this.hass, this.stateObj!.entity_id, dateObj);
     }
   }
 
@@ -61,7 +61,7 @@ class MoreInfoDatetime extends LitElement {
       const newDate = ev.detail.value.split("-").map(Number);
       dateObj.setFullYear(newDate[0], newDate[1] - 1, newDate[2]);
 
-      setDateTimeValue(this.hass!, this.stateObj!.entity_id, dateObj);
+      setDateTimeValue(this.hass, this.stateObj!.entity_id, dateObj);
     }
   }
 

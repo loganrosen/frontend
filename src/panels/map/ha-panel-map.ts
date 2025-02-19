@@ -31,7 +31,7 @@ class HaPanelMap extends LitElement {
         ${!__DEMO__ && this.hass.user?.is_admin
           ? html`<ha-icon-button
               slot="actionItems"
-              .label=${this.hass!.localize("ui.panel.map.edit_zones")}
+              .label=${this.hass.localize("ui.panel.map.edit_zones")}
               .path=${mdiPencil}
               @click=${this._openZonesEditor}
             ></ha-icon-button>`
@@ -63,7 +63,7 @@ class HaPanelMap extends LitElement {
     let changed = false;
     const personSources = new Set<string>();
     const locationEntities: string[] = [];
-    Object.values(this.hass!.states).forEach((entity) => {
+    Object.values(this.hass.states).forEach((entity) => {
       if (
         entity.state === "home" ||
         !("latitude" in entity.attributes) ||

@@ -80,7 +80,7 @@ class MoreInfoGroup extends LitElement {
         })
       : ""}
     ${this.stateObj.attributes.entity_id.map((entity_id) => {
-      const entityState = this.hass!.states[entity_id];
+      const entityState = this.hass.states[entity_id];
       if (!entityState) {
         return "";
       }

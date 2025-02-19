@@ -143,7 +143,7 @@ export class RecurrenceRuleEditor extends LitElement {
       this._freq = undefined;
       return;
     }
-    this._freq = convertFrequency(rrule!.freq!);
+    this._freq = convertFrequency(rrule.freq!);
     if (rrule.interval) {
       this._interval = rrule.interval;
     }
@@ -228,7 +228,7 @@ export class RecurrenceRuleEditor extends LitElement {
             fixedMenuPosition
             naturalMenuWidth
           >
-            ${this._monthlyRepeatItems!.map(
+            ${this._monthlyRepeatItems.map(
               (item) => html`
                 <ha-list-item .value=${item.value} .item=${item}>
                   ${item.label}
@@ -449,7 +449,7 @@ export class RecurrenceRuleEditor extends LitElement {
       byweekday = ruleByWeekDay(this._weekday);
     }
     const options: Partial<Options> = {
-      freq: convertRepeatFrequency(this._freq!)!,
+      freq: convertRepeatFrequency(this._freq)!,
       interval: this._interval > 1 ? this._interval : undefined,
       count: this._count,
       byweekday: byweekday,
@@ -459,7 +459,7 @@ export class RecurrenceRuleEditor extends LitElement {
     if (this._untilDay) {
       // The UNTIL value should be inclusive of the last event instance
       const until = toDate(
-        this._formatDate(this._untilDay!) +
+        this._formatDate(this._untilDay) +
           "T" +
           this._formatTime(this.dtstart!),
         { timeZone: this.timezone }

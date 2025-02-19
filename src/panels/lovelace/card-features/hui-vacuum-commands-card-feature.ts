@@ -164,7 +164,7 @@ class HuiVacuumCommandCardFeature
 
   private _onCommandTap(ev): void {
     ev.stopPropagation();
-    const entry = (ev.target! as any).entry as VacuumButton;
+    const entry = (ev.target!).entry as VacuumButton;
     this.hass!.callService("vacuum", entry.serviceName, {
       entity_id: this.stateObj!.entity_id,
     });

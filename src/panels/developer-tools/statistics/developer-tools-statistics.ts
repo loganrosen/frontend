@@ -267,7 +267,7 @@ class HaPanelDevStatistics extends KeyboardShortcutMixin(LitElement) {
           <ha-assist-chip
             .label=${localize("ui.components.subpage-data-table.sort_by", {
               sortColumn: this._sortColumn
-                ? ` ${columns[this._sortColumn]?.title || columns[this._sortColumn]?.label}` ||
+                ? ` ${columns[this._sortColumn].title || columns[this._sortColumn].label}` ||
                   ""
                 : "",
             })}
@@ -687,7 +687,7 @@ class HaPanelDevStatistics extends KeyboardShortcutMixin(LitElement) {
 
   protected supportedShortcuts(): SupportedShortcuts {
     return {
-      f: () => this._searchInput.focus(),
+      f: () => { this._searchInput.focus(); },
     };
   }
 

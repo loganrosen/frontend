@@ -93,7 +93,7 @@ class HuiClimateSwingHorizontalModesCardFeature
 
   private async _valueChanged(ev: CustomEvent) {
     const swingHorizontalMode =
-      (ev.detail as any).value ?? ((ev.target as any).value as string);
+      (ev.detail).value ?? ((ev.target as any).value as string);
 
     const oldSwingHorizontalMode =
       this.stateObj!.attributes.swing_horizontal_mode;
@@ -130,7 +130,7 @@ class HuiClimateSwingHorizontalModesCardFeature
 
     const options = filterModes(
       stateObj.attributes.swing_horizontal_modes,
-      this._config!.swing_horizontal_modes
+      this._config.swing_horizontal_modes
     ).map<ControlSelectOption>((mode) => ({
       value: mode,
       label: this.hass!.formatEntityAttributeValue(
@@ -154,11 +154,11 @@ class HuiClimateSwingHorizontalModesCardFeature
           .value=${this._currentSwingHorizontalMode}
           @value-changed=${this._valueChanged}
           hide-label
-          .ariaLabel=${this.hass!.formatEntityAttributeName(
+          .ariaLabel=${this.hass.formatEntityAttributeName(
             stateObj,
             "swing_horizontal_mode"
           )}
-          .disabled=${this.stateObj!.state === UNAVAILABLE}
+          .disabled=${this.stateObj.state === UNAVAILABLE}
         >
         </ha-control-select>
       `;
@@ -168,7 +168,7 @@ class HuiClimateSwingHorizontalModesCardFeature
       <ha-control-select-menu
         show-arrow
         hide-label
-        .label=${this.hass!.formatEntityAttributeName(
+        .label=${this.hass.formatEntityAttributeName(
           stateObj,
           "swing_horizontal_mode"
         )}

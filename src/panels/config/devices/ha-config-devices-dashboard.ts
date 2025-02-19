@@ -233,7 +233,7 @@ export class HaConfigDeviceDashboard extends SubscribeMixin(LitElement) {
     this._filters = {
       "ha-filter-states": {
         value: [
-          ...((this._filters["ha-filter-states"]?.value as string[]) || []),
+          ...((this._filters["ha-filter-states"].value as string[]) || []),
           "disabled",
         ],
         items: undefined,
@@ -348,7 +348,7 @@ export class HaConfigDeviceDashboard extends SubscribeMixin(LitElement) {
         ) {
           if (
             !(
-              Array.isArray(this._filters.config_entry?.value) &&
+              Array.isArray(this._filters.config_entry.value) &&
               this._filters.config_entry.value.length === 1
             )
           ) {
@@ -380,7 +380,7 @@ export class HaConfigDeviceDashboard extends SubscribeMixin(LitElement) {
           outputDevices = outputDevices.filter((device) =>
             device.config_entries.some((entryId) => entryIds.includes(entryId))
           );
-          (filter.value as string[]).forEach((domain) =>
+          (filter.value).forEach((domain) =>
             filteredDomains.add(domain)
           );
         } else if (
@@ -400,7 +400,7 @@ export class HaConfigDeviceDashboard extends SubscribeMixin(LitElement) {
         }
       });
 
-      const stateFilters = filters["ha-filter-states"]?.value as
+      const stateFilters = filters["ha-filter-states"].value as
         | string[]
         | undefined;
 
@@ -419,7 +419,7 @@ export class HaConfigDeviceDashboard extends SubscribeMixin(LitElement) {
           device.primary_config_entry
         );
 
-        const labels = labelReg && device?.labels;
+        const labels = labelReg && device.labels;
         const labelsEntries = (labels || []).map(
           (lbl) => labelReg!.find((label) => label.label_id === lbl)!
         );
@@ -459,7 +459,7 @@ export class HaConfigDeviceDashboard extends SubscribeMixin(LitElement) {
           battery_level:
             this.hass.states[
               this._batteryEntity(device.id, deviceEntityLookup) || ""
-            ]?.state,
+            ].state,
           label_entries: labelsEntries,
         };
       });
@@ -493,7 +493,7 @@ export class HaConfigDeviceDashboard extends SubscribeMixin(LitElement) {
                 src=${brandsUrl({
                   domain: device.domains[0],
                   type: "icon",
-                  darkOptimized: this.hass.themes?.darkMode,
+                  darkOptimized: this.hass.themes.darkMode,
                 })}
               />`
             : "",
@@ -686,15 +686,15 @@ export class HaConfigDeviceDashboard extends SubscribeMixin(LitElement) {
         </div>
       </ha-md-menu-item>`;
 
-    const labelItems = html`${this._labels?.map((label) => {
+    const labelItems = html`${this._labels.map((label) => {
         const color = label.color ? computeCssColor(label.color) : undefined;
         const selected = this._selected.every((deviceId) =>
-          this.hass.devices[deviceId]?.labels.includes(label.label_id)
+          this.hass.devices[deviceId].labels.includes(label.label_id)
         );
         const partial =
           !selected &&
           this._selected.some((deviceId) =>
-            this.hass.devices[deviceId]?.labels.includes(label.label_id)
+            this.hass.devices[deviceId].labels.includes(label.label_id)
           );
         return html`<ha-md-menu-item
           .value=${label.label_id}
@@ -779,30 +779,30 @@ export class HaConfigDeviceDashboard extends SubscribeMixin(LitElement) {
         >
           <ha-svg-icon slot="icon" .path=${mdiPlus}></ha-svg-icon>
         </ha-fab>
-        ${Array.isArray(this._filters.config_entry?.value) &&
-        this._filters.config_entry?.value.length
+        ${Array.isArray(this._filters.config_entry.value) &&
+        this._filters.config_entry.value.length
           ? html`<ha-alert slot="filter-pane">
               ${this.hass.localize(
                 "ui.panel.config.devices.filtering_by_config_entry"
               )}
-              ${this.entries?.find(
+              ${this.entries.find(
                 (entry) =>
-                  entry.entry_id === this._filters.config_entry!.value![0]
+                  entry.entry_id === this._filters.config_entry.value![0]
               )?.title || this._filters.config_entry.value[0]}${this._filters
                 .config_entry.value.length === 1 &&
-              Array.isArray(this._filters.sub_entry?.value) &&
+              Array.isArray(this._filters.sub_entry.value) &&
               this._filters.sub_entry.value.length
                 ? html` (${this._subEntries?.find(
                     (entry) =>
-                      entry.subentry_id === this._filters.sub_entry!.value![0]
-                  )?.title || this._filters.sub_entry!.value![0]})`
+                      entry.subentry_id === this._filters.sub_entry.value![0]
+                  )?.title || this._filters.sub_entry.value[0]})`
                 : nothing}
             </ha-alert>`
           : nothing}
         <ha-filter-floor-areas
           .hass=${this.hass}
           type="device"
-          .value=${this._filters["ha-filter-floor-areas"]?.value}
+          .value=${this._filters["ha-filter-floor-areas"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-floor-areas"}
@@ -811,7 +811,7 @@ export class HaConfigDeviceDashboard extends SubscribeMixin(LitElement) {
         ></ha-filter-floor-areas>
         <ha-filter-integrations
           .hass=${this.hass}
-          .value=${this._filters["ha-filter-integrations"]?.value}
+          .value=${this._filters["ha-filter-integrations"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-integrations"}
@@ -820,7 +820,7 @@ export class HaConfigDeviceDashboard extends SubscribeMixin(LitElement) {
         ></ha-filter-integrations>
         <ha-filter-states
           .hass=${this.hass}
-          .value=${this._filters["ha-filter-states"]?.value}
+          .value=${this._filters["ha-filter-states"].value}
           .states=${this._states(this.hass.localize)}
           .label=${this.hass.localize("ui.panel.config.devices.picker.state")}
           @data-table-filter-changed=${this._filterChanged}
@@ -831,7 +831,7 @@ export class HaConfigDeviceDashboard extends SubscribeMixin(LitElement) {
         ></ha-filter-states>
         <ha-filter-labels
           .hass=${this.hass}
-          .value=${this._filters["ha-filter-labels"]?.value}
+          .value=${this._filters["ha-filter-labels"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-labels"}

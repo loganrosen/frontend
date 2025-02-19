@@ -206,7 +206,7 @@ class HaConfigBackupDetails extends LitElement {
                                             type: "icon",
                                             useFallback: true,
                                             darkOptimized:
-                                              this.hass.themes?.darkMode,
+                                              this.hass.themes.darkMode,
                                           })}
                                           crossorigin="anonymous"
                                           referrerpolicy="no-referrer"

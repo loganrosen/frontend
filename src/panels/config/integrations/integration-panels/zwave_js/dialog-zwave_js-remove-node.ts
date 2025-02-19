@@ -160,7 +160,7 @@ class DialogZWaveJSRemoveNode extends LitElement {
       return;
     }
     this._subscribed = this.hass.connection
-      .subscribeMessage((message) => this._handleMessage(message), {
+      .subscribeMessage((message) => { this._handleMessage(message); }, {
         type: "zwave_js/remove_node",
         entry_id: this.entry_id,
       })
@@ -171,7 +171,7 @@ class DialogZWaveJSRemoveNode extends LitElement {
       });
     this._status = "started";
     this._removeNodeTimeoutHandle = window.setTimeout(
-      () => this._unsubscribe(),
+      () => { this._unsubscribe(); },
       120000
     );
   }

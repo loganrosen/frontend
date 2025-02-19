@@ -120,40 +120,40 @@ export default <T extends Constructor<HassBaseEl>>(superClass: T) =>
     protected hassConnected() {
       super.hassConnected();
       getUserLocale(this.hass!).then((locale) => {
-        if (locale?.language && this.hass!.language !== locale.language) {
+        if (locale.language && this.hass!.language !== locale.language) {
           // We just got language from backend, no need to save back
           this._selectLanguage(locale.language, false);
         }
         if (
-          locale?.number_format &&
+          locale.number_format &&
           this.hass!.locale.number_format !== locale.number_format
         ) {
           // We just got number_format from backend, no need to save back
           this._selectNumberFormat(locale.number_format, false);
         }
         if (
-          locale?.time_format &&
+          locale.time_format &&
           this.hass!.locale.time_format !== locale.time_format
         ) {
           // We just got time_format from backend, no need to save back
           this._selectTimeFormat(locale.time_format, false);
         }
         if (
-          locale?.date_format &&
+          locale.date_format &&
           this.hass!.locale.date_format !== locale.date_format
         ) {
           // We just got date_format from backend, no need to save back
           this._selectDateFormat(locale.date_format, false);
         }
         if (
-          locale?.time_zone &&
+          locale.time_zone &&
           this.hass!.locale.time_zone !== locale.time_zone
         ) {
           // We just got time_zone from backend, no need to save back
           this._selectTimeZone(locale.time_zone, false);
         }
         if (
-          locale?.first_weekday &&
+          locale.first_weekday &&
           this.hass!.locale.first_weekday !== locale.first_weekday
         ) {
           // We just got first_weekday from backend, no need to save back
@@ -247,7 +247,7 @@ export default <T extends Constructor<HassBaseEl>>(superClass: T) =>
 
       // update selectedLanguage so that it can be saved to local storage
       this._updateHass({
-        locale: { ...this.hass!.locale, language: language },
+        locale: { ...this.hass.locale, language: language },
         language: language,
         selectedLanguage: language,
       });
@@ -373,7 +373,7 @@ export default <T extends Constructor<HassBaseEl>>(superClass: T) =>
         return undefined;
       }
 
-      const panelComponent = this.hass?.panels?.[panelUrl]?.component_name;
+      const panelComponent = this.hass?.panels[panelUrl]?.component_name;
 
       // If it's the first call we don't have panel info yet to check the component.
       const fragment = translationMetadata.fragments.includes(
@@ -438,7 +438,7 @@ export default <T extends Constructor<HassBaseEl>>(superClass: T) =>
 
       const resources = {
         [language]: {
-          ...(this.hass ?? this._pendingHass)?.resources?.[language],
+          ...(this.hass ?? this._pendingHass).resources?.[language],
           ...data,
         },
       };

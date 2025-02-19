@@ -96,7 +96,7 @@ class HuiWeatherForecastCard extends LitElement implements LovelaceCard {
 
   private _unsubscribeForecastEvents() {
     if (this._subscribed) {
-      this._subscribed.then((unsub) => unsub());
+      this._subscribed.then((unsub) => { unsub(); });
       this._subscribed = undefined;
     }
   }
@@ -109,15 +109,15 @@ class HuiWeatherForecastCard extends LitElement implements LovelaceCard {
       !this._config ||
       !this._needForecastSubscription() ||
       !isComponentLoaded(this.hass, "weather") ||
-      !this.hass.states[this._config!.entity]
+      !this.hass.states[this._config.entity]
     ) {
       return;
     }
 
     this._subscribed = subscribeForecast(
-      this.hass!,
-      this._config!.entity,
-      this._config!.forecast_type as "daily" | "hourly" | "twice_daily",
+      this.hass,
+      this._config.entity,
+      this._config.forecast_type as "daily" | "hourly" | "twice_daily",
       (event) => {
         this._forecastEvent = event;
       }
@@ -229,10 +229,10 @@ class HuiWeatherForecastCard extends LitElement implements LovelaceCard {
     const forecastData = getForecast(
       stateObj.attributes,
       this._forecastEvent,
-      this._config?.forecast_type
+      this._config.forecast_type
     );
 
-    let itemsToShow = this._config?.forecast_slots ?? 5;
+    let itemsToShow = this._config.forecast_slots ?? 5;
     if (this._sizeController.value === "very-very-narrow") {
       itemsToShow = Math.min(3, itemsToShow);
     } else if (this._sizeController.value === "very-narrow") {
@@ -242,10 +242,10 @@ class HuiWeatherForecastCard extends LitElement implements LovelaceCard {
     }
 
     const forecast =
-      this._config?.show_forecast !== false && forecastData?.forecast?.length
+      this._config.show_forecast !== false && forecastData?.forecast.length
         ? forecastData.forecast.slice(0, itemsToShow)
         : undefined;
-    const weather = !forecast || this._config?.show_current !== false;
+    const weather = !forecast || this._config.show_current !== false;
 
     const hourly = forecastData?.type === "hourly";
     const dayNight = forecastData?.type === "twice_daily";
@@ -258,8 +258,8 @@ class HuiWeatherForecastCard extends LitElement implements LovelaceCard {
         class=${ifDefined(this._sizeController.value)}
         @action=${this._handleAction}
         .actionHandler=${actionHandler({
-          hasHold: hasAction(this._config!.hold_action),
-          hasDoubleClick: hasAction(this._config!.double_tap_action),
+          hasHold: hasAction(this._config.hold_action),
+          hasDoubleClick: hasAction(this._config.double_tap_action),
         })}
         tabindex=${ifDefined(
           hasAction(this._config.tap_action) ? "0" : undefined
@@ -316,7 +316,7 @@ class HuiWeatherForecastCard extends LitElement implements LovelaceCard {
                                     ]}
                                   ></ha-svg-icon>
                                 `
-                              : this.hass!.localize(
+                              : this.hass.localize(
                                   `ui.card.weather.attributes.${this._config.secondary_info_attribute}`
                                 )}
                             ${this._config.secondary_info_attribute ===
@@ -431,7 +431,7 @@ class HuiWeatherForecastCard extends LitElement implements LovelaceCard {
   }
 
   private _handleAction(ev: ActionHandlerEvent) {
-    handleAction(this, this.hass!, this._config!, ev.detail.action!);
+    handleAction(this, this.hass!, this._config!, ev.detail.action);
   }
 
   private _showValue(item?: any): boolean {

@@ -124,10 +124,10 @@ export class ZHAClusterCommands extends LitElement {
     if (this.device && this.selectedCluster && this.hass) {
       this._commands = await fetchCommandsForCluster(
         this.hass,
-        this.device!.ieee,
-        this.selectedCluster!.endpoint_id,
-        this.selectedCluster!.id,
-        this.selectedCluster!.type
+        this.device.ieee,
+        this.selectedCluster.endpoint_id,
+        this.selectedCluster.id,
+        this.selectedCluster.type
       );
       this._commands.sort((a, b) => a.name.localeCompare(b.name));
       if (this._commands.length > 0) {
@@ -151,14 +151,14 @@ export class ZHAClusterCommands extends LitElement {
       selectedCommand!.schema.every(
         (field) =>
           !field.required ||
-          !["", undefined].includes(this._commandData![field.name])
+          !["", undefined].includes(this._commandData[field.name])
       );
 
     return {
-      ieee: this.device!.ieee,
-      endpoint_id: this.selectedCluster!.endpoint_id,
-      cluster_id: this.selectedCluster!.id,
-      cluster_type: this.selectedCluster!.type,
+      ieee: this.device.ieee,
+      endpoint_id: this.selectedCluster.endpoint_id,
+      cluster_id: this.selectedCluster.id,
+      cluster_type: this.selectedCluster.type,
       command: this._selectedCommandId!,
       command_type: selectedCommand!.type,
       params: this._commandData,

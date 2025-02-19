@@ -81,7 +81,7 @@ export class HuiWaterHeaterOperationModesCardFeatureEditor
     }
 
     const stateObj = this.context?.entity_id
-      ? this.hass.states[this.context?.entity_id]
+      ? this.hass.states[this.context.entity_id]
       : undefined;
 
     const data: WaterHeaterOperationModesCardFeatureData = {
@@ -111,7 +111,7 @@ export class HuiWaterHeaterOperationModesCardFeatureEditor
       .value as WaterHeaterOperationModesCardFeatureData;
 
     const stateObj = this.context?.entity_id
-      ? this.hass!.states[this.context?.entity_id]
+      ? this.hass!.states[this.context.entity_id]
       : undefined;
 
     if (customize_modes && !config.operation_modes) {

@@ -20,7 +20,7 @@ export const showOptionsFlowDialog = (
   configEntry: ConfigEntry,
   dialogParams?: Omit<DataEntryFlowDialogParams, "flowConfig">
 ): void =>
-  showFlowDialog(
+  { showFlowDialog(
     element,
     {
       startFlowHandler: configEntry.entry_id,
@@ -100,7 +100,7 @@ export const showOptionsFlowDialog = (
           );
         }
 
-        const prefix = options?.path?.[0] ? `sections.${options.path[0]}.` : "";
+        const prefix = options.path?.[0] ? `sections.${options.path[0]}.` : "";
 
         return (
           hass.localize(
@@ -116,7 +116,7 @@ export const showOptionsFlowDialog = (
           );
         }
 
-        const prefix = options?.path?.[0] ? `sections.${options.path[0]}.` : "";
+        const prefix = options.path?.[0] ? `sections.${options.path[0]}.` : "";
 
         const description = hass.localize(
           `component.${step.translation_domain || configEntry.domain}.options.step.${step.step_id}.${prefix}data_description.${field.name}`,
@@ -233,4 +233,4 @@ export const showOptionsFlowDialog = (
         );
       },
     }
-  );
+  ); };

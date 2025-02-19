@@ -138,7 +138,7 @@ export const subscribeHistory = (
   };
   const stream = new HistoryStream(hass);
   return hass.connection.subscribeMessage<HistoryStreamMessage>(
-    (message) => callbackFunction(stream.processMessage(message)),
+    (message) => { callbackFunction(stream.processMessage(message)); },
     params
   );
 };
@@ -255,7 +255,7 @@ export const subscribeHistoryStatesTimeWindow = (
   };
   const stream = new HistoryStream(hass, hoursToShow);
   return hass.connection.subscribeMessage<HistoryStreamMessage>(
-    (message) => callbackFunction(stream.processMessage(message)),
+    (message) => { callbackFunction(stream.processMessage(message)); },
     params
   );
 };
@@ -289,7 +289,7 @@ const processTimelineEntity = (
 
     const currentAttributes: HassEntityAttributeBase = {};
     if (current_state?.attributes.device_class) {
-      currentAttributes.device_class = current_state?.attributes.device_class;
+      currentAttributes.device_class = current_state.attributes.device_class;
     }
 
     data.push({
@@ -454,7 +454,7 @@ export const convertStatisticsToHistory = (
   );
 
   // remap states array to statistics array
-  (statisticsHistory?.line || []).forEach((item) => {
+  (statisticsHistory.line || []).forEach((item) => {
     item.data.forEach((data) => {
       data.statistics = data.states;
       data.states = [];

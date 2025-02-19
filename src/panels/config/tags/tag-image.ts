@@ -20,7 +20,7 @@ export class HaTagImage extends LitElement {
         clearTimeout(this._timeout);
         this._timeout = undefined;
         this.classList.remove("just-scanned");
-        requestAnimationFrame(() => this.classList.add("just-scanned"));
+        requestAnimationFrame(() => { this.classList.add("just-scanned"); });
       } else {
         this.classList.add("just-scanned");
       }

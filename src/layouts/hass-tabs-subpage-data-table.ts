@@ -194,7 +194,7 @@ export class HaTabsSubpageDataTable extends KeyboardShortcutMixin(LitElement) {
 
   protected supportedShortcuts(): SupportedShortcuts {
     return {
-      f: () => this._searchInput.focus(),
+      f: () => { this._searchInput.focus(); },
     };
   }
 
@@ -273,7 +273,7 @@ export class HaTabsSubpageDataTable extends KeyboardShortcutMixin(LitElement) {
           <ha-assist-chip
             .label=${localize("ui.components.subpage-data-table.sort_by", {
               sortColumn: this._sortColumn
-                ? ` ${this.columns[this._sortColumn]?.title || this.columns[this._sortColumn]?.label}` ||
+                ? ` ${this.columns[this._sortColumn].title || this.columns[this._sortColumn].label}` ||
                   ""
                 : "",
             })}

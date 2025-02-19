@@ -197,7 +197,7 @@ export const reconfigureNode = (
   callbackFunction: (message: ClusterConfigurationEvent) => void
 ) =>
   hass.connection.subscribeMessage(
-    (message: ClusterConfigurationEvent) => callbackFunction(message),
+    (message: ClusterConfigurationEvent) => { callbackFunction(message); },
     {
       type: "zha/devices/reconfigure",
       ieee: ieeeAddress,

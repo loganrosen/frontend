@@ -141,7 +141,7 @@ class LandingPageLogs extends LitElement {
   private _scrollToBottom(): void {
     if (this._logElement) {
       this._newLogsIndicator = false;
-      this._logElement!.scrollTo(0, this._logElement!.scrollHeight);
+      this._logElement.scrollTo(0, this._logElement.scrollHeight);
     }
   }
 

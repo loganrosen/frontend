@@ -101,7 +101,7 @@ class HassioRepositoriesDialog extends LitElement {
         escapeKeyAction
         .heading=${createCloseHeading(
           this.hass,
-          this._dialogParams!.supervisor.localize("dialog.repositories.title")
+          this._dialogParams.supervisor.localize("dialog.repositories.title")
         )}
       >
         ${this._error
@@ -144,7 +144,7 @@ class HassioRepositoriesDialog extends LitElement {
                   `
                 )
               : html`<ha-md-list-item
-                  >${this._dialogParams!.supervisor.localize(
+                  >${this._dialogParams.supervisor.localize(
                     "dialog.repositories.no_repositories"
                   )}</ha-md-list-item
                 >`}
@@ -153,8 +153,8 @@ class HassioRepositoriesDialog extends LitElement {
             <ha-textfield
               class="flex-auto"
               id="repository_input"
-              .value=${this._dialogParams!.url || ""}
-              .label=${this._dialogParams!.supervisor.localize(
+              .value=${this._dialogParams.url || ""}
+              .label=${this._dialogParams.supervisor.localize(
                 "dialog.repositories.add"
               )}
               @keydown=${this._handleKeyAdd}
@@ -166,14 +166,14 @@ class HassioRepositoriesDialog extends LitElement {
                     indeterminate
                     size="small"
                   ></ha-circular-progress>`
-                : this._dialogParams!.supervisor.localize(
+                : this._dialogParams.supervisor.localize(
                     "dialog.repositories.add"
                   )}
             </mwc-button>
           </div>
         </div>
         <mwc-button slot="primaryAction" @click=${this.closeDialog}>
-          ${this._dialogParams?.supervisor.localize("common.close")}
+          ${this._dialogParams.supervisor.localize("common.close")}
         </mwc-button>
       </ha-dialog>
     `;
@@ -221,9 +221,9 @@ class HassioRepositoriesDialog extends LitElement {
 
   public focus() {
     this.updateComplete.then(() =>
-      (
+      { (
         this.shadowRoot?.querySelector("[dialogInitialFocus]") as HTMLElement
-      )?.focus()
+      ).focus(); }
     );
   }
 

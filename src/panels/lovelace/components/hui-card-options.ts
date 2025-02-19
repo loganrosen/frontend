@@ -127,7 +127,7 @@ export class HuiCardOptions extends LitElement {
                     .path=${mdiPlus}
                     class="move-arrow"
                     @click=${this._increaseCardPosition}
-                    .disabled=${this._cards!.length === cardIndex + 1}
+                    .disabled=${this._cards.length === cardIndex + 1}
                   ></ha-icon-button>
                 `
               : nothing}
@@ -275,7 +275,7 @@ export class HuiCardOptions extends LitElement {
   private _duplicateCard(): void {
     const { cardIndex } = parseLovelaceCardPath(this.path!);
     const containerPath = getLovelaceContainerPath(this.path!);
-    const cardConfig = this._cards![cardIndex];
+    const cardConfig = this._cards[cardIndex];
     showEditCardDialog(this, {
       lovelaceConfig: this.lovelace!.config,
       saveConfig: this.lovelace!.saveConfig,
@@ -369,8 +369,8 @@ export class HuiCardOptions extends LitElement {
 
         const toPath: LovelaceContainerPath = [viewIndex];
 
-        if (urlPath === this.lovelace!.urlPath) {
-          this.lovelace!.saveConfig(
+        if (urlPath === this.lovelace.urlPath) {
+          this.lovelace.saveConfig(
             moveCardToContainer(newConfig, this.path!, toPath)
           );
           this.lovelace.showToast({
@@ -393,8 +393,8 @@ export class HuiCardOptions extends LitElement {
             urlPath,
             addCard(newConfig, toPath, card)
           );
-          this.lovelace!.saveConfig(
-            deleteCard(this.lovelace!.config, this.path!)
+          this.lovelace.saveConfig(
+            deleteCard(this.lovelace.config, this.path!)
           );
 
           this.lovelace.showToast({

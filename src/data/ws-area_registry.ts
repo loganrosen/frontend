@@ -22,7 +22,7 @@ const subscribeAreaRegistryUpdates = (
     debounce(
       () =>
         fetchAreaRegistry(conn).then((areas: AreaRegistryEntry[]) =>
-          store.setState(areas, true)
+          { store.setState(areas, true); }
         ),
       500,
       true

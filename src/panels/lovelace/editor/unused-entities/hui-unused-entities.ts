@@ -49,7 +49,7 @@ export class HuiUnusedEntities extends LitElement {
       return nothing;
     }
 
-    if (this.lovelace.mode === "storage" && this.lovelace.editMode === false) {
+    if (this.lovelace.mode === "storage" && !this.lovelace.editMode) {
       return nothing;
     }
 
@@ -81,14 +81,14 @@ export class HuiUnusedEntities extends LitElement {
           .hass=${this.hass}
           .narrow=${this.narrow}
           .entities=${this._unusedEntities.map((entity) => {
-            const stateObj = this.hass!.states[entity];
+            const stateObj = this.hass.states[entity];
             return {
               icon: "",
               entity_id: entity,
               stateObj,
               name: stateObj ? computeStateName(stateObj) : "Unavailable",
               domain: computeDomain(entity),
-              last_changed: stateObj?.last_changed,
+              last_changed: stateObj.last_changed,
             };
           }) as DataTableRowData[]}
           @selected-changed=${this._handleSelectedChanged}
@@ -115,7 +115,7 @@ export class HuiUnusedEntities extends LitElement {
       return;
     }
     this._selectedEntities = [];
-    const unusedEntities = computeUnusedEntities(this.hass, this._config!);
+    const unusedEntities = computeUnusedEntities(this.hass, this._config);
     this._unusedEntities = [...unusedEntities].sort();
   }
 
@@ -133,7 +133,7 @@ export class HuiUnusedEntities extends LitElement {
 
     if (this.lovelace.config.views.length === 1) {
       showSuggestCardDialog(this, {
-        lovelaceConfig: this.lovelace.config!,
+        lovelaceConfig: this.lovelace.config,
         saveConfig: this.lovelace.saveConfig,
         path: [0],
         entities: this._selectedEntities,
@@ -147,7 +147,7 @@ export class HuiUnusedEntities extends LitElement {
       allowDashboardChange: false,
       viewSelectedCallback: (_urlPath, _selectedDashConfig, viewIndex) => {
         showSuggestCardDialog(this, {
-          lovelaceConfig: this.lovelace.config!,
+          lovelaceConfig: this.lovelace.config,
           saveConfig: this.lovelace.saveConfig,
           path: [viewIndex],
           entities: this._selectedEntities,

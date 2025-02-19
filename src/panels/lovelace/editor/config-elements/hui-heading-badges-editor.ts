@@ -91,7 +91,7 @@ export class HuiHeadingBadgesEditor extends LitElement {
                           <span>${label}</span>
                         </div>
                         <ha-icon-button
-                          .label=${this.hass!.localize(
+                          .label=${this.hass.localize(
                             `ui.panel.lovelace.editor.entities.edit`
                           )}
                           .path=${mdiPencil}
@@ -100,7 +100,7 @@ export class HuiHeadingBadgesEditor extends LitElement {
                           @click=${this._editBadge}
                         ></ha-icon-button>
                         <ha-icon-button
-                          .label=${this.hass!.localize(
+                          .label=${this.hass.localize(
                             `ui.panel.lovelace.editor.entities.remove`
                           )}
                           .path=${mdiDelete}
@@ -120,7 +120,7 @@ export class HuiHeadingBadgesEditor extends LitElement {
         <ha-button
           data-add-entity
           outlined
-          .label=${this.hass!.localize(`ui.panel.lovelace.editor.entities.add`)}
+          .label=${this.hass.localize(`ui.panel.lovelace.editor.entities.add`)}
           @click=${this._addEntity}
         >
           <ha-svg-icon .path=${mdiPlus} slot="icon"></ha-svg-icon>

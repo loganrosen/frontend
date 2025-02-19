@@ -67,9 +67,9 @@ export const getZwaveDeviceActions = async (
         ),
         icon: mdiChatQuestion,
         action: () =>
-          showZWaveJSReinterviewNodeDialog(el, {
+          { showZWaveJSReinterviewNodeDialog(el, {
             device_id: device.id,
-          }),
+          }); },
       },
       {
         label: hass.localize(
@@ -77,9 +77,9 @@ export const getZwaveDeviceActions = async (
         ),
         icon: mdiHospitalBox,
         action: () =>
-          showZWaveJSRebuildNodeRoutesDialog(el, {
+          { showZWaveJSRebuildNodeRoutesDialog(el, {
             device,
-          }),
+          }); },
       },
       {
         label: hass.localize(
@@ -87,9 +87,9 @@ export const getZwaveDeviceActions = async (
         ),
         icon: mdiDeleteForever,
         action: () =>
-          showZWaveJSRemoveFailedNodeDialog(el, {
+          { showZWaveJSRemoveFailedNodeDialog(el, {
             device_id: device.id,
-          }),
+          }); },
       },
       {
         label: hass.localize(
@@ -97,9 +97,9 @@ export const getZwaveDeviceActions = async (
         ),
         icon: mdiInformation,
         action: () =>
-          showZWaveJSNodeStatisticsDialog(el, {
+          { showZWaveJSNodeStatisticsDialog(el, {
             device,
-          }),
+          }); },
       }
     );
   }

@@ -161,7 +161,7 @@ class DialogNewDashboard extends LitElement implements HassDialog {
       return;
     }
 
-    const target = ev.currentTarget as any;
+    const target = ev.currentTarget;
     const config =
       target.config ||
       (target.strategy && this._generateStrategyConfig(target.strategy)) ||

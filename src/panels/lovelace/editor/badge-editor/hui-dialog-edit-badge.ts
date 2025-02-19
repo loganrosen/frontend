@@ -135,9 +135,9 @@ export class HuiDialogEditBadge
 
     const oldConfig = changedProps.get("_badgeConfig") as LovelaceBadgeConfig;
 
-    if (oldConfig?.type !== this._badgeConfig!.type) {
-      this._documentationURL = this._badgeConfig!.type
-        ? getBadgeDocumentationURL(this.hass, this._badgeConfig!.type)
+    if (oldConfig.type !== this._badgeConfig.type) {
+      this._documentationURL = this._badgeConfig.type
+        ? getBadgeDocumentationURL(this.hass, this._badgeConfig.type)
         : undefined;
     }
   }
@@ -170,23 +170,23 @@ export class HuiDialogEditBadge
           badgeName = badgeName.substring(0, badgeName.length - 6);
         }
       } else {
-        badgeName = this.hass!.localize(
+        badgeName = this.hass.localize(
           `ui.panel.lovelace.editor.badge.${this._badgeConfig.type}.name`
         );
       }
-      heading = this.hass!.localize(
+      heading = this.hass.localize(
         "ui.panel.lovelace.editor.edit_badge.typed_header",
         { type: badgeName }
       );
     } else if (!this._badgeConfig) {
       heading = this._containerConfig.title
-        ? this.hass!.localize(
+        ? this.hass.localize(
             "ui.panel.lovelace.editor.edit_badge.pick_badge_view_title",
             { name: this._containerConfig.title }
           )
-        : this.hass!.localize("ui.panel.lovelace.editor.edit_badge.pick_badge");
+        : this.hass.localize("ui.panel.lovelace.editor.edit_badge.pick_badge");
     } else {
-      heading = this.hass!.localize(
+      heading = this.hass.localize(
         "ui.panel.lovelace.editor.edit_badge.header"
       );
     }
@@ -214,7 +214,7 @@ export class HuiDialogEditBadge
                 <a
                   slot="actionItems"
                   href=${this._documentationURL}
-                  title=${this.hass!.localize("ui.panel.lovelace.menu.help")}
+                  title=${this.hass.localize("ui.panel.lovelace.menu.help")}
                   target="_blank"
                   rel="noreferrer"
                   dir=${computeRTLDirection(this.hass)}
@@ -261,7 +261,7 @@ export class HuiDialogEditBadge
                 .disabled=${!this._guiModeAvailable}
                 class="gui-mode-button"
               >
-                ${this.hass!.localize(
+                ${this.hass.localize(
                   !this._badgeEditorEl || this._GUImode
                     ? "ui.panel.lovelace.editor.edit_badge.show_code_editor"
                     : "ui.panel.lovelace.editor.edit_badge.show_visual_editor"
@@ -271,7 +271,7 @@ export class HuiDialogEditBadge
           : ""}
         <div slot="primaryAction" @click=${this._save}>
           <mwc-button @click=${this._cancel} dialogInitialFocus>
-            ${this.hass!.localize("ui.common.cancel")}
+            ${this.hass.localize("ui.common.cancel")}
           </mwc-button>
           ${this._badgeConfig !== undefined && this._dirty
             ? html`
@@ -287,7 +287,7 @@ export class HuiDialogEditBadge
                           size="small"
                         ></ha-circular-progress>
                       `
-                    : this.hass!.localize("ui.common.save")}
+                    : this.hass.localize("ui.common.save")}
                 </mwc-button>
               `
             : ``}
@@ -346,14 +346,14 @@ export class HuiDialogEditBadge
       setTimeout(resolve, 0);
     });
     const confirm = await showConfirmationDialog(this, {
-      title: this.hass!.localize(
+      title: this.hass.localize(
         "ui.panel.lovelace.editor.edit_badge.unsaved_changes"
       ),
-      text: this.hass!.localize(
+      text: this.hass.localize(
         "ui.panel.lovelace.editor.edit_badge.confirm_cancel"
       ),
-      dismissText: this.hass!.localize("ui.common.stay"),
-      confirmText: this.hass!.localize("ui.common.leave"),
+      dismissText: this.hass.localize("ui.common.stay"),
+      confirmText: this.hass.localize("ui.common.leave"),
     });
     if (confirm) {
       this._cancel();
@@ -380,7 +380,7 @@ export class HuiDialogEditBadge
     const path = this._params!.path;
     await this._params!.saveConfig(
       "badgeConfig" in this._params!
-        ? addBadge(this._params!.lovelaceConfig, path, this._badgeConfig!)
+        ? addBadge(this._params.lovelaceConfig, path, this._badgeConfig!)
         : replaceBadge(
             this._params!.lovelaceConfig,
             [...path, this._params!.badgeIndex],

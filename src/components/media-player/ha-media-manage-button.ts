@@ -31,7 +31,7 @@ class MediaManageButton extends LitElement {
       !this.currentItem ||
       !(
         isLocalMediaSourceContentId(this.currentItem.media_content_id || "") ||
-        (this.hass!.user?.is_admin &&
+        (this.hass.user?.is_admin &&
           isImageUploadMediaSourceContentId(this.currentItem.media_content_id))
       )
     ) {

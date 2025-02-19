@@ -61,10 +61,10 @@ class ConfigUrlForm extends LitElement {
 
     const internalUrl = this._showCustomInternalUrl
       ? this._internal_url
-      : this._urls?.internal || "";
+      : this._urls.internal || "";
     const externalUrl = this._showCustomExternalUrl
       ? this._external_url
-      : (this._cloudChecked ? this._urls?.cloud : this._urls?.external) || "";
+      : (this._cloudChecked ? this._urls.cloud : this._urls.external) || "";
 
     let hasCloud: boolean;
     let remoteEnabled: boolean;
@@ -374,14 +374,14 @@ class ConfigUrlForm extends LitElement {
   private async _fetchUrls() {
     this._urls = await getNetworkUrls(this.hass);
     this._cloudChecked =
-      this._urls?.cloud === this._urls?.external &&
+      this._urls.cloud === this._urls.external &&
       !this.hass.config.external_url;
     this._showCustomInternalUrl = !!this.hass.config.internal_url;
     this._showCustomExternalUrl = !(
       this._cloudStatus?.logged_in && !this.hass.config.external_url
     );
-    this._internal_url = this._urls?.internal ?? "";
-    this._external_url = this._urls?.external ?? "";
+    this._internal_url = this._urls.internal ?? "";
+    this._external_url = this._urls.external ?? "";
   }
 
   static styles = css`

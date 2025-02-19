@@ -229,17 +229,17 @@ export class HAFullCalendar extends LitElement {
       this.calendar.addEventSource(this.events);
     }
 
-    if (changedProps.has("views") && !this.views.includes(this._activeView!)) {
+    if (changedProps.has("views") && !this.views.includes(this._activeView)) {
       this._activeView =
         this.initialView && this.views.includes(this.initialView)
           ? this.initialView
           : this.views[0];
-      this.calendar!.changeView(this._activeView);
+      this.calendar.changeView(this._activeView);
       this._fireViewChanged();
     }
 
     if (changedProps.has("eventDisplay")) {
-      this.calendar!.setOption("eventDisplay", this.eventDisplay);
+      this.calendar.setOption("eventDisplay", this.eventDisplay);
     }
 
     const oldHass = changedProps.get("hass") as HomeAssistant;
@@ -281,14 +281,14 @@ export class HAFullCalendar extends LitElement {
       },
     };
 
-    config.dateClick = (info) => this._handleDateClick(info);
-    config.eventClick = (info) => this._handleEventClick(info);
+    config.dateClick = (info) => { this._handleDateClick(info); };
+    config.eventClick = (info) => { this._handleEventClick(info); };
 
     this.calendar = new Calendar(
       this.shadowRoot!.getElementById("calendar")!,
       config
     );
-    this.calendar!.render();
+    this.calendar.render();
     this._fireViewChanged();
   }
 
@@ -369,7 +369,7 @@ export class HAFullCalendar extends LitElement {
 
   private _handleView(ev: CustomEvent): void {
     this._activeView = ev.detail.value;
-    this.calendar!.changeView(this._activeView!);
+    this.calendar!.changeView(this._activeView);
     this._fireViewChanged();
   }
 

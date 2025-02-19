@@ -234,11 +234,11 @@ export class HaStatisticPicker extends LitElement {
   );
 
   public open() {
-    this.comboBox?.open();
+    this.comboBox.open();
   }
 
   public focus() {
-    this.comboBox?.focus();
+    this.comboBox.focus();
   }
 
   public willUpdate(changedProps: PropertyValues) {

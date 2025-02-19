@@ -19,10 +19,10 @@ class StorageClass {
           : ev.newValue;
         if (this._listeners[ev.key]) {
           this._listeners[ev.key].forEach((listener) =>
-            listener(
+            { listener(
               ev.oldValue ? JSON.parse(ev.oldValue) : ev.oldValue,
               this._storage[ev.key!]
-            )
+            ); }
           );
         }
       }
@@ -90,7 +90,7 @@ class StorageClass {
     } finally {
       if (this._listeners[storageKey]) {
         this._listeners[storageKey].forEach((listener) =>
-          listener(oldValue, value)
+          { listener(oldValue, value); }
         );
       }
     }
@@ -132,7 +132,7 @@ export const storage =
       options.subscribe !== false
         ? (el: ReactiveElement): UnsubscribeFunc =>
             storageInstance.subscribeChanges(
-              storageKey!,
+              storageKey,
               (oldValue, _newValue) => {
                 el.requestUpdate(clsElement.key, oldValue);
               }
@@ -140,10 +140,10 @@ export const storage =
         : undefined;
 
     const getValue = (): any =>
-      storageInstance.hasKey(storageKey!)
+      storageInstance.hasKey(storageKey)
         ? options.deserializer
-          ? options.deserializer(storageInstance.getValue(storageKey!))
-          : storageInstance.getValue(storageKey!)
+          ? options.deserializer(storageInstance.getValue(storageKey))
+          : storageInstance.getValue(storageKey)
         : initVal;
 
     const setValue = (el: ReactiveElement, value: any) => {
@@ -152,7 +152,7 @@ export const storage =
         oldValue = getValue();
       }
       storageInstance.setValue(
-        storageKey!,
+        storageKey,
         options.serializer ? options.serializer(value) : value
       );
       if (options.state) {

@@ -118,7 +118,7 @@ class MoreInfoVacuum extends LitElement {
         ? html` <div class="flex-horizontal">
             <div>
               <span class="status-subtitle"
-                >${this.hass!.localize(
+                >${this.hass.localize(
                   "ui.dialogs.more_info_control.vacuum.status"
                 )}:
               </span>
@@ -139,7 +139,7 @@ class MoreInfoVacuum extends LitElement {
             <div>
               <p></p>
               <div class="status-subtitle">
-                ${this.hass!.localize(
+                ${this.hass.localize(
                   "ui.dialogs.more_info_control.vacuum.commands"
                 )}
               </div>
@@ -153,7 +153,7 @@ class MoreInfoVacuum extends LitElement {
                         .path=${item.icon}
                         .entry=${item}
                         @click=${this._callService}
-                        .label=${this.hass!.localize(
+                        .label=${this.hass.localize(
                           `ui.dialogs.more_info_control.vacuum.${item.translationKey}`
                         )}
                         .disabled=${stateObj.state === UNAVAILABLE}
@@ -170,7 +170,7 @@ class MoreInfoVacuum extends LitElement {
             <div>
               <div class="flex-horizontal">
                 <ha-select
-                  .label=${this.hass!.localize(
+                  .label=${this.hass.localize(
                     "ui.dialogs.more_info_control.vacuum.fan_speed"
                   )}
                   .disabled=${stateObj.state === UNAVAILABLE}
@@ -230,7 +230,7 @@ class MoreInfoVacuum extends LitElement {
   private _renderBattery() {
     const stateObj = this.stateObj!;
 
-    const deviceId = this.hass.entities[stateObj.entity_id]?.device_id;
+    const deviceId = this.hass.entities[stateObj.entity_id].device_id;
 
     const entities = deviceId
       ? this._deviceEntities(deviceId, this.hass.entities)
@@ -252,7 +252,7 @@ class MoreInfoVacuum extends LitElement {
         entities
       );
       const batteryCharging = batteryChargingEntity
-        ? this.hass.states[batteryChargingEntity?.entity_id]
+        ? this.hass.states[batteryChargingEntity.entity_id]
         : undefined;
 
       return html`

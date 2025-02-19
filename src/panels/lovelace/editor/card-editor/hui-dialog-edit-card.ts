@@ -137,10 +137,10 @@ export class HuiDialogEditCard
 
     const oldConfig = changedProps.get("_cardConfig") as LovelaceCardConfig;
 
-    if (oldConfig?.type !== this._cardConfig!.type) {
+    if (oldConfig.type !== this._cardConfig.type) {
       this._documentationURL = getCardDocumentationURL(
         this.hass,
-        this._cardConfig!.type
+        this._cardConfig.type
       );
     }
   }
@@ -173,23 +173,23 @@ export class HuiDialogEditCard
           cardName = cardName.substring(0, cardName.length - 5);
         }
       } else {
-        cardName = this.hass!.localize(
+        cardName = this.hass.localize(
           `ui.panel.lovelace.editor.card.${this._cardConfig.type}.name`
         );
       }
-      heading = this.hass!.localize(
+      heading = this.hass.localize(
         "ui.panel.lovelace.editor.edit_card.typed_header",
         { type: cardName }
       );
     } else if (!this._cardConfig) {
       heading = this._containerConfig.title
-        ? this.hass!.localize(
+        ? this.hass.localize(
             "ui.panel.lovelace.editor.edit_card.pick_card_view_title",
             { name: this._containerConfig.title }
           )
-        : this.hass!.localize("ui.panel.lovelace.editor.edit_card.pick_card");
+        : this.hass.localize("ui.panel.lovelace.editor.edit_card.pick_card");
     } else {
-      heading = this.hass!.localize(
+      heading = this.hass.localize(
         "ui.panel.lovelace.editor.edit_card.header"
       );
     }
@@ -217,7 +217,7 @@ export class HuiDialogEditCard
                 <a
                   slot="actionItems"
                   href=${this._documentationURL}
-                  title=${this.hass!.localize("ui.panel.lovelace.menu.help")}
+                  title=${this.hass.localize("ui.panel.lovelace.menu.help")}
                   target="_blank"
                   rel="noreferrer"
                   dir=${computeRTLDirection(this.hass)}
@@ -279,7 +279,7 @@ export class HuiDialogEditCard
                 .disabled=${!this._guiModeAvailable}
                 class="gui-mode-button"
               >
-                ${this.hass!.localize(
+                ${this.hass.localize(
                   !this._cardEditorEl || this._GUImode
                     ? "ui.panel.lovelace.editor.edit_card.show_code_editor"
                     : "ui.panel.lovelace.editor.edit_card.show_visual_editor"
@@ -289,7 +289,7 @@ export class HuiDialogEditCard
           : ""}
         <div slot="primaryAction" @click=${this._save}>
           <mwc-button @click=${this._cancel} dialogInitialFocus>
-            ${this.hass!.localize("ui.common.cancel")}
+            ${this.hass.localize("ui.common.cancel")}
           </mwc-button>
           ${this._cardConfig !== undefined && this._dirty
             ? html`
@@ -305,7 +305,7 @@ export class HuiDialogEditCard
                           size="small"
                         ></ha-circular-progress>
                       `
-                    : this.hass!.localize("ui.common.save")}
+                    : this.hass.localize("ui.common.save")}
                 </mwc-button>
               `
             : ``}
@@ -380,14 +380,14 @@ export class HuiDialogEditCard
       setTimeout(resolve, 0);
     });
     const confirm = await showConfirmationDialog(this, {
-      title: this.hass!.localize(
+      title: this.hass.localize(
         "ui.panel.lovelace.editor.edit_card.unsaved_changes"
       ),
-      text: this.hass!.localize(
+      text: this.hass.localize(
         "ui.panel.lovelace.editor.edit_card.confirm_cancel"
       ),
-      dismissText: this.hass!.localize("ui.common.stay"),
-      confirmText: this.hass!.localize("ui.common.leave"),
+      dismissText: this.hass.localize("ui.common.stay"),
+      confirmText: this.hass.localize("ui.common.leave"),
     });
     if (confirm) {
       this._cancel();
@@ -414,7 +414,7 @@ export class HuiDialogEditCard
     const path = this._params!.path;
     await this._params!.saveConfig(
       "cardConfig" in this._params!
-        ? addCard(this._params!.lovelaceConfig, path, this._cardConfig!)
+        ? addCard(this._params.lovelaceConfig, path, this._cardConfig!)
         : replaceCard(
             this._params!.lovelaceConfig,
             [...path, this._params!.cardIndex],

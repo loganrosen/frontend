@@ -37,7 +37,7 @@ class HuiWeatherEntityRow extends LitElement implements LovelaceRow {
 
   private _unsubscribeForecastEvents() {
     if (this._subscribed) {
-      this._subscribed.then((unsub) => unsub());
+      this._subscribed.then((unsub) => { unsub(); });
       this._subscribed = undefined;
     }
   }
@@ -47,11 +47,11 @@ class HuiWeatherEntityRow extends LitElement implements LovelaceRow {
     if (!this.hass || !this._config || !this.isConnected) {
       return;
     }
-    const stateObj = this.hass!.states[this._config!.entity];
+    const stateObj = this.hass.states[this._config.entity];
     const forecastType = getDefaultForecastType(stateObj);
     if (forecastType) {
       this._subscribed = subscribeForecast(
-        this.hass!,
+        this.hass,
         stateObj.entity_id,
         forecastType,
         (event) => {
@@ -74,7 +74,7 @@ class HuiWeatherEntityRow extends LitElement implements LovelaceRow {
   }
 
   public setConfig(config: EntitiesCardEntityConfig): void {
-    if (!config?.entity) {
+    if (!config.entity) {
       throw new Error("Entity must be specified");
     }
 
@@ -126,8 +126,8 @@ class HuiWeatherEntityRow extends LitElement implements LovelaceRow {
         })}"
         @action=${this._handleAction}
         .actionHandler=${actionHandler({
-          hasHold: hasAction(this._config!.hold_action),
-          hasDoubleClick: hasAction(this._config!.double_tap_action),
+          hasHold: hasAction(this._config.hold_action),
+          hasDoubleClick: hasAction(this._config.double_tap_action),
         })}
         tabindex=${ifDefined(
           !this._config.tap_action || hasAction(this._config.tap_action)
@@ -151,8 +151,8 @@ class HuiWeatherEntityRow extends LitElement implements LovelaceRow {
         })}"
         @action=${this._handleAction}
         .actionHandler=${actionHandler({
-          hasHold: hasAction(this._config!.hold_action),
-          hasDoubleClick: hasAction(this._config!.double_tap_action),
+          hasHold: hasAction(this._config.hold_action),
+          hasDoubleClick: hasAction(this._config.double_tap_action),
         })}
       >
         ${this._config.name || computeStateName(stateObj)}
@@ -188,8 +188,8 @@ class HuiWeatherEntityRow extends LitElement implements LovelaceRow {
         })}"
         @action=${this._handleAction}
         .actionHandler=${actionHandler({
-          hasHold: hasAction(this._config!.hold_action),
-          hasDoubleClick: hasAction(this._config!.double_tap_action),
+          hasHold: hasAction(this._config.hold_action),
+          hasDoubleClick: hasAction(this._config.double_tap_action),
         })}
       >
         <div>
@@ -200,14 +200,14 @@ class HuiWeatherEntityRow extends LitElement implements LovelaceRow {
             : this.hass.formatEntityAttributeValue(stateObj, "temperature")}
         </div>
         <div class="secondary">
-          ${getSecondaryWeatherAttribute(this.hass!, stateObj, forecast!)}
+          ${getSecondaryWeatherAttribute(this.hass, stateObj, forecast!)}
         </div>
       </div>
     `;
   }
 
   private _handleAction(ev: ActionHandlerEvent) {
-    handleAction(this, this.hass!, this._config!, ev.detail.action!);
+    handleAction(this, this.hass!, this._config!, ev.detail.action);
   }
 
   static get styles(): CSSResultGroup {

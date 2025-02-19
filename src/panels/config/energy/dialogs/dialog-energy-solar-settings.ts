@@ -164,7 +164,7 @@ export class DialogEnergySolarSettings
                         src=${brandsUrl({
                           domain: entry.domain,
                           type: "icon",
-                          darkOptimized: this.hass.themes?.darkMode,
+                          darkOptimized: this.hass.themes.darkMode,
                         })}
                       />${entry.title}
                     </div>`}

@@ -109,9 +109,9 @@ export type HaFormDataContainer = Record<string, HaFormData>;
 export type HaFormData =
   | HaFormStringData
   | HaFormIntegerData
-  | HaFormFloatData
+   
   | HaFormBooleanData
-  | HaFormSelectData
+   
   | HaFormMultiSelectData
   | HaFormTimeData;
 

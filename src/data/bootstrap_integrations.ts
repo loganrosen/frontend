@@ -8,7 +8,7 @@ export const subscribeBootstrapIntegrations = (
 ) => {
   const unsubProm =
     hass.connection.subscribeMessage<BootstrapIntegrationsTimings>(
-      (message) => callback(message),
+      (message) => { callback(message); },
       {
         type: "subscribe_bootstrap_integrations",
       }

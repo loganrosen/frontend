@@ -96,11 +96,11 @@ export class HuiCalendarCardEditor
           "ui.panel.lovelace.editor.card.calendar.calendar_entities"
         ) +
         " (" +
-        this.hass!.localize("ui.panel.lovelace.editor.card.config.required") +
+        this.hass.localize("ui.panel.lovelace.editor.card.config.required") +
         ")"}
       </h3>
       <ha-entities-picker
-        .hass=${this.hass!}
+        .hass=${this.hass}
         .value=${this._config.entities}
         .includeDomains=${["calendar"]}
         @value-changed=${this._entitiesChanged}

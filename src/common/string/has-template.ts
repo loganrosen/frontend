@@ -11,7 +11,7 @@ export const hasTemplate = (value: unknown): boolean => {
     return isTemplate(value);
   }
   if (typeof value === "object") {
-    const values = Array.isArray(value) ? value : Object.values(value!);
+    const values = Array.isArray(value) ? value : Object.values(value);
     return values.some((val) => val && hasTemplate(val));
   }
   return false;

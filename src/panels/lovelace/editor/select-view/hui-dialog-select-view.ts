@@ -85,7 +85,7 @@ export class HuiDialogSelectView extends LitElement {
             >
               <mwc-list-item
                 value="lovelace"
-                .disabled=${(this.hass.panels.lovelace?.config as any)?.mode ===
+                .disabled=${(this.hass.panels.lovelace.config as any)?.mode ===
                 "yaml"}
               >
                 Default
@@ -144,14 +144,14 @@ export class HuiDialogSelectView extends LitElement {
           @click=${this.closeDialog}
           dialogInitialFocus
         >
-          ${this.hass!.localize("ui.common.cancel")}
+          ${this.hass.localize("ui.common.cancel")}
         </mwc-button>
         <mwc-button
           slot="primaryAction"
           .disabled=${!this._config || (this._config.views || []).length < 1}
           @click=${this._selectView}
         >
-          ${this._params.actionLabel || this.hass!.localize("ui.common.move")}
+          ${this._params.actionLabel || this.hass.localize("ui.common.move")}
         </mwc-button>
       </ha-dialog>
     `;

@@ -103,7 +103,7 @@ class HaLogbookRenderer extends LitElement {
   }
 
   protected render() {
-    if (!this.entries?.length) {
+    if (!this.entries.length) {
       return html`
         <div class="container no-entries">
           ${this.hass.localize("ui.components.logbook.entries_not_found")}
@@ -146,7 +146,7 @@ class HaLogbookRenderer extends LitElement {
       ? this.hass.states[item.entity_id]
       : undefined;
     const historicStateObj = currentStateObj
-      ? createHistoricState(currentStateObj, item.state!)
+      ? createHistoricState(currentStateObj, item.state)
       : undefined;
     const domain = item.entity_id
       ? computeDomain(item.entity_id)
@@ -159,10 +159,10 @@ class HaLogbookRenderer extends LitElement {
       domain &&
       isComponentLoaded(this.hass, domain)
         ? brandsUrl({
-            domain: domain!,
+            domain: domain,
             type: "icon",
             useFallback: true,
-            darkOptimized: this.hass.themes?.darkMode,
+            darkOptimized: this.hass.themes.darkMode,
           })
         : undefined;
 
@@ -170,7 +170,7 @@ class HaLogbookRenderer extends LitElement {
       triggerDomains.includes(item.domain!) &&
       item.context_id &&
       item.context_id in this.traceContexts
-        ? this.traceContexts[item.context_id!]
+        ? this.traceContexts[item.context_id]
         : undefined;
 
     const hasTrace = traceContext !== undefined;
@@ -184,7 +184,7 @@ class HaLogbookRenderer extends LitElement {
         @click=${this._handleClick}
       >
         ${index === 0 ||
-        (item?.when &&
+        (item.when &&
           previous?.when &&
           new Date(item.when * 1000).toDateString() !==
             new Date(previous.when * 1000).toDateString())
@@ -346,7 +346,7 @@ class HaLogbookRenderer extends LitElement {
   ) {
     if (
       !item.context_entity_id ||
-      seenEntityIds.includes(item.context_entity_id!)
+      seenEntityIds.includes(item.context_entity_id)
     ) {
       return "";
     }
@@ -403,7 +403,7 @@ class HaLogbookRenderer extends LitElement {
         this.hass.localize(
           `component.${item.context_domain}.services.${item.context_service}.name`
         ) ||
-        this.hass.services[item.context_domain]?.[item.context_service]?.name ||
+        this.hass.services[item.context_domain][item.context_service].name ||
         item.context_service
       }`
         : ""}`;

@@ -78,7 +78,7 @@ class DialogZWaveJSUpdateFirmwareNode extends LitElement {
   private _deviceName?: string;
 
   public showDialog(params: ZWaveJSUpdateFirmwareNodeDialogParams): void {
-    this._deviceName = computeDeviceName(params.device, this.hass!);
+    this._deviceName = computeDeviceName(params.device, this.hass);
     this.device = params.device;
     this._fetchData();
     this._subscribeNodeStatus();
@@ -322,7 +322,7 @@ class DialogZWaveJSUpdateFirmwareNode extends LitElement {
           "ui.panel.config.zwave_js.update_firmware.upload_failed"
         ),
         text: err.message,
-        confirmText: this.hass!.localize("ui.common.close"),
+        confirmText: this.hass.localize("ui.common.close"),
       });
     }
   }
@@ -336,8 +336,8 @@ class DialogZWaveJSUpdateFirmwareNode extends LitElement {
             device: html`<strong>${this._deviceName}</strong>`,
           }
         ),
-        dismissText: this.hass!.localize("ui.common.no"),
-        confirmText: this.hass!.localize("ui.common.yes"),
+        dismissText: this.hass.localize("ui.common.no"),
+        confirmText: this.hass.localize("ui.common.yes"),
       })
     ) {
       this._unsubscribeNodeFirmwareUpdate();
@@ -349,7 +349,7 @@ class DialogZWaveJSUpdateFirmwareNode extends LitElement {
             "ui.panel.config.zwave_js.update_firmware.abort_failed"
           ),
           text: err.message,
-          confirmText: this.hass!.localize("ui.common.close"),
+          confirmText: this.hass.localize("ui.common.close"),
         });
       }
       this._firmwareFile = undefined;
@@ -376,7 +376,7 @@ class DialogZWaveJSUpdateFirmwareNode extends LitElement {
     if (!this._subscribedNodeStatus) {
       return;
     }
-    this._subscribedNodeStatus.then((unsub) => unsub());
+    this._subscribedNodeStatus.then((unsub) => { unsub(); });
     this._subscribedNodeStatus = undefined;
   }
 
@@ -411,7 +411,7 @@ class DialogZWaveJSUpdateFirmwareNode extends LitElement {
     if (!this._subscribedNodeFirmwareUpdate) {
       return;
     }
-    this._subscribedNodeFirmwareUpdate.then((unsub) => unsub());
+    this._subscribedNodeFirmwareUpdate.then((unsub) => { unsub(); });
     this._subscribedNodeFirmwareUpdate = undefined;
   }
 

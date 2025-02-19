@@ -42,9 +42,9 @@ customElements.whenDefined("hui-root").then(() => {
     this.addEventListener("set-demo-config", async (ev) => {
       const index = (ev as CustomEvent).detail.index;
       try {
-        await setDemoConfig(this.hass, this.lovelace!, index);
+        await setDemoConfig(this.hass, this.lovelace, index);
       } catch (_err: any) {
-        setDemoConfig(this.hass, this.lovelace!, selectedDemoConfigIndex);
+        setDemoConfig(this.hass, this.lovelace, selectedDemoConfigIndex);
         alert("Failed to switch config :-(");
       }
     });

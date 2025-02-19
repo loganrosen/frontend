@@ -122,7 +122,7 @@ export class HuiAreaCardEditor
   private _classesForArea(
     area: string,
     domain: "sensor" | "binary_sensor",
-    numericDeviceClasses?: string[] | undefined
+    numericDeviceClasses?: string[]  
   ): string[] {
     const entities = Object.values(this.hass!.entities).filter(
       (e) =>
@@ -130,11 +130,11 @@ export class HuiAreaCardEditor
         !e.entity_category &&
         !e.hidden &&
         (e.area_id === area ||
-          (e.device_id && this.hass!.devices[e.device_id]?.area_id === area))
+          (e.device_id && this.hass!.devices[e.device_id].area_id === area))
     );
 
     const classes = entities
-      .map((e) => this.hass!.states[e.entity_id]?.attributes.device_class || "")
+      .map((e) => this.hass!.states[e.entity_id].attributes.device_class || "")
       .filter(
         (c) =>
           c &&

@@ -73,7 +73,7 @@ export class HaFilterCategories extends SubscribeMixin(LitElement) {
         <div slot="header" class="header">
           ${this.hass.localize("ui.panel.config.category.caption")}
           ${this.value?.length
-            ? html`<div class="badge">${this.value?.length}</div>
+            ? html`<div class="badge">${this.value.length}</div>
                 <ha-icon-button
                   .path=${mdiFilterVariantRemove}
                   @click=${this._clearFilter}
@@ -251,7 +251,7 @@ export class HaFilterCategories extends SubscribeMixin(LitElement) {
     }
     const index = ev.detail.index - 1;
 
-    const val = this._categories![index]?.category_id;
+    const val = this._categories[index]?.category_id;
     if (!val) {
       return;
     }

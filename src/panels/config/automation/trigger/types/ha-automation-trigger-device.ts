@@ -57,7 +57,7 @@ export class HaDeviceTrigger extends LitElement {
       );
       capabilities.extra_fields.forEach((item) => {
         if (trigger[item.name] !== undefined) {
-          extraFieldsData![item.name] = trigger[item.name];
+          extraFieldsData[item.name] = trigger[item.name];
         }
       });
       return extraFieldsData;

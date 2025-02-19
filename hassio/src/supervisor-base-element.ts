@@ -147,9 +147,9 @@ export class SupervisorBaseElement extends urlSyncMixin(
     try {
       this._unsubs[collection] = this._collections[collection].subscribe(
         (data) =>
-          this._updateSupervisor({
+          { this._updateSupervisor({
             [collection]: data,
-          })
+          }); }
       );
     } catch (e) {
       // eslint-disable-next-line no-console
@@ -219,7 +219,7 @@ export class SupervisorBaseElement extends urlSyncMixin(
       });
 
       this.addEventListener("supervisor-update", (ev) =>
-        this._updateSupervisor(ev.detail)
+        { this._updateSupervisor(ev.detail); }
       );
     }
   }

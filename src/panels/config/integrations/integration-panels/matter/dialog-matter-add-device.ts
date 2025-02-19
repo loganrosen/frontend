@@ -69,7 +69,7 @@ class DialogMatterAddDevice extends LitElement {
   public showDialog(): void {
     this._open = true;
     this._unsub = redirectOnNewMatterDevice(this.hass, () =>
-      this.closeDialog()
+      { this.closeDialog(); }
     );
   }
 

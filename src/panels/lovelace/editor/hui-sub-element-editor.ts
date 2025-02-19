@@ -43,11 +43,11 @@ export class HuiSubElementEditor extends LitElement {
       <div class="header">
         <div class="back-title">
           <ha-icon-button-prev
-            .label=${this.hass!.localize("ui.common.back")}
+            .label=${this.hass.localize("ui.common.back")}
             @click=${this._goBack}
           ></ha-icon-button-prev>
           <span slot="title">
-            ${this.config?.type === "element"
+            ${this.config.type === "element"
               ? this.hass.localize(
                   `ui.panel.lovelace.editor.sub-element-editor.types.element_type`,
                   {
@@ -58,7 +58,7 @@ export class HuiSubElementEditor extends LitElement {
                   }
                 )
               : this.hass.localize(
-                  `ui.panel.lovelace.editor.sub-element-editor.types.${this.config?.type}`
+                  `ui.panel.lovelace.editor.sub-element-editor.types.${this.config.type}`
                 )}
           </span>
         </div>
@@ -66,7 +66,7 @@ export class HuiSubElementEditor extends LitElement {
           class="gui-mode-button"
           @click=${this._toggleMode}
           .disabled=${!this._guiModeAvailable}
-          .label=${this.hass!.localize(
+          .label=${this.hass.localize(
             this._guiMode
               ? "ui.panel.lovelace.editor.edit_card.show_code_editor"
               : "ui.panel.lovelace.editor.edit_card.show_visual_editor"

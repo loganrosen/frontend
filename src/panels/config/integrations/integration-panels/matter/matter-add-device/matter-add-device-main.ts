@@ -65,7 +65,7 @@ class MatterAddDeviceMain extends LitElement {
     if (ev.type === "keydown" && ev.key !== "Enter" && ev.key !== " ") {
       return;
     }
-    const item = ev.currentTarget as any;
+    const item = ev.currentTarget;
     const step = item.step as "new" | "existing";
     fireEvent(this, "step-selected", { step });
   }

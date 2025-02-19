@@ -68,7 +68,7 @@ export const getLovelaceCollection = (
     (_conn, store) =>
       subscribeLovelaceUpdates(conn, urlPath, () =>
         fetchConfig(conn, urlPath, false).then((config) =>
-          store.setState(config, true)
+          { store.setState(config, true); }
         )
       )
   );
@@ -96,7 +96,7 @@ export const getLegacyLovelaceCollection = (conn: Connection) =>
     (_conn, store) =>
       subscribeLegacyLovelaceUpdates(conn, () =>
         fetchLegacyConfig(conn, false).then((config) =>
-          store.setState(config, true)
+          { store.setState(config, true); }
         )
       )
   );

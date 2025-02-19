@@ -251,7 +251,7 @@ export class HaStateLabelBadge extends LitElement {
 
       if (stateObj.state === "active") {
         this._updateRemaining = window.setInterval(
-          () => this._calculateTimerRemaining(this.state),
+          () => { this._calculateTimerRemaining(this.state); },
           1000
         );
       }

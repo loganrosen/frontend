@@ -76,7 +76,7 @@ class HaConfigRepairs extends LitElement {
                   domain: issue.issue_domain || issue.domain,
                   type: "icon",
                   useFallback: true,
-                  darkOptimized: this.hass.themes?.darkMode,
+                  darkOptimized: this.hass.themes.darkMode,
                 })}
                 .title=${domainName}
                 crossorigin="anonymous"

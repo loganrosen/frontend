@@ -44,7 +44,7 @@ export class HaAssistPipelinePicker extends LitElement {
     return html`
       <ha-select
         .label=${this.label ||
-        this.hass!.localize("ui.components.pipeline-picker.pipeline")}
+        this.hass.localize("ui.components.pipeline-picker.pipeline")}
         .value=${value}
         .required=${this.required}
         .disabled=${this.disabled}
@@ -56,14 +56,14 @@ export class HaAssistPipelinePicker extends LitElement {
         ${this.includeLastUsed
           ? html`
               <ha-list-item .value=${LAST_USED}>
-                ${this.hass!.localize(
+                ${this.hass.localize(
                   "ui.components.pipeline-picker.last_used"
                 )}
               </ha-list-item>
             `
           : null}
         <ha-list-item .value=${PREFERRED}>
-          ${this.hass!.localize("ui.components.pipeline-picker.preferred", {
+          ${this.hass.localize("ui.components.pipeline-picker.preferred", {
             preferred: this._pipelines.find(
               (pipeline) => pipeline.id === this._preferredPipeline
             )?.name,

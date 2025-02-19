@@ -77,7 +77,7 @@ export class GridSection extends LitElement implements LovelaceSectionElement {
   render() {
     if (!this.cards || !this._config) return nothing;
 
-    const cardsConfig = this._config?.cards ?? [];
+    const cardsConfig = this._config.cards ?? [];
 
     const editMode = Boolean(this.lovelace?.editMode && !this.isStrategy);
 
@@ -108,7 +108,7 @@ export class GridSection extends LitElement implements LovelaceSectionElement {
             cardsConfig,
             (cardConfig) => this._getKey(cardConfig),
             (_cardConfig, idx) => {
-              const card = this.cards![idx];
+              const card = this.cards[idx];
               card.layout = "grid";
               const gridOptions = card.getGridOptions();
 

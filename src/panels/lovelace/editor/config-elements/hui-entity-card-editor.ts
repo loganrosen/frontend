@@ -54,7 +54,7 @@ const SCHEMA = [
 
 const entityCardConfigForm: LovelaceConfigForm = {
   schema: SCHEMA,
-  assertConfig: (config: EntityCardConfig) => assert(config, struct),
+  assertConfig: (config: EntityCardConfig) => { assert(config, struct); },
   computeLabel: (schema: HaFormSchema, localize: LocalizeFunc) => {
     if (schema.name === "theme") {
       return `${localize(

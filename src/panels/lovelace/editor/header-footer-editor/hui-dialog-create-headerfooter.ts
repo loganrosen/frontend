@@ -44,10 +44,10 @@ export class HuiCreateDialogHeaderFooter
         scrimClickAction
         .heading=${createCloseHeading(
           this.hass,
-          this.hass!.localize(
+          this.hass.localize(
             `ui.panel.lovelace.editor.header-footer.choose_header_footer`,
             {
-              type: this.hass!.localize(
+              type: this.hass.localize(
                 `ui.panel.lovelace.editor.header-footer.${this._params.type}`
               ),
             }
@@ -71,7 +71,7 @@ export class HuiCreateDialogHeaderFooter
               >
                 <ha-svg-icon .path=${headerFooter.icon}></ha-svg-icon>
                 <div .id=${"card-name-" + index} role="none presentation">
-                  ${this.hass!.localize(
+                  ${this.hass.localize(
                     `ui.panel.lovelace.editor.header-footer.types.${headerFooter.type}.name`
                   )}
                 </div>
@@ -81,7 +81,7 @@ export class HuiCreateDialogHeaderFooter
         </div>
         <div slot="primaryAction">
           <mwc-button @click=${this._cancel}>
-            ${this.hass!.localize("ui.common.cancel")}
+            ${this.hass.localize("ui.common.cancel")}
           </mwc-button>
         </div>
       </ha-dialog>

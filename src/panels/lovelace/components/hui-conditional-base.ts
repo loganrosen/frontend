@@ -73,7 +73,7 @@ export class HuiConditionalBase extends ReactiveElement {
   }
 
   private _clearMediaQueries() {
-    this._listeners.forEach((unsub) => unsub());
+    this._listeners.forEach((unsub) => { unsub(); });
     this._listeners = [];
   }
 
@@ -132,8 +132,8 @@ export class HuiConditionalBase extends ReactiveElement {
     this._element.preview = this.preview;
 
     const conditionMet = checkConditionsMet(
-      this._config!.conditions,
-      this.hass!
+      this._config.conditions,
+      this.hass
     );
 
     this.setVisibility(conditionMet);
@@ -150,11 +150,11 @@ export class HuiConditionalBase extends ReactiveElement {
     }
     if (visible) {
       this._element.hass = this.hass;
-      if (!this._element!.parentElement) {
-        this.appendChild(this._element!);
+      if (!this._element.parentElement) {
+        this.appendChild(this._element);
       }
     } else if (this._element.parentElement) {
-      this.removeChild(this._element!);
+      this.removeChild(this._element);
     }
   }
 }

@@ -143,7 +143,7 @@ export class HaCardConditionEditor extends LitElement {
             <li divider role="separator"></li>
 
             <ha-list-item class="warning" graphic="icon">
-              ${this.hass!.localize("ui.common.delete")}
+              ${this.hass.localize("ui.common.delete")}
               <ha-svg-icon
                 class="warning"
                 slot="graphic"
@@ -159,11 +159,11 @@ export class HaCardConditionEditor extends LitElement {
                     "ui.errors.config.editor_not_supported"
                   )}
                 >
-                  ${this._uiWarnings!.length > 0 &&
-                  this._uiWarnings![0] !== undefined
+                  ${this._uiWarnings.length > 0 &&
+                  this._uiWarnings[0] !== undefined
                     ? html`
                         <ul>
-                          ${this._uiWarnings!.map(
+                          ${this._uiWarnings.map(
                             (warning) => html`<li>${warning}</li>`
                           )}
                         </ul>

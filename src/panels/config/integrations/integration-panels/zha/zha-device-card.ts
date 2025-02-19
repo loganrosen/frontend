@@ -92,7 +92,7 @@ class ZHADeviceCard extends SubscribeMixin(LitElement) {
                       @click=${this._openMoreInfo}
                       .title=${entity.stateName!}
                       .hass=${this.hass}
-                      .stateObj=${this.hass!.states[entity.entity_id]}
+                      .stateObj=${this.hass.states[entity.entity_id]}
                       slot="item-icon"
                     ></state-badge>
                   `
@@ -155,7 +155,7 @@ class ZHADeviceCard extends SubscribeMixin(LitElement) {
         return undefined;
       }
 
-      return updateEntityRegistryEntry(this.hass!, entity.entity_id, {
+      return updateEntityRegistryEntry(this.hass, entity.entity_id, {
         name: newName || name,
         disabled_by: entity.disabled_by,
         new_entity_id: newEntityId || entity.entity_id,

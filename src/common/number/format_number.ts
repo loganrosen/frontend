@@ -112,7 +112,7 @@ export const getNumberFormatOptions = (
     };
   }
   if (
-    Number.isInteger(Number(entityState?.attributes?.step)) &&
+    Number.isInteger(Number(entityState?.attributes.step)) &&
     Number.isInteger(Number(entityState?.state))
   ) {
     return { maximumFractionDigits: 0 };

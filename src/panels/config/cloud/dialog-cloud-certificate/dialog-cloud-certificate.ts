@@ -44,26 +44,26 @@ class DialogCloudCertificate extends LitElement {
       >
         <div>
           <p>
-            ${this.hass!.localize(
+            ${this.hass.localize(
               "ui.panel.config.cloud.dialog_certificate.certificate_expiration_date"
             )}
             ${formatDateTime(
               new Date(certificateInfo.expire_date),
-              this.hass!.locale,
-              this.hass!.config
+              this.hass.locale,
+              this.hass.config
             )}<br />
-            (${this.hass!.localize(
+            (${this.hass.localize(
               "ui.panel.config.cloud.dialog_certificate.will_be_auto_renewed"
             )})
           </p>
           <p class="break-word">
-            ${this.hass!.localize(
+            ${this.hass.localize(
               "ui.panel.config.cloud.dialog_certificate.fingerprint"
             )}
             ${certificateInfo.fingerprint}
           </p>
           <p class="break-word">
-            ${this.hass!.localize(
+            ${this.hass.localize(
               "ui.panel.config.cloud.dialog_certificate.alternative_names"
             )}
           </p>
@@ -75,7 +75,7 @@ class DialogCloudCertificate extends LitElement {
         </div>
 
         <mwc-button @click=${this.closeDialog} slot="primaryAction">
-          ${this.hass!.localize(
+          ${this.hass.localize(
             "ui.panel.config.cloud.dialog_certificate.close"
           )}
         </mwc-button>

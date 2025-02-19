@@ -9,8 +9,8 @@ const _load = (tag: "link" | "script" | "img", url: string, type?: "module") =>
     let parent = "body";
 
     // Important success and error for the promise
-    element.onload = () => resolve(url);
-    element.onerror = () => reject(url);
+    element.onload = () => { resolve(url); };
+    element.onerror = () => { reject(url); };
 
     // Need to set different attributes depending on tag type
     switch (tag) {

@@ -42,7 +42,7 @@ export const computeAttributeValueDisplay = (
   if (typeof attributeValue === "number") {
     const domain = computeStateDomain(stateObj);
 
-    const formatter = DOMAIN_ATTRIBUTES_FORMATERS[domain]?.[attribute];
+    const formatter = DOMAIN_ATTRIBUTES_FORMATERS[domain][attribute];
 
     const formattedValue = formatter
       ? formatter(attributeValue, locale)

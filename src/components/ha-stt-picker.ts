@@ -50,7 +50,7 @@ export class HaSTTPicker extends LitElement {
 
       if (!value) {
         for (const sttEngine of this._engines) {
-          if (sttEngine?.supported_languages?.length !== 0) {
+          if (sttEngine.supported_languages?.length !== 0) {
             value = sttEngine.engine_id;
             break;
           }
@@ -64,7 +64,7 @@ export class HaSTTPicker extends LitElement {
     return html`
       <ha-select
         .label=${this.label ||
-        this.hass!.localize("ui.components.stt-picker.stt")}
+        this.hass.localize("ui.components.stt-picker.stt")}
         .value=${value}
         .required=${this.required}
         .disabled=${this.disabled}
@@ -75,7 +75,7 @@ export class HaSTTPicker extends LitElement {
       >
         ${!this.required
           ? html`<ha-list-item .value=${NONE}>
-              ${this.hass!.localize("ui.components.stt-picker.none")}
+              ${this.hass.localize("ui.components.stt-picker.none")}
             </ha-list-item>`
           : nothing}
         ${this._engines.map((engine) => {
@@ -84,7 +84,7 @@ export class HaSTTPicker extends LitElement {
           }
           let label: string;
           if (engine.engine_id.includes(".")) {
-            const stateObj = this.hass!.states[engine.engine_id];
+            const stateObj = this.hass.states[engine.engine_id];
             label = stateObj ? computeStateName(stateObj) : engine.engine_id;
           } else {
             label = engine.name || engine.engine_id;

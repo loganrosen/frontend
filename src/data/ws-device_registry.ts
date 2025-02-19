@@ -17,7 +17,7 @@ const subscribeDeviceRegistryUpdates = (
     debounce(
       () =>
         fetchDeviceRegistry(conn).then((devices) =>
-          store.setState(devices, true)
+          { store.setState(devices, true); }
         ),
       500,
       true

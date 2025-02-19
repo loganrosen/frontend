@@ -134,7 +134,7 @@ class OnboardingCoreConfig extends LitElement {
     fireEvent(this, "onboarding-progress", { increase: 0.5 });
     await this.updateComplete;
     setTimeout(
-      () => this.renderRoot.querySelector("ha-country-picker")!.focus(),
+      () => { this.renderRoot.querySelector("ha-country-picker")!.focus(); },
       100
     );
   }

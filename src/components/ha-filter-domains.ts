@@ -43,7 +43,7 @@ export class HaFilterDomains extends LitElement {
             "ui.panel.config.entities.picker.headers.domain"
           )}
           ${this.value?.length
-            ? html`<div class="badge">${this.value?.length}</div>
+            ? html`<div class="badge">${this.value.length}</div>
                 <ha-icon-button
                   .path=${mdiFilterVariantRemove}
                   @click=${this._clearFilter}
@@ -132,7 +132,7 @@ export class HaFilterDomains extends LitElement {
       return;
     }
     if (this.value?.includes(value)) {
-      this.value = this.value?.filter((val) => val !== value);
+      this.value = this.value.filter((val) => val !== value);
     } else {
       this.value = [...(this.value || []), value];
     }

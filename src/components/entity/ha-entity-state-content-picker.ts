@@ -135,7 +135,7 @@ class HaEntityStatePicker extends LitElement {
         },
         ...(domain
           ? STATE_DISPLAY_SPECIAL_CONTENT.filter((content) =>
-              STATE_DISPLAY_SPECIAL_CONTENT_DOMAINS[domain]?.includes(content)
+              STATE_DISPLAY_SPECIAL_CONTENT_DOMAINS[domain].includes(content)
             ).map((content) => ({
               label: this.hass.localize(
                 `ui.components.state-content-picker.${content}`
@@ -172,7 +172,7 @@ class HaEntityStatePicker extends LitElement {
     );
 
     return html`
-      ${value?.length
+      ${value.length
         ? html`
             <ha-sortable
               no-style
@@ -238,7 +238,7 @@ class HaEntityStatePicker extends LitElement {
 
     const filteredItems = this._comboBox.items?.filter((item) => {
       const label = item.label || item.value;
-      return label.toLowerCase().includes(this._filter?.toLowerCase());
+      return label.toLowerCase().includes(this._filter.toLowerCase());
     });
 
     if (this._filter) {

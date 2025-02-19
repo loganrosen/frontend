@@ -263,7 +263,7 @@ export const getSecondaryWeatherAttribute = (
   let attribute: string;
 
   if (
-    forecast?.length &&
+    forecast.length &&
     forecast[0].precipitation !== undefined &&
     forecast[0].precipitation !== null
   ) {
@@ -285,7 +285,7 @@ export const getSecondaryWeatherAttribute = (
       ? html`
           <ha-svg-icon class="attr-icon" .path=${weatherAttrIcon}></ha-svg-icon>
         `
-      : hass!.localize(`ui.card.weather.attributes.${attribute}`)}
+      : hass.localize(`ui.card.weather.attributes.${attribute}`)}
     ${hass.formatEntityAttributeValue(stateObj, attribute, roundedValue)}
   `;
 };
@@ -295,7 +295,7 @@ const getWeatherExtrema = (
   stateObj: WeatherEntity,
   forecast: ForecastAttribute[]
 ): TemplateResult | undefined => {
-  if (!forecast?.length) {
+  if (!forecast.length) {
     return undefined;
   }
 
@@ -303,7 +303,7 @@ const getWeatherExtrema = (
   let tempHigh: number | undefined;
   const today = new Date().getDate();
 
-  for (const fc of forecast!) {
+  for (const fc of forecast) {
     if (new Date(fc.datetime).getDate() !== today) {
       break;
     }
@@ -537,7 +537,7 @@ const DAY_IN_MILLISECONDS = 86400000;
 const isForecastHourly = (
   forecast?: ForecastAttribute[]
 ): boolean | undefined => {
-  if (forecast && forecast?.length && forecast?.length > 2) {
+  if (forecast && forecast.length && forecast.length > 2) {
     const date1 = new Date(forecast[1].datetime);
     const date2 = new Date(forecast[2].datetime);
     const timeDiff = date2.getTime() - date1.getTime();
@@ -551,7 +551,7 @@ const isForecastHourly = (
 const isForecastTwiceDaily = (
   forecast?: ForecastAttribute[]
 ): boolean | undefined => {
-  if (forecast && forecast?.length && forecast?.length > 2) {
+  if (forecast && forecast.length && forecast.length > 2) {
     const date1 = new Date(forecast[1].datetime);
     const date2 = new Date(forecast[2].datetime);
     const timeDiff = date2.getTime() - date1.getTime();
@@ -578,7 +578,7 @@ export const getWeatherConvertibleUnits = (
   });
 
 const getLegacyForecast = (
-  weather_attributes?: WeatherEntityAttributes | undefined
+  weather_attributes?: WeatherEntityAttributes  
 ):
   | {
       forecast: ForecastAttribute[];
@@ -604,9 +604,9 @@ const getLegacyForecast = (
 };
 
 export const getForecast = (
-  weather_attributes?: WeatherEntityAttributes | undefined,
+  weather_attributes?: WeatherEntityAttributes  ,
   forecast_event?: ForecastEvent,
-  forecast_type?: ForecastType | undefined
+  forecast_type?: ForecastType  
 ):
   | {
       forecast: ForecastAttribute[];
@@ -616,10 +616,10 @@ export const getForecast = (
   if (forecast_type === undefined) {
     if (
       forecast_event?.type !== undefined &&
-      forecast_event?.forecast &&
-      forecast_event?.forecast?.length > 2
+      forecast_event.forecast &&
+      forecast_event.forecast.length > 2
     ) {
-      return { forecast: forecast_event.forecast, type: forecast_event?.type };
+      return { forecast: forecast_event.forecast, type: forecast_event.type };
     }
     return getLegacyForecast(weather_attributes);
   }
@@ -630,8 +630,8 @@ export const getForecast = (
 
   if (
     forecast_type === forecast_event?.type &&
-    forecast_event?.forecast &&
-    forecast_event?.forecast?.length > 2
+    forecast_event.forecast &&
+    forecast_event.forecast.length > 2
   ) {
     return { forecast: forecast_event.forecast, type: forecast_type };
   }

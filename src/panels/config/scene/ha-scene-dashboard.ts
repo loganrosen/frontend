@@ -207,7 +207,7 @@ class HaSceneDashboard extends SubscribeMixin(LitElement) {
       }
       return (
         filteredScenes
-          ? scenes.filter((scene) => filteredScenes!.includes(scene.entity_id))
+          ? scenes.filter((scene) => filteredScenes.includes(scene.entity_id))
           : scenes
       ).map((scene) => {
         const entityRegEntry = entityReg.find(
@@ -219,7 +219,7 @@ class HaSceneDashboard extends SubscribeMixin(LitElement) {
           ...scene,
           name: computeStateName(scene),
           area: entityRegEntry?.area_id
-            ? areas[entityRegEntry?.area_id]?.name
+            ? areas[entityRegEntry.area_id].name
             : undefined,
           category: category
             ? categoryReg?.find((cat) => cat.category_id === category)?.name
@@ -350,21 +350,21 @@ class HaSceneDashboard extends SubscribeMixin(LitElement) {
                   label: this.hass.localize(
                     "ui.panel.config.scene.picker.show_info"
                   ),
-                  action: () => this._showInfo(scene),
+                  action: () => { this._showInfo(scene); },
                 },
                 {
                   path: mdiCog,
                   label: this.hass.localize(
                     "ui.panel.config.automation.picker.show_settings"
                   ),
-                  action: () => this._openSettings(scene),
+                  action: () => { this._openSettings(scene); },
                 },
                 {
                   path: mdiTag,
                   label: this.hass.localize(
                     `ui.panel.config.scene.picker.${scene.category ? "edit_category" : "assign_category"}`
                   ),
-                  action: () => this._editCategory(scene),
+                  action: () => { this._editCategory(scene); },
                 },
                 {
                   divider: true,
@@ -382,7 +382,7 @@ class HaSceneDashboard extends SubscribeMixin(LitElement) {
                     "ui.panel.config.scene.picker.delete"
                   ),
                   path: mdiDelete,
-                  action: () => this._deleteConfirm(scene),
+                  action: () => { this._deleteConfirm(scene); },
                   warning: scene.attributes.id,
                   disabled: !scene.attributes.id,
                 },
@@ -416,7 +416,7 @@ class HaSceneDashboard extends SubscribeMixin(LitElement) {
   }
 
   protected render(): TemplateResult {
-    const categoryItems = html`${this._categories?.map(
+    const categoryItems = html`${this._categories.map(
         (category) =>
           html`<ha-md-menu-item
             .value=${category.category_id}
@@ -442,15 +442,15 @@ class HaSceneDashboard extends SubscribeMixin(LitElement) {
         </div>
       </ha-md-menu-item>`;
 
-    const labelItems = html` ${this._labels?.map((label) => {
+    const labelItems = html` ${this._labels.map((label) => {
         const color = label.color ? computeCssColor(label.color) : undefined;
         const selected = this._selected.every((entityId) =>
-          this.hass.entities[entityId]?.labels.includes(label.label_id)
+          this.hass.entities[entityId].labels.includes(label.label_id)
         );
         const partial =
           !selected &&
           this._selected.some((entityId) =>
-            this.hass.entities[entityId]?.labels.includes(label.label_id)
+            this.hass.entities[entityId].labels.includes(label.label_id)
           );
         return html`<ha-md-menu-item
           .value=${label.label_id}
@@ -584,7 +584,7 @@ class HaSceneDashboard extends SubscribeMixin(LitElement) {
         <ha-filter-floor-areas
           .hass=${this.hass}
           .type=${"scene"}
-          .value=${this._filters["ha-filter-floor-areas"]?.value}
+          .value=${this._filters["ha-filter-floor-areas"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-floor-areas"}
@@ -594,7 +594,7 @@ class HaSceneDashboard extends SubscribeMixin(LitElement) {
         <ha-filter-devices
           .hass=${this.hass}
           .type=${"scene"}
-          .value=${this._filters["ha-filter-devices"]?.value}
+          .value=${this._filters["ha-filter-devices"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-devices"}
@@ -604,7 +604,7 @@ class HaSceneDashboard extends SubscribeMixin(LitElement) {
         <ha-filter-entities
           .hass=${this.hass}
           .type=${"scene"}
-          .value=${this._filters["ha-filter-entities"]?.value}
+          .value=${this._filters["ha-filter-entities"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-entities"}
@@ -613,7 +613,7 @@ class HaSceneDashboard extends SubscribeMixin(LitElement) {
         ></ha-filter-entities>
         <ha-filter-labels
           .hass=${this.hass}
-          .value=${this._filters["ha-filter-labels"]?.value}
+          .value=${this._filters["ha-filter-labels"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-labels"}
@@ -623,7 +623,7 @@ class HaSceneDashboard extends SubscribeMixin(LitElement) {
         <ha-filter-categories
           .hass=${this.hass}
           scope="scene"
-          .value=${this._filters["ha-filter-categories"]?.value}
+          .value=${this._filters["ha-filter-categories"].value}
           @data-table-filter-changed=${this._filterChanged}
           slot="filter-pane"
           .expanded=${this._expandedFilter === "ha-filter-categories"}
@@ -863,7 +863,7 @@ class HaSceneDashboard extends SubscribeMixin(LitElement) {
           "intersection" in items
             ? // @ts-ignore
               items.intersection(categoryItems)
-            : new Set([...items].filter((x) => categoryItems!.has(x)));
+            : new Set([...items].filter((x) => categoryItems.has(x)));
       }
       if (
         key === "ha-filter-labels" &&
@@ -886,7 +886,7 @@ class HaSceneDashboard extends SubscribeMixin(LitElement) {
           "intersection" in items
             ? // @ts-ignore
               items.intersection(labelItems)
-            : new Set([...items].filter((x) => labelItems!.has(x)));
+            : new Set([...items].filter((x) => labelItems.has(x)));
       }
     }
     this._filteredScenes = items ? [...items] : undefined;
@@ -928,7 +928,7 @@ class HaSceneDashboard extends SubscribeMixin(LitElement) {
     const scene = this.scenes.find((a) => a.entity_id === ev.detail.id);
 
     if (scene?.attributes.id) {
-      navigate(`/config/scene/edit/${scene?.attributes.id}`);
+      navigate(`/config/scene/edit/${scene.attributes.id}`);
     }
   }
 
@@ -1082,15 +1082,15 @@ ${rejected
 
   private _deleteConfirm(scene: SceneEntity): void {
     showConfirmationDialog(this, {
-      title: this.hass!.localize(
+      title: this.hass.localize(
         "ui.panel.config.scene.picker.delete_confirm_title"
       ),
-      text: this.hass!.localize(
+      text: this.hass.localize(
         "ui.panel.config.scene.picker.delete_confirm_text",
         { name: computeStateName(scene) }
       ),
-      confirmText: this.hass!.localize("ui.common.delete"),
-      dismissText: this.hass!.localize("ui.common.cancel"),
+      confirmText: this.hass.localize("ui.common.delete"),
+      dismissText: this.hass.localize("ui.common.cancel"),
       confirm: () => this._delete(scene),
       destructive: true,
     });
@@ -1108,7 +1108,7 @@ ${rejected
       showSceneEditor({
         ...config,
         id: undefined,
-        name: `${config?.name} (${this.hass.localize(
+        name: `${config.name} (${this.hass.localize(
           "ui.panel.config.scene.picker.duplicate"
         )})`,
       });

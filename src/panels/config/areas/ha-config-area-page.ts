@@ -344,7 +344,7 @@ class HaConfigAreaPage extends LitElement {
                       "ui.panel.config.devices.automation.automations_heading"
                     )}
                   >
-                    ${groupedAutomations?.length
+                    ${groupedAutomations.length
                       ? html`<h3>
                             ${this.hass.localize(
                               "ui.panel.config.areas.assigned_to_area"
@@ -359,7 +359,7 @@ class HaConfigAreaPage extends LitElement {
                             )}</mwc-list
                           >`
                       : ""}
-                    ${relatedAutomations?.length
+                    ${relatedAutomations.length
                       ? html`<h3>
                             ${this.hass.localize(
                               "ui.panel.config.areas.targeting_area"
@@ -374,7 +374,7 @@ class HaConfigAreaPage extends LitElement {
                             )}</mwc-list
                           >`
                       : ""}
-                    ${!groupedAutomations?.length && !relatedAutomations?.length
+                    ${!groupedAutomations.length && !relatedAutomations.length
                       ? html`
                           <div class="no-entries">
                             ${this.hass.localize(
@@ -394,7 +394,7 @@ class HaConfigAreaPage extends LitElement {
                       "ui.panel.config.devices.scene.scenes_heading"
                     )}
                   >
-                    ${groupedScenes?.length
+                    ${groupedScenes.length
                       ? html`<h3>
                             ${this.hass.localize(
                               "ui.panel.config.areas.assigned_to_area"
@@ -406,7 +406,7 @@ class HaConfigAreaPage extends LitElement {
                             )}</mwc-list
                           >`
                       : ""}
-                    ${relatedScenes?.length
+                    ${relatedScenes.length
                       ? html`<h3>
                             ${this.hass.localize(
                               "ui.panel.config.areas.targeting_area"
@@ -418,7 +418,7 @@ class HaConfigAreaPage extends LitElement {
                             )}</mwc-list
                           >`
                       : ""}
-                    ${!groupedScenes?.length && !relatedScenes?.length
+                    ${!groupedScenes.length && !relatedScenes.length
                       ? html`
                           <div class="no-entries">
                             ${this.hass.localize(
@@ -438,7 +438,7 @@ class HaConfigAreaPage extends LitElement {
                       "ui.panel.config.devices.script.scripts_heading"
                     )}
                   >
-                    ${groupedScripts?.length
+                    ${groupedScripts.length
                       ? html`<h3>
                             ${this.hass.localize(
                               "ui.panel.config.areas.assigned_to_area"
@@ -448,7 +448,7 @@ class HaConfigAreaPage extends LitElement {
                             this._renderScript(script.name, script.entity)
                           )}`
                       : ""}
-                    ${relatedScripts?.length
+                    ${relatedScripts.length
                       ? html`<h3>
                             ${this.hass.localize(
                               "ui.panel.config.areas.targeting_area"
@@ -458,7 +458,7 @@ class HaConfigAreaPage extends LitElement {
                             this._renderScript(script.name, script.entity)
                           )}`
                       : ""}
-                    ${!groupedScripts?.length && !relatedScripts?.length
+                    ${!groupedScripts.length && !relatedScripts.length
                       ? html`
                           <div class="no-entries">
                             ${this.hass.localize(
@@ -520,8 +520,8 @@ class HaConfigAreaPage extends LitElement {
       });
       groupedEntities.sort((entry1, entry2) =>
         caseInsensitiveStringCompare(
-          entry1.name!,
-          entry2.name!,
+          entry1.name,
+          entry2.name,
           this.hass.locale.language
         )
       );
@@ -538,8 +538,8 @@ class HaConfigAreaPage extends LitElement {
       });
       relatedEntities.sort((entry1, entry2) =>
         caseInsensitiveStringCompare(
-          entry1.name!,
-          entry2.name!,
+          entry1.name,
+          entry2.name,
           this.hass.locale.language
         )
       );
@@ -622,7 +622,7 @@ class HaConfigAreaPage extends LitElement {
   }
 
   private _openEntity(ev) {
-    const entry: EntityRegistryEntry = (ev.currentTarget as any).entity;
+    const entry: EntityRegistryEntry = (ev.currentTarget).entity;
     showMoreInfoDialog(this, {
       entityId: entry.entity_id,
     });
@@ -632,7 +632,7 @@ class HaConfigAreaPage extends LitElement {
     showAreaRegistryDetailDialog(this, {
       entry,
       updateEntry: async (values) =>
-        updateAreaRegistryEntry(this.hass!, entry!.area_id, values),
+        updateAreaRegistryEntry(this.hass, entry!.area_id, values),
     });
   }
 
@@ -641,7 +641,7 @@ class HaConfigAreaPage extends LitElement {
     showConfirmationDialog(this, {
       title: this.hass.localize(
         "ui.panel.config.areas.delete.confirmation_title",
-        { name: area!.name }
+        { name: area.name }
       ),
       text: this.hass.localize(
         "ui.panel.config.areas.delete.confirmation_text"
@@ -650,8 +650,8 @@ class HaConfigAreaPage extends LitElement {
       confirmText: this.hass.localize("ui.common.delete"),
       destructive: true,
       confirm: async () => {
-        await deleteAreaRegistryEntry(this.hass!, area!.area_id);
-        afterNextRender(() => history.back());
+        await deleteAreaRegistryEntry(this.hass, area.area_id);
+        afterNextRender(() => { history.back(); });
       },
     });
   }

@@ -406,7 +406,7 @@ export default class HaAutomationTriggerRow extends LitElement {
   public disconnectedCallback(): void {
     super.disconnectedCallback();
     if (this._triggerUnsub) {
-      this._triggerUnsub.then((unsub) => unsub());
+      this._triggerUnsub.then((unsub) => { unsub(); });
       this._triggerUnsub = undefined;
     }
     this._doSubscribeTrigger.cancel();
@@ -415,7 +415,7 @@ export default class HaAutomationTriggerRow extends LitElement {
   private _subscribeTrigger() {
     // Clean up old trigger subscription.
     if (this._triggerUnsub) {
-      this._triggerUnsub.then((unsub) => unsub());
+      this._triggerUnsub.then((unsub) => { unsub(); });
       this._triggerUnsub = undefined;
     }
 
@@ -429,7 +429,7 @@ export default class HaAutomationTriggerRow extends LitElement {
 
     // Clean up old trigger subscription.
     if (this._triggerUnsub) {
-      this._triggerUnsub.then((unsub) => unsub());
+      this._triggerUnsub.then((unsub) => { unsub(); });
       this._triggerUnsub = undefined;
     }
 

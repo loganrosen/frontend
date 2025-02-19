@@ -148,7 +148,7 @@ export class SectionsView extends LitElement implements LovelaceViewElement {
 
     const sections = this.sections;
     const totalSectionCount =
-      this._sectionColumnCount + (this.lovelace?.editMode ? 1 : 0);
+      this._sectionColumnCount + (this.lovelace.editMode ? 1 : 0);
     const editMode = this.lovelace.editMode;
 
     const maxColumnCount = this._columnsController.value ?? 1;
@@ -315,7 +315,7 @@ export class SectionsView extends LitElement implements LovelaceViewElement {
         ? [
             {
               type: "heading",
-              heading: this.hass!.localize(
+              heading: this.hass.localize(
                 "ui.panel.lovelace.editor.section.default_section_title"
               ),
             },

@@ -146,14 +146,14 @@ export class HaConfigFlowCard extends LitElement {
 
   private async _ignoreFlow() {
     const confirmed = await showConfirmationDialog(this, {
-      title: this.hass!.localize(
+      title: this.hass.localize(
         "ui.panel.config.integrations.ignore.confirm_ignore_title",
         { name: localizeConfigFlowTitle(this.hass.localize, this.flow) }
       ),
-      text: this.hass!.localize(
+      text: this.hass.localize(
         "ui.panel.config.integrations.ignore.confirm_ignore"
       ),
-      confirmText: this.hass!.localize(
+      confirmText: this.hass.localize(
         "ui.panel.config.integrations.ignore.ignore"
       ),
     });

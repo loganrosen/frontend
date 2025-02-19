@@ -28,7 +28,7 @@ class MoreInfoRemote extends LitElement {
       ${supportsFeature(stateObj, REMOTE_SUPPORT_ACTIVITY)
         ? html`
             <mwc-select
-              .label=${this.hass!.localize(
+              .label=${this.hass.localize(
                 "ui.dialogs.more_info_control.remote.activity"
               )}
               .value=${stateObj.attributes.current_activity || ""}

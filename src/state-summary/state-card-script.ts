@@ -45,7 +45,7 @@ class StateCardScript extends LitElement {
               .disabled=${isUnavailableState(stateObj.state) ||
               !canRun(stateObj)}
             >
-              ${this.hass!.localize("ui.card.script.run")}
+              ${this.hass.localize("ui.card.script.run")}
             </mwc-button>`
           : ""}
       </div>

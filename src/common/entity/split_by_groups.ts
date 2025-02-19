@@ -20,9 +20,9 @@ export const splitByGroups = (entities: HassEntities) => {
   });
 
   groups.forEach((group) =>
-    group.attributes.entity_id.forEach((entityId) => {
+    { group.attributes.entity_id.forEach((entityId) => {
       delete ungrouped[entityId];
-    })
+    }); }
   );
 
   return { groups, ungrouped };

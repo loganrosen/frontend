@@ -57,7 +57,7 @@ class HassioCardContent extends LitElement {
           ${this.description}
           ${
             /* treat as available when undefined */
-            this.available === false ? " (Not available)" : ""
+            !this.available ? " (Not available)" : ""
           }
         </div>
       </div>

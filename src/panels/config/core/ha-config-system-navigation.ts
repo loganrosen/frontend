@@ -183,7 +183,7 @@ class HaConfigSystemNavigation extends LitElement {
       const hardwareInfo: HardwareInfo = await this.hass.callWS({
         type: "hardware/info",
       });
-      this._boardName = hardwareInfo?.hardware.find(
+      this._boardName = hardwareInfo.hardware.find(
         (hw) => hw.board !== null
       )?.name;
     } else if (isHassioLoaded) {

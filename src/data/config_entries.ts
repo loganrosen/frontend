@@ -96,7 +96,7 @@ export const subscribeConfigEntries = (
     params.type_filter = filters.type;
   }
   return hass.connection.subscribeMessage<ConfigEntryUpdate[]>(
-    (message) => callbackFunction(message),
+    (message) => { callbackFunction(message); },
     params
   );
 };

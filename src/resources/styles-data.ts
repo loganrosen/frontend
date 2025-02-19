@@ -1,5 +1,5 @@
-export const DEFAULT_PRIMARY_COLOR = "#03a9f4" as const;
-export const DEFAULT_ACCENT_COLOR = "#ff9800" as const;
+export const DEFAULT_PRIMARY_COLOR = "#03a9f4";
+export const DEFAULT_ACCENT_COLOR = "#ff9800";
 
 export const darkStyles = {
   "primary-background-color": "#111111",

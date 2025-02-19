@@ -35,7 +35,7 @@ class HaEntityMarker extends LitElement {
           : this.showIcon && this.entityId
             ? html`<ha-state-icon
                 .hass=${this.hass}
-                .stateObj=${this.hass?.states[this.entityId]}
+                .stateObj=${this.hass.states[this.entityId]}
               ></ha-state-icon>`
             : this.entityName}
       </div>

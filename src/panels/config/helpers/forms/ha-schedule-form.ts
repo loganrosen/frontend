@@ -106,9 +106,9 @@ class HaScheduleForm extends LitElement {
 
   public focus() {
     this.updateComplete.then(() =>
-      (
+      { (
         this.shadowRoot?.querySelector("[dialogInitialFocus]") as HTMLElement
-      )?.focus()
+      ).focus(); }
     );
   }
 
@@ -123,12 +123,12 @@ class HaScheduleForm extends LitElement {
           .value=${this._name}
           .configValue=${"name"}
           @input=${this._valueChanged}
-          .label=${this.hass!.localize(
+          .label=${this.hass.localize(
             "ui.dialogs.helper_settings.generic.name"
           )}
           autoValidate
           required
-          .validationMessage=${this.hass!.localize(
+          .validationMessage=${this.hass.localize(
             "ui.dialogs.helper_settings.required_error_msg"
           )}
           dialogInitialFocus
@@ -138,7 +138,7 @@ class HaScheduleForm extends LitElement {
           .value=${this._icon}
           .configValue=${"icon"}
           @value-changed=${this._valueChanged}
-          .label=${this.hass!.localize(
+          .label=${this.hass.localize(
             "ui.dialogs.helper_settings.generic.icon"
           )}
         ></ha-icon-picker>
@@ -198,16 +198,16 @@ class HaScheduleForm extends LitElement {
     };
 
     config.eventClick = (info) => this._handleEventClick(info);
-    config.select = (info) => this._handleSelect(info);
-    config.eventResize = (info) => this._handleEventResize(info);
-    config.eventDrop = (info) => this._handleEventDrop(info);
+    config.select = (info) => { this._handleSelect(info); };
+    config.eventResize = (info) => { this._handleEventResize(info); };
+    config.eventDrop = (info) => { this._handleEventDrop(info); };
 
     this.calendar = new Calendar(
       this.shadowRoot!.getElementById("calendar")!,
       config
     );
 
-    this.calendar!.render();
+    this.calendar.render();
   }
 
   private get _events() {
@@ -355,8 +355,8 @@ class HaScheduleForm extends LitElement {
     const item = [...this[`_${day}`]][index];
     showScheduleBlockInfoDialog(this, {
       block: item,
-      updateBlock: (newBlock) => this._updateBlock(day, index, newBlock),
-      deleteBlock: () => this._deleteBlock(day, index),
+      updateBlock: (newBlock) => { this._updateBlock(day, index, newBlock); },
+      deleteBlock: () => { this._deleteBlock(day, index); },
     });
   }
 

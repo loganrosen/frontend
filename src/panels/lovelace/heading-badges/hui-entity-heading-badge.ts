@@ -59,7 +59,7 @@ export class HuiEntityHeadingBadge
       },
       ...this._config!,
     };
-    handleAction(this, this.hass!, config, ev.detail.action!);
+    handleAction(this, this.hass!, config, ev.detail.action);
   }
 
   private _computeStateColor = memoizeOne(
@@ -107,7 +107,7 @@ export class HuiEntityHeadingBadge
     const config = this._config;
 
     const entityId = config.entity;
-    const stateObj = this.hass!.states[entityId];
+    const stateObj = this.hass.states[entityId];
 
     if (!stateObj) {
       return html`

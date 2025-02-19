@@ -202,7 +202,7 @@ class OnboardingRestoreBackup extends LitElement {
 
     const failedRestore =
       lastNonIdleEvent?.manager_state === "restore_backup" &&
-      lastNonIdleEvent?.state === "failed";
+      lastNonIdleEvent.state === "failed";
 
     if (failedRestore) {
       this._failed = true;

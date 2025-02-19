@@ -68,7 +68,7 @@ export class HuiCalendarCard extends LitElement implements LovelaceCard {
   private _resizeObserver?: ResizeObserver;
 
   public setConfig(config: CalendarCardConfig): void {
-    if (!config.entities?.length) {
+    if (!config.entities.length) {
       throw new Error("Entities must be specified");
     }
 
@@ -76,7 +76,7 @@ export class HuiCalendarCard extends LitElement implements LovelaceCard {
       throw new Error("Entities need to be an array");
     }
 
-    this._calendars = config!.entities.map((entity, idx) => ({
+    this._calendars = config.entities.map((entity, idx) => ({
       entity_id: entity,
       backgroundColor: getColorByIndex(idx),
     }));
@@ -149,7 +149,7 @@ export class HuiCalendarCard extends LitElement implements LovelaceCard {
       (changedProps.has("hass") && oldHass.themes !== this.hass.themes) ||
       (changedProps.has("_config") && oldConfig.theme !== this._config.theme)
     ) {
-      applyThemesOnElement(this, this.hass.themes, this._config!.theme);
+      applyThemesOnElement(this, this.hass.themes, this._config.theme);
     }
   }
 
@@ -201,7 +201,7 @@ export class HuiCalendarCard extends LitElement implements LovelaceCard {
   private async _attachObserver(): Promise<void> {
     if (!this._resizeObserver) {
       this._resizeObserver = new ResizeObserver(
-        debounce(() => this._measureCard(), 250, false)
+        debounce(() => { this._measureCard(); }, 250, false)
       );
     }
     const card = this.shadowRoot!.querySelector("ha-card");

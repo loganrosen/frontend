@@ -112,7 +112,7 @@ export class HuiHeadingBadge extends ReactiveElement {
       if (changedProps.has("config")) {
         const elementConfig = this._elementConfig;
         if (this.config !== elementConfig && this.config) {
-          const typeChanged = this.config?.type !== elementConfig?.type;
+          const typeChanged = this.config.type !== elementConfig?.type;
           if (typeChanged) {
             this._loadElement(this.config);
           } else {
@@ -138,7 +138,7 @@ export class HuiHeadingBadge extends ReactiveElement {
   }
 
   private _clearMediaQueries() {
-    this._listeners.forEach((unsub) => unsub());
+    this._listeners.forEach((unsub) => { unsub(); });
     this._listeners = [];
   }
 

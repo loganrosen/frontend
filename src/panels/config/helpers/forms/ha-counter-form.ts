@@ -55,9 +55,9 @@ class HaCounterForm extends LitElement {
 
   public focus() {
     this.updateComplete.then(() =>
-      (
+      { (
         this.shadowRoot?.querySelector("[dialogInitialFocus]") as HTMLElement
-      )?.focus()
+      ).focus(); }
     );
   }
 
@@ -72,12 +72,12 @@ class HaCounterForm extends LitElement {
           .value=${this._name}
           .configValue=${"name"}
           @input=${this._valueChanged}
-          .label=${this.hass!.localize(
+          .label=${this.hass.localize(
             "ui.dialogs.helper_settings.generic.name"
           )}
           autoValidate
           required
-          .validationMessage=${this.hass!.localize(
+          .validationMessage=${this.hass.localize(
             "ui.dialogs.helper_settings.required_error_msg"
           )}
           dialogInitialFocus
@@ -87,7 +87,7 @@ class HaCounterForm extends LitElement {
           .value=${this._icon}
           .configValue=${"icon"}
           @value-changed=${this._valueChanged}
-          .label=${this.hass!.localize(
+          .label=${this.hass.localize(
             "ui.dialogs.helper_settings.generic.icon"
           )}
         ></ha-icon-picker>
@@ -96,7 +96,7 @@ class HaCounterForm extends LitElement {
           .configValue=${"minimum"}
           type="number"
           @input=${this._valueChanged}
-          .label=${this.hass!.localize(
+          .label=${this.hass.localize(
             "ui.dialogs.helper_settings.counter.minimum"
           )}
         ></ha-textfield>
@@ -105,7 +105,7 @@ class HaCounterForm extends LitElement {
           .configValue=${"maximum"}
           type="number"
           @input=${this._valueChanged}
-          .label=${this.hass!.localize(
+          .label=${this.hass.localize(
             "ui.dialogs.helper_settings.counter.maximum"
           )}
         ></ha-textfield>
@@ -114,7 +114,7 @@ class HaCounterForm extends LitElement {
           .configValue=${"initial"}
           type="number"
           @input=${this._valueChanged}
-          .label=${this.hass!.localize(
+          .label=${this.hass.localize(
             "ui.dialogs.helper_settings.counter.initial"
           )}
         ></ha-textfield>
@@ -125,7 +125,7 @@ class HaCounterForm extends LitElement {
                 .configValue=${"step"}
                 type="number"
                 @input=${this._valueChanged}
-                .label=${this.hass!.localize(
+                .label=${this.hass.localize(
                   "ui.dialogs.helper_settings.counter.step"
                 )}
               ></ha-textfield>

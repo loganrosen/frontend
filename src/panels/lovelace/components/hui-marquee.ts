@@ -14,13 +14,13 @@ class HuiMarquee extends LitElement {
   protected firstUpdated(changedProps) {
     super.firstUpdated(changedProps);
 
-    this.addEventListener("mouseover", () => this.classList.add("hovering"), {
+    this.addEventListener("mouseover", () => { this.classList.add("hovering"); }, {
       // Capture because we need to run before a parent sets active on us.
       // Hovering will disable the overflow, allowing us to calc if we overflow.
       capture: true,
     });
 
-    this.addEventListener("mouseout", () => this.classList.remove("hovering"));
+    this.addEventListener("mouseout", () => { this.classList.remove("hovering"); });
   }
 
   protected updated(changedProperties: PropertyValues): void {

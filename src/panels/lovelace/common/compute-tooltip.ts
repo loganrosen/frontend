@@ -44,16 +44,16 @@ function computeActionTooltip(
       )}`;
       break;
     case "call-service":
-      tooltip += `${hass.localize(
+      tooltip += hass.localize(
         "ui.panel.lovelace.cards.picture-elements.perform_action",
         { name: config.service }
-      )}`;
+      );
       break;
     case "more-info":
-      tooltip += `${hass.localize(
+      tooltip += hass.localize(
         "ui.panel.lovelace.cards.picture-elements.more_info",
         { name: state }
-      )}`;
+      );
       break;
   }
 

@@ -95,7 +95,7 @@ export class HuiActionEditor extends LitElement {
 
   get _service(): string {
     const config = this.config as CallServiceActionConfig;
-    return config?.perform_action || config?.service || "";
+    return config.perform_action || config.service || "";
   }
 
   private _serviceAction = memoizeOne(
@@ -142,11 +142,11 @@ export class HuiActionEditor extends LitElement {
           naturalMenuWidt
         >
           <mwc-list-item value="default">
-            ${this.hass!.localize(
+            ${this.hass.localize(
               "ui.panel.lovelace.editor.action-editor.actions.default_action"
             )}
             ${this.defaultAction
-              ? ` (${this.hass!.localize(
+              ? ` (${this.hass.localize(
                   `ui.panel.lovelace.editor.action-editor.actions.${this.defaultAction}`
                 ).toLowerCase()})`
               : nothing}
@@ -182,7 +182,7 @@ export class HuiActionEditor extends LitElement {
       ${this.config?.action === "url"
         ? html`
             <ha-textfield
-              .label=${this.hass!.localize(
+              .label=${this.hass.localize(
                 "ui.panel.lovelace.editor.action-editor.url_path"
               )}
               .value=${this._url_path}
@@ -272,7 +272,7 @@ export class HuiActionEditor extends LitElement {
     }
     if (target.configValue) {
       fireEvent(this, "value-changed", {
-        value: { ...this.config!, [target.configValue!]: value },
+        value: { ...this.config!, [target.configValue]: value },
       });
     }
   }

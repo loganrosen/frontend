@@ -76,7 +76,7 @@ class DataEntryFlowDialog extends LitElement {
       this._loading = "loading_flow";
       this._handler = params.startFlowHandler;
       try {
-        step = await this._params!.flowConfig.createFlow(
+        step = await this._params.flowConfig.createFlow(
           this.hass,
           params.startFlowHandler
         );
@@ -206,7 +206,7 @@ class DataEntryFlowDialog extends LitElement {
                       "external",
                       "progress",
                       "data_entry_flow_progressed",
-                    ].includes(this._step?.type as any) &&
+                    ].includes(this._step.type as any) &&
                       this._params.manifest?.is_built_in) ||
                     this._params.manifest?.documentation
                       ? html`
@@ -216,7 +216,7 @@ class DataEntryFlowDialog extends LitElement {
                                   this.hass,
                                   `/integrations/${this._params.manifest.domain}`
                                 )
-                              : this._params?.manifest?.documentation}
+                              : this._params.manifest.documentation}
                             target="_blank"
                             rel="noreferrer noopener"
                           >

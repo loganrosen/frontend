@@ -119,7 +119,7 @@ export class HaConfigAreasDashboard extends LitElement {
     super.willUpdate(changedProperties);
     if (changedProperties.has("hass")) {
       const oldHass = changedProperties.get("hass");
-      if (this.hass.areas !== oldHass?.areas) {
+      if (this.hass.areas !== oldHass.areas) {
         this._areas = Object.values(this.hass.areas);
       }
     }
@@ -224,7 +224,7 @@ export class HaConfigAreasDashboard extends LitElement {
                   .floor=${UNASSIGNED_FLOOR}
                 >
                   <div class="areas">
-                    ${areasAndFloors?.unassignedAreas.map((area) =>
+                    ${areasAndFloors.unassignedAreas.map((area) =>
                       this._renderArea(area)
                     )}
                   </div>
@@ -320,7 +320,7 @@ export class HaConfigAreasDashboard extends LitElement {
     showAreaRegistryDetailDialog(this, {
       entry: area,
       updateEntry: async (values) =>
-        updateAreaRegistryEntry(this.hass!, area.area_id, values),
+        updateAreaRegistryEntry(this.hass, area.area_id, values),
     });
   }
 
@@ -406,7 +406,7 @@ export class HaConfigAreasDashboard extends LitElement {
     showAreaRegistryDetailDialog(this, {
       entry,
       createEntry: async (values) =>
-        createAreaRegistryEntry(this.hass!, values),
+        createAreaRegistryEntry(this.hass, values),
     });
   }
 
@@ -414,7 +414,7 @@ export class HaConfigAreasDashboard extends LitElement {
     showFloorRegistryDetailDialog(this, {
       entry,
       createEntry: async (values, addedAreas) => {
-        const floor = await createFloorRegistryEntry(this.hass!, values);
+        const floor = await createFloorRegistryEntry(this.hass, values);
         addedAreas.forEach((areaId) => {
           updateAreaRegistryEntry(this.hass, areaId, {
             floor_id: floor.floor_id,
@@ -423,7 +423,7 @@ export class HaConfigAreasDashboard extends LitElement {
       },
       updateEntry: async (values, addedAreas, removedAreas) => {
         const floor = await updateFloorRegistryEntry(
-          this.hass!,
+          this.hass,
           entry!.floor_id,
           values
         );

@@ -94,7 +94,7 @@ export class DialogDeviceAutomation extends LitElement {
     if (!shouldHandleRequestSelectedEvent(ev) || !this._params) {
       return;
     }
-    const type = (ev.currentTarget as any).type;
+    const type = (ev.currentTarget).type;
     const isScript = this._params.script;
 
     this.closeDialog();

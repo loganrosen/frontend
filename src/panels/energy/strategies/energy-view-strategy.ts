@@ -57,7 +57,7 @@ export class EnergyViewStrategy extends ReactiveElement {
     const hasGrid = prefs.energy_sources.find(
       (source) =>
         source.type === "grid" &&
-        (source.flow_from?.length || source.flow_to?.length)
+        (source.flow_from.length || source.flow_to.length)
     ) as GridSourceTypeEnergyPreference;
     const hasReturn = hasGrid && hasGrid.flow_to.length;
     const hasSolar = prefs.energy_sources.some(

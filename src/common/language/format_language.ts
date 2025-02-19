@@ -6,7 +6,7 @@ export const formatLanguageCode = (
   locale: FrontendLocaleData
 ) => {
   try {
-    return formatLanguageCodeMem(locale)?.of(languageCode) ?? languageCode;
+    return formatLanguageCodeMem(locale).of(languageCode) ?? languageCode;
   } catch {
     return languageCode;
   }

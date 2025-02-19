@@ -201,7 +201,7 @@ class MoreInfoFan extends LitElement {
                         .path=${mdiTuneVariant}
                       ></ha-svg-icon>
                     `}
-                ${this.stateObj.attributes.preset_modes?.map(
+                ${this.stateObj.attributes.preset_modes.map(
                   (mode) => html`
                     <ha-list-item .value=${mode} graphic="icon">
                       <ha-attribute-icon

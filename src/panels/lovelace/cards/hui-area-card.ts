@@ -221,9 +221,9 @@ export class HuiAreaCard
       (total, entity) => total + Number(entity.state),
       0
     );
-    return `${formatNumber(sum / values.length, this.hass!.locale, {
+    return `${formatNumber(sum / values.length, this.hass.locale, {
       maximumFractionDigits: 1,
-    })}${uom ? blankBeforeUnit(uom, this.hass!.locale) : ""}${uom || ""}`;
+    })}${uom ? blankBeforeUnit(uom, this.hass.locale) : ""}${uom || ""}`;
   }
 
   private _area = memoizeOne(
@@ -244,13 +244,13 @@ export class HuiAreaCard
 
   public hassSubscribe(): UnsubscribeFunc[] {
     return [
-      subscribeAreaRegistry(this.hass!.connection, (areas) => {
+      subscribeAreaRegistry(this.hass.connection, (areas) => {
         this._areas = areas;
       }),
-      subscribeDeviceRegistry(this.hass!.connection, (devices) => {
+      subscribeDeviceRegistry(this.hass.connection, (devices) => {
         this._devices = devices;
       }),
-      subscribeEntityRegistry(this.hass!.connection, (entries) => {
+      subscribeEntityRegistry(this.hass.connection, (entries) => {
         this._entities = entries;
       }),
     ];
@@ -297,8 +297,8 @@ export class HuiAreaCard
 
     if (
       !oldHass ||
-      oldHass.themes !== this.hass!.themes ||
-      oldHass.locale !== this.hass!.locale
+      oldHass.themes !== this.hass.themes ||
+      oldHass.locale !== this.hass.locale
     ) {
       return true;
     }
@@ -321,7 +321,7 @@ export class HuiAreaCard
 
     for (const domainEntities of Object.values(entities)) {
       for (const stateObj of domainEntities) {
-        if (oldHass!.states[stateObj.entity_id] !== stateObj) {
+        if (oldHass.states[stateObj.entity_id] !== stateObj) {
           return true;
         }
       }
@@ -333,7 +333,7 @@ export class HuiAreaCard
   public willUpdate(changedProps: PropertyValues) {
     if (changedProps.has("_config") || this._ratio === null) {
       this._ratio = this._config?.aspect_ratio
-        ? parseAspectRatio(this._config?.aspect_ratio)
+        ? parseAspectRatio(this._config.aspect_ratio)
         : null;
 
       if (this._ratio === null || this._ratio.w <= 0 || this._ratio.h <= 0) {

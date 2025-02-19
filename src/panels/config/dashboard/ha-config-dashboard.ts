@@ -104,7 +104,7 @@ const randomTip = (hass: HomeAssistant, narrow: boolean) => {
     },
   ];
 
-  if (hass?.enableShortcuts) {
+  if (hass.enableShortcuts) {
     tips.push(
       {
         content: hass.localize("ui.tips.key_c_hint"),
@@ -170,7 +170,7 @@ class HaConfigDashboard extends SubscribeMixin(LitElement) {
 
   public hassSubscribe(): UnsubscribeFunc[] {
     return [
-      subscribeRepairsIssueRegistry(this.hass.connection!, (repairs) => {
+      subscribeRepairsIssueRegistry(this.hass.connection, (repairs) => {
         const repairsIssues = repairs.issues.filter((issue) => !issue.ignored);
 
         this._repairsIssues = {
@@ -328,7 +328,7 @@ class HaConfigDashboard extends SubscribeMixin(LitElement) {
       entityRegistry: HomeAssistant["entities"]
     ): { updates: UpdateEntity[]; total: number } => {
       const updates = filterUpdateEntitiesWithInstall(entities).filter(
-        (entity) => !entityRegistry[entity.entity_id]?.hidden
+        (entity) => !entityRegistry[entity.entity_id].hidden
       );
 
       return {

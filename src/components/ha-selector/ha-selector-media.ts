@@ -66,7 +66,7 @@ export class HaMediaSelector extends LitElement {
           domain: extractDomainFromBrandUrl(thumbnail),
           type: "icon",
           useFallback: true,
-          darkOptimized: this.hass.themes?.darkMode,
+          darkOptimized: this.hass.themes.darkMode,
         });
       } else {
         this._thumbnailUrl = thumbnail;
@@ -145,7 +145,7 @@ export class HaMediaSelector extends LitElement {
                         class="folder"
                         .path=${!this.value?.media_content_id
                           ? mdiPlus
-                          : this.value?.metadata?.media_class
+                          : this.value.metadata?.media_class
                             ? MediaClassBrowserSettings[
                                 this.value.metadata.media_class === "directory"
                                   ? this.value.metadata.children_media_class ||
@@ -197,7 +197,7 @@ export class HaMediaSelector extends LitElement {
               thumbnail: pickedMedia.item.thumbnail,
               media_class: pickedMedia.item.media_class,
               children_media_class: pickedMedia.item.children_media_class,
-              navigateIds: pickedMedia.navigateIds?.map((id) => ({
+              navigateIds: pickedMedia.navigateIds.map((id) => ({
                 media_content_type: id.media_content_type,
                 media_content_id: id.media_content_id,
               })),

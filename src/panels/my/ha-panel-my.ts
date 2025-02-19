@@ -291,7 +291,7 @@ export const getMyRedirects = (): Redirects => ({
 });
 
 const getRedirect = (path: string): Redirect | undefined =>
-  getMyRedirects()?.[path];
+  getMyRedirects()[path];
 
 export type ParamType = "url" | "string" | "string?";
 
@@ -340,7 +340,7 @@ class HaPanelMy extends LitElement {
 
     if (this._redirect.redirect === "#external-app-configuration") {
       if (this.hass.auth.external?.config.hasSettingsScreen) {
-        this.hass.auth.external!.fireMessage({ type: "config_screen/show" });
+        this.hass.auth.external.fireMessage({ type: "config_screen/show" });
         return;
       }
       this._error = "not_app";

@@ -68,16 +68,16 @@ class NotificationManager extends LitElement {
         .timeoutMs=${this._parameters.duration!}
         @MDCSnackbar:closed=${this._toastClosed}
       >
-        ${this._parameters?.action
+        ${this._parameters.action
           ? html`
               <ha-button
                 slot="action"
-                .label=${this._parameters?.action.text}
+                .label=${this._parameters.action.text}
                 @click=${this._buttonClicked}
               ></ha-button>
             `
           : nothing}
-        ${this._parameters?.dismissable
+        ${this._parameters.dismissable
           ? html`
               <ha-icon-button
                 .label=${this.hass.localize("ui.common.close")}
@@ -94,7 +94,7 @@ class NotificationManager extends LitElement {
   private _buttonClicked() {
     this._toast?.close("action");
     if (this._parameters?.action) {
-      this._parameters?.action.action();
+      this._parameters.action.action();
     }
   }
 }

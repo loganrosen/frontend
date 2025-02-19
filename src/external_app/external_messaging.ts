@@ -305,12 +305,12 @@ export class ExternalMessaging {
   private _commandHandler?: EMIncomingMessageHandler;
 
   public async attach() {
-    window[CALLBACK_EXTERNAL_BUS] = (msg) => this.receiveMessage(msg);
+    window[CALLBACK_EXTERNAL_BUS] = (msg) => { this.receiveMessage(msg); };
     window.addEventListener("connection-status", (ev) =>
-      this.fireMessage({
+      { this.fireMessage({
         type: "connection-status",
         payload: { event: ev.detail },
-      })
+      }); }
     );
     this.config = await this.sendMessage<"config/get">({
       type: "config/get",

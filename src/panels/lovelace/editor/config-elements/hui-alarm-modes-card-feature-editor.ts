@@ -60,9 +60,9 @@ export class HuiAlarmModesCardFeatureEditor
                     options: stateObj
                       ? supportedAlarmModes(stateObj).map((mode) => ({
                           value: mode,
-                          label: `${localize(
+                          label: localize(
                             `ui.panel.lovelace.editor.features.types.alarm-modes.modes_list.${mode}`
-                          )}`,
+                          ),
                         }))
                       : [],
                   },
@@ -84,7 +84,7 @@ export class HuiAlarmModesCardFeatureEditor
     };
 
     const stateObj = this.context?.entity_id
-      ? this.hass.states[this.context?.entity_id]
+      ? this.hass.states[this.context.entity_id]
       : undefined;
 
     const schema = this._schema(
@@ -109,7 +109,7 @@ export class HuiAlarmModesCardFeatureEditor
       .value as AlarmModesCardFeatureData;
 
     const stateObj = this.context?.entity_id
-      ? this.hass!.states[this.context?.entity_id]
+      ? this.hass!.states[this.context.entity_id]
       : undefined;
 
     if (customize_modes && !config.modes) {

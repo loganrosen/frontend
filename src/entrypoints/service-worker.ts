@@ -126,7 +126,7 @@ const initPushNotifications = () => {
         event.waitUntil(
           self.registration
             .getNotifications({ tag: data.tag })
-            .then((notifications) => notifications.forEach((n) => n.close()))
+            .then((notifications) => { notifications.forEach((n) => { n.close(); }); })
         );
         return;
       }
@@ -192,8 +192,8 @@ const initPushNotifications = () => {
 };
 
 const catchHandler: RouteHandler = async (options) => {
-  const dest = (options.request as Request).destination;
-  const url = (options.request as Request).url;
+  const dest = (options.request).destination;
+  const url = (options.request).url;
 
   if (dest !== "document" || noFallBackRegEx.test(url)) {
     return Response.error();

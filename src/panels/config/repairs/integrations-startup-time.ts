@@ -40,7 +40,7 @@ class IntegrationsStartupTime extends LitElement {
 
     return html`
       <mwc-list>
-        ${this._setups?.map((setup) => {
+        ${this._setups.map((setup) => {
           const manifest = this._manifests && this._manifests[setup.domain];
           const docLink = manifest
             ? manifest.is_built_in
@@ -64,7 +64,7 @@ class IntegrationsStartupTime extends LitElement {
                   domain: setup.domain,
                   type: "icon",
                   useFallback: true,
-                  darkOptimized: this.hass.themes?.darkMode,
+                  darkOptimized: this.hass.themes.darkMode,
                 })}
                 crossorigin="anonymous"
                 referrerpolicy="no-referrer"

@@ -282,7 +282,7 @@ export class HaAuthorize extends litLocalizeLiteMixin(LitElement) {
   protected updated(changedProps: PropertyValues) {
     super.updated(changedProps);
     if (changedProps.has("language")) {
-      document.querySelector("html")!.setAttribute("lang", this.language!);
+      document.querySelector("html")!.setAttribute("lang", this.language);
     }
   }
 

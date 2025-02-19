@@ -96,7 +96,7 @@ export class HuiHumidifierModesCardFeatureEditor
     }
 
     const stateObj = this.context?.entity_id
-      ? this.hass.states[this.context?.entity_id]
+      ? this.hass.states[this.context.entity_id]
       : undefined;
 
     const data: HumidifierModesCardFeatureData = {
@@ -128,7 +128,7 @@ export class HuiHumidifierModesCardFeatureEditor
       .value as HumidifierModesCardFeatureData;
 
     const stateObj = this.context?.entity_id
-      ? this.hass!.states[this.context?.entity_id]
+      ? this.hass!.states[this.context.entity_id]
       : undefined;
 
     if (customize_modes && !config.modes) {

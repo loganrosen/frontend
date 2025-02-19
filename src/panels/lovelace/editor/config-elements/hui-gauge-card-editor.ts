@@ -150,9 +150,9 @@ export class HuiGaugeCardEditor
       return nothing;
     }
 
-    const schema = this._schema(this._config!.severity !== undefined);
+    const schema = this._schema(this._config.severity !== undefined);
     const data = {
-      show_severity: this._config!.severity !== undefined,
+      show_severity: this._config.severity !== undefined,
       ...this._config,
     };
 

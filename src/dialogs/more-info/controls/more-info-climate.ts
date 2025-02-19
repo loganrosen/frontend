@@ -143,7 +143,7 @@ class MoreInfoClimate extends LitElement {
               <ha-icon-button-group>
                 <ha-icon-button-toggle
                   .selected=${this._mainControl === "temperature"}
-                  .disabled=${this.stateObj!.state === UNAVAILABLE}
+                  .disabled=${this.stateObj.state === UNAVAILABLE}
                   .label=${this.hass.localize(
                     "ui.dialogs.more_info_control.climate.temperature"
                   )}
@@ -154,7 +154,7 @@ class MoreInfoClimate extends LitElement {
                 </ha-icon-button-toggle>
                 <ha-icon-button-toggle
                   .selected=${this._mainControl === "humidity"}
-                  .disabled=${this.stateObj!.state === UNAVAILABLE}
+                  .disabled=${this.stateObj.state === UNAVAILABLE}
                   .label=${this.hass.localize(
                     "ui.dialogs.more_info_control.climate.humidity"
                   )}
@@ -228,7 +228,7 @@ class MoreInfoClimate extends LitElement {
                         .path=${mdiTuneVariant}
                       ></ha-svg-icon>
                     `}
-                ${stateObj.attributes.preset_modes!.map(
+                ${stateObj.attributes.preset_modes.map(
                   (mode) => html`
                     <ha-list-item .value=${mode} graphic="icon">
                       <ha-attribute-icon
@@ -276,7 +276,7 @@ class MoreInfoClimate extends LitElement {
                   : html`
                       <ha-svg-icon slot="icon" .path=${mdiFan}></ha-svg-icon>
                     `}
-                ${stateObj.attributes.fan_modes!.map(
+                ${stateObj.attributes.fan_modes.map(
                   (mode) => html`
                     <ha-list-item .value=${mode} graphic="icon">
                       <ha-attribute-icon
@@ -327,7 +327,7 @@ class MoreInfoClimate extends LitElement {
                         .path=${mdiArrowOscillating}
                       ></ha-svg-icon>
                     `}
-                ${stateObj.attributes.swing_modes!.map(
+                ${stateObj.attributes.swing_modes.map(
                   (mode) => html`
                     <ha-list-item .value=${mode} graphic="icon">
                       <ha-attribute-icon
@@ -380,7 +380,7 @@ class MoreInfoClimate extends LitElement {
                         .path=${mdiArrowOscillating}
                       ></ha-svg-icon>
                     `}
-                ${stateObj.attributes.swing_horizontal_modes!.map(
+                ${stateObj.attributes.swing_horizontal_modes.map(
                   (mode) => html`
                     <ha-list-item .value=${mode} graphic="icon">
                       <ha-attribute-icon

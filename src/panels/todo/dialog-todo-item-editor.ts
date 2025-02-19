@@ -225,7 +225,7 @@ class DialogTodoItemEditor extends LitElement {
     if (!this._params?.entity) {
       return false;
     }
-    const entityStateObj = this.hass!.states[this._params?.entity];
+    const entityStateObj = this.hass.states[this._params.entity];
     return entityStateObj && supportsFeature(entityStateObj, feature);
   }
 
@@ -292,7 +292,7 @@ class DialogTodoItemEditor extends LitElement {
 
     this._submitting = true;
     try {
-      await createItem(this.hass!, this._params!.entity, {
+      await createItem(this.hass, this._params!.entity, {
         summary: this._summary,
         description: this._description,
         due: this._due
@@ -322,7 +322,7 @@ class DialogTodoItemEditor extends LitElement {
     const entry = this._params!.item!;
 
     try {
-      await updateItem(this.hass!, this._params!.entity, {
+      await updateItem(this.hass, this._params!.entity, {
         ...entry,
         summary: this._summary,
         description:
@@ -375,7 +375,7 @@ class DialogTodoItemEditor extends LitElement {
       return;
     }
     try {
-      await deleteItems(this.hass!, this._params!.entity, [entry.uid]);
+      await deleteItems(this.hass, this._params!.entity, [entry.uid]);
     } catch (err: any) {
       this._error = err ? err.message : "Unknown error";
       return;

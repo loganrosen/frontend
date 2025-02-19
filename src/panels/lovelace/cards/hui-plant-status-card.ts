@@ -100,7 +100,7 @@ class HuiPlantStatusCard extends LitElement implements LovelaceCard {
       return nothing;
     }
 
-    const stateObj = this.hass.states[this._config!.entity];
+    const stateObj = this.hass.states[this._config.entity];
 
     if (!stateObj) {
       return html`

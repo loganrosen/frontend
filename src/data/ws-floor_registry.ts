@@ -27,7 +27,7 @@ const subscribeFloorRegistryUpdates = (
     debounce(
       () =>
         fetchFloorRegistry(conn).then((areas: FloorRegistryEntry[]) =>
-          store.setState(areas, true)
+          { store.setState(areas, true); }
         ),
       500,
       true

@@ -54,9 +54,9 @@ class DialogNewAutomation extends LitElement implements HassDialog {
 
   public showDialog(params: NewAutomationDialogParams): void {
     this._opened = true;
-    this._mode = params?.mode || "automation";
+    this._mode = params.mode || "automation";
 
-    fetchBlueprints(this.hass!, this._mode).then((blueprints) => {
+    fetchBlueprints(this.hass, this._mode).then((blueprints) => {
       this.blueprints = blueprints;
     });
   }
@@ -85,7 +85,7 @@ class DialogNewAutomation extends LitElement implements HassDialog {
         };
       });
     return result.sort((a, b) =>
-      stringCompare(a.name, b.name, this.hass!.locale.language)
+      stringCompare(a.name, b.name, this.hass.locale.language)
     );
   });
 
@@ -205,7 +205,7 @@ class DialogNewAutomation extends LitElement implements HassDialog {
     if (!shouldHandleRequestSelectedEvent(ev)) {
       return;
     }
-    const path = (ev.currentTarget! as any).path;
+    const path = (ev.currentTarget!).path;
     if (this._mode === "script") {
       showScriptEditor({ use_blueprint: { path } });
     } else {

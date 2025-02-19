@@ -107,11 +107,11 @@ class HaMfaModuleSetupFlow extends LitElement {
                           breaks
                           .content=${this.hass.localize(
                             `component.auth.mfa_setup.${
-                              this._step!.handler
+                              this._step.handler
                             }.step.${
-                              (this._step! as DataEntryFlowStepForm).step_id
+                              (this._step).step_id
                             }.description`,
-                            this._step!.description_placeholders
+                            this._step.description_placeholders
                           )}
                         ></ha-markdown>
                         <ha-form

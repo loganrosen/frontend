@@ -161,7 +161,7 @@ export class HuiEnergyGasGraphCard
     const gasSources: GasSourceTypeEnergyPreference[] =
       energyData.prefs.energy_sources.filter(
         (source) => source.type === "gas"
-      ) as GasSourceTypeEnergyPreference[];
+      );
 
     this._unit =
       getEnergyGasUnit(this.hass, energyData.prefs, energyData.statsMetadata) ||
@@ -216,7 +216,7 @@ export class HuiEnergyGasGraphCard
     const data: BarSeriesOption[] = [];
     const compareTransform = getCompareTransform(
       this._start,
-      this._compareStart!
+      this._compareStart
     );
 
     gasSources.forEach((source, idx) => {

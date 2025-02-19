@@ -216,7 +216,7 @@ export class HuiStatisticCardEditor
     ) {
       const metadata = (
         await getStatisticMetadata(this.hass!, [config.entity])
-      )?.[0];
+      )[0];
       if (metadata && !metadata.has_sum && config.stat_type === "change") {
         config.stat_type = "mean";
       }
@@ -228,8 +228,8 @@ export class HuiStatisticCardEditor
     if (!config.stat_type && config.entity) {
       const metadata = (
         await getStatisticMetadata(this.hass!, [config.entity])
-      )?.[0];
-      config.stat_type = metadata?.has_sum ? "change" : "mean";
+      )[0];
+      config.stat_type = metadata.has_sum ? "change" : "mean";
     }
 
     fireEvent(this, "config-changed", { config });

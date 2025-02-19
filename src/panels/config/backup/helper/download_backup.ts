@@ -33,14 +33,14 @@ export const downloadBackup = async (
 ): Promise<void> => {
   const agentIds = Object.keys(backup.agents);
   const preferedAgent = agentId ?? getPreferredAgentForDownload(agentIds);
-  const isProtected = backup.agents[preferedAgent]?.protected;
+  const isProtected = backup.agents[preferedAgent].protected;
 
   if (!isProtected) {
     downloadBackupFile(hass, backup.backup_id, preferedAgent);
     return;
   }
 
-  const encryptionKey = backupConfig?.create_backup?.password;
+  const encryptionKey = backupConfig?.create_backup.password;
 
   if (!encryptionKey) {
     showDownloadDecryptedBackupDialog(element, {

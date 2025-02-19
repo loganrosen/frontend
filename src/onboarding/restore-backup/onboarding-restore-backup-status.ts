@@ -47,7 +47,7 @@ class OnboardingRestoreBackupStatus extends LitElement {
                   ? html`
                       <div class="failed">
                         <h4>Error:</h4>
-                        ${this.backupInfo.last_non_idle_event?.reason}
+                        ${this.backupInfo.last_non_idle_event.reason}
                       </div>
                     `
                   : nothing}

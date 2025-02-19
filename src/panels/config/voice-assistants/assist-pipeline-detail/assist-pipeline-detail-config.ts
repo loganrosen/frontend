@@ -17,7 +17,7 @@ export class AssistPipelineDetailConfig extends LitElement {
 
   public async focus() {
     await this.updateComplete;
-    const input = this.renderRoot?.querySelector("ha-form");
+    const input = this.renderRoot.querySelector("ha-form");
     input?.focus();
   }
 

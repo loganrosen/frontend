@@ -98,7 +98,7 @@ export class HaCodeEditor extends ReactiveElement {
     if (!this.codemirror) {
       return;
     }
-    if (this.autofocus !== false) {
+    if (this.autofocus) {
       this.codemirror.focus();
     }
   }
@@ -128,7 +128,7 @@ export class HaCodeEditor extends ReactiveElement {
     if (changedProps.has("mode")) {
       transactions.push({
         effects: [
-          this._loadedCodeMirror!.langCompartment!.reconfigure(this._mode),
+          this._loadedCodeMirror!.langCompartment.reconfigure(this._mode),
           this._loadedCodeMirror!.foldingCompartment.reconfigure(
             this._getFoldingExtensions()
           ),
@@ -137,14 +137,14 @@ export class HaCodeEditor extends ReactiveElement {
     }
     if (changedProps.has("readOnly")) {
       transactions.push({
-        effects: this._loadedCodeMirror!.readonlyCompartment!.reconfigure(
-          this._loadedCodeMirror!.EditorView!.editable.of(!this.readOnly)
+        effects: this._loadedCodeMirror!.readonlyCompartment.reconfigure(
+          this._loadedCodeMirror!.EditorView.editable.of(!this.readOnly)
         ),
       });
     }
     if (changedProps.has("linewrap")) {
       transactions.push({
-        effects: this._loadedCodeMirror!.linewrapCompartment!.reconfigure(
+        effects: this._loadedCodeMirror!.linewrapCompartment.reconfigure(
           this.linewrap ? this._loadedCodeMirror!.EditorView.lineWrapping : []
         ),
       });

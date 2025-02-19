@@ -82,7 +82,7 @@ export const actionConfigStructType = object({
 
 export const actionConfigStruct = dynamic<any>((value) => {
   if (value && typeof value === "object" && "action" in value) {
-    switch ((value as BaseActionConfig).action!) {
+    switch ((value as BaseActionConfig).action) {
       case "call-service": {
         return actionConfigStructService;
       }

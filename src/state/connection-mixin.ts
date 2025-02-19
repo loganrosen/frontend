@@ -185,9 +185,9 @@ export const connectionMixin = <T extends Constructor<HassBaseEl>>(
           if (__DEV__ || this.hass?.debugConnection) {
             resp.then(
               // eslint-disable-next-line no-console
-              (result) => console.log("Received", result),
+              (result) => { console.log("Received", result); },
               // eslint-disable-next-line no-console
-              (err) => console.error("Error", err)
+              (err) => { console.error("Error", err); }
             );
           }
           return resp;
@@ -222,8 +222,8 @@ export const connectionMixin = <T extends Constructor<HassBaseEl>>(
 
       broadcastConnectionStatus("connected");
 
-      conn.addEventListener("ready", () => this.hassReconnected());
-      conn.addEventListener("disconnected", () => this.hassDisconnected());
+      conn.addEventListener("ready", () => { this.hassReconnected(); });
+      conn.addEventListener("disconnected", () => { this.hassDisconnected(); });
       // If we reconnect after losing connection and auth is no longer valid.
       conn.addEventListener("reconnect-error", (_conn, err) => {
         if (err === ERR_INVALID_AUTH) {
@@ -232,7 +232,7 @@ export const connectionMixin = <T extends Constructor<HassBaseEl>>(
         }
       });
 
-      subscribeEntities(conn, (states) => this._updateHass({ states }));
+      subscribeEntities(conn, (states) => { this._updateHass({ states }); });
       subscribeEntityRegistryDisplay(conn, (entityReg) => {
         const entities: HomeAssistant["entities"] = {};
         for (const entity of entityReg.entities) {
@@ -276,24 +276,24 @@ export const connectionMixin = <T extends Constructor<HassBaseEl>>(
         }
         this._updateHass({ floors });
       });
-      subscribeConfig(conn, (config) => this._updateHass({ config }));
-      subscribeServices(conn, (services) => this._updateHass({ services }));
-      subscribePanels(conn, (panels) => this._updateHass({ panels }));
+      subscribeConfig(conn, (config) => { this._updateHass({ config }); });
+      subscribeServices(conn, (services) => { this._updateHass({ services }); });
+      subscribePanels(conn, (panels) => { this._updateHass({ panels }); });
       subscribeFrontendUserData(conn, "core", (userData) =>
-        this._updateHass({ userData })
+        { this._updateHass({ userData }); }
       );
 
       clearInterval(this.__backendPingInterval);
       this.__backendPingInterval = setInterval(() => {
         if (this.hass?.connected) {
-          promiseTimeout(5000, this.hass?.connection.ping()).catch(() => {
+          promiseTimeout(5000, this.hass.connection.ping()).catch(() => {
             if (!this.hass?.connected) {
               return;
             }
 
             // eslint-disable-next-line no-console
             console.log("Websocket died, forcing reconnect...");
-            this.hass?.connection.reconnect(true);
+            this.hass.connection.reconnect(true);
           });
         }
       }, 10000);

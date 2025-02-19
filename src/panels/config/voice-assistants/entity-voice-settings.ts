@@ -120,11 +120,11 @@ export class EntityVoiceSettings extends SubscribeMixin(LitElement) {
   protected render() {
     const googleEnabled =
       this._cloudStatus?.logged_in === true &&
-      this._cloudStatus.prefs.google_enabled === true;
+      this._cloudStatus.prefs.google_enabled;
 
     const alexaEnabled =
       this._cloudStatus?.logged_in === true &&
-      this._cloudStatus.prefs.alexa_enabled === true;
+      this._cloudStatus.prefs.alexa_enabled;
 
     const showAssistants = [...Object.keys(voiceAssistants)];
     const uiAssistants = [...showAssistants];
@@ -216,7 +216,7 @@ export class EntityVoiceSettings extends SubscribeMixin(LitElement) {
                   src=${brandsUrl({
                     domain: voiceAssistants[key].domain,
                     type: "icon",
-                    darkOptimized: this.hass.themes?.darkMode,
+                    darkOptimized: this.hass.themes.darkMode,
                   })}
                   crossorigin="anonymous"
                   referrerpolicy="no-referrer"
@@ -299,7 +299,7 @@ export class EntityVoiceSettings extends SubscribeMixin(LitElement) {
 
   private _aliasesChanged(ev) {
     const currentLength =
-      this._aliases?.length ?? this.entry?.aliases?.length ?? 0;
+      this._aliases?.length ?? this.entry?.aliases.length ?? 0;
 
     this._aliases = ev.detail.value;
 

@@ -52,7 +52,7 @@ export class EntitySettingsHelperTab extends LitElement {
       this._error = undefined;
       if (
         this.entry.unique_id !==
-        (changedProperties.get("entry") as ExtEntityRegistryEntry)?.unique_id
+        (changedProperties.get("entry") as ExtEntityRegistryEntry).unique_id
       ) {
         this._item = undefined;
       }
@@ -101,7 +101,7 @@ export class EntitySettingsHelperTab extends LitElement {
           class="warning"
           @click=${this._confirmDeleteItem}
           .disabled=${this._submitting ||
-          (!this._item && !stateObj?.attributes.restored)}
+          (!this._item && !stateObj.attributes.restored)}
         >
           ${this.hass.localize("ui.dialogs.entity_registry.editor.delete")}
         </mwc-button>
@@ -125,7 +125,7 @@ export class EntitySettingsHelperTab extends LitElement {
   }
 
   private async _getItem() {
-    const items = await HELPERS_CRUD[this.entry.platform].fetch(this.hass!);
+    const items = await HELPERS_CRUD[this.entry.platform].fetch(this.hass);
     this._item = items.find((item) => item.id === this.entry.unique_id) || null;
   }
 
@@ -134,7 +134,7 @@ export class EntitySettingsHelperTab extends LitElement {
     try {
       if (this._componentLoaded && this._item) {
         await HELPERS_CRUD[this.entry.platform].update(
-          this.hass!,
+          this.hass,
           this._item.id,
           this._item
         );
@@ -169,15 +169,15 @@ export class EntitySettingsHelperTab extends LitElement {
     try {
       if (this._componentLoaded && this._item) {
         await HELPERS_CRUD[this.entry.platform].delete(
-          this.hass!,
+          this.hass,
           this._item.id
         );
       } else {
         const stateObj = this.hass.states[this.entry.entity_id];
-        if (!stateObj?.attributes.restored) {
+        if (!stateObj.attributes.restored) {
           return;
         }
-        await removeEntityRegistryEntry(this.hass!, this.entry.entity_id);
+        await removeEntityRegistryEntry(this.hass, this.entry.entity_id);
       }
       fireEvent(this, "close-dialog");
     } finally {

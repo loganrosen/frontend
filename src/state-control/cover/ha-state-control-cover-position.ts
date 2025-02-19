@@ -20,18 +20,18 @@ export class HaStateControlCoverPosition extends LitElement {
 
   protected updated(changedProp: Map<string | number | symbol, unknown>): void {
     if (changedProp.has("stateObj")) {
-      const currentPosition = this.stateObj?.attributes.current_position;
+      const currentPosition = this.stateObj.attributes.current_position;
       this.value =
         currentPosition != null ? Math.round(currentPosition) : undefined;
     }
   }
 
   private _valueChanged(ev: CustomEvent) {
-    const value = (ev.detail as any).value;
+    const value = (ev.detail).value;
     if (isNaN(value)) return;
 
     this.hass.callService("cover", "set_cover_position", {
-      entity_id: this.stateObj!.entity_id,
+      entity_id: this.stateObj.entity_id,
       position: value,
     });
   }

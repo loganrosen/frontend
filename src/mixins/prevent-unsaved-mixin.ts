@@ -23,7 +23,7 @@ export const PreventUnsavedMixin = <T extends Constructor<LitElement>>(
       }
     };
 
-    private _handleUnload = (e: BeforeUnloadEvent) => e.preventDefault();
+    private _handleUnload = (e: BeforeUnloadEvent) => { e.preventDefault(); };
 
     private _removeListeners() {
       window.removeEventListener("click", this._handleClick, true);

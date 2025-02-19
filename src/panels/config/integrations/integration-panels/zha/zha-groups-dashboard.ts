@@ -113,7 +113,7 @@ export class ZHAGroupsDashboard extends LitElement {
       >
         <a href="/config/zha/group-add" slot="fab">
           <ha-fab
-            .label=${this.hass!.localize(
+            .label=${this.hass.localize(
               "ui.panel.config.zha.groups.add_group"
             )}
             extended
@@ -126,7 +126,7 @@ export class ZHAGroupsDashboard extends LitElement {
   }
 
   private async _fetchGroups() {
-    this._groups = (await fetchGroups(this.hass!)).sort(sortZHAGroups);
+    this._groups = (await fetchGroups(this.hass)).sort(sortZHAGroups);
   }
 
   private _handleRowClicked(ev: HASSDomEvent<RowClickedEvent>) {

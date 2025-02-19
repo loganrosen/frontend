@@ -32,7 +32,7 @@ class MoreInfoAutomation extends LitElement {
       <div class="actions">
         <mwc-button
           @click=${this._runActions}
-          .disabled=${isUnavailableState(this.stateObj!.state)}
+          .disabled=${isUnavailableState(this.stateObj.state)}
         >
           ${this.hass.localize("ui.card.automation.trigger")}
         </mwc-button>

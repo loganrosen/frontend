@@ -43,7 +43,7 @@ export const subscribeRenderTemplate = (
   }
 ): Promise<UnsubscribeFunc> =>
   conn.subscribeMessage(
-    (msg: RenderTemplateResult | RenderTemplateError) => onChange(msg),
+    (msg: RenderTemplateResult | RenderTemplateError) => { onChange(msg); },
     {
       type: "render_template",
       ...params,

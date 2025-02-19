@@ -42,22 +42,22 @@ export class HaStateControlValveButtons extends LitElement {
 
   private _onOpenTap(ev): void {
     ev.stopPropagation();
-    this.hass!.callService("valve", "open_valve", {
-      entity_id: this.stateObj!.entity_id,
+    this.hass.callService("valve", "open_valve", {
+      entity_id: this.stateObj.entity_id,
     });
   }
 
   private _onCloseTap(ev): void {
     ev.stopPropagation();
-    this.hass!.callService("valve", "close_valve", {
-      entity_id: this.stateObj!.entity_id,
+    this.hass.callService("valve", "close_valve", {
+      entity_id: this.stateObj.entity_id,
     });
   }
 
   private _onStopTap(ev): void {
     ev.stopPropagation();
-    this.hass!.callService("valve", "stop_valve", {
-      entity_id: this.stateObj!.entity_id,
+    this.hass.callService("valve", "stop_valve", {
+      entity_id: this.stateObj.entity_id,
     });
   }
 

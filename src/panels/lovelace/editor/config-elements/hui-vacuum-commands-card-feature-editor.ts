@@ -44,9 +44,9 @@ export class HuiVacuumCommandsCardFeatureEditor
                   stateObj && supportsVacuumCommand(stateObj, command)
               ).map((command) => ({
                 value: command,
-                label: `${localize(
+                label: localize(
                   `ui.panel.lovelace.editor.features.types.vacuum-commands.commands_list.${command}`
-                )}`,
+                ),
               })),
             },
           },
@@ -60,7 +60,7 @@ export class HuiVacuumCommandsCardFeatureEditor
     }
 
     const stateObj = this.context?.entity_id
-      ? this.hass.states[this.context?.entity_id]
+      ? this.hass.states[this.context.entity_id]
       : undefined;
 
     const schema = this._schema(this.hass.localize, stateObj);

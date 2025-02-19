@@ -144,13 +144,13 @@ export class HuiSection extends ReactiveElement {
   }
 
   private _clearMediaQueries() {
-    this._listeners.forEach((unsub) => unsub());
+    this._listeners.forEach((unsub) => { unsub(); });
     this._listeners = [];
   }
 
   private _listenMediaQueries() {
     this._clearMediaQueries();
-    if (!this.config?.visibility) {
+    if (!this.config.visibility) {
       return;
     }
     const conditions = this.config.visibility;
@@ -175,7 +175,7 @@ export class HuiSection extends ReactiveElement {
       isStrategy = true;
       sectionConfig = await generateLovelaceSectionStrategy(
         sectionConfig.strategy,
-        this.hass!
+        this.hass
       );
     }
 

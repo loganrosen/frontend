@@ -63,8 +63,8 @@ export class HaFilterFloorAreas extends LitElement {
           ${this.hass.localize("ui.panel.config.areas.caption")}
           ${this.value?.areas?.length || this.value?.floors?.length
             ? html`<div class="badge">
-                  ${(this.value?.areas?.length || 0) +
-                  (this.value?.floors?.length || 0)}
+                  ${(this.value.areas?.length || 0) +
+                  (this.value.floors?.length || 0)}
                 </div>
                 <ha-icon-button
                   .path=${mdiFilterVariantRemove}
@@ -76,7 +76,7 @@ export class HaFilterFloorAreas extends LitElement {
           ? html`
               <mwc-list class="ha-scrollbar">
                 ${repeat(
-                  areas?.floors || [],
+                  areas.floors || [],
                   (floor) => floor.floor_id,
                   (floor) => html`
                     <ha-check-list-item
@@ -104,7 +104,7 @@ export class HaFilterFloorAreas extends LitElement {
                   `
                 )}
                 ${repeat(
-                  areas?.unassisgnedAreas,
+                  areas.unassisgnedAreas,
                   (area) => area.area_id,
                   (area) => this._renderArea(area)
                 )}
@@ -211,7 +211,7 @@ export class HaFilterFloorAreas extends LitElement {
         (area) => !area.floor_id || !floorAreaLookup[area.floor_id]
       );
       return {
-        floors: floors?.map((floor) => ({
+        floors: floors.map((floor) => ({
           ...floor,
           areas: floorAreaLookup[floor.floor_id] || [],
         })),

@@ -99,7 +99,7 @@ class HuiFanSpeedCardFeature extends LitElement implements LovelaceCardFeature {
             this.hass.entities,
             "percentage"
           )}
-          .disabled=${this.stateObj!.state === UNAVAILABLE}
+          .disabled=${this.stateObj.state === UNAVAILABLE}
         >
         </ha-control-select>
       `;
@@ -120,7 +120,7 @@ class HuiFanSpeedCardFeature extends LitElement implements LovelaceCardFeature {
           this.hass.entities,
           "percentage"
         )}
-        .disabled=${this.stateObj!.state === UNAVAILABLE}
+        .disabled=${this.stateObj.state === UNAVAILABLE}
         .unit=${DOMAIN_ATTRIBUTES_UNITS.fan.percentage}
         .locale=${this.hass.locale}
       ></ha-control-slider>
@@ -128,7 +128,7 @@ class HuiFanSpeedCardFeature extends LitElement implements LovelaceCardFeature {
   }
 
   private _speedValueChanged(ev: CustomEvent) {
-    const speed = (ev.detail as any).value as FanSpeed;
+    const speed = (ev.detail).value as FanSpeed;
 
     const percentage = fanSpeedToPercentage(this.stateObj!, speed);
 
@@ -139,7 +139,7 @@ class HuiFanSpeedCardFeature extends LitElement implements LovelaceCardFeature {
   }
 
   private _valueChanged(ev: CustomEvent) {
-    const value = (ev.detail as any).value;
+    const value = (ev.detail).value;
     if (isNaN(value)) return;
 
     this.hass!.callService("fan", "set_percentage", {

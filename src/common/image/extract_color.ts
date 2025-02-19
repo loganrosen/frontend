@@ -18,10 +18,10 @@ const logColor = (
   label = `${color.hex} - ${color.population}`
 ) =>
   // eslint-disable-next-line no-console
-  console.log(
+  { console.log(
     `%c${label}`,
     `color: ${color.bodyTextColor}; background-color: ${color.hex}`
-  );
+  ); };
 
 const customGenerator = (colors: Swatch[]) => {
   colors.sort((colorA, colorB) => colorB.population - colorA.population);
@@ -98,7 +98,7 @@ const customGenerator = (colors: Swatch[]) => {
       "%cPicked colors",
       `color: ${foregroundColor}; background-color: ${backgroundColor.hex}; font-weight: bold; padding: 16px;`
     );
-    colors.forEach((color) => logColor(color));
+    colors.forEach((color) => { logColor(color); });
     // eslint-disable-next-line no-console
     console.log();
   }

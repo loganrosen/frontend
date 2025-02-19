@@ -23,7 +23,7 @@ export const showSubConfigFlowDialog = (
     subEntryId?: string;
   }
 ): void =>
-  showFlowDialog(element, dialogParams, {
+  { showFlowDialog(element, dialogParams, {
     flowType: "config_subentries_flow",
     showDevices: true,
     createFlow: async (hass, handler) => {
@@ -91,7 +91,7 @@ export const showSubConfigFlowDialog = (
         );
       }
 
-      const prefix = options?.path?.[0] ? `sections.${options.path[0]}.` : "";
+      const prefix = options.path?.[0] ? `sections.${options.path[0]}.` : "";
 
       return (
         hass.localize(
@@ -107,7 +107,7 @@ export const showSubConfigFlowDialog = (
         );
       }
 
-      const prefix = options?.path?.[0] ? `sections.${options.path[0]}.` : "";
+      const prefix = options.path?.[0] ? `sections.${options.path[0]}.` : "";
 
       const description = hass.localize(
         `component.${step.translation_domain || configEntry.domain}.config_subentries.${flowType}.step.${step.step_id}.${prefix}data_description.${field.name}`,
@@ -272,4 +272,4 @@ export const showSubConfigFlowDialog = (
         }
       );
     },
-  });
+  }); };

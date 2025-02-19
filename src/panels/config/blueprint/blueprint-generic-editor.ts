@@ -92,7 +92,7 @@ export abstract class HaBlueprintGenericEditor extends LitElement {
                     .content=${blueprint.metadata.description}
                   ></ha-markdown>`
                 : ""}
-              ${blueprint?.metadata?.input &&
+              ${blueprint?.metadata.input &&
               Object.keys(blueprint.metadata.input).length
                 ? Object.entries(blueprint.metadata.input).map(
                     ([key, value]) => {
@@ -117,7 +117,7 @@ export abstract class HaBlueprintGenericEditor extends LitElement {
   }
 
   private _renderSection(sectionKey: string, section: BlueprintInputSection) {
-    const title = section?.name || sectionKey;
+    const title = section.name || sectionKey;
     const anyRequired =
       section.input &&
       Object.values(section.input).some(
@@ -131,7 +131,7 @@ export abstract class HaBlueprintGenericEditor extends LitElement {
       .noCollapse=${anyRequired}
     >
       <div slot="header" role="heading" aria-level="3" class="section-header">
-        ${section?.icon
+        ${section.icon
           ? html`<ha-icon
               class="section-header"
               .icon=${section.icon}
@@ -140,7 +140,7 @@ export abstract class HaBlueprintGenericEditor extends LitElement {
         <ha-markdown .content=${title}></ha-markdown>
       </div>
       <div class="content">
-        ${section?.description
+        ${section.description
           ? html`<ha-markdown .content=${section.description}></ha-markdown>`
           : nothing}
         ${section.input
@@ -204,7 +204,7 @@ export abstract class HaBlueprintGenericEditor extends LitElement {
 
   private _inputChanged(ev) {
     ev.stopPropagation();
-    const target = ev.target as any;
+    const target = ev.target;
     const key = target.key;
     const value = ev.detail ? ev.detail.value : target.value;
     if (

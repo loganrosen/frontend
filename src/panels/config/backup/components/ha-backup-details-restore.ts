@@ -96,8 +96,8 @@ class HaBackupDetailsRestore extends LitElement {
       !this._selectedData ||
       (this.haRequired && !this._selectedData.homeassistant_included) ||
       !(
-        this._selectedData?.database_included ||
-        this._selectedData?.homeassistant_included ||
+        this._selectedData.database_included ||
+        this._selectedData.homeassistant_included ||
         this._selectedData.addons.length ||
         this._selectedData.folders.length
       )

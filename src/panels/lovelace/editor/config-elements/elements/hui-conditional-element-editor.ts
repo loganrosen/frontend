@@ -110,7 +110,7 @@ export class HuiConditionalElementEditor
   private _elementsChanged(ev: CustomEvent): void {
     ev.stopPropagation();
 
-    const oldLength = this._config?.elements?.length || 0;
+    const oldLength = this._config?.elements.length || 0;
     const config = {
       ...this._config,
       elements: ev.detail.elements as LovelaceElementConfig[],
@@ -139,7 +139,7 @@ export class HuiConditionalElementEditor
     const value = ev.detail.config;
 
     if (configValue === "element") {
-      const newConfigElements = this._config.elements!.concat();
+      const newConfigElements = this._config.elements.concat();
       if (!value) {
         newConfigElements.splice(this._subElementEditorConfig!.index!, 1);
         this._goBack();
@@ -147,7 +147,7 @@ export class HuiConditionalElementEditor
         newConfigElements[this._subElementEditorConfig!.index!] = value;
       }
 
-      this._config = { ...this._config!, elements: newConfigElements };
+      this._config = { ...this._config, elements: newConfigElements };
     }
 
     this._subElementEditorConfig = {

@@ -242,23 +242,23 @@ class HaPanelHistory extends LitElement {
     }
     if (entityIds) {
       const splitIds = entityIds.split(",");
-      this._targetPickerValue!.entity_id = splitIds;
+      this._targetPickerValue.entity_id = splitIds;
     }
     if (deviceIds) {
       const splitIds = deviceIds.split(",");
-      this._targetPickerValue!.device_id = splitIds;
+      this._targetPickerValue.device_id = splitIds;
     }
     if (areaIds) {
       const splitIds = areaIds.split(",");
-      this._targetPickerValue!.area_id = splitIds;
+      this._targetPickerValue.area_id = splitIds;
     }
     if (floorIds) {
       const splitIds = floorIds.split(",");
-      this._targetPickerValue!.floor_id = splitIds;
+      this._targetPickerValue.floor_id = splitIds;
     }
     if (labelsIds) {
       const splitIds = labelsIds.split(",");
-      this._targetPickerValue!.label_id = splitIds;
+      this._targetPickerValue.label_id = splitIds;
     }
 
     const startDate = searchParams.start_date;
@@ -311,7 +311,7 @@ class HaPanelHistory extends LitElement {
     }
 
     const statistics = await fetchStatistics(
-      this.hass!,
+      this.hass,
       this._startDate,
       this._endDate,
       statisticIds,
@@ -324,7 +324,7 @@ class HaPanelHistory extends LitElement {
       await getSensorNumericDeviceClasses(this.hass);
 
     this._statisticsHistory = convertStatisticsToHistory(
-      this.hass!,
+      this.hass,
       statistics,
       statisticIds,
       sensorNumericDeviceClasses,
@@ -399,7 +399,7 @@ class HaPanelHistory extends LitElement {
       this._interval = undefined;
     }
     if (this._subscribed) {
-      this._subscribed.then((unsub) => unsub?.());
+      this._subscribed.then((unsub) => { unsub(); });
       this._subscribed = undefined;
     }
   }

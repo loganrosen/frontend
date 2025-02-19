@@ -162,7 +162,7 @@ export class DialogHelperDetail extends LitElement {
           @click=${this._createItem}
           .disabled=${this._submitting}
         >
-          ${this.hass!.localize("ui.panel.config.helpers.dialog.create")}
+          ${this.hass.localize("ui.panel.config.helpers.dialog.create")}
         </mwc-button>
         ${this._params?.domain
           ? nothing
@@ -171,7 +171,7 @@ export class DialogHelperDetail extends LitElement {
               @click=${this._goBack}
               .disabled=${this._submitting}
             >
-              ${this.hass!.localize("ui.common.back")}
+              ${this.hass.localize("ui.common.back")}
             </mwc-button>`}
       `;
     } else if (this._loading || this._helperFlows === undefined) {
@@ -225,7 +225,7 @@ export class DialogHelperDetail extends LitElement {
                     domain,
                     type: "icon",
                     useFallback: true,
-                    darkOptimized: this.hass.themes?.darkMode,
+                    darkOptimized: this.hass.themes.darkMode,
                   })}
                   crossorigin="anonymous"
                   referrerpolicy="no-referrer"
@@ -267,7 +267,7 @@ export class DialogHelperDetail extends LitElement {
                     (isHelperDomain(this._domain) &&
                       this.hass.localize(
                         `ui.panel.config.helpers.types.${
-                          this._domain as HelperDomain
+                          this._domain
                         }`
                       )) ||
                     this._domain,
@@ -312,7 +312,7 @@ export class DialogHelperDetail extends LitElement {
             return (
               label.toLowerCase().includes(lowerFilter) ||
               domain.toLowerCase().includes(lowerFilter) ||
-              (predefinedHelpers[domain as HelperDomain]?.alias || []).some(
+              (predefinedHelpers[domain as HelperDomain].alias || []).some(
                 (alias) => alias.toLowerCase().includes(lowerFilter)
               )
             );

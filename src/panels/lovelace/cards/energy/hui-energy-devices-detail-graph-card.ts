@@ -323,7 +323,7 @@ export class HuiEnergyDevicesDetailGraphCard
     });
     const compareTransform = getCompareTransform(
       this._start,
-      this._compareStart!
+      this._compareStart
     );
 
     const untrackedConsumption: BarSeriesOption["data"] = [];
@@ -383,7 +383,7 @@ export class HuiEnergyDevicesDetailGraphCard
     const data: BarSeriesOption[] = [];
     const compareTransform = getCompareTransform(
       this._start,
-      this._compareStart!
+      this._compareStart
     );
 
     devices.forEach((source, idx) => {

@@ -35,7 +35,7 @@ export class HaCardConditionNumericState extends LitElement {
   }
 
   protected static validateUIConfig(condition: StateCondition) {
-    return assert(condition, numericStateConditionStruct);
+    assert(condition, numericStateConditionStruct);
   }
 
   private _schema = memoizeOne(

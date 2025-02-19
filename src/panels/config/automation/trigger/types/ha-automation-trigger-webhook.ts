@@ -128,7 +128,7 @@ export class HaWebhookTrigger extends LitElement {
         <ha-button-menu multi @closed=${stopPropagation}>
           <ha-icon-button
             slot="trigger"
-            .label=${this.hass!.localize(
+            .label=${this.hass.localize(
               "ui.panel.config.automation.editor.triggers.type.webhook.webhook_settings"
             )}
             .path=${mdiCog}
@@ -151,7 +151,7 @@ export class HaWebhookTrigger extends LitElement {
             @request-selected=${this._localOnlyChanged}
             .selected=${localOnly!}
           >
-            ${this.hass!.localize(
+            ${this.hass.localize(
               "ui.panel.config.automation.editor.triggers.type.webhook.local_only"
             )}
           </ha-check-list-item>

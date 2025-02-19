@@ -57,7 +57,7 @@ class MoreInfoInputDatetime extends LitElement {
 
   private _timeChanged(ev: CustomEvent<{ value: string }>): void {
     setInputDateTimeValue(
-      this.hass!,
+      this.hass,
       this.stateObj!.entity_id,
       ev.detail.value,
       this.stateObj!.attributes.has_date
@@ -68,7 +68,7 @@ class MoreInfoInputDatetime extends LitElement {
 
   private _dateChanged(ev: CustomEvent<{ value: string }>): void {
     setInputDateTimeValue(
-      this.hass!,
+      this.hass,
       this.stateObj!.entity_id,
       this.stateObj!.attributes.has_time
         ? this.stateObj!.state.split(" ")[1]

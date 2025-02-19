@@ -38,7 +38,7 @@ class FlowPreviewTemplate extends LitElement {
   disconnectedCallback(): void {
     super.disconnectedCallback();
     if (this._unsub) {
-      this._unsub.then((unsub) => unsub());
+      this._unsub.then((unsub) => { unsub(); });
       this._unsub = undefined;
     }
   }

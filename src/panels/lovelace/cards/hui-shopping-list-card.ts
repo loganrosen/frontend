@@ -15,7 +15,7 @@ class HuiShoppingListCard extends HuiTodoListCard {
         // find first entity provided by "shopping_list"
         for (const list of todoLists) {
           const entityReg = this.hass!.entities[list.entity_id];
-          if (entityReg?.platform === "shopping_list") {
+          if (entityReg.platform === "shopping_list") {
             return list.entity_id;
           }
         }

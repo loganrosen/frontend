@@ -189,7 +189,7 @@ class HaConfigIntegrationsDashboard extends KeyboardShortcutMixin(
           !manifests[componentDomain].config_flow &&
           (!manifests[componentDomain].integration_type ||
             ["device", "hub", "service", "integration"].includes(
-              manifests[componentDomain].integration_type!
+              manifests[componentDomain].integration_type
             ))
         ) {
           domains.add(componentDomain);
@@ -673,7 +673,7 @@ class HaConfigIntegrationsDashboard extends KeyboardShortcutMixin(
       this._reScanImprovDevices
     );
 
-    this.hass.auth.external!.fireMessage({
+    this.hass.auth.external.fireMessage({
       type: "improv/scan",
     });
   }
@@ -683,7 +683,7 @@ class HaConfigIntegrationsDashboard extends KeyboardShortcutMixin(
       return;
     }
     this._improvDiscovered = new Map();
-    this.hass.auth.external!.fireMessage({
+    this.hass.auth.external.fireMessage({
       type: "improv/scan",
     });
   };
@@ -951,7 +951,7 @@ class HaConfigIntegrationsDashboard extends KeyboardShortcutMixin(
 
   protected supportedShortcuts(): SupportedShortcuts {
     return {
-      f: () => this._searchInput.focus(),
+      f: () => { this._searchInput.focus(); },
     };
   }
 

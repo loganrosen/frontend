@@ -13,7 +13,7 @@ class DialogRepairsIssueSubtitle extends LitElement {
   protected firstUpdated() {
     if (this.scrollWidth > this.offsetWidth) {
       this.title =
-        (this.shadowRoot?.firstElementChild as HTMLElement)?.innerText || "";
+        (this.shadowRoot?.firstElementChild as HTMLElement).innerText || "";
     }
   }
 

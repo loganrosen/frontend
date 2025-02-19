@@ -241,7 +241,7 @@ class HuiEnergyDistrubutionCard
 
       const co2State = this.hass.states[this._data.co2SignalEntity];
 
-      if (co2State?.attributes.country_code) {
+      if (co2State.attributes.country_code) {
         electricityMapUrl += `/zone/${co2State.attributes.country_code}`;
       }
 

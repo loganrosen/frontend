@@ -164,7 +164,7 @@ export class HuiCardPicker extends LitElement {
                 ${suggestedCards.length > 0
                   ? html`
                       <div class="cards-container-header">
-                        ${this.hass!.localize(
+                        ${this.hass.localize(
                           `ui.panel.lovelace.editor.card.generic.suggested_cards`
                         )}
                       </div>
@@ -179,7 +179,7 @@ export class HuiCardPicker extends LitElement {
                 ${suggestedCards.length > 0
                   ? html`
                       <div class="cards-container-header">
-                        ${this.hass!.localize(
+                        ${this.hass.localize(
                           `ui.panel.lovelace.editor.card.generic.other_cards`
                         )}
                       </div>
@@ -193,7 +193,7 @@ export class HuiCardPicker extends LitElement {
                 ${customCardsItems.length > 0
                   ? html`
                       <div class="cards-container-header">
-                        ${this.hass!.localize(
+                        ${this.hass.localize(
                           `ui.panel.lovelace.editor.card.generic.custom_cards`
                         )}
                       </div>
@@ -211,12 +211,12 @@ export class HuiCardPicker extends LitElement {
             .config=${{ type: "" }}
           >
             <div class="card-header">
-              ${this.hass!.localize(
+              ${this.hass.localize(
                 `ui.panel.lovelace.editor.card.generic.manual`
               )}
             </div>
             <div class="preview description">
-              ${this.hass!.localize(
+              ${this.hass.localize(
                 `ui.panel.lovelace.editor.card.generic.manual_description`
               )}
             </div>
@@ -334,12 +334,12 @@ export class HuiCardPicker extends LitElement {
           name: this.hass!.localize(
             "ui.panel.lovelace.editor.card.generic.paste"
           ),
-          description: `${this.hass!.localize(
+          description: this.hass!.localize(
             "ui.panel.lovelace.editor.card.generic.paste_description",
             {
               type: this._clipboard.type,
             }
-          )}`,
+          ),
         },
         this._clipboard
       ),
@@ -386,7 +386,7 @@ export class HuiCardPicker extends LitElement {
   }
 
   private _tryCreateCardElement(cardConfig: LovelaceCardConfig) {
-    const element = tryCreateCardElement(cardConfig) as LovelaceCard;
+    const element = tryCreateCardElement(cardConfig);
     element.hass = this.hass;
     element.addEventListener(
       "ll-rebuild",
@@ -410,7 +410,7 @@ export class HuiCardPicker extends LitElement {
       return;
     }
     if (cardElToReplace.parentElement) {
-      cardElToReplace.parentElement!.replaceChild(newCardEl, cardElToReplace);
+      cardElToReplace.parentElement.replaceChild(newCardEl, cardElToReplace);
     }
   }
 

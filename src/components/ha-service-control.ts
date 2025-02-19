@@ -129,7 +129,7 @@ export class HaServiceControl extends LitElement {
         !oldValue?.action ||
         computeDomain(this.value.action) !== computeDomain(oldValue.action)
       ) {
-        this._fetchManifest(computeDomain(this.value?.action));
+        this._fetchManifest(computeDomain(this.value.action));
       }
     } else {
       this._manifest = undefined;
@@ -273,20 +273,20 @@ export class HaServiceControl extends LitElement {
     const targetEntities =
       ensureArray(
         value?.target?.entity_id || value?.data?.entity_id
-      )?.slice() || [];
+      ).slice() || [];
     const targetDevices =
       ensureArray(
         value?.target?.device_id || value?.data?.device_id
-      )?.slice() || [];
+      ).slice() || [];
     const targetAreas =
-      ensureArray(value?.target?.area_id || value?.data?.area_id)?.slice() ||
+      ensureArray(value?.target?.area_id || value?.data?.area_id).slice() ||
       [];
     const targetFloors = ensureArray(
       value?.target?.floor_id || value?.data?.floor_id
-    )?.slice();
+    ).slice();
     const targetLabels = ensureArray(
       value?.target?.label_id || value?.data?.label_id
-    )?.slice();
+    ).slice();
     if (targetLabels) {
       targetLabels.forEach((labelId) => {
         const expanded = expandLabelTarget(
@@ -394,12 +394,12 @@ export class HaServiceControl extends LitElement {
       (serviceData?.fields.length && !serviceData.hasSelector.length) ||
       (serviceData &&
         Object.keys(this._value?.data || {}).some(
-          (key) => !serviceData!.hasSelector.includes(key)
+          (key) => !serviceData.hasSelector.includes(key)
         ));
 
     const entityId =
       shouldRenderServiceDataYaml &&
-      serviceData?.fields.find((field) => field.key === "entity_id");
+      serviceData.fields.find((field) => field.key === "entity_id");
 
     const hasOptional = Boolean(
       !shouldRenderServiceDataYaml &&
@@ -561,7 +561,7 @@ export class HaServiceControl extends LitElement {
     domain: string | undefined,
     serviceName: string | undefined
   ) {
-    return this.hass!.localize(
+    return this.hass.localize(
       `component.${domain}.services.${serviceName}.sections.${dataField.key}.description`
     );
   }
@@ -590,7 +590,7 @@ export class HaServiceControl extends LitElement {
       return nothing;
     }
 
-    const selector = dataField?.selector ?? { text: undefined };
+    const selector = dataField.selector ?? { text: undefined };
 
     const showOptional = showOptionalToggle(dataField);
 
@@ -622,7 +622,7 @@ export class HaServiceControl extends LitElement {
           <span slot="description"
             >${this.hass.localize(
               `component.${domain}.services.${serviceName}.fields.${dataField.key}.description`
-            ) || dataField?.description}</span
+            ) || dataField.description}</span
           >
           <ha-selector
             .disabled=${this.disabled ||
@@ -722,15 +722,15 @@ export class HaServiceControl extends LitElement {
         let targetEntities =
           ensureArray(
             currentTarget.entity_id || this._value!.data?.entity_id
-          )?.slice() || [];
+          ).slice() || [];
         let targetDevices =
           ensureArray(
             currentTarget.device_id || this._value!.data?.device_id
-          )?.slice() || [];
+          ).slice() || [];
         let targetAreas =
           ensureArray(
             currentTarget.area_id || this._value!.data?.area_id
-          )?.slice() || [];
+          ).slice() || [];
         if (targetAreas.length) {
           targetAreas = targetAreas.filter((area) =>
             areaMeetsTargetSelector(

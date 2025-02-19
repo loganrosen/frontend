@@ -66,7 +66,7 @@ class DialogTagDetail
           this.hass,
           this._params.entry
             ? this._params.entry.name || this._params.entry.id
-            : this.hass!.localize("ui.panel.config.tag.detail.new_tag")
+            : this.hass.localize("ui.panel.config.tag.detail.new_tag")
         )}
       >
         <div>
@@ -75,7 +75,7 @@ class DialogTagDetail
             : ""}
           <div class="form">
             ${this._params.entry
-              ? html`${this.hass!.localize(
+              ? html`${this.hass.localize(
                   "ui.panel.config.tag.detail.tag_id"
                 )}:
                 ${this._params.entry.id}`
@@ -85,8 +85,8 @@ class DialogTagDetail
               .value=${this._name}
               .configValue=${"name"}
               @input=${this._valueChanged}
-              .label=${this.hass!.localize("ui.panel.config.tag.detail.name")}
-              .validationMessage=${this.hass!.localize(
+              .label=${this.hass.localize("ui.panel.config.tag.detail.name")}
+              .validationMessage=${this.hass.localize(
                 "ui.panel.config.tag.detail.required_error_msg"
               )}
               required
@@ -96,10 +96,10 @@ class DialogTagDetail
                   .value=${this._id || ""}
                   .configValue=${"id"}
                   @input=${this._valueChanged}
-                  .label=${this.hass!.localize(
+                  .label=${this.hass.localize(
                     "ui.panel.config.tag.detail.tag_id"
                   )}
-                  .placeholder=${this.hass!.localize(
+                  .placeholder=${this.hass.localize(
                     "ui.panel.config.tag.detail.tag_id_placeholder"
                   )}
                 ></ha-textfield>`
@@ -109,12 +109,12 @@ class DialogTagDetail
             ? html`
                 <div>
                   <p>
-                    ${this.hass!.localize("ui.panel.config.tag.detail.usage", {
+                    ${this.hass.localize("ui.panel.config.tag.detail.usage", {
                       companion_link: html`<a
                         href="https://companion.home-assistant.io/"
                         target="_blank"
                         rel="noreferrer"
-                        >${this.hass!.localize(
+                        >${this.hass.localize(
                           "ui.panel.config.tag.detail.companion_apps"
                         )}</a
                       >`,
@@ -123,7 +123,7 @@ class DialogTagDetail
                 </div>
                 <div id="qr">
                   <ha-qr-code
-                    .data=${`${TAG_BASE}${this._params!.entry!.id}`}
+                    .data=${`${TAG_BASE}${this._params.entry.id}`}
                     center-image="/static/icons/favicon-192x192.png"
                     error-correction-level="quartile"
                     scale="5"
@@ -141,7 +141,7 @@ class DialogTagDetail
                 @click=${this._deleteEntry}
                 .disabled=${this._submitting}
               >
-                ${this.hass!.localize("ui.panel.config.tag.detail.delete")}
+                ${this.hass.localize("ui.panel.config.tag.detail.delete")}
               </mwc-button>
             `
           : nothing}
@@ -151,8 +151,8 @@ class DialogTagDetail
           .disabled=${this._submitting || !this._name}
         >
           ${this._params.entry
-            ? this.hass!.localize("ui.panel.config.tag.detail.update")
-            : this.hass!.localize("ui.panel.config.tag.detail.create")}
+            ? this.hass.localize("ui.panel.config.tag.detail.update")
+            : this.hass.localize("ui.panel.config.tag.detail.create")}
         </mwc-button>
         ${this._params.openWrite && !this._params.entry
           ? html`<mwc-button
@@ -160,7 +160,7 @@ class DialogTagDetail
               @click=${this._updateWriteEntry}
               .disabled=${this._submitting || !this._name}
             >
-              ${this.hass!.localize(
+              ${this.hass.localize(
                 "ui.panel.config.tag.detail.create_and_write"
               )}
             </mwc-button>`

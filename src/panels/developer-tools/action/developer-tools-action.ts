@@ -119,11 +119,11 @@ class HaPanelDevAction extends LitElement {
     );
 
     const domain = this._serviceData?.action
-      ? computeDomain(this._serviceData?.action)
+      ? computeDomain(this._serviceData.action)
       : undefined;
 
     const serviceName = this._serviceData?.action
-      ? computeObjectId(this._serviceData?.action)
+      ? computeObjectId(this._serviceData.action)
       : undefined;
 
     return html`
@@ -248,7 +248,7 @@ class HaPanelDevAction extends LitElement {
                           href=${documentationUrl(
                             this.hass,
                             "/integrations/" +
-                              computeDomain(this._serviceData?.action)
+                              computeDomain(this._serviceData.action)
                           )}
                           title=${this.hass.localize(
                             "ui.components.service-control.integration_doc"
@@ -259,7 +259,7 @@ class HaPanelDevAction extends LitElement {
                           <ha-icon-button
                             class="help-icon"
                             .path=${mdiHelpCircle}
-                            .label=${this.hass!.localize("ui.common.help")}
+                            .label=${this.hass.localize("ui.common.help")}
                           ></ha-icon-button>
                         </a>`
                       : ""}
@@ -451,7 +451,7 @@ class HaPanelDevAction extends LitElement {
     const [domain, service] = this._serviceData!.action!.split(".", 2);
     const script: Action[] = [];
     if (
-      this.hass.services?.[domain]?.[service] &&
+      this.hass.services[domain][service] &&
       "response" in this.hass.services[domain][service]
     ) {
       script.push({
@@ -564,11 +564,11 @@ class HaPanelDevAction extends LitElement {
       this._serviceData?.action
     );
     const domain = this._serviceData?.action
-      ? computeDomain(this._serviceData?.action)
+      ? computeDomain(this._serviceData.action)
       : undefined;
 
     const serviceName = this._serviceData?.action
-      ? computeObjectId(this._serviceData?.action)
+      ? computeObjectId(this._serviceData.action)
       : undefined;
 
     const example = {};

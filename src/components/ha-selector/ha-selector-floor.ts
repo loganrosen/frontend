@@ -115,10 +115,10 @@ export class HaFloorSelector extends LitElement {
         .helper=${this.helper}
         .pickFloorLabel=${this.label}
         no-add
-        .deviceFilter=${this.selector.floor?.device
+        .deviceFilter=${this.selector.floor.device
           ? this._filterDevices
           : undefined}
-        .entityFilter=${this.selector.floor?.entity
+        .entityFilter=${this.selector.floor.entity
           ? this._filterEntities
           : undefined}
         .disabled=${this.disabled}

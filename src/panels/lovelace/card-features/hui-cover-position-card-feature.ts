@@ -95,7 +95,7 @@ class HuiCoverPositionCardFeature
           this.hass.entities,
           "current_position"
         )}
-        .disabled=${this.stateObj!.state === UNAVAILABLE}
+        .disabled=${this.stateObj.state === UNAVAILABLE}
         .unit=${DOMAIN_ATTRIBUTES_UNITS.cover.current_position}
         .locale=${this.hass.locale}
       ></ha-control-slider>
@@ -103,7 +103,7 @@ class HuiCoverPositionCardFeature
   }
 
   private _valueChanged(ev: CustomEvent) {
-    const value = (ev.detail as any).value;
+    const value = (ev.detail).value;
     if (isNaN(value)) return;
 
     this.hass!.callService("cover", "set_cover_position", {

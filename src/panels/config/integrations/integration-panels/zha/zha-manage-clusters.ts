@@ -73,7 +73,7 @@ export class ZHAManageClusters extends LitElement {
       <ha-card class="content">
         <div class="node-picker">
           <ha-select
-            .label=${this.hass!.localize("ui.panel.config.zha.common.clusters")}
+            .label=${this.hass.localize("ui.panel.config.zha.common.clusters")}
             class="menu"
             .value=${String(this._selectedClusterIndex)}
             @selected=${this._selectedClusterChanged}

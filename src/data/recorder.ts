@@ -323,7 +323,7 @@ export const getDisplayUnit = (
 ): string | null | undefined => {
   let unit: string | undefined;
   if (statisticsId) {
-    unit = hass.states[statisticsId]?.attributes.unit_of_measurement;
+    unit = hass.states[statisticsId].attributes.unit_of_measurement;
   }
   return unit === undefined
     ? statisticsMetaData?.statistics_unit_of_measurement

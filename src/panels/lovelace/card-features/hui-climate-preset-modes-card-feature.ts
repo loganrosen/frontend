@@ -90,7 +90,7 @@ class HuiClimatePresetModesCardFeature
 
   private async _valueChanged(ev: CustomEvent) {
     const presetMode =
-      (ev.detail as any).value ?? ((ev.target as any).value as string);
+      (ev.detail).value ?? ((ev.target as any).value as string);
 
     const oldPresetMode = this.stateObj!.attributes.preset_mode;
 
@@ -126,7 +126,7 @@ class HuiClimatePresetModesCardFeature
 
     const options = filterModes(
       stateObj.attributes.preset_modes,
-      this._config!.preset_modes
+      this._config.preset_modes
     ).map<ControlSelectOption>((mode) => ({
       value: mode,
       label: this.hass!.formatEntityAttributeValue(
@@ -150,11 +150,11 @@ class HuiClimatePresetModesCardFeature
           .value=${this._currentPresetMode}
           @value-changed=${this._valueChanged}
           hide-label
-          .ariaLabel=${this.hass!.formatEntityAttributeName(
+          .ariaLabel=${this.hass.formatEntityAttributeName(
             stateObj,
             "preset_mode"
           )}
-          .disabled=${this.stateObj!.state === UNAVAILABLE}
+          .disabled=${this.stateObj.state === UNAVAILABLE}
         >
         </ha-control-select>
       `;
@@ -164,7 +164,7 @@ class HuiClimatePresetModesCardFeature
       <ha-control-select-menu
         show-arrow
         hide-label
-        .label=${this.hass!.formatEntityAttributeName(stateObj, "preset_mode")}
+        .label=${this.hass.formatEntityAttributeName(stateObj, "preset_mode")}
         .value=${this._currentPresetMode}
         .disabled=${this.stateObj.state === UNAVAILABLE}
         fixedMenuPosition
