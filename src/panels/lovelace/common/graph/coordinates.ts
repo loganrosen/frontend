@@ -33,9 +33,10 @@ const calcPoints = (
 
   const getCoords = (item: any[], i: number, offset = 0, depth = 1) => {
     if (depth > 1 && item) {
-      item.forEach((subItem, index) =>
-        getCoords(subItem, i, index, depth - 1)
-      ); return;
+      item.forEach((subItem, index) => {
+        getCoords(subItem, i, index, depth - 1);
+      });
+      return;
     }
 
     const x = xRatio * (i + offset / 6);
@@ -44,7 +45,7 @@ const calcPoints = (
       last = [average(item), lastValue(item)];
     }
     const y = getY(item ? last[0] : last[1]);
-    return coords.push([x, y]);
+    coords.push([x, y]);
   };
 
   for (let i = 0; i < history.length; i += 1) {
